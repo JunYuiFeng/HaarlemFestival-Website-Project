@@ -2,3 +2,21 @@ nav
 {
     background-color: #5F0F40;
 }
+
+#FoodIntroSubImage
+{
+    margin-top: 66px;
+}
+
+#FoodParagraph1
+{
+    background: linear-gradient(180deg, #9A031E 0%, #3E030E 100%);
+    margin-top: 66px;
+}
+
+#FoodParagraph1Content
+{
+    color: white;
+    font-size: 13pt;
+    margin: 162px 120px 162px 120px;
+}

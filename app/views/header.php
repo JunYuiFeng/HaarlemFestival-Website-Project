@@ -25,25 +25,22 @@
           <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/menu/main">History</a>
+          <a class="nav-link" href="/visithaarlem/history">History</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/menu/dessert">Culture</a>
+          <a class="nav-link" href="/visithaarlem/culture">Culture</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/menu/drink">Food</a>
+          <a class="nav-link" href="/visithaarlem/food">Food</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/menu/drink">Kids</a>
+          <a class="nav-link" href="/visithaarlem/kids">Kids</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/menu/drink">Festival</a>
+          <a class="nav-link" href="/visithaarlem/festival">Festival</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/menu/drink">Personal Program</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/menu/drink">Personal Program</a>
+          <a class="nav-link" href="/visithaarlem/personalprogram">Personal Program</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/cart/index">

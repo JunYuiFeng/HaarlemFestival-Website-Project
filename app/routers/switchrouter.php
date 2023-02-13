@@ -13,6 +13,12 @@ class SwitchRouter
                 $controller = new VisitHaarlemController();
                 $controller->index();
                 break;
+            case 'visithaarlem/food':
+                require_once __DIR__ . '/../controllers/visithaarlemcontroller.php';
+                $controller = new VisitHaarlemController();
+                $controller->food();
+                break;
+
             default:
                 http_response_code(404);
                 break;
