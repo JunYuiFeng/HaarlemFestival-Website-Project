@@ -1,0 +1,90 @@
+.interestingSection {
+  padding: 20px 120px;
+
+  .text-center p {
+    color: #5f0f40;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 77px;
+    letter-spacing: 0.17em;
+  }
+  .festivalPromo {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    color: white;
+    img {
+      width: 100%;
+    }
+    div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 700;
+      line-height: 103px;
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      h4 {
+        color: #ffd000;
+        font-size: 48px;
+      }
+      p {
+        color: #ffffff;
+        font-size: 40px;
+      }
+    }
+    .btn {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+.visitHaarlemPromo {
+  display: flex;
+  justify-content: space-between;
+  figure {
+    width: 45%;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+.mobileAppPromoSection {
+  display: flex;
+  justify-content: center;
+  padding: 0 120px;
+  .informationColumn {
+    width: 70%;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: #000000;
+    h1 {
+      font-weight: 800;
+      font-size: 40px;
+      line-height: 58px;
+    }
+    h2 {
+      font-size: 20px;
+    }
+  }
+  .mockupColumn {
+    width: 30%;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .jun{
+    width: 100;
+  }
+}
+
