@@ -10,6 +10,31 @@ nav {
   );
 }
 
+.btn {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  &:hover {
+    opacity: 0.9;
+  }
+  &.btn-red-gradient {
+    background: linear-gradient(92.89deg, #93051f 0%, #37020b 100%);
+    border-radius: 0;
+    color: white;
+    font-size: 14px;
+    line-height: normal;
+    padding: 5px 20px;
+  }
+  &.btn-yellow-gradient {
+    background: linear-gradient(92.89deg, #ffd000 0%, #ffd000 100%);
+    border-radius: 0;
+    color: #000000;
+    font-size: 14px;
+    line-height: normal;
+    padding: 5px 20px;
+  }
+}
+
 /* index */
 .videoBackground {
   width: 100%;
@@ -111,14 +136,28 @@ nav {
 .mobileAppPromoSection {
   display: flex;
   justify-content: center;
+  gap: 20px;
   padding: 0 120px;
   .informationColumn {
-    width: 70%;
+    width: 40%;
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     color: #000000;
+    .caption {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      gap: 10px;
+      img {
+        height: 100%;
+      }
+      p {
+        font-size: 20px;
+        margin: 0;
+      }
+    }
     h1 {
       font-weight: 800;
       font-size: 40px;
@@ -126,6 +165,16 @@ nav {
     }
     h2 {
       font-size: 20px;
+      margin-top: 5%;
+    }
+    .downloadBtns {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 5%;
+      img {
+        height: 4vw;
+        cursor: pointer;
+      }
     }
   }
   .mockupColumn {
