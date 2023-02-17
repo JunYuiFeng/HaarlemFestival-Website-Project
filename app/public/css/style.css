@@ -4,6 +4,29 @@ nav {
   background: linear-gradient(90.05deg, #321325 0.73%, #7f4066 99.97%, #7f4066 99.97%);
 }
 
+#FoodIntroSubImage {
+    margin-top: 66px;
+}
+
+#FoodParagraph1 {
+    background: linear-gradient(180deg, #9A031E 0%, #3E030E 100%);
+    margin-top: 66px;
+}
+
+#FoodParagraph1Content {
+    color: white;
+    font-size: 13pt;
+    margin: 162px 120px 162px 120px;
+}
+
+#Restaurant {
+    background: linear-gradient(180deg, #9A031E 0%, #3E030E 100%);
+}
+
+#header{
+    color: #5F0F40;
+}
+
 /* index */
 .videoBackground {
   width: 100%;
