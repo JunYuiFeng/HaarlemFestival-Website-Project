@@ -12,7 +12,7 @@
 
 <body>
     <?php
-    include __DIR__ . '/../header.php';
+    include __DIR__ . '/../transparent-header.php';
     ?>
 
     <video autoplay muted loop class="videoBackground">
@@ -50,13 +50,13 @@
                 <img src="/img/KidsPagePromo.png" alt="">
                 <h3>Haarlem for Kids</h3>
                 <p>Have you ever seen 60,000 LEGO bricks in one space? That’s...</p>
-                <button type="button" class="btn btn-red-gradient">READ MORE</button>
+                <a href="/visithaarlem/kids"><button type="button" class="btn btn-red-gradient">READ MORE</button></a>
             </figure>
             <figure>
                 <img src="/img/FoodPagePromo.png" alt="">
                 <h3>Top restaurants in Haarleem</h3>
                 <p>Discover the best restaurants you MUST visit in Haarlem.</p>
-                <button type="button" class="btn btn-red-gradient">READ MORE</button>
+                <a href="/visithaarlem/food"><button type="button" class="btn btn-red-gradient">READ MORE</button></a>
             </figure>
         </figure>
     </section>

@@ -4,6 +4,13 @@ nav {
   background: linear-gradient(90.05deg, #321325 0.73%, #7f4066 99.97%, #7f4066 99.97%);
 }
 
+#transparent-navbar {
+  position: absolute;
+  width: 100%;
+  background: transparent;
+  z-index: 100;
+}
+
 .btn {
   font-family: "Inter";
   font-style: normal;
