@@ -35,16 +35,10 @@ nav {
 }
 
 .welcomeSection {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   padding: 20px 120px;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  align-items: flex-end;
 }
 
 .welcomeSection article {
@@ -72,7 +66,6 @@ nav {
 
 .welcomeSection img {
   width: 25%;
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
 }
@@ -80,7 +73,6 @@ nav {
 .interestingSection {
   padding: 20px 120px;
 }
-
 .interestingSection .text-center p {
   color: #5f0f40;
   font-family: "Inter";
@@ -90,78 +82,59 @@ nav {
   line-height: 77px;
   letter-spacing: 0.17em;
 }
-
 .interestingSection .festivalPromo {
   width: 100%;
   position: relative;
   text-align: center;
   color: white;
 }
-
 .interestingSection .festivalPromo img {
   width: 100%;
 }
-
 .interestingSection .festivalPromo div {
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   line-height: 103px;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
 .interestingSection .festivalPromo div h4 {
   color: #ffd000;
   font-size: 48px;
 }
-
 .interestingSection .festivalPromo div p {
   color: #ffffff;
   font-size: 40px;
 }
-
 .interestingSection .festivalPromo .btn {
   position: absolute;
   bottom: 20px;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .visitHaarlemPromo {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
 }
-
 .visitHaarlemPromo figure {
   width: 45%;
 }
-
 .visitHaarlemPromo figure img {
   width: 100%;
   height: auto;
 }
 
 .mobileAppPromoSection {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   gap: 20px;
   padding: 0 120px;
 }
-
 .mobileAppPromoSection .informationColumn {
   width: 40%;
   font-family: "Inter";
@@ -188,7 +161,6 @@ nav {
   font-size: 40px;
   line-height: 58px;
 }
-
 .mobileAppPromoSection .informationColumn h2 {
   font-size: 20px;
   margin-top: 5%;
@@ -202,11 +174,9 @@ nav {
   height: 4vw;
   cursor: pointer;
 }
-
 .mobileAppPromoSection .mockupColumn {
   width: 30%;
 }
-
 .mobileAppPromoSection .mockupColumn img {
   width: 100%;
   height: auto;
