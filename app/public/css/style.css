@@ -180,4 +180,27 @@ nav {
 .mobileAppPromoSection .mockupColumn img {
   width: 100%;
   height: auto;
+}
+
+#FoodIntroSubImage {
+  margin-top: 66px;
+}
+
+#FoodParagraph1 {
+  background: linear-gradient(180deg, #9a031e 0%, #3e030e 100%);
+  margin-top: 66px;
+}
+
+#FoodParagraph1Content {
+  color: white;
+  font-size: 13pt;
+  margin: 162px 120px 162px 120px;
+}
+
+#Restaurant {
+  background: linear-gradient(180deg, #9a031e 0%, #3e030e 100%);
+}
+
+#header {
+  color: #5f0f40;
 }/*# sourceMappingURL=style.css.map */
