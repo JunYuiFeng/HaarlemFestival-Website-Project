@@ -4,27 +4,29 @@ nav {
   background: linear-gradient(90.05deg, #321325 0.73%, #7f4066 99.97%, #7f4066 99.97%);
 }
 
-#FoodIntroSubImage {
-    margin-top: 66px;
+.btn {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
 }
-
-#FoodParagraph1 {
-    background: linear-gradient(180deg, #9A031E 0%, #3E030E 100%);
-    margin-top: 66px;
+.btn:hover {
+  opacity: 0.9;
 }
-
-#FoodParagraph1Content {
-    color: white;
-    font-size: 13pt;
-    margin: 162px 120px 162px 120px;
+.btn.btn-red-gradient {
+  background: linear-gradient(92.89deg, #93051f 0%, #37020b 100%);
+  border-radius: 0;
+  color: white;
+  font-size: 14px;
+  line-height: normal;
+  padding: 5px 20px;
 }
-
-#Restaurant {
-    background: linear-gradient(180deg, #9A031E 0%, #3E030E 100%);
-}
-
-#header{
-    color: #5F0F40;
+.btn.btn-yellow-gradient {
+  background: linear-gradient(92.89deg, #ffd000 0%, #ffd000 100%);
+  border-radius: 0;
+  color: #000000;
+  font-size: 14px;
+  line-height: normal;
+  padding: 5px 20px;
 }
 
 /* index */
@@ -156,18 +158,31 @@ nav {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  gap: 20px;
   padding: 0 120px;
 }
 
 .mobileAppPromoSection .informationColumn {
-  width: 70%;
+  width: 40%;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   color: #000000;
 }
-
+.mobileAppPromoSection .informationColumn .caption {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  gap: 10px;
+}
+.mobileAppPromoSection .informationColumn .caption img {
+  height: 100%;
+}
+.mobileAppPromoSection .informationColumn .caption p {
+  font-size: 20px;
+  margin: 0;
+}
 .mobileAppPromoSection .informationColumn h1 {
   font-weight: 800;
   font-size: 40px;
@@ -176,6 +191,16 @@ nav {
 
 .mobileAppPromoSection .informationColumn h2 {
   font-size: 20px;
+  margin-top: 5%;
+}
+.mobileAppPromoSection .informationColumn .downloadBtns {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 5%;
+}
+.mobileAppPromoSection .informationColumn .downloadBtns img {
+  height: 4vw;
+  cursor: pointer;
 }
 
 .mobileAppPromoSection .mockupColumn {
@@ -186,4 +211,26 @@ nav {
   width: 100%;
   height: auto;
 }
-/*# sourceMappingURL=style.css.map */
+
+#FoodIntroSubImage {
+  margin-top: 66px;
+}
+
+#FoodParagraph1 {
+  background: linear-gradient(180deg, #9a031e 0%, #3e030e 100%);
+  margin-top: 66px;
+}
+
+#FoodParagraph1Content {
+  color: white;
+  font-size: 13pt;
+  margin: 162px 120px 162px 120px;
+}
+
+#Restaurant {
+  background: linear-gradient(180deg, #9a031e 0%, #3e030e 100%);
+}
+
+#header {
+  color: #5f0f40;
+}/*# sourceMappingURL=style.css.map */

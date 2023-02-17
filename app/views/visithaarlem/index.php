@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -42,33 +43,33 @@
                 <h4>HAARLEM</h4>
                 <p class="m-0">FESTIVAL 2023</p>
             </div>
-            <button type="button" class="btn btn-warning">READ MORE</button>
+            <button type="button" class="btn btn-yellow-gradient">READ MORE</button>
         </figure>
         <figure class="visitHaarlemPromo">
             <figure>
                 <img src="/img/KidsPagePromo.png" alt="">
                 <h3>Haarlem for Kids</h3>
                 <p>Have you ever seen 60,000 LEGO bricks in one space? That’s...</p>
-                <button type="button" class="btn btn-primary">READ MORE</button>
+                <button type="button" class="btn btn-red-gradient">READ MORE</button>
             </figure>
             <figure>
                 <img src="/img/FoodPagePromo.png" alt="">
                 <h3>Top restaurants in Haarleem</h3>
                 <p>Discover the best restaurants you MUST visit in Haarlem.</p>
-                <button type="button" class="btn btn-primary">READ MORE</button>
+                <button type="button" class="btn btn-red-gradient">READ MORE</button>
             </figure>
         </figure>
     </section>
     <section class="mobileAppPromoSection">
         <figure class="informationColumn">
-            <div class="display-flex">
+            <div class="caption">
                 <img src="/img/DoctorWho.png" alt="">
                 <p>Haarlem mobile app</p>
             </div>
             <h1>Interactive museum challenges</h1>
             <p>Solve several interesting problems to find out the secret of Professor Tyler!</p>
             <h2>Download the app</h2>
-            <div class="display-flex">
+            <div class="downloadBtns">
                 <img src="/img/AppStoreCTA.png" alt="">
                 <img src="/img/GooglePlayCTA.png" alt="">
             </div>
