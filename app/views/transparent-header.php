@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark" id="transparent-navbar">
     <div class="container">
         <a class="navbar-brand" href="/">
             <img src="/img/HaarlemFestival-Logo.png" alt="">

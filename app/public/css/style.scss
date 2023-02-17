@@ -9,6 +9,12 @@ nav {
     #7f4066 99.97%
   );
 }
+#transparent-navbar{
+  position: absolute;
+  width: 100%;
+  background: transparent;
+  z-index: 100;
+}
 
 .btn {
   font-family: "Inter";
