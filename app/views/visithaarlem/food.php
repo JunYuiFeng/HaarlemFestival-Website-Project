@@ -13,8 +13,8 @@ include __DIR__ . '/../header.php';
 <body>
     <div class="container">
         <div class="row">
-            <h1>Haarlem</h1><br>
-            <h3>for food</h3>
+            <h1 id="header">Haarlem</h1><br>
+            <h3 id="header">for food</h3>
         </div>
 
         <div class="row">

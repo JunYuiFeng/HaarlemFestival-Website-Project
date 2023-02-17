@@ -174,3 +174,7 @@ nav {
 #Restaurant {
     background: linear-gradient(180deg, #9A031E 0%, #3E030E 100%);
 }
+
+#header{
+    color: #5F0F40;
+}
