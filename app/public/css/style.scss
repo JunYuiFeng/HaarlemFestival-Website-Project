@@ -1,3 +1,55 @@
+@import url("https://fonts.cdnfonts.com/css/alata");
+@import url("https://fonts.cdnfonts.com/css/inter");
+
+nav {
+  background: linear-gradient(
+    90.05deg,
+    #321325 0.73%,
+    #7f4066 99.97%,
+    #7f4066 99.97%
+  );
+}
+
+/* index */
+.videoBackground {
+  width: 100%;
+}
+
+.welcomeSection {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 120px;
+  align-items: flex-end;
+}
+
+.welcomeSection article {
+  width: 70%;
+}
+
+.welcomeSection h1 {
+  color: #9a031e;
+  font-family: "Alata";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 88px;
+  letter-spacing: 0.225em;
+}
+
+.welcomeSection p {
+  color: #000000;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 29px;
+}
+
+.welcomeSection img {
+  width: 25%;
+  height: fit-content;
+}
+
 .interestingSection {
   padding: 20px 120px;
 
@@ -83,8 +135,4 @@
       height: auto;
     }
   }
-  .jun{
-    width: 100;
-  }
 }
-
