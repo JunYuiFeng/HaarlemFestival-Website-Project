@@ -12,4 +12,9 @@ class VisitHaarlemController
     {
         require __DIR__ . '/../views/visithaarlem/food.php';
     }
+
+    public function history()
+    {
+        require __DIR__ . '/../views/visithaarlem/history.php';
+    }
 }
