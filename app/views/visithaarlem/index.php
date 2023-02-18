@@ -80,6 +80,7 @@
             <img src="/img/MobileAppPromotion.png" alt="">
         </figure>
     </section>
+
 </body>
 
 </html>
