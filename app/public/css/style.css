@@ -216,6 +216,7 @@ nav {
   color: #5f0f40;
 }
 
+<<<<<<< Updated upstream
 .kids-welcome-screen {
   margin-bottom: 7%;
   color: #5f0f40;
@@ -402,4 +403,8 @@ nav {
 }
 .places-for-kids .article .findOnMap img {
   width: 30px;
+=======
+.container.restaurant {
+  background: linear-gradient(180deg, #9a031e 0%, #3e030e 100%);
+>>>>>>> Stashed changes
 }/*# sourceMappingURL=style.css.map */

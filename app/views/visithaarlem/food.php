@@ -59,7 +59,7 @@
         <h2>Restaurants</h2>
         <div class="row">
             <div class="col">
-                <div class="container" id="Restaurant">
+                <div class="container restaurant">
                     <p>Haarlem is a Dutch city known for its rich history and vibrant culture.
                         The city is home to a wide variety of restaurants and cafes, offering a range of cuisines, from traditional Dutch dishes to international favourites.
                         One of the city's most popular dining destinations is the Grote Markt, or Great Market, where visitors can sample fresh local produce and try delicious food from a variety of vendors.
@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="container" id="Restaurant">
+                <div class="container restaurant">
                     <p>Haarlem is a Dutch city known for its rich history and vibrant culture.
                         The city is home to a wide variety of restaurants and cafes, offering a range of cuisines, from traditional Dutch dishes to international favourites.
                         One of the city's most popular dining destinations is the Grote Markt, or Great Market, where visitors can sample fresh local produce and try delicious food from a variety of vendors.
