@@ -210,4 +210,159 @@ nav {
 
 #header {
   color: #5f0f40;
+}
+
+.kids-welcome-screen {
+  margin-bottom: 7%;
+  color: #5f0f40;
+  font-style: normal;
+  font-family: "Inter";
+}
+.kids-welcome-screen h1 {
+  font-weight: 800;
+  font-size: 64px;
+  line-height: normal;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.kids-welcome-screen h2 {
+  font-weight: 800;
+  font-size: 48px;
+  line-height: normal;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.kids-welcome-screen p {
+  color: #321325;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 29px;
+}
+
+.text-center.kids-page {
+  font-family: "Inter";
+  font-style: normal;
+  color: #4f0310;
+}
+.text-center.kids-page h1 {
+  font-weight: 700;
+  font-size: 48px;
+  line-height: normal;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.text-center.kids-page h4 {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: normal;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.kids-event-banner {
+  background: linear-gradient(93.86deg, #95051e 0%, #2b0108 100%);
+  box-shadow: 0px 4px 63px 3px #95061e;
+  width: 100%;
+  display: flex;
+  color: #ffffff;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 29px;
+  padding: 10px 20px;
+}
+.kids-event-banner .col1 {
+  width: 35%;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+}
+.kids-event-banner .col1 p:nth-child(1) {
+  margin-bottom: 15%;
+}
+.kids-event-banner .col2 {
+  align-self: flex-end;
+  height: 100%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.kids-event-banner .col2 p {
+  font-weight: 800;
+  margin: 0;
+}
+.kids-event-banner .col2 img {
+  width: 40px;
+}
+.kids-event-banner .col3 {
+  width: 35%;
+}
+.kids-event-banner .col3 img {
+  width: 80%;
+}
+
+.shadow-text {
+  font-family: "Alata";
+  font-style: normal;
+  font-weight: 400;
+  position: relative;
+  margin: 15% 0;
+}
+.shadow-text h1 {
+  color: rgba(154, 3, 30, 0.29);
+  font-size: 152px;
+  line-height: 345px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.shadow-text p {
+  color: #000000;
+  font-size: 30px;
+  line-height: 50px;
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.kids-benefits {
+  margin-top: 25%;
+  padding: 0 7%;
+}
+.kids-benefits .benefit {
+  width: 30%;
+  background: linear-gradient(180deg, #98041e 0%, #2a0108 100%);
+  border-radius: 31px;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  font-family: "Inter";
+  font-style: normal;
+  transition: 0.5s;
+}
+.kids-benefits .benefit div:nth-child(2) {
+  margin-top: auto;
+}
+.kids-benefits .benefit h1 {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 44px;
+}
+.kids-benefits .benefit p {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 29px;
+}
+.kids-benefits .benefit:hover {
+  transform: translateY(-20px);
+  filter: contrast(1.2);
+}
+
+.places-for-kids {
+  margin-top: 30%;
+  margin-bottom: 10%;
+}
+.places-for-kids .article:nth-child(2) {
+  margin: 7% 0;
 }/*# sourceMappingURL=style.css.map */
