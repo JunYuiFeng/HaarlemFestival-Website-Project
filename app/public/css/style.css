@@ -1,5 +1,9 @@
 @import url("https://fonts.cdnfonts.com/css/alata");
 @import url("https://fonts.cdnfonts.com/css/inter");
+body {
+  font-family: "Inter";
+}
+
 nav {
   background: linear-gradient(90.05deg, #321325 0.73%, #7f4066 99.97%, #7f4066 99.97%);
 }
@@ -365,4 +369,37 @@ nav {
 }
 .places-for-kids .article:nth-child(2) {
   margin: 7% 0;
+}
+.places-for-kids .article h1 {
+  color: #9a031e;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 44px;
+}
+.places-for-kids .article p {
+  color: #000000;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 29px;
+}
+.places-for-kids .article .findOnMap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.places-for-kids .article .findOnMap a {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 29px;
+  text-decoration-line: underline;
+  color: #5f0f40;
+}
+.places-for-kids .article .findOnMap img {
+  width: 30px;
 }/*# sourceMappingURL=style.css.map */

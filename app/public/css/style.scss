@@ -1,6 +1,9 @@
 @import url("https://fonts.cdnfonts.com/css/alata");
 @import url("https://fonts.cdnfonts.com/css/inter");
 
+body {
+  font-family: "Inter";
+}
 nav {
   background: linear-gradient(
     90.05deg,
@@ -365,6 +368,39 @@ nav {
   .article {
     &:nth-child(2) {
       margin: 7% 0;
+    }
+    h1 {
+      color: #9a031e;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 44px;
+    }
+    p {
+      color: #000000;
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 29px;
+    }
+    .findOnMap {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      a {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 29px;
+        text-decoration-line: underline;
+        color: #5f0f40;
+      }
+      img{
+        width: 30px;
+      }
     }
   }
 }
