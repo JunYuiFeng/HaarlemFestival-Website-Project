@@ -7,6 +7,19 @@ body {
 nav {
   background: linear-gradient(90.05deg, #321325 0.73%, #7f4066 99.97%, #7f4066 99.97%);
 }
+nav .logo {
+  width: 75%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+nav .nav-item {
+  font-family: "Inter";
+}
+nav .nav-item .nav-link {
+  font-size: 26px;
+  margin-left: 20px;
+  color: white !important;
+}
 
 #transparent-navbar {
   position: absolute;
@@ -205,7 +218,7 @@ nav {
 #FoodParagraph1Content {
   color: white;
   font-size: 13pt;
-  margin: 162px 120px 162px 120px;
+  margin: 130px 120px 130px 120px;
 }
 
 #Restaurant {

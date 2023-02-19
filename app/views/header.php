@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <img src="/img/HaarlemFestival-Logo.png" alt="">
+      <img src="/img/HaarlemFestival-Logo.png" alt="HaarlemFestival-Logo" class="logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -11,37 +11,37 @@
       <ul class="nav navbar-nav ms-auto" id="navigation">
         <li class="nav-item">
           <a class="nav-link" href="/">
-            <h3><b>Home</b></h3>
+            <b>Home</b>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/visithaarlem/history">
-            <h3><b>History</b></h3>
+            <b>History</b>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/visithaarlem/culture">
-            <h3><b>Culture</b></h3>
+            <b>Culture</b>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/visithaarlem/food">
-            <h3><b>Food</b></h3>
+            <b>Food</b>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/visithaarlem/kids">
-            <h3><b>Kids</b></h3>
+            <b>Kids</b>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/visithaarlem/festival">
-            <h3><b>Festival</b></h3>
+            <b>Festival</b>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/visithaarlem/personalprogram">
-            <h3><b>personal program</b></h3>
+            <b>personal program</b>
           </a>
         </li>
         <li class="nav-item">
