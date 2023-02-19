@@ -80,6 +80,10 @@
             <img src="/img/MobileAppPromotion.png" alt="">
         </figure>
     </section>
+    
+    <?php
+    include __DIR__ . '/../footer.php';
+    ?>
 
 </body>
 
