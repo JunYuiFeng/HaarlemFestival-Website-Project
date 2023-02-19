@@ -16,9 +16,9 @@
     ?>
 
     <div class="container">
-        <div class="row">
-            <h1 id="header">Haarlem</h1><br>
-            <h3 id="header">for food</h3>
+        <div class="row foodPageTitle">
+            <h1>Haarlem</h1><br>
+            <h2>for food</h2>
         </div>
 
         <div class="row">
@@ -26,14 +26,19 @@
         </div>
 
         <div class="row">
-            <div class="col">
+            <div class="col-5">
+                <div class="container foodPageMsgBox">
+                    <p><b>In Haarlem food can be found anywhere: in the streets, in a corner, in a church or in a factory.
+                        You can decide if you want to eat something simple, delicious and cheap or something extraordinary in a very fancy restaurant.
+                        The food is so authentic that you can taste the flavour of the history and the culture make Haarlem so special and unique.</b> </p>
+                </div>
 
             </div>
             <div class="col">
-                <img src="/img/VisitHaarlemFood_Fries.jpg" alt="VisitHaarlemFood_Fries" id="FoodIntroSubImage">
+                <img src="/img/VisitHaarlemFood_Fries.jpg" alt="VisitHaarlemFood_Fries" id="FoodIntroSubImage" width="60%">
             </div>
             <div class="col">
-                <img src="/img/VisitHaarlemFood_Haring.jpg" alt="VisitHaarlemFood_Haring" id="FoodIntroSubImage">
+                <img src="/img/VisitHaarlemFood_Haring.jpg" alt="VisitHaarlemFood_Haring" id="FoodIntroSubImage" width="60%">
             </div>
         </div>
 
@@ -53,14 +58,14 @@
         </div>
     </div>
 
-    <div class="container">
-        <h2>Restaurants</h2>
-        <div class="row">
+    <div class="container restaurantsSection">
+        <h1>Restaurants</h1>
+        <div class="row restaurant">
             <div class="col-6">
-                <div class="card">
+                <div class="card restaurantRight">
                     <img src="/img/RatatouilleCoverImg.jpg" alt="">
                     <div class="card-body">
-                        <h1>Ratatouille</h1>
+                        <h2>Ratatouille</h2>
                         <p>This restaurant serves a mix of French and European cuisines.
                             The dishes and signature dishes are perfectly and freshly preprepared by chef Jozua Jaring.
                             It all started in 2013 and keep evolving until 2014 when they got awarded with a Michelin star.
@@ -76,10 +81,29 @@
                 </div>
             </div>
             <div class="col-6">
-                <div class="card">
+                <div class="card restaurantLeft">
                     <img src="/img/RatatouilleCoverImg.jpg" alt="">
                     <div class="card-body">
-                        <h1>Ratatouille</h1>
+                        <h2>Ratatouille</h2>
+                        <p>This restaurant serves a mix of French and European cuisines.
+                            The dishes and signature dishes are perfectly and freshly preprepared by chef Jozua Jaring.
+                            It all started in 2013 and keep evolving until 2014 when they got awarded with a Michelin star.
+                            In 2015 they move to a new location which is today’s Ratatouille with a better environment,
+                            so the people can enjoy even more. Beside the amazing dishes, their wine makes it even better! </p>
+                        <p><b>Address</b>: Spaarne 96, 2011 CL Haarlem <br>
+                            <b>Phone</b>: 023 542 7270 <br>
+                            <b>Website</b>: <a href="https://ratatouillefoodandwine.nl">https://ratatouillefoodandwine.nl</a> <br>
+                            <b>Price range</b>: €‎€‎€‎€‎<br>
+                            <b>Opening hours</b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card restaurantRight">
+                    <img src="/img/RatatouilleCoverImg.jpg" alt="">
+                    <div class="card-body">
+                        <h2>Ratatouille</h2>
                         <p>This restaurant serves a mix of French and European cuisines.
                             The dishes and signature dishes are perfectly and freshly preprepared by chef Jozua Jaring.
                             It all started in 2013 and keep evolving until 2014 when they got awarded with a Michelin star.
@@ -100,7 +124,7 @@
     <?php
     include __DIR__ . '/../footer.php';
     ?>
-    
+
 </body>
 
 </html>

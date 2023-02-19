@@ -4,20 +4,22 @@
 body {
   font-family: "Inter";
 }
+
 nav {
-  background: linear-gradient(
-    90.05deg,
-    #321325 0.73%,
-    #7f4066 99.97%,
-    #7f4066 99.97%
-  );
+  background: linear-gradient(90.05deg,
+      #321325 0.73%,
+      #7f4066 99.97%,
+      #7f4066 99.97%);
+
   .logo {
     width: 75%;
     margin-top: 10px;
     margin-bottom: 10px;
   }
+
   .nav-item {
     font-family: "Inter";
+
     .nav-link {
       font-size: 26px;
       margin-left: 20px;
@@ -37,9 +39,11 @@ nav {
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
+
   &:hover {
     opacity: 0.9;
   }
+
   &.btn-red-gradient {
     background: linear-gradient(92.89deg, #93051f 0%, #37020b 100%);
     border-radius: 0;
@@ -48,6 +52,7 @@ nav {
     line-height: normal;
     padding: 5px 20px;
   }
+
   &.btn-yellow-gradient {
     background: linear-gradient(92.89deg, #ffd000 0%, #ffd000 100%);
     border-radius: 0;
@@ -109,14 +114,17 @@ nav {
     line-height: 77px;
     letter-spacing: 0.17em;
   }
+
   .festivalPromo {
     width: 100%;
     position: relative;
     text-align: center;
     color: white;
+
     img {
       width: 100%;
     }
+
     div {
       position: absolute;
       top: 50%;
@@ -127,15 +135,18 @@ nav {
       font-weight: 700;
       line-height: 103px;
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
       h4 {
         color: #ffd000;
         font-size: 48px;
       }
+
       p {
         color: #ffffff;
         font-size: 40px;
       }
     }
+
     .btn {
       position: absolute;
       bottom: 20px;
@@ -144,22 +155,27 @@ nav {
     }
   }
 }
+
 .visitHaarlemPromo {
   display: flex;
   justify-content: space-between;
+
   figure {
     width: 45%;
+
     img {
       width: 100%;
       height: auto;
     }
   }
 }
+
 .mobileAppPromoSection {
   display: flex;
   justify-content: center;
   gap: 20px;
   padding: 0 120px;
+
   .informationColumn {
     width: 40%;
     font-family: "Inter";
@@ -167,40 +183,49 @@ nav {
     font-weight: 400;
     font-size: 16px;
     color: #000000;
+
     .caption {
       display: flex;
       align-items: center;
       height: 40px;
       gap: 10px;
+
       img {
         height: 100%;
       }
+
       p {
         font-size: 20px;
         margin: 0;
       }
     }
+
     h1 {
       font-weight: 800;
       font-size: 40px;
       line-height: 58px;
     }
+
     h2 {
       font-size: 20px;
       margin-top: 5%;
     }
+
     .downloadBtns {
       display: flex;
       gap: 15px;
       margin-bottom: 5%;
+
       img {
         height: 4vw;
         cursor: pointer;
       }
     }
   }
+
   .mockupColumn {
     width: 30%;
+
     img {
       width: 100%;
       height: auto;
@@ -228,8 +253,68 @@ nav {
   background: linear-gradient(180deg, #9a031e 0%, #3e030e 100%);
 }
 
-#header {
+.foodPageTitle {
   color: #5f0f40;
+  margin-top: 50px;
+  margin-bottom: 40px;
+
+  h1 {
+    font-weight: 800;
+    font-size: 64px;
+    line-height: normal;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  h2 {
+    font-weight: 800;
+    font-size: 48px;
+    line-height: normal;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.foodPageMsgBox {
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+
+  p {
+    font-size: 20pt;
+    padding: 30px;
+  }
+}
+
+.restaurantsSection {
+  margin-top: 60px;
+  margin-bottom: 88px;
+
+  h1 {
+    color: #5f0f40;
+    padding: 15px 0px;
+    font-weight: bold;
+    font-size: 48px;
+  }
+  .restaurant {
+    .card {
+      img {
+        margin: 30px;
+      }
+      margin-top: 60px;
+      background: linear-gradient(180deg, #95051E 0%, #2E0209 100%);
+      p {
+        color: white;
+      }
+      h2 {
+        color: white;
+      }
+    }
+    .restaurantRight {
+      margin-right: 45px;
+    }
+    .restaurantLeft {
+      margin-left: 45px;
+    }
+  }
 }
 
 //kids page
@@ -238,18 +323,21 @@ nav {
   color: #5f0f40;
   font-style: normal;
   font-family: "Inter";
+
   h1 {
     font-weight: 800;
     font-size: 64px;
     line-height: normal;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
+
   h2 {
     font-weight: 800;
     font-size: 48px;
     line-height: normal;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
+
   p {
     color: #321325;
     font-weight: 600;
@@ -257,16 +345,19 @@ nav {
     line-height: 29px;
   }
 }
+
 .text-center.kids-page {
   font-family: "Inter";
   font-style: normal;
   color: #4f0310;
+
   h1 {
     font-weight: 700;
     font-size: 48px;
     line-height: normal;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
+
   h4 {
     font-weight: 700;
     font-size: 26px;
@@ -274,6 +365,7 @@ nav {
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 }
+
 .kids-event-banner {
   background: linear-gradient(93.86deg, #95051e 0%, #2b0108 100%);
   box-shadow: 0px 4px 63px 3px #95061e;
@@ -286,15 +378,18 @@ nav {
   font-size: 16px;
   line-height: 29px;
   padding: 10px 20px;
+
   .col1 {
     width: 35%;
     align-self: flex-end;
     display: flex;
     flex-direction: column;
+
     p:nth-child(1) {
       margin-bottom: 15%;
     }
   }
+
   .col2 {
     align-self: flex-end;
     height: 100%;
@@ -302,27 +397,33 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     p {
       font-weight: 800;
       margin: 0;
     }
+
     img {
       width: 40px;
     }
   }
+
   .col3 {
     width: 35%;
+
     img {
       width: 80%;
     }
   }
 }
+
 .shadow-text {
   font-family: "Alata";
   font-style: normal;
   font-weight: 400;
   position: relative;
   margin: 15% 0;
+
   h1 {
     color: rgba(154, 3, 30, 0.29);
     font-size: 152px;
@@ -332,6 +433,7 @@ nav {
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
   p {
     color: #000000;
     font-size: 30px;
@@ -342,9 +444,11 @@ nav {
     transform: translate(-50%, 0%);
   }
 }
+
 .kids-benefits {
   margin-top: 25%;
   padding: 0 7%;
+
   .benefit {
     width: 30%;
     background: linear-gradient(180deg, #98041e 0%, #2a0108 100%);
@@ -356,32 +460,39 @@ nav {
     font-family: "Inter";
     font-style: normal;
     transition: 0.5s;
+
     div:nth-child(2) {
       margin-top: auto;
     }
+
     h1 {
       font-weight: 700;
       font-size: 26px;
       line-height: 44px;
     }
+
     p {
       font-weight: 600;
       font-size: 16px;
       line-height: 29px;
     }
+
     &:hover {
       transform: translateY(-20px);
       filter: contrast(1.2);
     }
   }
 }
+
 .places-for-kids {
   margin-top: 30%;
   margin-bottom: 10%;
+
   .article {
     &:nth-child(2) {
       margin: 7% 0;
     }
+
     h1 {
       color: #9a031e;
       font-family: "Inter";
@@ -390,6 +501,7 @@ nav {
       font-size: 32px;
       line-height: 44px;
     }
+
     p {
       color: #000000;
       font-family: "Inter";
@@ -398,10 +510,12 @@ nav {
       font-size: 18px;
       line-height: 29px;
     }
+
     .findOnMap {
       display: flex;
       align-items: center;
       gap: 5px;
+
       a {
         font-family: "Inter";
         font-style: normal;
@@ -411,16 +525,19 @@ nav {
         text-decoration-line: underline;
         color: #5f0f40;
       }
+
       img {
         width: 30px;
       }
     }
   }
 }
+
 //Festival Page
 .welcomeSection.festival article {
   width: 100%;
 }
+
 .welcomeSection.festival h1 {
   line-height: normal;
   margin-bottom: 2%;
@@ -429,10 +546,12 @@ nav {
 .eventPromo {
   font-family: "Inter";
   font-style: normal;
+
   .eventName {
     background: #fcdc4d;
     padding: 10px 4%;
     width: fit-content;
+
     h1 {
       color: #000000;
       font-weight: 700;
@@ -441,8 +560,10 @@ nav {
       margin: 0;
     }
   }
+
   .description {
     padding: 2% 2%;
+
     p {
       color: #ffffff;
       font-weight: 500;
@@ -450,20 +571,25 @@ nav {
       line-height: normal;
       margin: 0;
     }
+
     &.dance {
       background: linear-gradient(271.74deg, #000000 17.62%, #531313 55.15%);
     }
+
     &.yummy {
       background: linear-gradient(271.74deg, #000000 17.62%, #531313 55.15%);
     }
+
     &.history {
       background: linear-gradient(271.74deg, #000000 17.62%, #531313 55.15%);
     }
   }
 }
+
 .container.schedule {
   margin-top: 5%;
   margin-bottom: 5%;
+
   h1 {
     color: #9a031e;
     font-family: "Alata";
@@ -482,9 +608,11 @@ nav {
     font-family: "Inter";
     font-style: normal;
     text-align: center;
+
     &:nth-child(2n) {
       background: linear-gradient(94.11deg, #000000 -2.58%, #620011 110.26%);
     }
+
     h2 {
       font-weight: 700;
       font-size: 1.5vw;
@@ -492,12 +620,14 @@ nav {
       color: #ffffff;
       white-space: nowrap;
     }
+
     .events {
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       gap: 5px;
+
       p {
         font-weight: 500;
         font-size: 14px;
@@ -507,6 +637,7 @@ nav {
     }
   }
 }
+
 .container.map {
   h1 {
     color: #9a031e;
@@ -517,28 +648,35 @@ nav {
     line-height: normal;
     letter-spacing: 0.225em;
   }
+
   .agenda {
     display: flex;
     gap: 2%;
     margin-top: 2%;
-    margin-bottom : 1%;
+    margin-bottom: 1%;
+
     .event-name {
       display: flex;
       align-items: center;
       gap: 2px;
+
       .color-box {
         width: 15px;
         height: 15px;
+
         &.yummy {
           background: #9a031e;
         }
+
         &.dance {
           background: #2e0b1f;
         }
+
         &.history {
           background: #cb793a;
         }
       }
+
       p {
         color: #000000;
         font-family: "Inter";
@@ -550,19 +688,20 @@ nav {
       }
     }
   }
-  img{
+
+  img {
     width: 100%;
   }
 }
 
 footer {
-  background: linear-gradient(90.19deg, #321325 1.12%, #5F0F40 99.85%); 
+  background: linear-gradient(90.19deg, #321325 1.12%, #5F0F40 99.85%);
   opacity: 0.8;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
-  color:white; 
-  padding:4px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
+  padding: 4px;
 }
 
 #facebookicon {
-  background-color: white ;
+  background-color: white;
 }
