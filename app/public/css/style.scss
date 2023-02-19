@@ -11,12 +11,12 @@ nav {
     #7f4066 99.97%,
     #7f4066 99.97%
   );
-  .logo{
+  .logo {
     width: 75%;
     margin-top: 10px;
     margin-bottom: 10px;
   }
-  .nav-item{    
+  .nav-item {
     font-family: "Inter";
     .nav-link {
       font-size: 26px;
@@ -66,7 +66,6 @@ nav {
 .welcomeSection {
   display: flex;
   justify-content: space-between;
-  padding: 20px 120px;
   align-items: flex-end;
 }
 
@@ -412,9 +411,146 @@ nav {
         text-decoration-line: underline;
         color: #5f0f40;
       }
-      img{
+      img {
         width: 30px;
       }
     }
+  }
+}
+//Festival Page
+.welcomeSection.festival article {
+  width: 100%;
+}
+.welcomeSection.festival h1 {
+  line-height: normal;
+  margin-bottom: 2%;
+}
+
+.eventPromo {
+  font-family: "Inter";
+  font-style: normal;
+  .eventName {
+    background: #fcdc4d;
+    padding: 10px 4%;
+    width: fit-content;
+    h1 {
+      color: #000000;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: normal;
+      margin: 0;
+    }
+  }
+  .description {
+    padding: 2% 2%;
+    p {
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: normal;
+      margin: 0;
+    }
+    &.dance {
+      background: linear-gradient(271.74deg, #000000 17.62%, #531313 55.15%);
+    }
+    &.yummy {
+      background: linear-gradient(271.74deg, #000000 17.62%, #531313 55.15%);
+    }
+    &.history {
+      background: linear-gradient(271.74deg, #000000 17.62%, #531313 55.15%);
+    }
+  }
+}
+.container.schedule {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  h1 {
+    color: #9a031e;
+    font-family: "Alata";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 88px;
+    letter-spacing: 0.225em;
+  }
+
+  .day-block {
+    flex: 1 1 0px;
+    background: linear-gradient(94.11deg, #620011 -2.58%, #000000 110.26%);
+    padding: 15px 10px;
+    height: 350px;
+    font-family: "Inter";
+    font-style: normal;
+    text-align: center;
+    &:nth-child(2n) {
+      background: linear-gradient(94.11deg, #000000 -2.58%, #620011 110.26%);
+    }
+    h2 {
+      font-weight: 700;
+      font-size: 1.5vw;
+      line-height: normal;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+    .events {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      p {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: normal;
+        color: #ffffff;
+      }
+    }
+  }
+}
+.container.map {
+  h1 {
+    color: #9a031e;
+    font-family: "Alata";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: normal;
+    letter-spacing: 0.225em;
+  }
+  .agenda {
+    display: flex;
+    gap: 2%;
+    margin-top: 2%;
+    margin-bottom : 1%;
+    .event-name {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      .color-box {
+        width: 15px;
+        height: 15px;
+        &.yummy {
+          background: #9a031e;
+        }
+        &.dance {
+          background: #2e0b1f;
+        }
+        &.history {
+          background: #cb793a;
+        }
+      }
+      p {
+        color: #000000;
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: normal;
+        margin: 0;
+      }
+    }
+  }
+  img{
+    width: 100%;
   }
 }

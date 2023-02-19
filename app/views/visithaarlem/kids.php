@@ -14,7 +14,7 @@
     <?php
     include __DIR__ . '/../header.php';
     ?>
-    <div class="container d-flex justify-content-center gap-5 kids-welcome-screen mt-4">
+    <div class="container d-flex justify-content-between gap-5 kids-welcome-screen mt-4">
         <div class="col-6">
             <h1>Haarlem</h1>
             <h2 class="mb-3">for families and children</h2>

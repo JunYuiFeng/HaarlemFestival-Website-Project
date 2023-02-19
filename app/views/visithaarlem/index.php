@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Visit Haarlem HomePage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -18,7 +18,7 @@
     <video autoplay muted loop class="videoBackground">
         <source src="/img/VisitHaarlemVideo.mp4" type="video/mp4">
     </video>
-    <section class="welcomeSection">
+    <section class="welcomeSection container">
         <article>
             <h1>WELCOME TO HAARLEM</h1>
             <p>Haarlem has a charming historic center, renowned museums, stores, restaurants,
