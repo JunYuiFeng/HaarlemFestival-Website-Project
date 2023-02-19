@@ -7,14 +7,17 @@ body {
 nav {
   background: linear-gradient(90.05deg, #321325 0.73%, #7f4066 99.97%, #7f4066 99.97%);
 }
+
 nav .logo {
   width: 75%;
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
 nav .nav-item {
   font-family: "Inter";
 }
+
 nav .nav-item .nav-link {
   font-size: 26px;
   margin-left: 20px;
@@ -33,9 +36,11 @@ nav .nav-item .nav-link {
   font-style: normal;
   font-weight: 500;
 }
+
 .btn:hover {
   opacity: 0.9;
 }
+
 .btn.btn-red-gradient {
   background: linear-gradient(92.89deg, #93051f 0%, #37020b 100%);
   border-radius: 0;
@@ -44,6 +49,7 @@ nav .nav-item .nav-link {
   line-height: normal;
   padding: 5px 20px;
 }
+
 .btn.btn-yellow-gradient {
   background: linear-gradient(92.89deg, #ffd000 0%, #ffd000 100%);
   border-radius: 0;
@@ -59,9 +65,15 @@ nav .nav-item .nav-link {
 }
 
 .welcomeSection {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .welcomeSection article {
@@ -89,6 +101,7 @@ nav .nav-item .nav-link {
 
 .welcomeSection img {
   width: 25%;
+  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
 }
@@ -96,6 +109,7 @@ nav .nav-item .nav-link {
 .interestingSection {
   padding: 20px 120px;
 }
+
 .interestingSection .text-center p {
   color: #5f0f40;
   font-family: "Inter";
@@ -105,59 +119,78 @@ nav .nav-item .nav-link {
   line-height: 77px;
   letter-spacing: 0.17em;
 }
+
 .interestingSection .festivalPromo {
   width: 100%;
   position: relative;
   text-align: center;
   color: white;
 }
+
 .interestingSection .festivalPromo img {
   width: 100%;
 }
+
 .interestingSection .festivalPromo div {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   line-height: 103px;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .interestingSection .festivalPromo div h4 {
   color: #ffd000;
   font-size: 48px;
 }
+
 .interestingSection .festivalPromo div p {
   color: #ffffff;
   font-size: 40px;
 }
+
 .interestingSection .festivalPromo .btn {
   position: absolute;
   bottom: 20px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .visitHaarlemPromo {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
+
 .visitHaarlemPromo figure {
   width: 45%;
 }
+
 .visitHaarlemPromo figure img {
   width: 100%;
   height: auto;
 }
 
 .mobileAppPromoSection {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   gap: 20px;
   padding: 0 120px;
 }
+
 .mobileAppPromoSection .informationColumn {
   width: 40%;
   font-family: "Inter";
@@ -166,40 +199,55 @@ nav .nav-item .nav-link {
   font-size: 16px;
   color: #000000;
 }
+
 .mobileAppPromoSection .informationColumn .caption {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 40px;
   gap: 10px;
 }
+
 .mobileAppPromoSection .informationColumn .caption img {
   height: 100%;
 }
+
 .mobileAppPromoSection .informationColumn .caption p {
   font-size: 20px;
   margin: 0;
 }
+
 .mobileAppPromoSection .informationColumn h1 {
   font-weight: 800;
   font-size: 40px;
   line-height: 58px;
 }
+
 .mobileAppPromoSection .informationColumn h2 {
   font-size: 20px;
   margin-top: 5%;
 }
+
 .mobileAppPromoSection .informationColumn .downloadBtns {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 15px;
   margin-bottom: 5%;
 }
+
 .mobileAppPromoSection .informationColumn .downloadBtns img {
   height: 4vw;
   cursor: pointer;
 }
+
 .mobileAppPromoSection .mockupColumn {
   width: 30%;
 }
+
 .mobileAppPromoSection .mockupColumn img {
   width: 100%;
   height: auto;
@@ -210,6 +258,7 @@ nav .nav-item .nav-link {
 }
 
 #FoodParagraph1 {
+  background: -webkit-gradient(linear, left top, left bottom, from(#9a031e), to(#3e030e));
   background: linear-gradient(180deg, #9a031e 0%, #3e030e 100%);
   margin-top: 66px;
 }
@@ -221,6 +270,7 @@ nav .nav-item .nav-link {
 }
 
 #Restaurant {
+  background: -webkit-gradient(linear, left top, left bottom, from(#9a031e), to(#3e030e));
   background: linear-gradient(180deg, #9a031e 0%, #3e030e 100%);
 }
 
@@ -229,12 +279,14 @@ nav .nav-item .nav-link {
   margin-top: 50px;
   margin-bottom: 40px;
 }
+
 .foodPageTitle h1 {
   font-weight: 800;
   font-size: 64px;
   line-height: normal;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .foodPageTitle h2 {
   font-weight: 800;
   font-size: 48px;
@@ -244,9 +296,11 @@ nav .nav-item .nav-link {
 
 .foodPageMsgBox {
   background: #FFFFFF;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
 }
+
 .foodPageMsgBox p {
   font-size: 20pt;
   padding: 30px;
@@ -256,28 +310,36 @@ nav .nav-item .nav-link {
   margin-top: 60px;
   margin-bottom: 88px;
 }
+
 .restaurantsSection h1 {
   color: #5f0f40;
   padding: 15px 0px;
   font-weight: bold;
   font-size: 48px;
 }
+
 .restaurantsSection .restaurant .card {
   margin-top: 60px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#95051E), to(#2E0209));
   background: linear-gradient(180deg, #95051E 0%, #2E0209 100%);
 }
+
 .restaurantsSection .restaurant .card img {
   margin: 30px;
 }
+
 .restaurantsSection .restaurant .card p {
   color: white;
 }
+
 .restaurantsSection .restaurant .card h2 {
   color: white;
 }
+
 .restaurantsSection .restaurant .restaurantRight {
   margin-right: 45px;
 }
+
 .restaurantsSection .restaurant .restaurantLeft {
   margin-left: 45px;
 }
@@ -288,18 +350,21 @@ nav .nav-item .nav-link {
   font-style: normal;
   font-family: "Inter";
 }
+
 .kids-welcome-screen h1 {
   font-weight: 800;
   font-size: 64px;
   line-height: normal;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .kids-welcome-screen h2 {
   font-weight: 800;
   font-size: 48px;
   line-height: normal;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .kids-welcome-screen p {
   color: #321325;
   font-weight: 600;
@@ -312,12 +377,14 @@ nav .nav-item .nav-link {
   font-style: normal;
   color: #4f0310;
 }
+
 .text-center.kids-page h1 {
   font-weight: 700;
   font-size: 48px;
   line-height: normal;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .text-center.kids-page h4 {
   font-weight: 700;
   font-size: 26px;
@@ -327,8 +394,11 @@ nav .nav-item .nav-link {
 
 .kids-event-banner {
   background: linear-gradient(93.86deg, #95051e 0%, #2b0108 100%);
-  box-shadow: 0px 4px 63px 3px #95061e;
+  -webkit-box-shadow: 0px 4px 63px 3px #95061e;
+          box-shadow: 0px 4px 63px 3px #95061e;
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   color: #ffffff;
   font-family: "Inter";
@@ -338,33 +408,54 @@ nav .nav-item .nav-link {
   line-height: 29px;
   padding: 10px 20px;
 }
+
 .kids-event-banner .col1 {
   width: 35%;
-  align-self: flex-end;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
+
 .kids-event-banner .col1 p:nth-child(1) {
   margin-bottom: 15%;
 }
+
 .kids-event-banner .col2 {
-  align-self: flex-end;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
   height: 100%;
   width: 30%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 .kids-event-banner .col2 p {
   font-weight: 800;
   margin: 0;
 }
+
 .kids-event-banner .col2 img {
   width: 40px;
 }
+
 .kids-event-banner .col3 {
   width: 35%;
 }
+
 .kids-event-banner .col3 img {
   width: 80%;
 }
@@ -376,6 +467,7 @@ nav .nav-item .nav-link {
   position: relative;
   margin: 15% 0;
 }
+
 .shadow-text h1 {
   color: rgba(154, 3, 30, 0.29);
   font-size: 152px;
@@ -383,8 +475,10 @@ nav .nav-item .nav-link {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
+
 .shadow-text p {
   color: #000000;
   font-size: 30px;
@@ -392,50 +486,67 @@ nav .nav-item .nav-link {
   position: absolute;
   top: 65%;
   left: 50%;
-  transform: translate(-50%, 0%);
+  -webkit-transform: translate(-50%, 0%);
+          transform: translate(-50%, 0%);
 }
 
 .kids-benefits {
   margin-top: 25%;
   padding: 0 7%;
 }
+
 .kids-benefits .benefit {
   width: 30%;
+  background: -webkit-gradient(linear, left top, left bottom, from(#98041e), to(#2a0108));
   background: linear-gradient(180deg, #98041e 0%, #2a0108 100%);
   border-radius: 31px;
   padding: 20px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   color: #ffffff;
   font-family: "Inter";
   font-style: normal;
+  -webkit-transition: 0.5s;
   transition: 0.5s;
 }
+
 .kids-benefits .benefit div:nth-child(2) {
   margin-top: auto;
 }
+
 .kids-benefits .benefit h1 {
   font-weight: 700;
   font-size: 26px;
   line-height: 44px;
 }
+
 .kids-benefits .benefit p {
   font-weight: 600;
   font-size: 16px;
   line-height: 29px;
 }
+
 .kids-benefits .benefit:hover {
-  transform: translateY(-20px);
-  filter: contrast(1.2);
+  -webkit-transform: translateY(-20px);
+          transform: translateY(-20px);
+  -webkit-filter: contrast(1.2);
+          filter: contrast(1.2);
 }
 
 .places-for-kids {
   margin-top: 30%;
   margin-bottom: 10%;
 }
+
 .places-for-kids .article:nth-child(2) {
   margin: 7% 0;
 }
+
 .places-for-kids .article h1 {
   color: #9a031e;
   font-family: "Inter";
@@ -444,6 +555,7 @@ nav .nav-item .nav-link {
   font-size: 32px;
   line-height: 44px;
 }
+
 .places-for-kids .article p {
   color: #000000;
   font-family: "Inter";
@@ -452,20 +564,28 @@ nav .nav-item .nav-link {
   font-size: 18px;
   line-height: 29px;
 }
+
 .places-for-kids .article .findOnMap {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 5px;
 }
+
 .places-for-kids .article .findOnMap a {
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
   line-height: 29px;
-  text-decoration-line: underline;
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
   color: #5f0f40;
 }
+
 .places-for-kids .article .findOnMap img {
   width: 30px;
 }
@@ -483,12 +603,15 @@ nav .nav-item .nav-link {
   font-family: "Inter";
   font-style: normal;
 }
+
 .eventPromo .eventName {
   background: #fcdc4d;
   padding: 10px 4%;
+  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
+
 .eventPromo .eventName h1 {
   color: #000000;
   font-weight: 700;
@@ -496,9 +619,11 @@ nav .nav-item .nav-link {
   line-height: normal;
   margin: 0;
 }
+
 .eventPromo .description {
   padding: 2% 2%;
 }
+
 .eventPromo .description p {
   color: #ffffff;
   font-weight: 500;
@@ -506,12 +631,15 @@ nav .nav-item .nav-link {
   line-height: normal;
   margin: 0;
 }
+
 .eventPromo .description.dance {
   background: linear-gradient(271.74deg, #000000 17.62%, #531313 55.15%);
 }
+
 .eventPromo .description.yummy {
   background: linear-gradient(271.74deg, #000000 17.62%, #531313 55.15%);
 }
+
 .eventPromo .description.history {
   background: linear-gradient(271.74deg, #000000 17.62%, #531313 55.15%);
 }
@@ -520,6 +648,7 @@ nav .nav-item .nav-link {
   margin-top: 5%;
   margin-bottom: 5%;
 }
+
 .container.schedule h1 {
   color: #9a031e;
   font-family: "Alata";
@@ -529,8 +658,11 @@ nav .nav-item .nav-link {
   line-height: 88px;
   letter-spacing: 0.225em;
 }
+
 .container.schedule .day-block {
-  flex: 1 1 0px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0px;
   background: linear-gradient(94.11deg, #620011 -2.58%, #000000 110.26%);
   padding: 15px 10px;
   height: 350px;
@@ -538,9 +670,11 @@ nav .nav-item .nav-link {
   font-style: normal;
   text-align: center;
 }
+
 .container.schedule .day-block:nth-child(2n) {
   background: linear-gradient(94.11deg, #000000 -2.58%, #620011 110.26%);
 }
+
 .container.schedule .day-block h2 {
   font-weight: 700;
   font-size: 1.5vw;
@@ -548,13 +682,22 @@ nav .nav-item .nav-link {
   color: #ffffff;
   white-space: nowrap;
 }
+
 .container.schedule .day-block .events {
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   gap: 5px;
 }
+
 .container.schedule .day-block .events p {
   font-weight: 500;
   font-size: 14px;
@@ -571,30 +714,43 @@ nav .nav-item .nav-link {
   line-height: normal;
   letter-spacing: 0.225em;
 }
+
 .container.map .agenda {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 2%;
   margin-top: 2%;
   margin-bottom: 1%;
 }
+
 .container.map .agenda .event-name {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 2px;
 }
+
 .container.map .agenda .event-name .color-box {
   width: 15px;
   height: 15px;
 }
+
 .container.map .agenda .event-name .color-box.yummy {
   background: #9a031e;
 }
+
 .container.map .agenda .event-name .color-box.dance {
   background: #2e0b1f;
 }
+
 .container.map .agenda .event-name .color-box.history {
   background: #cb793a;
 }
+
 .container.map .agenda .event-name p {
   color: #000000;
   font-family: "Inter";
@@ -604,6 +760,7 @@ nav .nav-item .nav-link {
   line-height: normal;
   margin: 0;
 }
+
 .container.map img {
   width: 100%;
 }
@@ -611,11 +768,25 @@ nav .nav-item .nav-link {
 footer {
   background: linear-gradient(90.19deg, #321325 1.12%, #5F0F40 99.85%);
   opacity: 0.8;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   color: white;
   padding: 4px;
 }
 
 #facebookicon {
   background-color: white;
-}/*# sourceMappingURL=style.css.map */
+}
+
+.card-bg-color {
+  background-color: #2E0C20;
+}
+
+.card-text-color {
+  color: #FFFFFF;
+}
+
+.heading {
+  color: #5F0F40;
+}
+/*# sourceMappingURL=style.css.map */
