@@ -28,6 +28,17 @@ nav .nav-item .nav-link {
   z-index: 100;
 }
 
+footer {
+  background: linear-gradient(90.19deg, #321325 1.12%, #5F0F40 99.85%);
+  opacity: 0.8;
+  color: white;
+  padding: 4px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+footer #envelopeImg {
+  size: 10px;
+}
+
 .btn {
   font-family: "Inter";
   font-style: normal;
@@ -226,6 +237,55 @@ nav .nav-item .nav-link {
 
 #header {
   color: #5f0f40;
+}
+
+#Culturebody {
+  background-color: #000000;
+}
+
+#VisitHaarlemCultureImg1 {
+  position: relative;
+}
+
+.MuseumBox {
+  margin-top: 30px;
+  filter: drop-shadow(12px 25px 11px rgba(0, 0, 0, 0.25));
+  position: relative;
+  display: inline-block;
+  width: 60px;
+}
+
+.img-top {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.MuseumBox:hover .img-top {
+  display: inline;
+}
+
+#VisitHaarlemCulture1 {
+  height: 417px;
+  float: left;
+  padding-left: 0%;
+  margin-left: 0;
+}
+
+#buttonViewMoreMuseum {
+  color: red;
+}
+
+.cardCulture {
+  background-color: #2b0108;
+}
+
+#cultureText1 {
+  margin: 50px;
+  text-align: center;
+  color: #5F0F40;
 }
 
 .kids-welcome-screen {
