@@ -81,8 +81,7 @@
         <figure class="mockupColumn">
             <img src="/img/MobileAppPromotion.png" alt="">
         </figure>
-    </section>
-    
+    </section>    
     <?php
     include __DIR__ . '/../footer.php';
     ?>

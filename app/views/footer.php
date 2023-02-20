@@ -9,11 +9,11 @@
                     <section class="d-flex justify-content-center justify-content-lg-between p-1">
                         <!-- Right -->
                         <div>
-                            <h6 class="text-uppercase fw-bold mb-4">
+                            <h6 class="text-uppercase fw-bold mb-3">
                                 <img src="/img/HaarlemFooterLogo.png">
                             </h6>
-                            <p>
-                                <img src="/img/opened envelope.png">
+                            <p class="">
+                                <img src="/img/opened envelope.png" >
                                 support@haarlemfestival.nl
                             </p>
                             <p>

@@ -43,7 +43,7 @@
         </div>
 
     </div>
-    <div class="row" id="FoodParagraph1">
+    <div class="row" id="FoodParagraph  1">
         <div class="container">
             <p id="FoodParagraph1Content">Haarlem is a Dutch city known for its rich history and vibrant culture.
                 The city is home to a wide variety of restaurants and cafes, offering a range of cuisines, from traditional Dutch dishes to international favourites.

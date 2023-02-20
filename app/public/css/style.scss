@@ -4,10 +4,13 @@
 body {
   font-family: "Inter";
 }
-
 nav {
-  background: linear-gradient(90.05deg, #321325 0.73%, #7f4066 99.97%, #7f4066 99.97%);
-
+  background: linear-gradient(
+    90.05deg,
+    #321325 0.73%,
+    #7f4066 99.97%,
+    #7f4066 99.97%
+  );
   .logo {
     width: 75%;
     margin-top: 10px;
@@ -30,6 +33,18 @@ nav {
   width: 100%;
   background: transparent;
   z-index: 100;
+}
+
+footer {
+  background: linear-gradient(90.19deg, #321325 1.12%, #5F0F40 99.85%);
+  opacity: 0.8;
+  color: white;
+  padding: 4px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  #envelopeImg {
+    size: 10px;
+  }
 }
 
 .btn {
@@ -246,6 +261,7 @@ nav {
   color: white;
   font-size: 13pt;
   margin: 130px 120px 130px 120px;
+
 }
 
 #Restaurant {
@@ -322,6 +338,54 @@ nav {
       margin-right: 45px;
     }
   }
+}
+
+//culture
+
+
+#Culturebody{
+  background-color: #000000;
+}
+
+#VisitHaarlemCultureImg1{
+  position: relative;
+}
+.MuseumBox {
+  margin-top: 30px;
+  filter: drop-shadow(12px 25px 11px rgba(0, 0, 0, 0.25));  
+  position: relative;
+  display: inline-block;
+  width: 60px;
+}
+.img-top{        
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+.MuseumBox:hover .img-top {
+  display: inline;
+}
+
+#VisitHaarlemCulture1 {
+  height: 417px;
+  float: left;
+  padding-left: 0%;
+  margin-left: 0;
+}
+
+#buttonViewMoreMuseum{
+  color:red;
+}
+.cardCulture{
+  background-color: #2b0108;
+}
+
+#cultureText1{
+  margin: 50px;
+  text-align: center;
+  color: #5F0F40;
 }
 
 //kids page
@@ -700,30 +764,3 @@ nav {
     width: 100%;
   }
 }
-
-footer {
-  background: linear-gradient(90.19deg, #321325 1.12%, #5F0F40 99.85%);
-  opacity: 0.8;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  color: white;
-  padding: 4px;
-}
-
-#facebookicon {
-  background-color: white;
-}
-
-// visit haarlem for history part start
-.card-bg-color {
-  background-color: #2E0C20;
-}
-
-.card-text-color {
-  color: #FFFFFF;
-}
-
-.heading {
-  color: #5F0F40;
-}
-
-// visit haarlem for history part end
