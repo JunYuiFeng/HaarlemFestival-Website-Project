@@ -316,7 +316,9 @@ footer #envelopeImg {
 }
 
 #VisitHaarlemCultureImg1 {
-  position: relative;
+  height: 417px;
+  width: 100%;
+  margin-top: 18px;
 }
 
 .MuseumBox {
@@ -324,10 +326,12 @@ footer #envelopeImg {
   filter: drop-shadow(12px 25px 11px rgba(0, 0, 0, 0.25));
   position: relative;
   display: inline-block;
-  width: 60px;
+  width: 400px;
+  height: auto;
 }
 
 .img-top {
+  size: 30px;
   display: none;
   position: absolute;
   top: 0;
@@ -346,12 +350,39 @@ footer #envelopeImg {
   margin-left: 0;
 }
 
-#buttonViewMoreMuseum {
+#buttonViewMore {
   color: red;
+  text-align: center;
 }
 
-.cardCulture {
-  background-color: #2b0108;
+#museumCart {
+  background: linear-gradient(0.12deg, #6A0013 0.08%, #2E0B1F 93.29%);
+  box-shadow: 0px 52px 54px 2px rgba(0, 0, 0, 0.11);
+  color: white;
+  padding: 20px;
+}
+
+#VisitHaarlemMuseumImg1 {
+  width: 750px;
+  height: 770px;
+  float: right;
+}
+
+#cardCulture1 {
+  background: linear-gradient(96.95deg, #620011 12.24%, #2E0B1F 80.77%);
+  box-shadow: 0px 52px 54px 2px rgba(0, 0, 0, 0.11);
+  color: white;
+  line-height: 200%;
+  padding: 15px;
+}
+
+#cardCulture2 {
+  background: linear-gradient(96.95deg, #620011 12.24%, #2E0B1F 80.77%);
+  box-shadow: 0px 52px 54px 2px rgba(0, 0, 0, 0.11);
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+  color: white;
+  line-height: 200%;
+  padding: 15px;
 }
 
 #cultureText1 {
