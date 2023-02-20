@@ -37,6 +37,7 @@
         <figure class="text-center">
             <p>Interesting</p>
         </figure>
+
         <figure class="festivalPromo">
             <img src="/img/VisitHaarlemFestivalPromo.png" />
             <div>
@@ -45,6 +46,7 @@
             </div>
             <button type="button" class="btn btn-yellow-gradient">READ MORE</button>
         </figure>
+        
         <figure class="visitHaarlemPromo">
             <figure>
                 <img src="/img/KidsPagePromo.png" alt="">

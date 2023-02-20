@@ -42,9 +42,6 @@
             </div>
         </div>
 
-        <div class="row">
-
-        </div>
     </div>
     <div class="row" id="FoodParagraph1">
         <div class="container">
@@ -60,26 +57,8 @@
 
     <div class="container restaurantsSection">
         <h1>Restaurants</h1>
+        <h3><b>Sort by</b></h3>
         <div class="row restaurant">
-            <div class="col-6">
-                <div class="card restaurantRight">
-                    <img src="/img/RatatouilleCoverImg.jpg" alt="">
-                    <div class="card-body">
-                        <h2>Ratatouille</h2>
-                        <p>This restaurant serves a mix of French and European cuisines.
-                            The dishes and signature dishes are perfectly and freshly preprepared by chef Jozua Jaring.
-                            It all started in 2013 and keep evolving until 2014 when they got awarded with a Michelin star.
-                            In 2015 they move to a new location which is today’s Ratatouille with a better environment,
-                            so the people can enjoy even more. Beside the amazing dishes, their wine makes it even better! </p>
-                        <p><b>Address</b>: Spaarne 96, 2011 CL Haarlem <br>
-                            <b>Phone</b>: 023 542 7270 <br>
-                            <b>Website</b>: <a href="https://ratatouillefoodandwine.nl">https://ratatouillefoodandwine.nl</a> <br>
-                            <b>Price range</b>: €‎€‎€‎€‎<br>
-                            <b>Opening hours</b>
-                        </p>
-                    </div>
-                </div>
-            </div>
             <div class="col-6">
                 <div class="card restaurantLeft">
                     <img src="/img/RatatouilleCoverImg.jpg" alt="">
@@ -101,9 +80,47 @@
             </div>
             <div class="col-6">
                 <div class="card restaurantRight">
-                    <img src="/img/RatatouilleCoverImg.jpg" alt="">
+                    <img src="/img/TroujoursCoverImg.jpg" alt="">
                     <div class="card-body">
-                        <h2>Ratatouille</h2>
+                        <h2>Urban Frenchy Bistro Toujours</h2>
+                        <p>This restaurant serves a mix of French and European cuisines.
+                            The dishes and signature dishes are perfectly and freshly preprepared by chef Jozua Jaring.
+                            It all started in 2013 and keep evolving until 2014 when they got awarded with a Michelin star.
+                            In 2015 they move to a new location which is today’s Ratatouille with a better environment,
+                            so the people can enjoy even more. Beside the amazing dishes, their wine makes it even better! </p>
+                        <p><b>Address</b>: Spaarne 96, 2011 CL Haarlem <br>
+                            <b>Phone</b>: 023 542 7270 <br>
+                            <b>Website</b>: <a href="https://ratatouillefoodandwine.nl">https://ratatouillefoodandwine.nl</a> <br>
+                            <b>Price range</b>: €‎€‎€‎€‎<br>
+                            <b>Opening hours</b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card restaurantLeft">
+                    <img src="/img/SpecktakelCoverImg.jpg" alt="">
+                    <div class="card-body">
+                        <h2>Specktakel</h2>
+                        <p>This restaurant serves a mix of French and European cuisines.
+                            The dishes and signature dishes are perfectly and freshly preprepared by chef Jozua Jaring.
+                            It all started in 2013 and keep evolving until 2014 when they got awarded with a Michelin star.
+                            In 2015 they move to a new location which is today’s Ratatouille with a better environment,
+                            so the people can enjoy even more. Beside the amazing dishes, their wine makes it even better! </p>
+                        <p><b>Address</b>: Spaarne 96, 2011 CL Haarlem <br>
+                            <b>Phone</b>: 023 542 7270 <br>
+                            <b>Website</b>: <a href="https://ratatouillefoodandwine.nl">https://ratatouillefoodandwine.nl</a> <br>
+                            <b>Price range</b>: €‎€‎€‎€‎<br>
+                            <b>Opening hours</b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card restaurantRight">
+                    <img src="/img/GrandCafeBrinkmanCoverImg.jpg" alt="">
+                    <div class="card-body">
+                        <h2>Grand Cafe Brinkman</h2>
                         <p>This restaurant serves a mix of French and European cuisines.
                             The dishes and signature dishes are perfectly and freshly preprepared by chef Jozua Jaring.
                             It all started in 2013 and keep evolving until 2014 when they got awarded with a Michelin star.
