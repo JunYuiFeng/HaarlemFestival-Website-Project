@@ -348,6 +348,7 @@ footer #envelopeImg {
 
 #VisitHaarlemCultureImg1 {
   position: relative;
+  width: 100%;
 }
 
 .boxImg {
@@ -420,10 +421,6 @@ footer #envelopeImg {
   position: absolute;
 }
 
-.cardCulture {
-  background-color: #2b0108;
-}
-
 #VisitHaarlemMuseumImg1 {
   width: 750px;
   height: 770px;
@@ -436,7 +433,7 @@ footer #envelopeImg {
 
 .cardCulture1 {
   align-items: center;
-  width: 45%;
+  width: 100%;
   background: linear-gradient(96.95deg, #620011 12.24%, #2E0B1F 80.77%);
   box-shadow: 0px 52px 54px 2px rgba(0, 0, 0, 0.11);
   color: white;
