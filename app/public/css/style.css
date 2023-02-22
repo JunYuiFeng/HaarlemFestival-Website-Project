@@ -9,14 +9,12 @@ nav {
 }
 nav .logo {
   width: 75%;
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
 nav .nav-item {
   font-family: "Inter";
 }
 nav .nav-item .nav-link {
-  font-size: 26px;
+  font-size: 22px;
   margin-left: 20px;
   color: white !important;
 }
@@ -29,7 +27,7 @@ nav .nav-item .nav-link {
 }
 
 footer {
-  background: linear-gradient(90.19deg, #321325 1.12%, #5F0F40 99.85%);
+  background: linear-gradient(90.19deg, #321325 1.12%, #5f0f40 99.85%);
   opacity: 0.8;
   color: white;
   padding: 4px;
@@ -254,7 +252,7 @@ footer #envelopeImg {
 }
 
 .foodPageMsgBox {
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
 }
@@ -293,7 +291,7 @@ footer #envelopeImg {
 }
 .restaurantsSection .restaurant .card {
   margin-top: 60px;
-  background: linear-gradient(180deg, #95051E 0%, #2E0209 100%);
+  background: linear-gradient(180deg, #95051e 0%, #2e0209 100%);
 }
 .restaurantsSection .restaurant .card img {
   margin: 30px;
@@ -309,6 +307,39 @@ footer #envelopeImg {
 }
 .restaurantsSection .restaurant .restaurantLeft {
   margin-right: 45px;
+}
+
+.history-header {
+  color: #5f0f40;
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+.history-header h1 {
+  font-weight: 800;
+  font-size: 64px;
+  line-height: normal;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.history-header h2 {
+  font-weight: 800;
+  font-size: 48px;
+  line-height: normal;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.content-header {
+  color: #5f0f40;
+  font-size: 48px;
+  line-height: normal;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.card-bg-color {
+  background-color: #2e0c20;
+}
+
+.card-text-color {
+  color: #ffffff;
 }
 
 #Culturebody {
@@ -388,7 +419,7 @@ footer #envelopeImg {
 #cultureText1 {
   margin: 50px;
   text-align: center;
-  color: #5F0F40;
+  color: #5f0f40;
 }
 
 .kids-welcome-screen {
@@ -592,18 +623,31 @@ footer #envelopeImg {
   font-family: "Inter";
   font-style: normal;
 }
-.eventPromo .eventName {
+.eventPromo .event {
+  position: relative;
+}
+.eventPromo .event .eventName {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: #fcdc4d;
   padding: 10px 4%;
   width: -moz-fit-content;
   width: fit-content;
+  cursor: pointer;
+  transition: 0.5s;
 }
-.eventPromo .eventName h1 {
+.eventPromo .event .eventName h1 {
   color: #000000;
   font-weight: 700;
   font-size: 32px;
   line-height: normal;
   margin: 0;
+}
+.eventPromo .event .eventName:hover {
+  transform: translate(-50%, -65%);
+  filter: contrast(1.5);
 }
 .eventPromo .description {
   padding: 2% 2%;
@@ -715,4 +759,155 @@ footer #envelopeImg {
 }
 .container.map img {
   width: 100%;
+}
+
+.bg-image-vertical {
+  position: relative;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: auto 100%;
+}
+
+@media (min-width: 1025px) {
+  .h-custom-2 {
+    height: 100%;
+  }
+}
+.container-fluid.login {
+  font-family: "Inter", "Alata", "Sans-serif";
+}
+.container-fluid.login h1 {
+  font-family: "Alata", "Sans-serif";
+  font-weight: 700;
+}
+.container-fluid.login .user-box {
+  position: relative;
+}
+.container-fluid.login .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #000000;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #000000;
+  outline: none;
+  background: transparent;
+}
+.container-fluid.login .user-box input:focus ~ label, .container-fluid.login .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #9a031e;
+  font-size: 12px;
+}
+.container-fluid.login .user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #000000;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.container-fluid.login button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #9a031e;
+  font-size: 13px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-top: 5%;
+  letter-spacing: 4px;
+}
+.container-fluid.login button:hover {
+  background: #9a031e;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #9a031e, 0 0 25px #9a031e, 0 0 50px #9a031e, 0 0 100px #9a031e;
+}
+.container-fluid.login button span {
+  position: absolute;
+  display: block;
+}
+.container-fluid.login button span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #9a031e);
+  animation: btn-anim1 1s linear infinite;
+}
+.container-fluid.login button span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #9a031e);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+.container-fluid.login button span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #9a031e);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+.container-fluid.login button span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #9a031e);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+.container-fluid.login .link-info {
+  color: #9a031e !important;
+}
+.container-fluid.login .error-message {
+  color: red;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%, 100% {
+    left: 100%;
+  }
+}
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%, 100% {
+    top: 100%;
+  }
+}
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%, 100% {
+    right: 100%;
+  }
+}
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%, 100% {
+    bottom: 100%;
+  }
 }/*# sourceMappingURL=style.css.map */

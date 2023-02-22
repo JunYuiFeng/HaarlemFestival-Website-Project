@@ -35,9 +35,4 @@ class VisitHaarlemController
         require __DIR__ . '/../views/visithaarlem/kids.php';
     }
 
-    public function festival()
-    {
-        require __DIR__ . '/../views/festival/overview.php';
-    }
-
 }

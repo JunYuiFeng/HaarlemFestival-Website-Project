@@ -19,8 +19,11 @@
     include __DIR__ . '/../header.php';
     ?>
     
-    <h1 class="container mt-4 heading">Haarlem<br> for history</h1>
-    <section class="container mt-5 mb-5">
+    <header class="container mt-5 mb-5">
+        <div class="row history-header">
+                <h1>Haarlem</h1><br>
+                <h2>for history</h2>
+        </div>
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -29,10 +32,10 @@
 
             </div>
         </div>
-    </section>
+    </header>
 
     <section class="container mb-5">
-        <h1 class="heading">Haarlem history</h1>
+        <h1 class="heading content-header">Haarlem history</h1>
         <p>Haarlem is a city and municipality at the same time located in the bank of river Spaarne. It is the capital of North Holland. It is a medium size city with 162,914 inhabitants. The neighboring cities of Haarlem are Bloemendaal, Hoofddorp, Zandvoort
             and Haarlemmermeer. This city was first mentioned in a document from the 10th century. In 1245 Haarlem received its recognition as a city from William II of Haarlem. This city has a rich history with old architectural buildings such as De
             Adriaan, Meat Hall, Taylers Hofje, The Dome etc. which attract tourists to visit the city.
