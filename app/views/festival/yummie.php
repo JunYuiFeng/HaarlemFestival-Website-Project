@@ -24,6 +24,13 @@
 
     <div class="row">
         <img src="/img/YummieWelcomeImg.jpg" alt="YummieWelcomeImg">
+        <div class="container yummieWelcomeParagraph"><h1>Welcome</h1>
+            <p>Welcome to this Yummie! food event. 
+            This event would last 5 days, from the 27th of July till the 31st of July. 
+            During the event there will be 7 amazing restaurants that is participating. 
+            Each restaurant varying from different cuisine, type of food, amount of session per day, 
+            a duration of a session, rating stars, pricing, and amount of seats. 
+            That means during this event there will be a limited amount of seats per day so don’t forget to reserve your table!</p></div>
     </div>
 
 </body>
