@@ -34,33 +34,35 @@
 
     <div class="container d-flex flex-column gap-5">
         <section class="eventPromo">
-            <div class="eventName">
+            
+            <div class="col-12 event">
+                <img src="/img/DanceFestival.png" alt="Dance Festival Image" class="img-fluid">
+                <div class="eventName">
                 <h1>Dance!</h1>
             </div>
-            <div class="col-12">
-                <img src="/img/DanceFestival.png" alt="Dance Festival Image" class="img-fluid">
             </div>
             <div class="col-12 description dance">
                 <p>Whether you're a fan of house, techno, or hip-hop, we have something for everyone. So put on your dancing shoes and get ready to party like never before at this unforgettable clubbing experience!</p>
             </div>
         </section>
         <section class="eventPromo">
-            <div class="eventName">
+            <div class="col-12 event">
+                <img src="/img/YummyFestival.png" alt="Yummy Festival Image" class="img-fluid">
+                <div class="eventName">
                 <h1>Yummy!</h1>
             </div>
-            <div class="col-12">
-                <img src="/img/YummyFestival.png" alt="Yummy Festival Image" class="img-fluid">
             </div>
             <div class="col-12 description yummy">
                 <p>Welcome to this Yummie!, where 7 amazing restaurants offering a range of international cuisines will tickle your taste buds. In a every of sessions at different price points our chefs will take you on culinary adventure. Reserve now! Seats are limited.</p>
             </div>
         </section>
         <section class="eventPromo">
-            <div class="eventName">
+            
+            <div class="col-12 event">
+                <img src="/img/HistoryFestival.png" alt="History Festival Image" class="img-fluid">
+                <div class="eventName">
                 <h1>A stroll through History!</h1>
             </div>
-            <div class="col-12">
-                <img src="/img/HistoryFestival.png" alt="History Festival Image" class="img-fluid">
             </div>
             <div class="col-12 description history">
                 <p>Welcome to our "A Stroll Through History" tour! Over the next hour, we will take a journey through time and explore the rich history of our city. We will visit some of the oldest and most historic buildings in the area.</p>
