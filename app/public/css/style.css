@@ -309,6 +309,10 @@ footer #envelopeImg {
   margin-right: 45px;
 }
 
+.yummieWelcomeParagraph {
+  background: linear-gradient(180deg, #9A031E 0%, #3E030E 100%);
+}
+
 .history-header {
   color: #5f0f40;
   margin-top: 50px;
