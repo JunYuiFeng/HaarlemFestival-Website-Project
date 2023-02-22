@@ -35,7 +35,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/visithaarlem/festival">
+          <a class="nav-link" href="/festival/overview">
             <b>Festival</b>
           </a>
         </li>
