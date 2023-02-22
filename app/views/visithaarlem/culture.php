@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="cardCulture">
         <br></br>
         <h2 class="col-md-12">Museum</h2>
         <div class="cardCulture1">
@@ -91,7 +91,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="cardCulture">
         <br></br>
         <h2 class="col-md-12">Theatre</h2>
         <div class="cardCulture1">
@@ -130,7 +130,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="cardCulture">
         <br></br>
         <h2 class="col-md-12">Festival</h2>
         <div class="cardCulture1">
