@@ -29,43 +29,39 @@
                 What do you want to explore?
             </h4>
         </div>
-        <!--change to cultureBox later-->
-        <div class="row">
-            <div class="col-md-4">
-                <div class="MuseumBox" class="col-md-4">
-                    <img src="/img/MuseumBox.png" alt="VisitHaarlemFood_Fries">
-                    <a href="/visithaarlem/museum" class="text-reset">
-                        <img src="/img/mesumBoxV2.png" class="img-top" alt="museumBoxV2">
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="MuseumBox" class="col-md-4">
-                    <img src="/img/Theaterbox.png" alt="VisitHaarlemFood_Fries" class="CultureSubMenu">
-                    <a href="/visithaarlem/theatre" class="text-reset">
-                        <img src="/img/theaterboxV2.png" class="img-top" alt="museumBoxV2">
-                    </a>
-
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="MuseumBox" class="col-md-4">
-                    <img src="/img/Festivalbox.png" alt="VisitHaarlemFood_Haring" class="CultureSubMenu">
-                    <a href="/visithaarlem/festivalCulture" class="text-reset">
-                        <img src="/img/festivalBoxV2.png" class="img-top" alt="museumBoxV2">
-                    </a>
-
-                </div>
+    </div>
+    <!--change to cultureBox later-->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="MuseumBox" class="col-md-4">
+                <img src="/img/MuseumBox.png" alt="VisitHaarlemFood_Fries" class="boxImg">
+                <a href="/visithaarlem/museum" class="text-reset">
+                    <img src="/img/mesumBoxV2.png" class="img-top" alt="museumBoxV2" class="boxImg">
+                </a>
             </div>
         </div>
-
-        <div class="row">
+        <div class="col-md-4">
+            <div class="MuseumBox" class="col-md-4">
+                <img src="/img/Theaterbox.png" alt="VisitHaarlemFood_Fries" class="boxImg">
+                <a href="/visithaarlem/theatre" class="text-reset">
+                    <img src="/img/theaterboxV2.png" class="img-top" alt="museumBoxV2" class="boxImg">
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="MuseumBox" class="col-md-4">
+                <img src="/img/Festivalbox.png" alt="VisitHaarlemFood_Haring" class="boxImg">
+                <a href="/visithaarlem/festivalCulture" class="text-reset">
+                    <img src="/img/festivalBoxV2.png" class="img-top" alt="museumBoxV2" class="boxImg">
+                </a>
+            </div>
         </div>
     </div>
+
     <div class="container">
         <br></br>
         <h2 class="col-md-12">Museum</h2>
-        <div class="container" id="cardCulture1">
+        <div class="cardCulture1">
             <div class="row">
                 <div class="col-md-6">
                     <img src="/img/CultureMuseumImg1.png" alt="CultureMuseumImg1">
@@ -78,28 +74,27 @@
                 </div>
             </div>
         </div>
+    </div>
+    <button type="button" class="buttonViewMore">View more museum</button>
 
-        <button type="button" id="buttonViewMore">View more museum</button>
-
-        <div class="container" class="cardCulture2" id="cardCulture2">
-            <div class="row" style="transform: matrix(-1, 0, 0, 1, 0, 0);">
-                <div class="col-md-6">
-                    <h1>Verwey Museum Haarlem </h1>
-                    <p>This classical windmill was build 1773 and rebuild it in 2002 because it was eaten by
-                        fire.
-                    </p>
-                </div>
-                <div class="col-md-6">
-
-                    <img src="/img/CultureMuseumImg2.png" alt="CultureMuseumImg2">
-                </div>
+    <div class="cardCulture2">
+        <div class="row" style="transform: matrix(-1, 0, 0, 1, 0, 0);">
+            <div class="col-md-6">
+                <h1>Verwey Museum Haarlem </h1>
+                <p>This classical windmill was build 1773 and rebuild it in 2002 because it was eaten by
+                    fire.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <img src="/img/CultureMuseumImg2.png" alt="CultureMuseumImg2">
             </div>
         </div>
     </div>
+
     <div class="container">
         <br></br>
-        <h2>Theatre</h2>
-        <div class="container" class="cardCulture1" id="cardCulture1">
+        <h2 class="col-md-12">Theatre</h2>
+        <div class="cardCulture1">
             <div class="row">
                 <div class="col-md-6">
                     <img src="/img/CultureTheaterImg1.png" alt="CultureTheaterImg1">
@@ -119,36 +114,26 @@
                 </div>
             </div>
         </div>
+    </div>
+    <button type="button" class="buttonViewMore">View more museum</button>
 
-        <button type="button" id="buttonViewMore">View more museum</button>
-
-        <div class="container" class="cardCulture" id="cardCulture2">
-            <div class="row" style="transform: matrix(-1, 0, 0, 1, 0, 0);padding:15px;">
-                <div class="col-md-6">
-                    <h1>Verwey Museum Haarlem </h1>
-                    <p style="">This classical windmill was build 1773 and rebuild it in 2002 because it was eaten by
-                        fire.
-                    </p>
-                    <p><b>Address</b>: Spaarne 96, 2011 CL Haarlem <br>
-                        <b>Phone</b>: 023 542 7270 <br>
-                        <b>Website</b>: <a
-                            href="https://ratatouillefoodandwine.nl">https://ratatouillefoodandwine.nl</a>
-                        <br>
-                        <b>Price range</b>: €‎€‎€‎€‎<br>
-                        <b>Opening hours</b>
-                    </p>
-                </div>
-                <div class="col-md-6">
-
-                    <img src="/img/CultureTheaterImg2.png" alt="CultureTheaterImg2">
-                </div>
+    <div class="cardCulture2">
+        <div class="row" style="transform: matrix(-1, 0, 0, 1, 0, 0);">
+            <div class="col-md-6">
+                <h1>Verwey Museum Haarlem </h1>
+                <p>This classical windmill was build 1773 and rebuild it in 2002 because it was eaten by
+                    fire.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <img src="/img/CultureTheaterImg2.png" alt="CultureMuseumImg1">
             </div>
         </div>
     </div>
     <div class="container">
         <br></br>
-        <h2>Festival</h2>
-        <div class="container" class="cardCulture" id="cardCulture1">
+        <h2 class="col-md-12">Festival</h2>
+        <div class="cardCulture1">
             <div class="row">
                 <div class="col-md-6">
                     <img src="/img/CultureFestival1Img.png" alt="CultureFestival1Img">
@@ -157,40 +142,22 @@
                     <h1>Verwey Museum Haarlem </h1>
                     <p>Haarlem’s most well known museum, Verwey showcases art and artifacts from Haarlem’s history.
                     </p>
-                    <p><b>Address</b>: Spaarne 96, 2011 CL Haarlem <br>
-                        <b>Phone</b>: 023 542 7270 <br>
-                        <b>Website</b>: <a
-                            href="https://ratatouillefoodandwine.nl">https://ratatouillefoodandwine.nl</a>
-                        <br>
-                        <b>Price range</b>: €‎€‎€‎€‎<br>
-                        <b>Opening hours</b>
                     </p>
                 </div>
             </div>
         </div>
-
-        <button type="button" id="buttonViewMore">View more museum</button>
-
-        <div class="container" class="cardCulture" id="cardCulture2">
-            <div class="row" style="transform: matrix(-1, 0, 0, 1, 0, 0); padding:15px;">
-                <div class="col-md-6">
-                    <h1>Verwey Museum Haarlem </h1>
-                    <p style="">This classical windmill was build 1773 and rebuild it in 2002 because it was eaten by
-                        fire.
-                    </p>
-                    <p><b>Address</b>: Spaarne 96, 2011 CL Haarlem <br>
-                        <b>Phone</b>: 023 542 7270 <br>
-                        <b>Website</b>: <a
-                            href="https://ratatouillefoodandwine.nl">https://ratatouillefoodandwine.nl</a>
-                        <br>
-                        <b>Price range</b>: €‎€‎€‎€‎<br>
-                        <b>Opening hours</b>
-                    </p>
-                </div>
-                <div class="col-md-6">
-
-                    <img src="/img/CultureFestival2Img.png" alt="CultureFestival2Img">
-                </div>
+    </div>
+    <button type="button" class="buttonViewMore">View more museum</button>
+    <div class="cardCulture2">
+        <div class="row" style="transform: matrix(-1, 0, 0, 1, 0, 0);">
+            <div class="col-md-6">
+                <h1>Verwey Museum Haarlem </h1>
+                <p>This classical windmill was build 1773 and rebuild it in 2002 because it was eaten by
+                    fire.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <img src="/img/CultureFestival2Img.png" alt="CultureFestival1Img">
             </div>
         </div>
     </div>

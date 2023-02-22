@@ -25,26 +25,26 @@
         <img src="/img/MuseumImg1.png" alt="VisitHaarlemCulture1" id="VisitHaarlemMuseumImg1">
         <div class="row">
             <div class="col-md-12">
-                <div class="MuseumBox">
-                    <img src="/img/MuseumBox.png" alt="VisitHaarlemFood_Fries">
+                <div class="MuseumBoxDetailedPage">
+                    <img src="/img/MuseumBox.png" alt="VisitHaarlemFood_Fries" class="boxImgDetailedPage">
                     <a href="/visithaarlem/museum" class="text-reset">
-                        <img src="/img/mesumBoxV2.png" class="img-top" alt="museumBoxV2">
+                        <img src="/img/mesumBoxV2.png" class="img-topDetailPage" alt="museumBoxV2">
                     </a>
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="MuseumBox" class="col-md-4">
-                    <img src="/img/Theaterbox.png" alt="VisitHaarlemFood_Fries" class="CultureSubMenu">
+                <div class="MuseumBoxDetailedPage" class="col-md-4">
+                    <img src="/img/Theaterbox.png" alt="VisitHaarlemFood_Fries" class="boxImgDetailedPage">
                     <a href="/visithaarlem/theatre" class="text-reset">
-                        <img src="/img/theaterboxV2.png" class="img-top" alt="museumBoxV2">
+                        <img src="/img/theaterboxV2.png" class="img-topDetailPage" alt="museumBoxV2" >
                     </a>
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="MuseumBox" class="col-md-4">
-                    <img src="/img/Festivalbox.png" alt="VisitHaarlemFood_Haring" class="CultureSubMenu">
+                <div class="MuseumBoxDetailedPage" class="col-md-4">
+                    <img src="/img/Festivalbox.png" alt="VisitHaarlemFood_Haring" class="boxImgDetailedPage">
                     <a href="/visithaarlem/festivalCulture" class="text-reset">
-                        <img src="/img/festivalBoxV2.png" class="img-top" alt="museumBoxV2">
+                        <img src="/img/festivalBoxV2.png" class="img-topDetailPage" alt="museumBoxV2">
                     </a>
                 </div>
             </div>
