@@ -245,6 +245,23 @@ footer {
 }
 
 //===========================================================Food Page=========================================================================
+.foodpageWelcomeSection {
+  position: relative;
+  .foodPageMsgBox {
+    width: 40%;
+    top: 70%;
+    left: 7%;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    position: absolute;
+    p {
+      font-size: 20pt;
+      padding: 30px;
+    }
+  }
+}
+
 #FoodIntroSubImage {
   margin-top: 66px;
 }
@@ -354,12 +371,37 @@ footer {
 }
 
 //======Yummie=======
-//.yummieWelcomeParagraph {
-//  background: linear-gradient(180deg, #9A031E 0%, #3E030E 100%);
-//  {
-//    
-//  }
-//}
+.yummieWelcomeParagraph {
+  background: linear-gradient(180deg, #9A031E 0%, #3E030E 100%);
+  color: white;
+  padding: 100px 120px;
+}
+
+.foodEvent {
+  margin-top: 100px;
+
+  .title {
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #9A031E;
+  }
+
+  .personalProgramOffer {
+    padding: 50px 40px;
+    margin: 40px 0px;
+    background: linear-gradient(180deg, #9A031E 0%, #35020B 100%);
+
+    p {
+      color: white;
+      font-size: 18pt;
+    }
+
+    button {
+      background: #FCDC4D;
+      border-radius: 16px;
+      padding: 10px 12px;
+    }
+  }
+}
 
 //visit haarlem for history page start
 .history-header {

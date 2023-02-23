@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/../routers/patternrouter.php';
-//session_start();
+session_start();
 
 $uri = trim($_SERVER['REQUEST_URI'], '/');
 
