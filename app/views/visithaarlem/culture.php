@@ -16,6 +16,7 @@
     include __DIR__ . '/../header.php';
     ?>
 
+
     <div class="container">
         <div class="row">
             <h1 id="header">Haarlem</h1><br>
@@ -31,26 +32,26 @@
         </div>
     </div>
     <!--change to cultureBox later-->
-    <div class="row">
+    <div class="row" >
         <div class="col-md-4">
-            <div class="MuseumBox" class="col-md-4">
-                <img src="/img/MuseumBox.png" alt="VisitHaarlemFood_Fries" class="boxImg">
+            <div class="MuseumBox">
+                <img src="/img/MuseumBox.png" class="boxImg">
                 <a href="/visithaarlem/museum" class="text-reset">
                     <img src="/img/mesumBoxV2.png" class="img-top" alt="museumBoxV2" class="boxImg">
                 </a>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="MuseumBox" class="col-md-4">
-                <img src="/img/Theaterbox.png" alt="VisitHaarlemFood_Fries" class="boxImg">
+            <div class="MuseumBox">
+                <img src="/img/Theaterbox.png" class="boxImg">
                 <a href="/visithaarlem/theatre" class="text-reset">
                     <img src="/img/theaterboxV2.png" class="img-top" alt="museumBoxV2" class="boxImg">
                 </a>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="MuseumBox" class="col-md-4">
-                <img src="/img/Festivalbox.png" alt="VisitHaarlemFood_Haring" class="boxImg">
+            <div class="MuseumBox">
+                <img src="/img/Festivalbox.png" class="boxImg">
                 <a href="/visithaarlem/festivalCulture" class="text-reset">
                     <img src="/img/festivalBoxV2.png" class="img-top" alt="museumBoxV2" class="boxImg">
                 </a>
@@ -161,6 +162,32 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <br></br>
     <br></br>
