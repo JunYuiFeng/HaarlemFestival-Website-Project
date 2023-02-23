@@ -1,38 +1,36 @@
 <?php
 include_once("../model/User.php");
+include_once("../services/loginservice.php");
 
-class LoginPageController
+
+class LoginController
 {
-    public function display()
+    private $loginService;
+    function __construct()
     {
-        if(isset($_SESSION["username"]))
-        {
+        $loginService = new LoginService();
+    }
+
+    public function index()
+    {
+        if (isset($_SESSION["username"])) {
             header("location: login_success");
-        }
-        else
-        {
+        } else {
             $GLOBALS["log"] = "login";
 
             $msg = "";
 
-            if(isset($_POST["login"])) 
-            {
-                if(empty($_POST["username"]) || empty($_POST["password"]))  
-                {  
+            if (isset($_POST["login"])) {
+                if (empty($_POST["username"]) || empty($_POST["password"])) {
                     $msg = "field empty, please fill in";
-                }  
-                else
-                {
+                } else {
                     $username = $_POST["username"];
                     $password = $_POST["password"];
-    
-                    if($this->loginService->login($username, $password))
-                    {
+
+                    if ($this->loginService->login($username, $password)) {
                         $_SESSION["username"] = $_POST["username"];
                         header("location: login_success");
-                    }
-                    else
-                    {
+                    } else {
                         $msg = "incorrect username or password";
                     }
                 }
@@ -52,11 +50,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     $user = new User($username, $password);
-    $controller = new LoginPageController();
+    //$controller = new LoginPageController();
 
-    if ($controller->validate($user)) {
-       echo "Login successful";
-    } else {
-       echo "Login failed";
-    }
+    // if ($controller->validate($user)) {
+    //     echo "Login successful";
+    // } else {
+    //     echo "Login failed";
+    // }
 }
