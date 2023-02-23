@@ -19,6 +19,9 @@ class FestivalController
         require __DIR__ . '/../views/festival/overview.php';
     }
 
+    public function dance(){
+        require __DIR__ . '/../views/festival/dance.php';
+    }
     public function yummie()
     {
         require __DIR__ . '/../views/festival/yummie.php';

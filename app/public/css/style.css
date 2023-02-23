@@ -352,9 +352,8 @@ footer #envelopeImg {
 }
 
 .boxImg {
-  width: 350px;
-  margin-left: 35%;
-  margin-right: auto;
+  width: 300px;
+  margin-left: 25%;
 }
 
 .boxImgDetailedPage {
@@ -370,6 +369,7 @@ footer #envelopeImg {
   display: inline-block;
   height: auto;
   align-content: center;
+  width: 100%;
 }
 
 .MuseumBoxDetailedPage {
@@ -390,14 +390,19 @@ footer #envelopeImg {
   z-index: 99;
 }
 
+#cultureBox {
+  align-items: center;
+}
+
 .img-top {
-  margin-left: 35%;
-  width: 350px;
+  width: 300px;
   display: none;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 99;
+  align-items: center;
+  margin-left: 25%;
 }
 
 .MuseumBoxDetailedPage:hover .img-topDetailPage {
@@ -456,6 +461,187 @@ footer #envelopeImg {
   margin: 50px;
   text-align: center;
   color: #5f0f40;
+}
+
+.danceBody {
+  background-color: black;
+  color: white;
+  background-image: "img/";
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+#danceHomeimg1 {
+  width: 100%;
+  height: 945px;
+}
+
+.danceHomeNameArtist {
+  background: linear-gradient(106.4deg, #FFFFFF 5.75%, #FFFFFF 88.63%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0px 4px 26px #FFB800;
+  position: absolute;
+}
+
+#danceHomeNameArtist1 {
+  left: 1002px;
+  top: 170px;
+}
+
+#danceHomeNameArtist2 {
+  left: 1544px;
+  top: 250px;
+}
+
+#danceHomeNameArtist3 {
+  left: 1037px;
+  top: 500px;
+}
+
+#danceHomeNameArtist4 {
+  left: 416px;
+  top: 401px;
+}
+
+#danceHomeNameArtist5 {
+  left: 47px;
+  top: 508px;
+}
+
+#danceHomeNameArtist6 {
+  left: 272px;
+  top: 681px;
+}
+
+#dancePersonalProrgam {
+  background: linear-gradient(180deg, #9A031E 0%, #35020B 100%);
+  position: absolute;
+  top: 792px;
+  left: 120px;
+  padding: 45px;
+  width: 80%;
+  color: white;
+  align-content: center;
+}
+
+#dancePersonalProgramButton {
+  background: #FCDC4D;
+  border-radius: 16px;
+  width: 110%;
+  height: 40px;
+}
+
+.danceHomeNameArtistCard {
+  background: linear-gradient(106.4deg, #FFFFFF 5.75%, #FFFFFF 88.63%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0px 4px 26px #FFB800;
+}
+
+.danceHomeNameArtistCard {
+  align-items: center;
+}
+
+.danceCardType1 {
+  background: #151515;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 21px 18px 52px rgba(0, 0, 0, 0.45);
+  border-radius: 22px;
+  color: white;
+  padding: 30px;
+  text-align: center;
+}
+
+.danceCardType2 {
+  background: linear-gradient(158.75deg, #151515 31.35%, #4A0000 99.61%);
+  box-shadow: 0px 52px 54px rgba(0, 0, 0, 0.1);
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 20px;
+  height: 580px;
+}
+
+.danceViewMore {
+  background: #6A0013;
+  color: white;
+}
+
+#danceAllAccessPass {
+  background: #151515;
+  box-shadow: 0px -4px 63px 22px rgba(255, 184, 0, 0.64), 13px 20px 8px -12px #000000;
+  margin: 30px;
+  color: #FFB800;
+  width: 60%;
+  height: 100px;
+  margin-top: 70px;
+  margin-left: 20%;
+}
+
+.danceDailyAccessPass {
+  background: #FFFFFF;
+  box-shadow: 5px 6px 5px 1px rgba(0, 0, 0, 0.85), 0px 1px 19px 20px rgba(150, 137, 137, 0.47);
+  border-radius: 13px;
+  height: 90px;
+  margin: 30px;
+  width: 300px;
+}
+
+.danceTableContent {
+  background: linear-gradient(101.77deg, #9A031E 18.12%, #000000 127.71%);
+  border-radius: 24px;
+  padding: 20px;
+  margin-top: 80px;
+}
+
+#danceTableContentDay1 table,
+#danceTableContentDay1 th,
+#danceTableContentDay1 td {
+  border: 1px solid;
+}
+#danceTableContentDay1 table {
+  width: 120%;
+  background-color: black;
+}
+#danceTableContentDay1 .danceTableContentButton {
+  margin-top: 50px;
+  background: #FFFFFF;
+  box-shadow: 5px 6px 5px 1px rgba(0, 0, 0, 0.85), 0px 1px 19px 20px rgba(150, 137, 137, 0.47);
+  border-radius: 13px;
+  width: 250px;
+  height: 50px;
+}
+
+#danceVanueCard {
+  padding-bottom: 20px;
+  margin-top: 80px;
+  background: conic-gradient(from 75.58deg at -16.05% 100%, #000000 0deg, #6D0000 71.01deg, #000000 360deg);
+}
+
+.danceVanue {
+  background-color: white;
+  color: #330009;
+}
+
+.danceVanueImg {
+  width: 100%;
+}
+
+.danceVanueType1 {
+  margin: 10px;
+}
+
+.danceVanueType2 {
+  margin-top: 150px;
+}
+
+#DanceHomeLine {
+  position: absolute;
+  left: -150px;
+  top: 0;
 }
 
 .kids-welcome-screen {
