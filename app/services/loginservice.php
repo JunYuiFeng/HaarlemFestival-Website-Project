@@ -12,20 +12,20 @@ class LoginService
 
     public function login(string $username, string $password): bool
     {
-        $managers = $this->repository->getAll();
-        $loginManager = NULL;
+        $users = $this->repository->getAll();
+        $loginUser = NULL;
 
-        // foreach ($managers as $manager) {
-        //     if ($username == $manager->getManager_username()) {
-        //         $loginManager = $manager;
-        //     } else {
-        //         return FALSE;
-        //     }
-        // }
+        foreach ($users as $user) {
+            if ($username == $user->getUsername()) {
+                $loginUser = $user;
+            } else {
+                return FALSE;
+            }
+        }
 
-        // if (password_verify($password, $loginManager->getManager_password())) {
-        //     return TRUE;
-        // }
+        if (password_verify($password, $loginUser->getPassword())) {
+            return TRUE;
+        }
         return FALSE;
     }
 

@@ -15,9 +15,8 @@ class LoginController
     {
         if (isset($_SESSION["username"])) {
             header("location: login_success");
-        } else {
-            $GLOBALS["log"] = "login";
-
+        } 
+        else {
             $msg = "";
 
             if (isset($_POST["login"])) {
@@ -36,6 +35,7 @@ class LoginController
                 }
             }
         }
+        
         require __DIR__ . '/../views/festival/login.php';
     }
 
