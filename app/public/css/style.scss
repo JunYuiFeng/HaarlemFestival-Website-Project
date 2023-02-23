@@ -1,21 +1,23 @@
 @import url("https://fonts.cdnfonts.com/css/alata");
 @import url("https://fonts.cdnfonts.com/css/inter");
+
 body {
   font-family: "Inter";
 }
 
 nav {
-  background: linear-gradient(
-    90.05deg,
-    #321325 0.73%,
-    #7f4066 99.97%,
-    #7f4066 99.97%
-  );
+  background: linear-gradient(90.05deg,
+      #321325 0.73%,
+      #7f4066 99.97%,
+      #7f4066 99.97%);
+
   .logo {
     width: 75%;
   }
+
   .nav-item {
     font-family: "Inter";
+
     .nav-link {
       font-size: 22px;
       margin-left: 20px;
@@ -37,6 +39,7 @@ footer {
   color: white;
   padding: 4px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
   #envelopeImg {
     size: 10px;
   }
@@ -46,9 +49,11 @@ footer {
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
+
   &:hover {
     opacity: 0.9;
   }
+
   &.btn-red-gradient {
     background: linear-gradient(92.89deg, #93051f 0%, #37020b 100%);
     border-radius: 0;
@@ -57,6 +62,7 @@ footer {
     line-height: normal;
     padding: 5px 20px;
   }
+
   &.btn-yellow-gradient {
     background: linear-gradient(92.89deg, #ffd000 0%, #ffd000 100%);
     border-radius: 0;
@@ -109,6 +115,7 @@ footer {
 
 .interestingSection {
   padding: 20px 120px;
+
   .text-center p {
     color: #5f0f40;
     font-family: "Inter";
@@ -118,14 +125,17 @@ footer {
     line-height: 77px;
     letter-spacing: 0.17em;
   }
+
   .festivalPromo {
     width: 100%;
     position: relative;
     text-align: center;
     color: white;
+
     img {
       width: 100%;
     }
+
     div {
       position: absolute;
       top: 50%;
@@ -136,15 +146,18 @@ footer {
       font-weight: 700;
       line-height: 103px;
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
       h4 {
         color: #ffd000;
         font-size: 48px;
       }
+
       p {
         color: #ffffff;
         font-size: 40px;
       }
     }
+
     .btn {
       position: absolute;
       bottom: 20px;
@@ -157,8 +170,10 @@ footer {
 .visitHaarlemPromo {
   display: flex;
   justify-content: space-between;
+
   figure {
     width: 45%;
+
     img {
       width: 100%;
       height: auto;
@@ -171,6 +186,7 @@ footer {
   justify-content: center;
   gap: 20px;
   padding: 0 120px;
+
   .informationColumn {
     width: 40%;
     font-family: "Inter";
@@ -178,40 +194,49 @@ footer {
     font-weight: 400;
     font-size: 16px;
     color: #000000;
+
     .caption {
       display: flex;
       align-items: center;
       height: 40px;
       gap: 10px;
+
       img {
         height: 100%;
       }
+
       p {
         font-size: 20px;
         margin: 0;
       }
     }
+
     h1 {
       font-weight: 800;
       font-size: 40px;
       line-height: 58px;
     }
+
     h2 {
       font-size: 20px;
       margin-top: 5%;
     }
+
     .downloadBtns {
       display: flex;
       gap: 15px;
       margin-bottom: 5%;
+
       img {
         height: 4vw;
         cursor: pointer;
       }
     }
   }
+
   .mockupColumn {
     width: 30%;
+
     img {
       width: 100%;
       height: auto;
@@ -260,17 +285,30 @@ footer {
   color: #5f0f40;
   margin-top: 50px;
   margin-bottom: 40px;
+
   h1 {
     font-weight: 800;
     font-size: 64px;
     line-height: normal;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
+
   h2 {
     font-weight: 800;
     font-size: 48px;
     line-height: normal;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.foodPageMsgBox {
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+
+  p {
+    font-size: 20pt;
+    padding: 30px;
   }
 }
 
@@ -296,29 +334,36 @@ footer {
 .restaurantsSection {
   margin-top: 60px;
   margin-bottom: 88px;
+
   h1 {
     color: #5f0f40;
     padding: 15px 0px;
     font-weight: bold;
     font-size: 48px;
   }
+
   .restaurant {
     .card {
       img {
         margin: 30px;
       }
+
       margin-top: 60px;
       background: linear-gradient(180deg, #95051e 0%, #2e0209 100%);
+
       p {
         color: white;
       }
+
       h2 {
         color: white;
       }
     }
+
     .restaurantRight {
       margin-left: 45px;
     }
+
     .restaurantLeft {
       margin-right: 45px;
     }
@@ -328,8 +373,34 @@ footer {
 //======Yummie=======
 .yummieWelcomeParagraph {
   background: linear-gradient(180deg, #9A031E 0%, #3E030E 100%);
-  overflow-x: 100%;
   color: white;
+  padding: 100px 120px;
+}
+
+.foodEvent {
+  margin-top: 100px;
+
+  .title {
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #9A031E;
+  }
+
+  .personalProgramOffer {
+    padding: 50px 40px;
+    margin: 40px 0px;
+    background: linear-gradient(180deg, #9A031E 0%, #35020B 100%);
+
+    p {
+      color: white;
+      font-size: 18pt;
+    }
+
+    button {
+      background: #FCDC4D;
+      border-radius: 16px;
+      padding: 10px 12px;
+    }
+  }
 }
 
 //visit haarlem for history page start
@@ -337,12 +408,14 @@ footer {
   color: #5f0f40;
   margin-top: 50px;
   margin-bottom: 40px;
+
   h1 {
     font-weight: 800;
     font-size: 64px;
     line-height: normal;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
+
   h2 {
     font-weight: 800;
     font-size: 48px;
@@ -377,12 +450,13 @@ footer {
   width: 100%;
 }
 
-.boxImg{
+.boxImg {
   width: 350px;
   margin-left: 35%;
   margin-right: auto;
 }
-.boxImgDetailedPage{  
+
+.boxImgDetailedPage {
   width: 250px;
   margin-left: 0;
   margin-right: auto;
@@ -398,16 +472,17 @@ footer {
   height: auto;
   align-content: center;
 }
-.MuseumBoxDetailedPage{
+
+.MuseumBoxDetailedPage {
   margin-top: 30px;
-  filter: drop-shadow(12px 25px 11px rgba(0, 0, 0, 0.25));  
+  filter: drop-shadow(12px 25px 11px rgba(0, 0, 0, 0.25));
   position: relative;
   display: inline-block;
   height: auto;
   align-content: center;
 }
 
-.img-topDetailPage{  
+.img-topDetailPage {
   width: 250px;
   display: none;
   position: absolute;
@@ -416,7 +491,7 @@ footer {
   z-index: 99;
 }
 
-.img-top{         
+.img-top {
   margin-left: 35%;
   width: 350px;
   display: none;
@@ -425,6 +500,7 @@ footer {
   left: 0;
   z-index: 99;
 }
+
 .MuseumBoxDetailedPage:hover .img-topDetailPage {
   display: inline;
 }
@@ -440,55 +516,55 @@ footer {
   margin-left: 0;
 }
 
-.buttonViewMore{
-  color:red;
+.buttonViewMore {
+  color: red;
   text-align: center;
   position: absolute;
 }
 
-.cardCulture {
+.cardCulture {}
+
+
+#VisitHaarlemMuseumImg1 {
+  width: 750px;
+  height: 770px;
+  float: right;
 }
 
-
-#VisitHaarlemMuseumImg1{
-width: 750px;
-height: 770px;
-float: right;
-}
-
-.cardCultureGroup1{
+.cardCultureGroup1 {
   align-items: center;
 }
 
-.cardCulture1{  
+.cardCulture1 {
   align-items: center;
   width: 100%;
   background: linear-gradient(96.95deg, #620011 12.24%, #2E0B1F 80.77%);
   box-shadow: 0px 52px 54px 2px rgba(0, 0, 0, 0.11);
-  color:white; 
-  line-height: 200%; 
-  padding:30px;
+  color: white;
+  line-height: 200%;
+  padding: 30px;
   width: 1500px;
 }
 
-.cardCulture2{
-  
+.cardCulture2 {
+
   width: 1500px;
   background: linear-gradient(96.95deg, #620011 12.24%, #2E0B1F 80.77%);
   box-shadow: 0px 52px 54px 2px rgba(0, 0, 0, 0.11);
-  transform: matrix(-1, 0, 0, 1, 0, 0); 
-  color:white; 
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+  color: white;
   line-height: 200%;
-  padding:30px;
+  padding: 30px;
 }
 
 
 
-#cultureText1{
+#cultureText1 {
   margin: 50px;
   text-align: center;
   color: #5f0f40;
 }
+
 // museum
 
 //kids page
@@ -497,18 +573,21 @@ float: right;
   color: #5f0f40;
   font-style: normal;
   font-family: "Inter";
+
   h1 {
     font-weight: 800;
     font-size: 64px;
     line-height: normal;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
+
   h2 {
     font-weight: 800;
     font-size: 48px;
     line-height: normal;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
+
   p {
     color: #321325;
     font-weight: 600;
@@ -521,12 +600,14 @@ float: right;
   font-family: "Inter";
   font-style: normal;
   color: #4f0310;
+
   h1 {
     font-weight: 700;
     font-size: 48px;
     line-height: normal;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
+
   h4 {
     font-weight: 700;
     font-size: 26px;
@@ -547,15 +628,18 @@ float: right;
   font-size: 16px;
   line-height: 29px;
   padding: 10px 20px;
+
   .col1 {
     width: 35%;
     align-self: flex-end;
     display: flex;
     flex-direction: column;
+
     p:nth-child(1) {
       margin-bottom: 15%;
     }
   }
+
   .col2 {
     align-self: flex-end;
     height: 100%;
@@ -563,16 +647,20 @@ float: right;
     display: flex;
     flex-direction: column;
     align-items: center;
+
     p {
       font-weight: 800;
       margin: 0;
     }
+
     img {
       width: 40px;
     }
   }
+
   .col3 {
     width: 35%;
+
     img {
       width: 80%;
     }
@@ -585,6 +673,7 @@ float: right;
   font-weight: 400;
   position: relative;
   margin: 15% 0;
+
   h1 {
     color: rgba(154, 3, 30, 0.29);
     font-size: 152px;
@@ -594,6 +683,7 @@ float: right;
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
   p {
     color: #000000;
     font-size: 30px;
@@ -608,6 +698,7 @@ float: right;
 .kids-benefits {
   margin-top: 25%;
   padding: 0 7%;
+
   .benefit {
     width: 30%;
     background: linear-gradient(180deg, #98041e 0%, #2a0108 100%);
@@ -619,19 +710,23 @@ float: right;
     font-family: "Inter";
     font-style: normal;
     transition: 0.5s;
+
     div:nth-child(2) {
       margin-top: auto;
     }
+
     h1 {
       font-weight: 700;
       font-size: 26px;
       line-height: 44px;
     }
+
     p {
       font-weight: 600;
       font-size: 16px;
       line-height: 29px;
     }
+
     &:hover {
       transform: translateY(-20px);
       filter: contrast(1.2);
@@ -642,10 +737,12 @@ float: right;
 .places-for-kids {
   margin-top: 30%;
   margin-bottom: 10%;
+
   .article {
     &:nth-child(2) {
       margin: 7% 0;
     }
+
     h1 {
       color: #9a031e;
       font-family: "Inter";
@@ -654,6 +751,7 @@ float: right;
       font-size: 32px;
       line-height: 44px;
     }
+
     p {
       color: #000000;
       font-family: "Inter";
@@ -662,10 +760,12 @@ float: right;
       font-size: 18px;
       line-height: 29px;
     }
+
     .findOnMap {
       display: flex;
       align-items: center;
       gap: 5px;
+
       a {
         font-family: "Inter";
         font-style: normal;
@@ -675,6 +775,7 @@ float: right;
         text-decoration-line: underline;
         color: #5f0f40;
       }
+
       img {
         width: 30px;
       }
@@ -695,8 +796,10 @@ float: right;
 .eventPromo {
   font-family: "Inter";
   font-style: normal;
+
   .event {
     position: relative;
+
     .eventName {
       position: absolute;
       top: 50%;
@@ -707,6 +810,7 @@ float: right;
       width: fit-content;
       cursor: pointer;
       transition: 0.5s;
+
       h1 {
         color: #000000;
         font-weight: 700;
@@ -714,14 +818,17 @@ float: right;
         line-height: normal;
         margin: 0;
       }
-      &:hover{
+
+      &:hover {
         transform: translate(-50%, -65%);
         filter: contrast(1.5);
       }
     }
   }
+
   .description {
     padding: 2% 2%;
+
     p {
       color: #ffffff;
       font-weight: 500;
@@ -729,12 +836,15 @@ float: right;
       line-height: normal;
       margin: 0;
     }
+
     &.dance {
       background: linear-gradient(271.74deg, #000000 17.62%, #531313 55.15%);
     }
+
     &.yummy {
       background: linear-gradient(271.74deg, #000000 17.62%, #531313 55.15%);
     }
+
     &.history {
       background: linear-gradient(271.74deg, #000000 17.62%, #531313 55.15%);
     }
@@ -744,6 +854,7 @@ float: right;
 .container.schedule {
   margin-top: 5%;
   margin-bottom: 5%;
+
   h1 {
     color: #9a031e;
     font-family: "Alata";
@@ -753,6 +864,7 @@ float: right;
     line-height: 88px;
     letter-spacing: 0.225em;
   }
+
   .day-block {
     flex: 1 1 0px;
     background: linear-gradient(94.11deg, #620011 -2.58%, #000000 110.26%);
@@ -761,9 +873,11 @@ float: right;
     font-family: "Inter";
     font-style: normal;
     text-align: center;
+
     &:nth-child(2n) {
       background: linear-gradient(94.11deg, #000000 -2.58%, #620011 110.26%);
     }
+
     h2 {
       font-weight: 700;
       font-size: 1.5vw;
@@ -771,12 +885,14 @@ float: right;
       color: #ffffff;
       white-space: nowrap;
     }
+
     .events {
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       gap: 5px;
+
       p {
         font-weight: 500;
         font-size: 14px;
@@ -797,28 +913,35 @@ float: right;
     line-height: normal;
     letter-spacing: 0.225em;
   }
+
   .agenda {
     display: flex;
     gap: 2%;
     margin-top: 2%;
     margin-bottom: 1%;
+
     .event-name {
       display: flex;
       align-items: center;
       gap: 2px;
+
       .color-box {
         width: 15px;
         height: 15px;
+
         &.yummy {
           background: #9a031e;
         }
+
         &.dance {
           background: #2e0b1f;
         }
+
         &.history {
           background: #cb793a;
         }
       }
+
       p {
         color: #000000;
         font-family: "Inter";
@@ -830,6 +953,7 @@ float: right;
       }
     }
   }
+
   img {
     width: 100%;
   }
@@ -849,14 +973,18 @@ float: right;
     height: 100%;
   }
 }
+
 .container-fluid.login {
   font-family: "Inter", "Alata", "Sans-serif";
+
   h1 {
     font-family: "Alata", "Sans-serif";
     font-weight: 700;
   }
+
   .user-box {
     position: relative;
+
     input {
       width: 100%;
       padding: 10px 0;
@@ -867,14 +995,16 @@ float: right;
       border-bottom: 1px solid #000000;
       outline: none;
       background: transparent;
-      &:focus ~ label,
-      &:valid ~ label {
+
+      &:focus~label,
+      &:valid~label {
         top: -20px;
         left: 0;
         color: #9a031e;
         font-size: 12px;
       }
     }
+
     label {
       position: absolute;
       top: 0;
@@ -886,6 +1016,7 @@ float: right;
       transition: 0.5s;
     }
   }
+
   button {
     background-color: transparent;
     border: 0;
@@ -901,6 +1032,7 @@ float: right;
     transition: 0.5s;
     margin-top: 5%;
     letter-spacing: 4px;
+
     &:hover {
       background: #9a031e;
       color: #fff;
@@ -908,10 +1040,12 @@ float: right;
       box-shadow: 0 0 5px #9a031e, 0 0 25px #9a031e, 0 0 50px #9a031e,
         0 0 100px #9a031e;
     }
+
     span {
       position: absolute;
       display: block;
     }
+
     span:nth-child(1) {
       top: 0;
       left: -100%;
@@ -920,6 +1054,7 @@ float: right;
       background: linear-gradient(90deg, transparent, #9a031e);
       animation: btn-anim1 1s linear infinite;
     }
+
     span:nth-child(2) {
       top: -100%;
       right: 0;
@@ -929,6 +1064,7 @@ float: right;
       animation: btn-anim2 1s linear infinite;
       animation-delay: 0.25s;
     }
+
     span:nth-child(3) {
       bottom: 0;
       right: -100%;
@@ -938,6 +1074,7 @@ float: right;
       animation: btn-anim3 1s linear infinite;
       animation-delay: 0.5s;
     }
+
     span:nth-child(4) {
       bottom: -100%;
       left: 0;
@@ -948,9 +1085,11 @@ float: right;
       animation-delay: 0.75s;
     }
   }
+
   .link-info {
     color: #9a031e !important;
   }
+
   .error-message {
     color: red;
   }
@@ -960,6 +1099,7 @@ float: right;
   0% {
     left: -100%;
   }
+
   50%,
   100% {
     left: 100%;
@@ -970,6 +1110,7 @@ float: right;
   0% {
     top: -100%;
   }
+
   50%,
   100% {
     top: 100%;
@@ -980,6 +1121,7 @@ float: right;
   0% {
     right: -100%;
   }
+
   50%,
   100% {
     right: 100%;
@@ -990,6 +1132,7 @@ float: right;
   0% {
     bottom: -100%;
   }
+
   50%,
   100% {
     bottom: 100%;
