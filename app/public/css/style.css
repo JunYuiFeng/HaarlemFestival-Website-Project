@@ -214,6 +214,23 @@ footer #envelopeImg {
   height: auto;
 }
 
+.foodpageWelcomeSection {
+  position: relative;
+}
+.foodpageWelcomeSection .foodPageMsgBox {
+  width: 40%;
+  top: 70%;
+  left: 7%;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  position: absolute;
+}
+.foodpageWelcomeSection .foodPageMsgBox p {
+  font-size: 20pt;
+  padding: 30px;
+}
+
 #FoodIntroSubImage {
   margin-top: 66px;
 }
@@ -249,16 +266,6 @@ footer #envelopeImg {
   font-size: 48px;
   line-height: normal;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.foodPageMsgBox {
-  background: #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 30px;
-}
-.foodPageMsgBox p {
-  font-size: 20pt;
-  padding: 30px;
 }
 
 .btn {
@@ -311,6 +318,8 @@ footer #envelopeImg {
 
 .yummieWelcomeParagraph {
   background: linear-gradient(180deg, #9A031E 0%, #3E030E 100%);
+  overflow-x: 100%;
+  color: white;
 }
 
 .history-header {
@@ -355,6 +364,18 @@ footer #envelopeImg {
   width: 100%;
 }
 
+.boxImg {
+  width: 350px;
+  margin-left: 35%;
+  margin-right: auto;
+}
+
+.boxImgDetailedPage {
+  width: 250px;
+  margin-left: 0;
+  margin-right: auto;
+}
+
 .MuseumBox {
   margin-top: 30px;
   filter: drop-shadow(12px 25px 11px rgba(0, 0, 0, 0.25));
@@ -364,7 +385,17 @@ footer #envelopeImg {
   align-content: center;
 }
 
-.img-top {
+.MuseumBoxDetailedPage {
+  margin-top: 30px;
+  filter: drop-shadow(12px 25px 11px rgba(0, 0, 0, 0.25));
+  position: relative;
+  display: inline-block;
+  height: auto;
+  align-content: center;
+}
+
+.img-topDetailPage {
+  width: 250px;
   display: none;
   position: absolute;
   top: 0;
@@ -397,8 +428,10 @@ footer #envelopeImg {
   margin-left: 0;
 }
 
-#buttonViewMoreMuseum {
+.buttonViewMore {
   color: red;
+  text-align: center;
+  position: absolute;
 }
 
 #VisitHaarlemMuseumImg1 {
