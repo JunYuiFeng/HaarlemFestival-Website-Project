@@ -1,8 +1,5 @@
 <?php
-
-include_once __DIR__ . "/../services/userManagement.php";
-
-class user{
+class UserManagementService{
     function __construct($newuser){
         $this->user = $newuser;
     }
