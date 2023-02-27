@@ -1,7 +1,14 @@
 <?php
+require_once __DIR__ . '/../services/restaurantservice.php';
 
 class VisitHaarlemController
 {
+    private $restaurantService;
+
+    function __construct()
+    {
+        $this->restaurantService = new RestaurantService();
+    }
 
     public function index()
     {
@@ -10,6 +17,7 @@ class VisitHaarlemController
 
     public function food()
     {
+        $restaurants = $this->restaurantService->getAll();
         require __DIR__ . '/../views/visithaarlem/food.php';
     }
 

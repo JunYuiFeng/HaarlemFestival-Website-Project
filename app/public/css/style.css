@@ -214,42 +214,6 @@ footer #envelopeImg {
   height: auto;
 }
 
-.foodpageWelcomeSection {
-  position: relative;
-}
-.foodpageWelcomeSection .foodPageMsgBox {
-  width: 40%;
-  top: 70%;
-  left: 7%;
-  background: #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 30px;
-  position: absolute;
-}
-.foodpageWelcomeSection .foodPageMsgBox p {
-  font-size: 20pt;
-  padding: 30px;
-}
-
-#FoodIntroSubImage {
-  margin-top: 66px;
-}
-
-#FoodParagraph1 {
-  background: linear-gradient(180deg, #9a031e 0%, #3e030e 100%);
-  margin-top: 66px;
-}
-
-#FoodParagraph1Content {
-  color: white;
-  font-size: 13pt;
-  margin: 130px 120px 130px 120px;
-}
-
-#Restaurant {
-  background: linear-gradient(180deg, #9a031e 0%, #3e030e 100%);
-}
-
 .foodPageTitle {
   color: #5f0f40;
   margin-top: 50px;
@@ -266,6 +230,37 @@ footer #envelopeImg {
   font-size: 48px;
   line-height: normal;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.foodpageWelcomeSection {
+  position: relative;
+}
+.foodpageWelcomeSection .foodPageMsgBox {
+  width: 45%;
+  top: 77%;
+  left: 5%;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  position: absolute;
+}
+.foodpageWelcomeSection .foodPageMsgBox p {
+  font-size: 20pt;
+  padding: 50px;
+}
+
+#FoodIntroSubImage {
+  margin-top: 66px;
+}
+
+.foodPageParagraph1 {
+  background: linear-gradient(180deg, #9a031e 0%, #3e030e 100%);
+  margin-top: 130px;
+}
+.foodPageParagraph1 p {
+  color: white;
+  font-size: 13pt;
+  margin: 120px 110px;
 }
 
 .foodPageMsgBox {
@@ -309,15 +304,11 @@ footer #envelopeImg {
 .restaurantsSection .restaurant .card {
   margin-top: 60px;
   background: linear-gradient(180deg, #95051e 0%, #2e0209 100%);
+  color: white;
+  padding: 18px;
 }
 .restaurantsSection .restaurant .card img {
-  margin: 30px;
-}
-.restaurantsSection .restaurant .card p {
-  color: white;
-}
-.restaurantsSection .restaurant .card h2 {
-  color: white;
+  margin: 10px;
 }
 .restaurantsSection .restaurant .restaurantRight {
   margin-left: 45px;

@@ -16,6 +16,7 @@ class Repository
             echo "Connection failed: " . $e->getMessage();
         }
     }
+    
     function Query($conn, $sql,  $datatype, ...$data)
     {
         $stmt = $conn->prepare($sql);

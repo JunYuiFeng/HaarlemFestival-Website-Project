@@ -43,14 +43,14 @@
                                 <label>Password</label>
                             </div>
 
-                            <button type="submit" name="login">
+                            <button type="submit" name="register">
                                 <span></span>
                                 <span></span>
                                 <span></span>
                                 <span></span>
                                 Create an account!
                             </button>
-                            <p class="error-message"><?php echo isset($message) ? $message : '' ?></p>
+                            <p class="error-message"><?php echo isset($this->msg) ? $this->msg : '' ?></p>
 
                             <p>Already have an account? <a href="login" class="link-info">Sign in here</a></p>
                         </form>
