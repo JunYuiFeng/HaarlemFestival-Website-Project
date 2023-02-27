@@ -8,7 +8,7 @@ class LoginController
     private $loginService;
     function __construct()
     {
-        $loginService = new LoginService();
+        $this->loginService = new LoginService();
     }
 
     public function index()
@@ -35,8 +35,18 @@ class LoginController
                 }
             }
         }
-        
-        require __DIR__ . '/../views/festival/login.php';
+
+        require __DIR__ . '/../views/login/index.php';
+    }
+
+    public function register()
+    {
+        require __DIR__ . '/../views/login/register.php';
+    }
+
+    public function dashboard()
+    {
+        require __DIR__ . '/../views/login/dashboard.php';
     }
 
     public function validate($user)

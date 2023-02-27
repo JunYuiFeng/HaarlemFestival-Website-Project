@@ -1,22 +1,10 @@
 <?php
-include_once("LoginPageController.php");
 
 class FestivalController
-{
-    public function login()
+{   
+    public function index()
     {
-        $loginController = new LoginPageController();
-        $loginController->display();
-        //require __DIR__ . '/../views/festival/login.php';
-    }
-    public function register()
-    {
-        require __DIR__ . '/../views/festival/register.php';
-    }
-    
-    public function overview()
-    {
-        require __DIR__ . '/../views/festival/overview.php';
+        require __DIR__ . '/../views/festival/index.php';
     }
 
     public function dance(){
