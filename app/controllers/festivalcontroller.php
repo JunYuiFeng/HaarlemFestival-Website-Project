@@ -1,10 +1,19 @@
 <?php
+include_once("logincontroller.php");
+include_once("registercontroller.php");
+
 
 class FestivalController
 {   
     public function index()
     {
         require __DIR__ . '/../views/festival/index.php';
+    }
+    public function register()
+    {
+        // $registerController = new RegisterController();
+        // $registerController->index();
+        // require __DIR__ . '/../views/festival/register.php';
     }
 
     public function dance(){
