@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/repository.php';
-require_once __DIR__ . '/../model/User.php';
+require_once __DIR__ . '/../models/user.php';
 
 class UsersRepository extends Repository
 {
