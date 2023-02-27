@@ -9,6 +9,11 @@ class FestivalController
         $loginController->display();
         //require __DIR__ . '/../views/festival/login.php';
     }
+    public function editUser(){
+        $editUserController = new EditUserController();
+        $editUserController->display();
+        require __DIR__ . '/../views/cms/editUser.php';
+    }
     public function register()
     {
         require __DIR__ . '/../views/festival/register.php';

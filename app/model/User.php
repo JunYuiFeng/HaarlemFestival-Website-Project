@@ -101,4 +101,18 @@ class User
 
         return $this;
     }
+
+    public function createUser(){
+        return $this->username;
+    }
+
+    public function getUser($username){
+        return $this->username;
+    }
+    public function removeUser(){
+        return $this->username;
+    }
+    public function updateUser(){
+        return $this->username;
+    }
 }
