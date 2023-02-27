@@ -34,5 +34,9 @@ class VisitHaarlemController
     {
         require __DIR__ . '/../views/visithaarlem/kids.php';
     }
+    public function dashboard()
+    {
+        require __DIR__ . '/../views/cms/dashboard.php';
+    }
 
 }
