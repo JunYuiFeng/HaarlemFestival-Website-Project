@@ -4,6 +4,7 @@ class User
     private $username;
     private $password;
 
+
     public function __construct($username, $password)
     {
         $this->username = $username;

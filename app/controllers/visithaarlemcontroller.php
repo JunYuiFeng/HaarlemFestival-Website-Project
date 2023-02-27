@@ -25,7 +25,7 @@ class VisitHaarlemController
         require __DIR__ . '/../views/visithaarlem/theatre.php';
     }
     public function FestivalCulture(){
-        require __DIR__ . '/../views/visithaarlem/festival.php';
+        require __DIR__ . '/../views/visithaarlem/cultureFestival.php';
     }
     public function Museum(){
         require __DIR__ . '/../views/visithaarlem/museum.php';

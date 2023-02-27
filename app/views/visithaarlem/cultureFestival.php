@@ -43,7 +43,7 @@
             <div class="col-md-12">
                 <div class="MuseumBoxDetailedPage" class="col-md-4">
                     <img src="/img/Festivalbox.png" alt="VisitHaarlemFood_Haring" class="boxImgDetailedPage">
-                    <a href="/visithaarlem/festivalCulture" class="text-reset">
+                    <a href="/visithaarlem/cultureFestival" class="text-reset">
                         <img src="/img/festivalBoxV2.png" class="img-topDetailPage" alt="museumBoxV2">
                     </a>
                 </div>

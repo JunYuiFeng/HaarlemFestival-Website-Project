@@ -2,6 +2,7 @@
 @import url("https://fonts.cdnfonts.com/css/inter");
 body {
   font-family: "Inter";
+  overflow-x: hidden;
 }
 
 nav {
@@ -28,7 +29,6 @@ nav .nav-item .nav-link {
 
 footer {
   background: linear-gradient(90.19deg, #321325 1.12%, #5f0f40 99.85%);
-  opacity: 0.8;
   color: white;
   padding: 4px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -342,6 +342,24 @@ footer #envelopeImg {
   color: #ffffff;
 }
 
+.cultureTitle {
+  color: #5f0f40;
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+.cultureTitle h1 {
+  font-weight: 800;
+  font-size: 64px;
+  line-height: normal;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.cultureTitle h2 {
+  font-weight: 800;
+  font-size: 48px;
+  line-height: normal;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 #Culturebody {
   background-color: #000000;
 }
@@ -426,6 +444,10 @@ footer #envelopeImg {
   position: absolute;
 }
 
+.cardCulture {
+  align-content: center;
+}
+
 #VisitHaarlemMuseumImg1 {
   width: 750px;
   height: 770px;
@@ -444,11 +466,11 @@ footer #envelopeImg {
   color: white;
   line-height: 200%;
   padding: 30px;
-  width: 1500px;
+  width: 100%;
 }
 
 .cardCulture2 {
-  width: 1500px;
+  width: 100%;
   background: linear-gradient(96.95deg, #620011 12.24%, #2E0B1F 80.77%);
   box-shadow: 0px 52px 54px 2px rgba(0, 0, 0, 0.11);
   transform: matrix(-1, 0, 0, 1, 0, 0);
@@ -463,7 +485,7 @@ footer #envelopeImg {
   color: #5f0f40;
 }
 
-.danceBody {
+#danceBody {
   background-color: black;
   color: white;
   background-image: "img/";
@@ -565,9 +587,23 @@ footer #envelopeImg {
   height: 580px;
 }
 
+.danceCardLine {
+  background: white;
+  width: 225%;
+  margin: 10px;
+  margin-right: -30px;
+  z-index: -1;
+  float: right;
+}
+
 .danceViewMore {
   background: #6A0013;
   color: white;
+  width: 350px;
+  height: 40px;
+  float: right;
+  margin-right: -32px;
+  text-align: left;
 }
 
 #danceAllAccessPass {
@@ -578,10 +614,10 @@ footer #envelopeImg {
   width: 60%;
   height: 100px;
   margin-top: 70px;
-  margin-left: 20%;
 }
 
 .danceDailyAccessPass {
+  align-self: center;
   background: #FFFFFF;
   box-shadow: 5px 6px 5px 1px rgba(0, 0, 0, 0.85), 0px 1px 19px 20px rgba(150, 137, 137, 0.47);
   border-radius: 13px;
@@ -595,6 +631,11 @@ footer #envelopeImg {
   border-radius: 24px;
   padding: 20px;
   margin-top: 80px;
+}
+
+.danceDemoMartin1 {
+  position: relative;
+  z-index: 10;
 }
 
 #danceTableContentDay1 table,
@@ -638,10 +679,15 @@ footer #envelopeImg {
   margin-top: 150px;
 }
 
-#DanceHomeLine {
+#danceHomeLine {
   position: absolute;
-  left: -150px;
-  top: 0;
+  z-index: -1;
+  top: -110%;
+}
+
+.personalProgramArrow {
+  font-size: large;
+  width: 500px;
 }
 
 .kids-welcome-screen {

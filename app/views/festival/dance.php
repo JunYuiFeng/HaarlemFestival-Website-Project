@@ -11,11 +11,13 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
 
-<body class="danceBody">
+<body id="danceBody">
 
     <?php
     include __DIR__ . '/../header.php';
     ?>
+
+    <img src="/img/DanceHomeLine.png" id="danceHomeLine">
     <div>
         <h3 class="danceHomeNameArtist" id="danceHomeNameArtist1">Nicky Romero</h3>
         <h3 class="danceHomeNameArtist" id="danceHomeNameArtist2">Hardwel</h3>
@@ -31,9 +33,9 @@
             Do you want to build your own personal program?
         </div>
         <div class="col-3">
-            <span>--------------------&#x2192;</span>
+            <span class="personalProgramArrow"><link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-long-right.css' rel='stylesheet'></span>
         </div>
-        <div class="col-3" >
+        <div class="col-3">
             <button type="button" id="dancePersonalProgramButton">Build own personal prorgam</button>
         </div>
     </div>
@@ -52,23 +54,20 @@
                             <p>in the name of love</p>
                             <p>high on life</p>
                         </div>
-                        <img src="/img/DanceDemoMartin1.png">
+                        <img src="/img/DanceDemoMartin1.png" class="danceDemoMartin1">
                     </div>
                     <div class="col-6">
                         <img src="/img/DanceArtist1.png">
                         <div class="col-12">
                             <br></br>
-                            <p style="  background:white;">
+                            <p class="danceCardLine">
                                 0
                             </p>
                         </div>
                         <p>
-                            <a href="#!" class="danceViewMore">
-                                view more
-                            </a>
+                            <button type="button" class="danceViewMore">view more</button>
                         </p>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -86,20 +85,18 @@
                             <p>in the name of love</p>
                             <p>high on life</p>
                         </div>
-                        <img src="/img/DanceDemoMartin1.png">
+                        <img src="/img/DanceDemoMartin1.png" class="danceDemoMartin1">
                     </div>
                     <div class="col-6">
                         <img src="/img/DanceArtist2.png">
                         <div class="col-12">
                             <br></br>
-                            <p style="  background:white;">
+                            <p class="danceCardLine">
                                 0
                             </p>
                         </div>
                         <p>
-                            <a href="#!" class="danceViewMore">
-                                view more
-                            </a>
+                            <button type="button" class="danceViewMore">view more</button>
                         </p>
                     </div>
 
@@ -168,17 +165,18 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-12 ">
+
+        <div class="d-flex justify-content-around">
             <button type="button" id="danceAllAccessPass"> Buy ticket for all-access pass for Friday, Saturday, Sunday:
                 €250,00</button>
         </div>
-        <div class="col-4 ">
+        <div class="col-4 d-flex justify-content-around">
             <button type="button" class="danceDailyAccessPass"> Buy all-access pass only for 1st day €125,00</button>
         </div>
-        <div class="col-4 ">
+        <div class="col-4 d-flex justify-content-around">
             <button type="button" class="danceDailyAccessPass"> Buy all-access pass only for 2nd day €150,00</button>
         </div>
-        <div class="col-4">
+        <div class="col-4 d-flex justify-content-around">
             <button type="button" class="danceDailyAccessPass"> Buy all-access pass only for 3rd day €150,00</button>
         </div>
     </div>

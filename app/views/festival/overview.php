@@ -36,9 +36,10 @@
         <section class="eventPromo">
             
             <div class="col-12 event">
+                <a href="/festival/dance">
                 <img src="/img/DanceFestival.png" alt="Dance Festival Image" class="img-fluid">
                 <div class="eventName">
-                <h1>Dance!</h1>
+                <h1>Dance!</h1></a>
             </div>
             </div>
             <div class="col-12 description dance">
