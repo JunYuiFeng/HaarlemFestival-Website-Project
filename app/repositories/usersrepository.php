@@ -4,7 +4,7 @@ require_once __DIR__ . '/../models/user.php';
 
 class UsersRepository extends Repository
 {
-    function getAll() 
+    function getAll()
     {
         try {
             $stmt = $this->connection->prepare("SELECT * FROM Users");
@@ -14,11 +14,26 @@ class UsersRepository extends Repository
             $users = $stmt->fetchAll();
 
             return $users;
-
-        } catch (PDOException $e)
-        {
+        } catch (PDOException $e) {
             echo $e;
         }
     }
-    
+    function createUser($username, $email, $password, $userType)
+    {
+        try {
+            $sql = 'INSERT INTO `Users`(`username`, `email`, `password`, `userType`) VALUES (:username, :email, :password, :userType)';
+
+            $statement = $this->connection->prepare($sql);
+
+            $statement->execute([
+                ':username' => $username,
+                ':email' => $email,
+                ':password' => $password,
+                ':userType' => $userType,
+            ]);
+            return $this->connection->lastInsertId();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
 }

@@ -7,6 +7,12 @@ class FestivalController
     {
         require __DIR__ . '/../views/festival/index.php';
     }
+    public function register()
+    {
+        // $registerController = new RegisterController();
+        // $registerController->index();
+        // require __DIR__ . '/../views/festival/register.php';
+    }
 
     public function dance(){
         require __DIR__ . '/../views/festival/dance.php';
