@@ -9,6 +9,7 @@ class MyAccountController
     private $loginService;
     private $registerService;
     private $msg;
+
     function __construct()
     {
         $this->loginService = new LoginService();
@@ -37,12 +38,13 @@ class MyAccountController
                 } else {
                     $username = $_POST["username"];
                     $password = $_POST["password"];
-                    if ($this->loginService->login($username, $password)) {
-                        $_SESSION["username"] = $_POST["username"];
+
+                    $res = $this->loginService->login($username, $password);
+                    if (ctype_digit($res)) {
+                        $_SESSION["logedin"] = $res;
                         header("location: index");
                     } else {
-
-                        $msg = "incorrect username or password";
+                        $this->msg = $res;
                     }
                 }
             }

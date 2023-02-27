@@ -10,7 +10,7 @@ class LoginService
         $this->repository = new UsersRepository();
     }
 
-    public function login(string $username, string $password): bool
+    public function login(string $username, string $password): string
     {
         $users = $this->repository->getAll();
         $loginUser = NULL;
