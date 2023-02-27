@@ -18,6 +18,9 @@ class MyAccountController
 
     public function index()
     {
+        if (!isset($_SESSION["logedin"])) {
+            header("location: login");
+        }
         require __DIR__ . '/../views/myaccount/index.php';
     }
 
@@ -27,18 +30,18 @@ class MyAccountController
             header("location: index");
         } else {
             $msg = "";
-
             if (isset($_POST["login"])) {
+
                 if (empty($_POST["username"]) || empty($_POST["password"])) {
                     $msg = "field empty, please fill in";
                 } else {
                     $username = $_POST["username"];
                     $password = $_POST["password"];
-
                     if ($this->loginService->login($username, $password)) {
                         $_SESSION["username"] = $_POST["username"];
                         header("location: index");
                     } else {
+
                         $msg = "incorrect username or password";
                     }
                 }
@@ -88,6 +91,6 @@ class MyAccountController
     public function logout()
     {
         unset($_SESSION['logedin']);
-        require __DIR__ . '/../views/myaccount/login.php';
+        header("location: login");
     }
 }
