@@ -7,6 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h1>Test</h1>
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>Username</td>
+            <td>Email</td>
+            <td>Password</td>
+            <td>Role</td>
+        </tr>
+    </table>    
 </body>
 </html>
