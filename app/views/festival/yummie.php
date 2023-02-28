@@ -64,12 +64,19 @@
                         <img src="/img/<?= $restaurant->getCoverImg() ?>" alt="">
                         <div class="card-body">
                             <h2><?= $restaurant->getName() ?></h2>
-                            <p><b>Cuisine</b>: <?= $restaurant->getCuisine() ?> <br>
-                                <b>Type</b>: <?= $restaurant->getFoodType() ?> <br>
-                                <b>Session duration</b>: <?= $restaurant->getSessionDuration() ?> <br>
-                                <b>Price</b>: <?= '€' . $restaurant->getPriceAge12AndUnder() . ' - ' . '€' . $restaurant->getPriceAboveAge12()?><br>
-                                <b>Rating</b>: <?= $restaurant->getRating() ?>
-                            </p>
+                            <div class="row">
+                                <div class="col">
+                                <p><b>Cuisine</b>: <?= $restaurant->getCuisine() ?> <br>
+                                    <b>Type</b>: <?= $restaurant->getFoodType() ?> <br>
+                                    <b>Session duration</b>: <?= $restaurant->getSessionDuration() ?> <br>
+                                    <b>Price</b>: <?= '€' . $restaurant->getPriceAge12AndUnder() . ' - ' . '€' . $restaurant->getPriceAboveAge12() ?><br>
+                                    <b>Rating</b>: <?= $restaurant->getRating() ?>
+                                </p>
+                                </div>
+                                <div class="col">
+                                    <button>See more info and reserve</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

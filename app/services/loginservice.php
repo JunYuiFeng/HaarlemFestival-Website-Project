@@ -18,15 +18,14 @@ class LoginService
         foreach ($users as $user) {
             if ($username == $user->getUsername()) {
                 $loginUser = $user;
-            } else {
-                return FALSE;
+                break;
             }
         }
 
-        if (password_verify($password, $loginUser->getPassword())) {
+        if ($loginUser && password_verify($password, $loginUser->getPassword())) {
             return TRUE;
         }
-        return FALSE;
+        return "incorrect username or password";
     }
 
     public function logout()
