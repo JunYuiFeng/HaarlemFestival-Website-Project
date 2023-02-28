@@ -35,7 +35,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/festival/overview">
+          <a class="nav-link" href="/festival/index">
             <b>Festival</b>
           </a>
         </li>

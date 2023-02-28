@@ -56,14 +56,21 @@
     <div class="container restaurantsSection">
         <h1>Restaurants</h1>
         <button class="btn default">
-            <h3><b>Sort by</b> <i class="fa-sharp fa-solid fa-chevron-down"></i></h3>
+            <h3><b>Sort by</b></h3>
         </button>
         <div class="row restaurant">
             <?php
-            foreach ($restaurants as $restaurant) {
+            foreach ($restaurants as $index => $restaurant) {
+                if ($index % 2 == 0) {
+                    // Give the first restaurant the "restaurantLeft" class
+                    $cardClass = "card restaurantLeft";
+                } else {
+                    // Give the second restaurant the "restaurantRight" class
+                    $cardClass = "card restaurantRight";
+                }
             ?>
                 <div class="col-6">
-                    <div class="card restaurantLeft">
+                    <div class="<?= $cardClass ?>">
                         <img src="/img/<?= $restaurant->getCoverImg() ?>" alt="RatatouilleCoverImg">
                         <div class="card-body">
                             <h2><?= $restaurant->getName() ?></h2>
@@ -71,74 +78,19 @@
                             <p><b>Address</b>: <?= $restaurant->getAddress() ?> <br>
                                 <b>Phone</b>: <?= $restaurant->getPhoneNumber() ?> <br>
                                 <b>Website</b>: <a href="<?= $restaurant->getWebsite() ?>"><?= $restaurant->getWebsite() ?></a> <br>
-                                <b>Price range</b>: <?php for ($i = 0; $i < $restaurant->getPriceIndicator(); $i++) { echo '€'; } ?><br>
+                                <b>Price range</b>: <?php for ($i = 0; $i < $restaurant->getPriceIndicator(); $i++) {
+                                                        echo '€';
+                                                    } ?><br>
                                 <b>Opening hours</b>
                             </p>
                         </div>
                     </div>
                 </div>
-
             <?php
             }
             ?>
-            <div class="col-6">
-                <div class="card restaurantRight">
-                    <img src="/img/TroujoursCoverImg.jpg" alt="">
-                    <div class="card-body">
-                        <h2>Urban Frenchy Bistro Toujours</h2>
-                        <p>This restaurant serves a mix of French and European cuisines.
-                            The dishes and signature dishes are perfectly and freshly preprepared by chef Jozua Jaring.
-                            It all started in 2013 and keep evolving until 2014 when they got awarded with a Michelin star.
-                            In 2015 they move to a new location which is today’s Ratatouille with a better environment,
-                            so the people can enjoy even more. Beside the amazing dishes, their wine makes it even better! </p>
-                        <p><b>Address</b>: Spaarne 96, 2011 CL Haarlem <br>
-                            <b>Phone</b>: 023 542 7270 <br>
-                            <b>Website</b>: <a href="https://ratatouillefoodandwine.nl">https://ratatouillefoodandwine.nl</a> <br>
-                            <b>Price range</b>: €‎€‎€‎€‎<br>
-                            <b>Opening hours</b>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card restaurantLeft">
-                    <img src="/img/SpecktakelCoverImg.jpg" alt="">
-                    <div class="card-body">
-                        <h2>Specktakel</h2>
-                        <p>This restaurant serves a mix of French and European cuisines.
-                            The dishes and signature dishes are perfectly and freshly preprepared by chef Jozua Jaring.
-                            It all started in 2013 and keep evolving until 2014 when they got awarded with a Michelin star.
-                            In 2015 they move to a new location which is today’s Ratatouille with a better environment,
-                            so the people can enjoy even more. Beside the amazing dishes, their wine makes it even better! </p>
-                        <p><b>Address</b>: Spaarne 96, 2011 CL Haarlem <br>
-                            <b>Phone</b>: 023 542 7270 <br>
-                            <b>Website</b>: <a href="https://ratatouillefoodandwine.nl">https://ratatouillefoodandwine.nl</a> <br>
-                            <b>Price range</b>: €‎€‎€‎€‎<br>
-                            <b>Opening hours</b>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card restaurantRight">
-                    <img src="/img/GrandCafeBrinkmanCoverImg.jpg" alt="">
-                    <div class="card-body">
-                        <h2>Grand Cafe Brinkman</h2>
-                        <p>This restaurant serves a mix of French and European cuisines.
-                            The dishes and signature dishes are perfectly and freshly preprepared by chef Jozua Jaring.
-                            It all started in 2013 and keep evolving until 2014 when they got awarded with a Michelin star.
-                            In 2015 they move to a new location which is today’s Ratatouille with a better environment,
-                            so the people can enjoy even more. Beside the amazing dishes, their wine makes it even better! </p>
-                        <p><b>Address</b>: Spaarne 96, 2011 CL Haarlem <br>
-                            <b>Phone</b>: 023 542 7270 <br>
-                            <b>Website</b>: <a href="https://ratatouillefoodandwine.nl">https://ratatouillefoodandwine.nl</a> <br>
-                            <b>Price range</b>: €‎€‎€‎€‎<br>
-                            <b>Opening hours</b>
-                        </p>
-                    </div>
-                </div>
-            </div>
         </div>
+
     </div>
 
     <?php
