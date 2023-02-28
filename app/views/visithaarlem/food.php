@@ -71,7 +71,7 @@
                             <p><b>Address</b>: <?= $restaurant->getAddress() ?> <br>
                                 <b>Phone</b>: <?= $restaurant->getPhoneNumber() ?> <br>
                                 <b>Website</b>: <a href="<?= $restaurant->getWebsite() ?>"><?= $restaurant->getWebsite() ?></a> <br>
-                                <b>Price range</b>: <?= $restaurant->getPriceIndicator()?><br>
+                                <b>Price range</b>: <?php for ($i = 0; $i < $restaurant->getPriceIndicator(); $i++) { echo '€'; } ?><br>
                                 <b>Opening hours</b>
                             </p>
                         </div>
