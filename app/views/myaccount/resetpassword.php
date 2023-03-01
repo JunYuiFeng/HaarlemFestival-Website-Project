@@ -23,35 +23,34 @@
 
                         <form method="post" action="" style="width: 23rem;">
 
-                            <h1 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h1>
+                            <h1 class="fw-normal pb-3" style="letter-spacing: 1px;">Forgot password?</h1>
+                            <p class="mb-5">Enter your email address and we'll send you a link to reset password</p>
 
                             <div class="user-box">
-                                <input type="text" name="username" required>
-                                <label>Username</label>
+                                <input type="text" name="email" required>
+                                <label>Email</label>
                             </div>
-                            <div class="user-box">
-                                <input type="password" name="password" required>
-                                <label>Password</label>
-                            </div>
+                            <p class="error-message"><?php echo isset($this->msg) ? $this->msg : '' ?></p>
 
-                            <button type="submit" name="login">
+                            <button type="submit" name="sendLink">
                                 <span></span>
                                 <span></span>
                                 <span></span>
                                 <span></span>
-                                Login
+                                Send
                             </button>
-                            <p class="error-message"><?php echo isset($message) ? $message : '' ?></p>
 
-                            <p class="small mb-5 pb-lg-2"><a class="text-muted" href="resetpassword">Forgot password?</a></p>
-                            <p>Don't have an account? <a href="register" class="link-info">Register here</a></p>
+                            <div class="d-flex gap-4 mt-5">
+                                <a href="login" class="link-info">Login</a>
+                                <a href="register" class="link-info">Register</a>
+                            </div>
                         </form>
 
                     </div>
 
                 </div>
                 <div class="col-sm-6 px-0 d-none d-sm-block">
-                    <img src="/img/LoginImage.jpeg" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+                    <img src="/img/ResetPasswordImage.jpeg" alt="Haarlem center picture" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
                 </div>
             </div>
         </div>

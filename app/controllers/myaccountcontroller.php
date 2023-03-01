@@ -1,6 +1,7 @@
 <?php
 include_once("../services/loginservice.php");
 include_once("../services/registerservice.php");
+include_once("../services/resetpasswordservice.php");
 
 
 
@@ -78,9 +79,52 @@ class MyAccountController
         require __DIR__ . '/../views/myaccount/register.php';
     }
 
-    public function dashboard()
+    public function resetPassword()
     {
-        require __DIR__ . '/../views/login/dashboard.php';
+        if (isset($_POST["sendLink"])) {
+            if (empty($_POST["email"])) {
+                $this->msg = "Please fill all the fields";
+            } else {
+                $resetPasswordService = new ResetPasswordService();
+                $email = $_POST["email"];
+                if ($resetPasswordService->validateEmail($email)) {
+                    if ($resetPasswordService->sendLink($email)) {
+                        $this->msg = "Email sent successfully";
+                    }
+                } else {
+                    $this->msg = "Email is not valid or not registered";
+                }
+            }
+        }
+        require __DIR__ . '/../views/myaccount/resetpassword.php';
+    }
+    public function changePassword()
+    {
+        if (isset($_GET["token"])) {
+            $resetPasswordService = new ResetPasswordService();
+            $token = $_GET["token"];
+            $user = $resetPasswordService->checkToken($token);
+
+            if ($user == NULL) {
+                require __DIR__ . '/../views/notfound.php';
+            }
+            if (isset($_POST["changePass"])) {
+                if ($_POST["newPassword"] == $_POST["newPasswordRepeat"]) {
+                    $password = $_POST["newPassword"];
+                    $hasshedPassword = password_hash($password, PASSWORD_DEFAULT);
+                    if ($resetPasswordService->setNewPassword($hasshedPassword, $user->getId())) {
+                        $_SESSION["logedin"] = $user->getId();
+                        header("location: index");
+                    }
+                    $this->msg = "Something went wrong, please try again";
+                } else {
+                    $this->msg = "Passwords do not match";
+                }
+            }
+            require __DIR__ . '/../views/myaccount/changepassword.php';
+        } else {
+            require __DIR__ . '/../views/notfound.php';
+        }
     }
 
     public function validate($user)
