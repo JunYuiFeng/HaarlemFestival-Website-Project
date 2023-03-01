@@ -41,7 +41,7 @@
                                 <span></span>
                                 Login
                             </button>
-                            <p class="error-message"><?php echo isset($message) ? $message : '' ?></p>
+                            <p class="error-message"><?php echo isset($msg) ? $msg : '' ?></p>
 
                             <p class="small mb-5 pb-lg-2"><a class="text-muted" href="resetpassword">Forgot password?</a></p>
                             <p>Don't have an account? <a href="register" class="link-info">Register here</a></p>

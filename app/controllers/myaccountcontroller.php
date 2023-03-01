@@ -35,7 +35,7 @@ class MyAccountController
             if (isset($_POST["login"])) {
 
                 if (empty($_POST["username"]) || empty($_POST["password"])) {
-                    $msg = "field empty, please fill in";
+                    $this->$msg = "field empty, please fill in";
                 } else {
                     $username = $_POST["username"];
                     $password = $_POST["password"];
@@ -136,7 +136,7 @@ class MyAccountController
 
     public function logout()
     {
-        unset($_SESSION['logedin']);
+        $this->loginService->logout();
         header("location: login");
     }
 }

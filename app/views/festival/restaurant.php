@@ -15,6 +15,35 @@
     include __DIR__ . '/../header.php';
     ?>
 
+    <div class="row">
+        <div class="col">
+            <h1><b>Ratatouille</b></h1>
+            <p><b>This restaurant serves a mix of French and European cuisines.
+                    The dishes and signature dishes are perfectly and freshly preprepared by chef Jozua Jaring.
+                    It all started in 2013 and keep evolving until 2014 when they got awarded with a Michelin star.
+                    In 2015 they move to a new location which is today’s Ratatouille with a better environment,
+                    so the people can enjoy even more. Beside the amazing dishes, their wine makes it even better!
+                </b></p>
+            <button><b>Reserve</b></button>
+        </div>
+        <div class="col">
+            <img src="/img/RatatouilleCoverImg.jpg" alt="">
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <div class="container">
+                <h3><b>Details</b></h3>
+            </div>
+        </div>
+        <div class="col">
+            <div class="container">
+                <h3><b>Contact and location</b></h3>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

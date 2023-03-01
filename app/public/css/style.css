@@ -306,15 +306,37 @@ footer #envelopeImg {
   background: linear-gradient(180deg, #95051e 0%, #2e0209 100%);
   color: white;
   padding: 18px;
+  height: 790px;
 }
 .restaurantsSection .restaurant .card img {
   margin: 10px;
 }
-.restaurantsSection .restaurant .restaurantRight {
+
+.restaurantRight {
   margin-left: 45px;
 }
-.restaurantsSection .restaurant .restaurantLeft {
+
+.restaurantLeft {
   margin-right: 45px;
+}
+
+.restaurantEventSection {
+  margin-top: 60px;
+  margin-bottom: 88px;
+}
+.restaurantEventSection .card {
+  margin-top: 60px;
+  background: linear-gradient(180deg, #95051e 0%, #2e0209 100%);
+  color: white;
+  padding: 18px;
+  height: 620px;
+}
+.restaurantEventSection .card img {
+  margin: 10px;
+}
+.restaurantEventSection .card .seeMoreBtn {
+  background: #FCDC4D;
+  border-radius: 12px;
 }
 
 .yummieWelcomeParagraph {

@@ -41,43 +41,54 @@
             <h3 class="d-flex justify-content-center"><b>27 July - 31 July </b></h3>
         </div>
         <div class="row personalProgramOffer">
-            <div class="col-6"><p><b>Do you want to build your own personal program?</b></p></div>
+            <div class="col-6">
+                <p><b>Do you want to build your own personal program?</b></p>
+            </div>
             <div class="col-2"></div>
             <div class="col-4"><button><b>Build your own personal program</b></button></div>
         </div>
 
-        <div class="row">
-            <div class="col-6">
-            <div class="card restaurantLeft">
-                    <img src="/img/RatatouilleCoverImg.jpg" alt="">
-                    <div class="card-body">
-                        <h2>Ratatouille</h2>
-                        <p><b>Address</b>: Spaarne 96, 2011 CL Haarlem <br>
-                            <b>Phone</b>: 023 542 7270 <br>
-                            <b>Website</b>: <a href="https://ratatouillefoodandwine.nl">https://ratatouillefoodandwine.nl</a> <br>
-                            <b>Price range</b>: €‎€‎€‎€‎<br>
-                            <b>Opening hours</b>
-                        </p>
+        <div class="row restaurantEventSection">
+            <?php
+            foreach ($restaurants as $index => $restaurant) {
+                if ($index % 2 == 0) {
+                    // Give the first restaurant the "restaurantLeft" class
+                    $cardClass = "card restaurantLeft";
+                } else {
+                    // Give the second restaurant the "restaurantRight" class
+                    $cardClass = "card restaurantRight";
+                }
+            ?>
+                <div class="col-6">
+                    <div class="<?= $cardClass ?>">
+                        <img src="/img/<?= $restaurant->getCoverImg() ?>" alt="">
+                        <div class="card-body">
+                            <h2><?= $restaurant->getName() ?></h2>
+                            <div class="row">
+                                <div class="col">
+                                <p><b>Cuisine</b>: <?= $restaurant->getCuisine() ?> <br>
+                                    <b>Type</b>: <?= $restaurant->getFoodType() ?> <br>
+                                    <b>Session duration</b>: <?= $restaurant->getSessionDuration() ?> <br>
+                                    <b>Price</b>: <?= '€' . $restaurant->getPriceAge12AndUnder() . ' - ' . '€' . $restaurant->getPriceAboveAge12() ?><br>
+                                    <b>Rating</b>: <?= $restaurant->getRating() ?>
+                                </p>
+                                </div>
+                                <div class="col align-self-end">
+                                    <button class="seeMoreBtn" onclick="location.href='restaurant'"><b>See more info and reserve</b></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-6">
-            <div class="card restaurantLeft">
-                    <img src="/img/TroujoursCoverImg.jpg" alt="">
-                    <div class="card-body">
-                        <h2>Urban Frenchy Bistro Toujours</h2>
-                        <p><b>Cuisine</b>: Spaarne 96, 2011 CL Haarlem <br>
-                            <b>Type</b>: 023 542 7270 <br>
-                            <b>Session duration</b>: <a href="https://ratatouillefoodandwine.nl">https://ratatouillefoodandwine.nl</a> <br>
-                            <b>Price</b>: €‎€‎€‎€‎<br>
-                            <b>Rating</b>: 
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <?php
+            }
+            ?>
         </div>
     </div>
+
+    <?php
+    include __DIR__ . '/../footer.php';
+    ?>
 
 </body>
 
