@@ -17,6 +17,9 @@
 
     <div class="row">
         <div class="col">
+            <button><-Back</button>
+        </div>
+        <div class="col">
             <h1><b>Ratatouille</b></h1>
             <p><b>This restaurant serves a mix of French and European cuisines.
                     The dishes and signature dishes are perfectly and freshly preprepared by chef Jozua Jaring.
