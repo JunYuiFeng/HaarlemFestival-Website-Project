@@ -48,7 +48,7 @@
             <div class="col-4"><button><b>Build your own personal program</b></button></div>
         </div>
 
-        <div class="row restaurant">
+        <div class="row restaurantEventSection">
             <?php
             foreach ($restaurants as $index => $restaurant) {
                 if ($index % 2 == 0) {
@@ -73,8 +73,8 @@
                                     <b>Rating</b>: <?= $restaurant->getRating() ?>
                                 </p>
                                 </div>
-                                <div class="col">
-                                    <button>See more info and reserve</button>
+                                <div class="col align-self-end">
+                                    <button class="seeMoreBtn" onclick="location.href='restaurant'"><b>See more info and reserve</b></button>
                                 </div>
                             </div>
                         </div>

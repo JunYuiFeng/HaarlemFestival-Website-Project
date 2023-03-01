@@ -92,7 +92,7 @@ class MyAccountController
 
     public function logout()
     {
-        unset($_SESSION['logedin']);
+        $this->loginService->logout();
         header("location: login");
     }
 }

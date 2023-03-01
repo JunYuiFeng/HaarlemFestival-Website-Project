@@ -30,6 +30,6 @@ class LoginService
 
     public function logout()
     {
-        unset($_SESSION["username"]);
+        unset($_SESSION["logedin"]);
     }
 }
