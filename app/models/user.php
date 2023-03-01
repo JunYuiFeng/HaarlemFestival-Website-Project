@@ -7,6 +7,8 @@ class User
     private  $email;
     private  $password;
     private  $userType;
+    private  $resetLinkToken;
+
 
     // public function __construct($id, $username, $email, $password, $userType)
     // {
