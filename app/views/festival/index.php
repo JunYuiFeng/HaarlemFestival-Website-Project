@@ -49,7 +49,7 @@
             <div class="col-12 event">
                 <img src="/img/YummyFestival.png" alt="Yummy Festival Image" class="img-fluid">
                 <div class="eventName">
-                <h1 onclick="location.href='/festival/yummie'">Yummie!</h1>
+                <h1 onclick="location.href='yummie'">Yummie!</h1>
             </div>
             </div>
             <div class="col-12 description yummy">

@@ -24,8 +24,12 @@ class FestivalController
         require __DIR__ . '/../views/festival/yummie.php';
     }
 
-    public function restaurant()
+    public function restaurantdetail()
     {
-        require __DIR__ . '/../views/festival/restaurant.php';
+        if(isset($_GET['id'])) {
+            $id = htmlspecialchars($_GET['id']);
+            $restaurant = $this->restaurantService->getById($id);
+        }
+        require __DIR__ . '/../views/festival/restaurantdetail.php';
     }
 }

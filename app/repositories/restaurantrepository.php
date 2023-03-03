@@ -20,4 +20,22 @@ class RestaurantRepository extends Repository
             echo $e;
         }
     }
+
+    function getById($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM Restaurants WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Restaurant');
+            $restaurant = $stmt->fetch();
+
+            return $restaurant;
+
+        } catch (PDOException $e) 
+        {
+            echo $e;
+        }
+    }
 }

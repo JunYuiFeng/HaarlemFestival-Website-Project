@@ -23,9 +23,9 @@ class LoginService
         }
 
         if ($loginUser && password_verify($password, $loginUser->getPassword())) {
-            return TRUE;
+            return true;
         }
-        return "incorrect username or password";
+        return false;
     }
 
     public function logout()

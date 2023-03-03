@@ -19,6 +19,25 @@ class UsersRepository extends Repository
         }
     }
 
+    
+    function getByUsername($username)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM Users WHERE username = :username");
+            $stmt->bindParam(':username', $username);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+            $user = $stmt->fetch();
+
+            return $user;
+
+        } catch (PDOException $e) 
+        {
+            echo $e;
+        }
+    }
+
 
     function createUser($username, $email, $password, $userType)
     {
