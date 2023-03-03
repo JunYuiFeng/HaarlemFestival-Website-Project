@@ -8,6 +8,7 @@ class User
     private  $password;
     private  $userType;
     private  $resetLinkToken;
+    private $registrationDate;
 
 
     // public function __construct($id, $username, $email, $password, $userType)
@@ -122,6 +123,26 @@ class User
     public function setUserType($userType)
     {
         $this->userType = $userType;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of registrationDate
+     */ 
+    public function getRegistrationDate()
+    {
+        return $this->registrationDate;
+    }
+
+    /**
+     * Set the value of registrationDate
+     *
+     * @return  self
+     */ 
+    public function setRegistrationDate($registrationDate)
+    {
+        $this->registrationDate = $registrationDate;
 
         return $this;
     }

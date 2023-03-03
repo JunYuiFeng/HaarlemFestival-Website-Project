@@ -66,15 +66,17 @@
                             <h2><?= $restaurant->getName() ?></h2>
                             <div class="row">
                                 <div class="col">
-                                <p><b>Cuisine</b>: <?= $restaurant->getCuisine() ?> <br>
-                                    <b>Type</b>: <?= $restaurant->getFoodType() ?> <br>
-                                    <b>Session duration</b>: <?= $restaurant->getSessionDuration() ?> <br>
-                                    <b>Price</b>: <?= '€' . $restaurant->getPriceAge12AndUnder() . ' - ' . '€' . $restaurant->getPriceAboveAge12() ?><br>
-                                    <b>Rating</b>: <?= $restaurant->getRating() ?>
-                                </p>
+                                    <p><b>Cuisine</b>: <?= $restaurant->getCuisine() ?> <br>
+                                        <b>Type</b>: <?= $restaurant->getFoodType() ?> <br>
+                                        <b>Session duration</b>: <?= $restaurant->getSessionDuration() ?> <br>
+                                        <b>Price</b>: <?= '€' . $restaurant->getPriceAge12AndUnder() . ' - ' . '€' . $restaurant->getPriceAboveAge12() ?><br>
+                                        <b>Rating</b>: <?php for ($i = 0; $i < $restaurant->getRating(); $i++) {
+                                            echo '<span class="star">&#9733;</span>';
+                                        }?>
+                                    </p>
                                 </div>
                                 <div class="col align-self-end">
-                                    <button class="seeMoreBtn" onclick="location.href='restaurant'"><b>See more info and reserve</b></button>
+                                    <button class="seeMoreBtn" onclick="location.href='restaurantdetail?id= <?=$restaurant->getId()?>'"><b>See more info and reserve</b></button>
                                 </div>
                             </div>
                         </div>

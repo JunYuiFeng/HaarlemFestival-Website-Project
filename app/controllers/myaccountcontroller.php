@@ -2,6 +2,7 @@
 include_once("../services/loginservice.php");
 include_once("../services/registerservice.php");
 include_once("../services/resetpasswordservice.php");
+include_once("../services/usersservice.php");
 
 
 
@@ -9,12 +10,14 @@ class MyAccountController
 {
     private $loginService;
     private $registerService;
+    private $userService;
     private $msg;
 
     function __construct()
     {
         $this->loginService = new LoginService();
         $this->registerService = new RegisterService();
+        $this->userService = new UsersService();
         $this->msg = "";
     }
 
@@ -37,15 +40,16 @@ class MyAccountController
                 if (empty($_POST["username"]) || empty($_POST["password"])) {
                     $this->$msg = "field empty, please fill in";
                 } else {
-                    $username = $_POST["username"];
-                    $password = $_POST["password"];
+                    $username = filter_var($_POST["username"], FILTER_SANITIZE_SPECIAL_CHARS);
+                    $password = filter_var($_POST["password"], FILTER_SANITIZE_SPECIAL_CHARS);
 
                     $res = $this->loginService->login($username, $password);
                     if (ctype_digit($res)) {
-                        $_SESSION["logedin"] = $res;
+                        $user = $this->userService->getByUsername($username);
+                        $_SESSION["logedin"] = $user->getId();
                         header("location: index");
                     } else {
-                        $this->msg = $res;
+                        $this->msg = "incorrect username or password";
                     }
                 }
             }
