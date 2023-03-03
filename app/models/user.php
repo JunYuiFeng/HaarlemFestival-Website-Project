@@ -9,11 +9,13 @@ class User
     private  $userType;
 
 
-    public function __construct($username, $password)
-    {
-        $this->username = $username;
-        $this->password = $password;
-    }
+
+    //public function __construct($username, $password)
+    //{
+    //    $this->username = $username;
+    //   $this->password = $password;
+    //}
+
     // public function __construct($id, $username, $email, $password, $userType)
     // {
     //     $this->id = $id;
@@ -128,6 +130,9 @@ class User
         $this->userType = $userType;
 
         return $this;
+    }
+    public function editUser(){
+        
     }
 
     public function createUser(){

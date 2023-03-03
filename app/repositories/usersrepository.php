@@ -36,16 +36,16 @@ class UsersRepository extends Repository
             echo $e;
         }
     }
-    function editUser(){
+    function editUser($username,$email,$password,$id){
         try{
-            $stmt = $this->connection->prepare("UPDATE users SET username = :username, email = :email, password = :password, usertype = :usertype WHERE id = :id");
-            $stmt->execute();
+            $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email, password = :password WHERE id = :id');
+            $stmt->execute(array(':username' =>$username, ':email' => $email, ':password' => $password, ':id' => $id));
         } catch (PDOException $e)
         {
             echo $e;
         }
     }   
-    function deleteUser(){
+    function deleteUser($id){
         try{
             $stmt = $this->connection->prepare("DELETE FROM users WHERE id = :id");
             $stmt->execute();

@@ -7,7 +7,7 @@ class UserManagementService{
         $repository = new UserManagement();
         $users = $repository->getAll();
         return $users;
-    }
+    }   
 
 }
 
