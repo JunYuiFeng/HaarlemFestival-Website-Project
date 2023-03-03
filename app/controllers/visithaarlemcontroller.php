@@ -1,17 +1,23 @@
 <?php
 require_once __DIR__ . '/../services/restaurantservice.php';
+require_once __DIR__ . '/../services/editPageService.php';
+
 
 class VisitHaarlemController
 {
     private $restaurantService;
+    private $contentEditorService;
+    private $content;
 
     function __construct()
     {
         $this->restaurantService = new RestaurantService();
+        $this->contentEditorService = new EditPageService();
     }
 
     public function index()
     {
+        $this->content = $this->contentEditorService->getPageContent("Home");
         require __DIR__ . '/../views/visithaarlem/index.php';
     }
 
@@ -42,9 +48,4 @@ class VisitHaarlemController
     {
         require __DIR__ . '/../views/visithaarlem/kids.php';
     }
-    public function dashboard()
-    {
-        require __DIR__ . '/../views/cms/dashboard.php';
-    }
-
 }

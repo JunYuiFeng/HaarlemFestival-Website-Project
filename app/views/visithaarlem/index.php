@@ -18,7 +18,17 @@
     <video autoplay muted loop class="videoBackground">
         <source src="/img/VisitHaarlemVideo.mp4" type="video/mp4">
     </video>
-    <section class="welcomeSection container">
+    <?= $this->content ?>
+    <?php
+    include __DIR__ . '/../footer.php';
+    ?>
+
+</body>
+
+</html>
+<!-- 
+
+<section class="welcomeSection container">
         <article>
             <h1>WELCOME TO HAARLEM</h1>
             <p>Haarlem has a charming historic center, renowned museums, stores, restaurants,
@@ -46,7 +56,7 @@
             </div>
             <button type="button" class="btn btn-yellow-gradient">READ MORE</button>
         </figure>
-        
+
         <figure class="visitHaarlemPromo">
             <figure>
                 <img src="/img/KidsPagePromo.png" alt="">
@@ -81,11 +91,4 @@
         <figure class="mockupColumn">
             <img src="/img/MobileAppPromotion.png" alt="">
         </figure>
-    </section>    
-    <?php
-    include __DIR__ . '/../footer.php';
-    ?>
-
-</body>
-
-</html>
+    </section> -->

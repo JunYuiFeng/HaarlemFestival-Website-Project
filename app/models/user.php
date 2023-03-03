@@ -7,6 +7,9 @@ class User
     private  $email;
     private  $password;
     private  $userType;
+    private  $resetLinkToken;
+    private $registrationDate;
+
 
 
 
@@ -147,5 +150,25 @@ class User
     }
     public function updateUser(){
         return $this->username;
+    }
+
+    /**
+     * Get the value of registrationDate
+     */ 
+    public function getRegistrationDate()
+    {
+        return $this->registrationDate;
+    }
+
+    /**
+     * Set the value of registrationDate
+     *
+     * @return  self
+     */ 
+    public function setRegistrationDate($registrationDate)
+    {
+        $this->registrationDate = $registrationDate;
+
+        return $this;
     }
 }

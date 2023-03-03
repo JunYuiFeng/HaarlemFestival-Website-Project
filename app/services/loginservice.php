@@ -18,19 +18,18 @@ class LoginService
         foreach ($users as $user) {
             if ($username == $user->getUsername()) {
                 $loginUser = $user;
-            } else {
-                return FALSE;
+                break;
             }
         }
 
-        if (password_verify($password, $loginUser->getPassword())) {
-            return TRUE;
+        if ($loginUser && password_verify($password, $loginUser->getPassword())) {
+            return true;
         }
-        return FALSE;
+        return false;
     }
 
     public function logout()
     {
-        unset($_SESSION["username"]);
+        unset($_SESSION["logedin"]);
     }
 }

@@ -267,6 +267,7 @@ footer {
 
 .foodpageWelcomeSection {
   position: relative;
+
   .foodPageMsgBox {
     width: 45%;
     top: 77%;
@@ -275,6 +276,7 @@ footer {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
     position: absolute;
+
     p {
       font-size: 20pt;
       padding: 50px;
@@ -289,6 +291,7 @@ footer {
 .foodPageParagraph1 {
   background: linear-gradient(180deg, #9a031e 0%, #3e030e 100%);
   margin-top: 130px;
+
   p {
     color: white;
     font-size: 13pt;
@@ -343,21 +346,45 @@ footer {
       background: linear-gradient(180deg, #95051e 0%, #2e0209 100%);
       color: white;
       padding: 18px;
+      height: 790px;
 
       img {
         margin: 10px;
       }
     }
+  }
+}
 
-    .restaurantRight {
-      margin-left: 45px;
+.restaurantRight {
+  margin-left: 45px;
+}
+
+.restaurantLeft {
+  margin-right: 45px;
+}
+
+.restaurantEventSection {
+  margin-top: 60px;
+  margin-bottom: 88px;
+
+  .card {
+    margin-top: 60px;
+    background: linear-gradient(180deg, #95051e 0%, #2e0209 100%);
+    color: white;
+    padding: 18px;
+    height: 620px;
+
+    img {
+      margin: 10px;
     }
 
-    .restaurantLeft {
-      margin-right: 45px;
+    .seeMoreBtn {
+      background: #FCDC4D;
+      border-radius: 12px;
     }
   }
 }
+
 
 //======Yummie=======
 .yummieWelcomeParagraph {
@@ -373,23 +400,88 @@ footer {
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     color: #9A031E;
   }
+}
 
-  .personalProgramOffer {
-    padding: 50px 40px;
-    margin: 40px 0px;
-    background: linear-gradient(180deg, #9A031E 0%, #35020B 100%);
+.personalProgramOffer {
+  padding: 50px 40px;
+  margin: 40px 0px;
+  background: linear-gradient(180deg, #9A031E 0%, #35020B 100%);
 
-    p {
-      color: white;
+  p {
+    color: white;
+    font-size: 18pt;
+  }
+
+  button {
+    background: #FCDC4D;
+    border-radius: 16px;
+    padding: 10px 12px;
+  }
+}
+
+
+//========Restaurant detail page==========
+.restaurantDetailPageContainer {
+  margin-top: 2%;
+  margin-bottom: 6.5%;
+
+  .descriptionSection {
+    margin-right: 30px;
+    margin-top: 30px;
+
+    h1 {
+      font-size: 36pt;
+    }
+
+    .michelinLogo {
+      width: 80%;
+    }
+
+    .michelinText {
+      color: #D3072B;
       font-size: 18pt;
     }
 
+    .restaurantDescription {
+      font-size: 13pt;
+      font-weight:600;
+      line-height: 22px;
+      margin-top: 8px;
+    }
+
     button {
+      padding: 1% 4%;
       background: #FCDC4D;
-      border-radius: 16px;
-      padding: 10px 12px;
+      border-radius: 13px;
+      border: 0;
     }
   }
+}
+
+.restaurantRow2Box {
+  background: linear-gradient(180deg, #9A031E 0%, #2B0209 100%);
+  color: white;
+  height: 100%;
+  padding-top: 7%;
+  padding-left: 7%;
+
+  h2 {
+    font-size: 20pt;
+    margin-bottom: 6%;
+  }
+
+  h3 {
+    font-size: 16pt;
+  }
+}
+
+.restaurantReservationBox {
+  background: linear-gradient(180deg, #9A031E 0%, #2B0209 100%);
+  color: white;
+  height: 100%;
+  filter: drop-shadow(4px 4px 20px rgba(0, 0, 0, 0.5));
+  border-radius: 40px;
+  padding-top: 6%;
 }
 
 //visit haarlem for history page start
@@ -591,7 +683,7 @@ footer {
   color: white;
   background-image: "img/";
   background-repeat: no-repeat;
-  background-attachment: fixed;  
+  background-attachment: fixed;
   background-size: cover;
 }
 
@@ -767,17 +859,21 @@ footer {
   margin-top: 80px;
   background: conic-gradient(from 75.58deg at -16.05% 100%, #000000 0deg, #6D0000 71.01deg, #000000 360deg);
 }
-.danceVanue{
+
+.danceVanue {
   background-color: white;
   color: #330009;
 }
-.danceVanueImg{
+
+.danceVanueImg {
   width: 100%;
 }
-.danceVanueType1{
+
+.danceVanueType1 {
   margin: 10px;
 }
-.danceVanueType2{
+
+.danceVanueType2 {
   margin-top: 150px;
 }
 #danceHomeLine{

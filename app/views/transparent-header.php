@@ -25,7 +25,7 @@
                     <a class="nav-link" href="/visithaarlem/kids"><b>Kids</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/festival/overview"><b>Festival</b></a>
+                    <a class="nav-link" href="/festival/index"><b>Festival</b></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/visithaarlem/personalprogram"><b>Personal Program</b></a>

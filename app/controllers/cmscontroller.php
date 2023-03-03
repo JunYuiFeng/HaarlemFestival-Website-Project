@@ -1,31 +1,29 @@
 <?php
-require_once __DIR__ . "/../services/userservice.php";
-require_once __DIR__ . "/../models/user.php";
-require_once __DIR__ . '/controller.php';
+require_once __DIR__ . '/../services/editPageService.php';
 
-
-class CmsController extends Controller
+class CmsController
 {
-    
-    private $userService = new UserService();
+    private $content;
+    private $contentEditorService;
 
-    public function usermanagement()
+    function __construct()
     {
-        
-        $users = $this->userService->getAll();
-        require __DIR__ . '/../views/cms/usermanagement.php';
-    }
-    public function create()
-    {
-        require __DIR__ . '/../views/cms/create.php';
-    }
-    public function delete()
-    {
-        $id = $_GET["id"];
-        $this->userService->delete($id);
-        header("location: index");
+        $this->contentEditorService = new EditPageService();
     }
 
+    public function editpagecontent()
+    {
+        if (isset($_GET["webPage"])) {
+            $webPage = $_GET["webPage"];
 
+            $this->content = $this->contentEditorService->getPageContent($webPage);
+            if (isset($_POST['editor'])) {
+                $editor_data = $_POST['editor'];
+                $this->contentEditorService->setNewPageContent($webPage, $editor_data);
+            }
+            require __DIR__ . '/../views/cms/editpagecontent.php';
+        } else {
+            require __DIR__ . '/../views/notfound.php';
+        }
+    }
 }
-?>
