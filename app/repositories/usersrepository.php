@@ -38,6 +38,23 @@ class UsersRepository extends Repository
         }
     }
 
+    function getByEmail($email)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM Users WHERE email = :email");
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+            $user = $stmt->fetch();
+
+            return $user;
+        } catch (PDOException $e) 
+        {
+            echo $e;
+        }
+    }
+
 
     function createUser($username, $email, $password, $userType)
     {

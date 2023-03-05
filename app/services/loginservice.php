@@ -20,6 +20,10 @@ class LoginService
                 $loginUser = $user;
                 break;
             }
+            else if ($username == $user->getEmail()) {
+                $loginUser = $user;
+                break;
+            }
         }
 
         if ($loginUser && password_verify($password, $loginUser->getPassword())) {

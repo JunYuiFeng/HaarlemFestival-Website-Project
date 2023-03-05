@@ -14,4 +14,9 @@ class UsersService
     {
         return $this->repository->getByUsername($username);
     }
+
+    public function getByEmail($email)
+    {
+        return $this->repository->getByEmail($email);
+    }
 }

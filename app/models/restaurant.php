@@ -7,15 +7,15 @@ class Restaurant
     private string $foodType;
     private float $sessionDuration;
     private int $priceIndicator;
-    private float $priceAge12AndUnder;
+    private ?float $priceAge12AndUnder;
     private float $rating;
     private bool $hasMichelin;
     private bool $isFestival;
-    private float $priceAboveAge12;
+    private ?float $priceAboveAge12;
     private int $phoneNumber;
     private string $address;
-    private int $seats;
-    private string $website;
+    private ?int $seats;
+    private ?string $website;
     private string $coverImg;
     private string $description;
 
