@@ -64,19 +64,25 @@ class MyAccountController
             header("location: index");
         } else {
             if (isset($_POST["register"])) {
-                if (empty($_POST["email"]) || empty($_POST["username"]) || empty($_POST["password"])) {
-                    $this->msg = "Please fill all the fields";
-                } else {
-                    $email = $_POST["email"];
-                    $username = $_POST["username"];
-                    $password = $_POST["password"];
-
-                    $res = $this->registerService->register($email, $username, $password);
-                    if (ctype_digit($res)) {
-                        $_SESSION["logedin"] = $res;
-                        header("location: index");
+                if (isset($_POST['captcha']) && ($_POST['captcha'] != "")) {
+                    if (strcasecmp($_SESSION['captcha'], $_POST['captcha']) != 0) {
+                        $this->msg = "Entered captcha code does not match! Please try again";
                     } else {
-                        $this->msg = $res;
+                        if (empty($_POST["email"]) || empty($_POST["username"]) || empty($_POST["password"])) {
+                            $this->msg = "Please fill all the fields";
+                        } else {
+                            $email = $_POST["email"];
+                            $username = $_POST["username"];
+                            $password = $_POST["password"];
+
+                            $res = $this->registerService->register($email, $username, $password);
+                            if (ctype_digit($res)) {
+                                $_SESSION["logedin"] = $res;
+                                header("location: index");
+                            } else {
+                                $this->msg = $res;
+                            }
+                        }
                     }
                 }
             }
