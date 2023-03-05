@@ -34,11 +34,9 @@ class MyAccountController
         if (isset($_SESSION["logedin"])) {
             header("location: index");
         } else {
-            $msg = "";
             if (isset($_POST["login"])) {
-
                 if (empty($_POST["username"]) || empty($_POST["password"])) {
-                    $this->$msg = "field empty, please fill in";
+                    $this->msg = "field empty, please fill in";
                 } else {
                     $username = filter_var($_POST["username"], FILTER_SANITIZE_SPECIAL_CHARS);
                     $password = filter_var($_POST["password"], FILTER_SANITIZE_SPECIAL_CHARS);
@@ -60,6 +58,7 @@ class MyAccountController
             }
         }
 
+         $msg = $this->msg;
         require __DIR__ . '/../views/myaccount/login.php';
     }
 
