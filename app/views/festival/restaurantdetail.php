@@ -32,16 +32,11 @@
                         </div>
                     </div>
                 </div>
-                <p class="restaurantDescription">This restaurant serves a mix of French and European cuisines.
-                    The dishes and signature dishes are perfectly and freshly preprepared by chef Jozua Jaring.
-                    It all started in 2013 and keep evolving until 2014 when they got awarded with a Michelin star.
-                    In 2015 they move to a new location which is today’s Ratatouille with a better environment,
-                    so the people can enjoy even more. Beside the amazing dishes, their wine makes it even better!
-                </p>
+                <p class="restaurantDescription"><?= $restaurant->getDescription() ?></p>
                 <button class="float-end"><b>Reserve</b></button>
             </div>
             <div class="col">
-                <img src="/img/RatatouilleCoverImg.jpg" alt="">
+                <img src="/img/<?= $restaurant->getCoverImg() ?>" alt="">
             </div>
         </div>
 
@@ -53,19 +48,21 @@
                 <div class="container restaurantRow2Box">
                     <div class="row">
                         <h2><b>Details</b></h2>
-                        <h3><b>Cuisine:</b><br>French and European <br><br>
-                            <b>Type:</b><br>Fish and Seafood <br><br>
-                            <b>Rating:</b><br>4
+                        <h3><b>Cuisine:</b><br><?= $restaurant->getCuisine() ?> <br><br>
+                            <b>Type:</b><br> <?= $restaurant->getFoodType() ?> <br><br>
+                            <b>Rating:</b><br><?php for ($i = 0; $i < $restaurant->getRating(); $i++) {
+                                                    echo '<span class="star">&#9733;</span>';
+                                                } ?>
                         </h3>
                     </div>
                     <div class="row">
                         <h2><b>Prices</b></h2>
                         <ul>
                             <li>
-                                <h3>45 per person</h3>
+                                <h3><?='€' . $restaurant->getPriceAboveAge12() . ' per person'?></h3>
                             </li>
                             <li>
-                                <h3>22,50 for children under 12 years old</h3>
+                                <h3><?='€' . $restaurant->getPriceAge12AndUnder() . ' for children under 12 years old'?></h3>
                             </li>
                         </ul>
                     </div>
@@ -76,37 +73,37 @@
                     <h2><b>Contact and location</b></h2>
                     <div style="display: inline-block;">
                         <div style="display: inline-block;">
-                            <img src="/img/RestaurantLocationIcon.png" alt="RestaurantLocationIcon">
+                            <img class="icon" src="/img/RestaurantLocationIcon.svg" alt="RestaurantLocationIcon" width="75%">
                         </div>
                         <div style="display: inline-block;">
-                            <p>Spaarne 96, 2011 CL Haarlem</p>
+                            <p><?= $restaurant->getAddress() ?></p>
                         </div>
                     </div>
                     <div style="display: inline-block;">
                         <div style="display: inline-block;">
-                            <img src="/img/RestaurantPhoneIcon.png" alt="RestaurantLocationIcon">
+                            <img class="icon" src="/img/RestaurantPhoneIcon.svg" alt="RestaurantLocationIcon" width="75%">
                         </div>
                         <div style="display: inline-block;">
-                            <p>023 542 7270</p>
+                            <p><?= $restaurant->getPhoneNumber() ?></p>
                         </div>
-                    </div>
+                    </div><br>
 
                     <div style="display: inline-block;">
                         <div style="display: inline-block;">
-                            <img src="/img/RestaurantWebIcon.png" alt="RestaurantWebIcon">
+                            <img class="icon" src="/img/RestaurantWebIcon.svg" alt="RestaurantWebIcon" width="75%">
                         </div>
                         <div style="display: inline-block;">
-                            <img src="/img/RestaurantFacebookIcon.png" alt="RestaurantFacebookIcon">
+                            <img class="icon" src="/img/RestaurantFacebookIcon.svg" alt="RestaurantFacebookIcon" width="75%">
                         </div>
                         <div style="display: inline-block;">
-                            <img src="/img/RestaurantTwitterIcon.png" alt="RestaurantTwitterIcon">
+                            <img class="icon" src="/img/RestaurantTwitterIcon.svg" alt="RestaurantTwitterIcon" width="75%">
                         </div>
                         <div style="display: inline-block;">
-                            <img src="/img/RestaurantEmailIcon.png" alt="RestaurantEmailIcon">
+                            <img src="/img/RestaurantEmailIcon.svg" alt="RestaurantEmailIcon" width="80%">
                         </div>
                     </div>
 
-                    <img class="img-fluid" src="/img/RatatouilleMap.jpg" alt="RatatouilleMap">
+                    <img class="img-fluid restaurantMap" src="/img/RatatouilleMap.jpg" alt="RatatouilleMap">
                 </div>
             </div>
         </div>
@@ -123,10 +120,62 @@
             <div class="col-7">
                 <img class="img-fluid" src="/img/RatatouilleImg2.jpg" alt="">
             </div>
+
             <div class="col">
                 <div class="container restaurantReservationBox">
-                    <h2><b>Reservation</b></h2>
+                    <h2 class="d-flex justify-content-center"><b>Reservation</b></h2>
 
+                    <div class="row">
+                        <div class="col">
+                            <h3><b>How many poeple?</b></h3>
+                            <label for="quantity">Above 12 years:</label>
+                            <input type="number" id="quantity" name="quantity">
+                            <label for="quantity">12 years or under:</label>
+                            <input type="number" id="quantity" name="quantity">
+
+                            <h3><b>Available time:</b></h3>
+                            <div>
+                                <input type="checkbox" id="option1" name="options" value="option1">
+                                <label for="option1">Sesion 1 at 17:00 - 19:00</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="option2" name="options" value="option2">
+                                <label for="option2">Session 2 at 19:15 - 21:15</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="option3" name="options" value="option3">
+                                <label for="option3">Session 3 at 21:30 - 23:30</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h3><b>Choose a day:</b></h3>
+                            <div>
+                                <input type="checkbox" id="option1" name="options" value="option1">
+                                <label for="option1">Thursday, 27th July</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="option2" name="options" value="option2">
+                                <label for="option2">Saturday 28th July</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="option3" name="options" value="option3">
+                                <label for="option3">Friday 29th July</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="option3" name="options" value="option3">
+                                <label for="option3">Sunday, 30th July</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="option3" name="options" value="option3">
+                                <label for="option3">Monday 31st July</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <textarea rows="5" cols="40" name="message" placeholder="Any special request or for example diets, allergies etc, can be written here..."></textarea>
+                    <p class="reservationExtraFeeText">**A fee of €10,- per person will be charged when a reservation is made on this site. This fee will be deducted from the final check on visiting the restaurant . ** </p>
+
+                    <button class="addToCart"><b>Add to cart</b></button>
                 </div>
             </div>
         </div>

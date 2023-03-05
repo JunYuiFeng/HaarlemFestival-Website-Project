@@ -337,6 +337,7 @@ footer #envelopeImg {
 .restaurantEventSection .card .seeMoreBtn {
   background: #FCDC4D;
   border-radius: 12px;
+  padding: 3% 5%;
 }
 
 .yummieWelcomeParagraph {
@@ -413,6 +414,9 @@ footer #envelopeImg {
 .restaurantRow2Box h3 {
   font-size: 16pt;
 }
+.restaurantRow2Box .restaurantMap {
+  margin-top: 5%;
+}
 
 .restaurantReservationBox {
   background: linear-gradient(180deg, #9A031E 0%, #2B0209 100%);
@@ -420,7 +424,24 @@ footer #envelopeImg {
   height: 100%;
   filter: drop-shadow(4px 4px 20px rgba(0, 0, 0, 0.5));
   border-radius: 40px;
-  padding-top: 6%;
+  padding-top: 7%;
+}
+.restaurantReservationBox h2 {
+  font-size: 20pt;
+  margin-bottom: 6%;
+}
+.restaurantReservationBox h3 {
+  font-size: 16pt;
+}
+.restaurantReservationBox .addToCart {
+  padding: 1% 3%;
+  background: #FCDC4D;
+  border-radius: 13px;
+  border: 0;
+}
+
+.reservationExtraFeeText {
+  font-size: 8pt;
 }
 
 .history-header {

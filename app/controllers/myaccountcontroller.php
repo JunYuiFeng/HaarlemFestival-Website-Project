@@ -45,7 +45,12 @@ class MyAccountController
 
                     $res = $this->loginService->login($username, $password);
                     if (ctype_digit($res)) {
-                        $user = $this->userService->getByUsername($username);
+                        if (strstr($username, "@")) {
+                            $user = $this->userService->getByEmail($username);
+                        }
+                        else {
+                            $user = $this->userService->getByUsername($username);
+                        }
                         $_SESSION["logedin"] = $user->getId();
                         header("location: index");
                     } else {
