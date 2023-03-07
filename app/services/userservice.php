@@ -21,4 +21,14 @@ class UserService{
     public function delete($id){
         return $this->repository->delete($id);
     }
+
+    public function getByUsername($username)
+    {
+        return $this->repository->getByUsername($username);
+    }
+
+    public function getByEmail($email)
+    {
+        return $this->repository->getByEmail($email);
+    }
 }
