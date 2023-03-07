@@ -63,18 +63,21 @@ class MyAccountController
         if (isset($_SESSION["logedin"])) {
             header("location: index");
         } else {
-            $msg = "";
             if (isset($_POST["login"])) {
-
                 if (empty($_POST["username"]) || empty($_POST["password"])) {
-                    $this->$msg = "field empty, please fill in";
+                    $this->msg = "field empty, please fill in";
                 } else {
                     $username = filter_var($_POST["username"], FILTER_SANITIZE_SPECIAL_CHARS);
                     $password = filter_var($_POST["password"], FILTER_SANITIZE_SPECIAL_CHARS);
 
                     $res = $this->loginService->login($username, $password);
                     if (ctype_digit($res)) {
-                        $user = $this->userService->getByUsername($username);
+                        if (strstr($username, "@")) {
+                            $user = $this->userService->getByEmail($username);
+                        }
+                        else {
+                            $user = $this->userService->getByUsername($username);
+                        }
                         $_SESSION["logedin"] = $user->getId();
                         header("location: index");
                     } else {
@@ -84,6 +87,7 @@ class MyAccountController
             }
         }
 
+         $msg = $this->msg;
         require __DIR__ . '/../views/myaccount/login.php';
     }
 
@@ -93,19 +97,25 @@ class MyAccountController
             header("location: index");
         } else {
             if (isset($_POST["register"])) {
-                if (empty($_POST["email"]) || empty($_POST["username"]) || empty($_POST["password"])) {
-                    $this->msg = "Please fill all the fields";
-                } else {
-                    $email = $_POST["email"];
-                    $username = $_POST["username"];
-                    $password = $_POST["password"];
-
-                    $res = $this->registerService->register($email, $username, $password);
-                    if (ctype_digit($res)) {
-                        $_SESSION["logedin"] = $res;
-                        header("location: index");
+                if (isset($_POST['captcha']) && ($_POST['captcha'] != "")) {
+                    if (strcasecmp($_SESSION['captcha'], $_POST['captcha']) != 0) {
+                        $this->msg = "Entered captcha code does not match! Please try again";
                     } else {
-                        $this->msg = $res;
+                        if (empty($_POST["email"]) || empty($_POST["username"]) || empty($_POST["password"])) {
+                            $this->msg = "Please fill all the fields";
+                        } else {
+                            $email = $_POST["email"];
+                            $username = $_POST["username"];
+                            $password = $_POST["password"];
+
+                            $res = $this->registerService->register($email, $username, $password);
+                            if (ctype_digit($res)) {
+                                $_SESSION["logedin"] = $res;
+                                header("location: index");
+                            } else {
+                                $this->msg = $res;
+                            }
+                        }
                     }
                 }
             }

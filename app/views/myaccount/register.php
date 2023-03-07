@@ -43,6 +43,23 @@
                                 <label>Password</label>
                             </div>
 
+                            <div class="user-box">
+                                <input type="text" name="captcha" required>
+                                <label>Enter Captcha</label>
+                            </div>
+
+                            <p>
+                                <img src="/captcha.php?rand=<?php echo rand(); ?>" id='captcha_image'>
+                            </p>
+                            <p>Can't read the image?
+                                <a href='javascript: refreshCaptcha();'>click here</a>
+                                to refresh
+                            </p>
+
+
+
+
+
                             <button type="submit" name="register">
                                 <span></span>
                                 <span></span>
@@ -63,6 +80,16 @@
     <?php
     include __DIR__ . '/../footer.php';
     ?>
+
+    <script>
+        //Refresh Captcha
+        function refreshCaptcha() {
+            var img = document.images['captcha_image'];
+            img.src = img.src.substring(
+                0, img.src.lastIndexOf("?")
+            ) + "?rand=" + Math.random() * 1000;
+        }
+    </script>
 </body>
 
 </html>

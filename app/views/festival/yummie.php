@@ -58,6 +58,11 @@
                     // Give the second restaurant the "restaurantRight" class
                     $cardClass = "card restaurantRight";
                 }
+
+                if ($restaurant->getIsFestival() == 0)
+                {
+                    return false;
+                }
             ?>
                 <div class="col-6">
                     <div class="<?= $cardClass ?>">
