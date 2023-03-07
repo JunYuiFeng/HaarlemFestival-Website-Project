@@ -18,6 +18,9 @@ class FestivalController
     public function dance(){
         require __DIR__ . '/../views/festival/dance.php';
     }
+    public function dancedetailed1(){
+        require __DIR__ . '/../views/festival/dancedetailedpage1.php';
+    }
     public function yummie()
     {
         $restaurants = $this->restaurantService->getAll();

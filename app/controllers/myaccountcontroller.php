@@ -5,6 +5,7 @@ require_once __DIR__ . "/../services/userservice.php";
 require_once __DIR__ . "/../models/user.php";
 include_once("../services/resetpasswordservice.php");
 include_once("../services/usersservice.php");
+include_once("../services/userservice.php");
 
 
 
@@ -14,11 +15,12 @@ class MyAccountController
     private $registerService;
     private $msg;
     private $userService;
+    private $usersService;
 
     function __construct()
     {
         $this->loginService = new LoginService();
-        $this->userService = new UserService();
+        $this->usersService = new UserService();
         $this->registerService = new RegisterService();
         $this->userService = new UsersService();
         $this->msg = "";
@@ -50,7 +52,7 @@ class MyAccountController
             $email = htmlspecialchars($_POST['email']);
             $id = htmlspecialchars($_POST['id']);
 
-            $this->userService->editUser($username, $email, $password, $id);
+            $this->usersService->editUser($username, $email, $password, $id);
 
         } catch (Exception $e) {
             echo $e->getMessage();

@@ -33,7 +33,9 @@
             Do you want to build your own personal program?
         </div>
         <div class="col-3">
-            <span class="personalProgramArrow"><link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-long-right.css' rel='stylesheet'></span>
+            <span class="personalProgramArrow">
+                <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-long-right.css' rel='stylesheet'>
+            </span>
         </div>
         <div class="col-3">
             <button type="button" id="dancePersonalProgramButton">Build own personal prorgam</button>
@@ -64,9 +66,9 @@
                                 0
                             </p>
                         </div>
-                        <p>
+                        <a href="/festival/dancedetailedpage1">
                             <button type="button" class="danceViewMore">view more</button>
-                        </p>
+                        </a>
                     </div>
                 </div>
             </div>
