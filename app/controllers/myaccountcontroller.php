@@ -1,7 +1,7 @@
 <?php
 include_once("../services/loginservice.php");
 include_once("../services/registerservice.php");
-require_once __DIR__ . "/../services/userservice.php";
+
 require_once __DIR__ . "/../models/user.php";
 include_once("../services/resetpasswordservice.php");
 include_once("../services/userservice.php");
@@ -25,13 +25,17 @@ class MyAccountController
 
     public function index()
     {
+        if (!isset($_SESSION["logedin"])) {
+            header("location: login");
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->updateItem();
-            require __DIR__ . '/../views/myaccount/index.php';
         }
 
         $this->userService = new UserService();
         $users = $this->userService->getAll();
+        require __DIR__ . '/../views/myaccount/index.php';
     }
 
     public function updateItem()
