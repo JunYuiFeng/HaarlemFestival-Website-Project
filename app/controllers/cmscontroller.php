@@ -26,4 +26,9 @@ class CmsController
             require __DIR__ . '/../views/notfound.php';
         }
     }
+
+    function usermanagement()
+    {
+        require __DIR__ . '/../views/cms/usermanagement.php';
+    }
 }
