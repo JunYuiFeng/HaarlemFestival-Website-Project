@@ -21,9 +21,7 @@ include_once("../repositories/usersrepository.php"); ?>
         <h1>My Account!</h1>
         <?php
         foreach ($users as $user) {
-
             if ($user->getId() == $_SESSION["logedin"]) { ?>
-
                 <h3>Hello user_id:
                     <?= $user->getUsername();
                     ?>

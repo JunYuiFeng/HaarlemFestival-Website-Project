@@ -25,19 +25,9 @@ class MyAccountController
 
     public function index()
     {
-        if (isset($_SESSION["logedin"])) {
-            header("location: index");
-        }
-        else {
-            require __DIR__ . '/../views/myaccount/login.php';
-        }
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->updateItem();
-        }
-        else {
             require __DIR__ . '/../views/myaccount/index.php';
-
         }
 
         $this->userService = new UserService();

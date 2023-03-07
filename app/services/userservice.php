@@ -12,6 +12,7 @@ class UserService{
     public function getOne($id){
         return $this->repository->getOne($id);
     }
+    
     public function create($user){
         return $this->repository->create($user);
     }
