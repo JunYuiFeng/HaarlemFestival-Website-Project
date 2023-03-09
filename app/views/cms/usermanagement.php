@@ -53,6 +53,23 @@
 
         <?php } ?>
     </table>
+
+    <script>
+        const form = document.querySelector('form');
+        const input = document.querySelector('#searchInput');
+        const resultsDiv = document.querySelector('#searchResults');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const query = input.value; // Get search query from input field
+
+            fetch('http:/localhost/api/cms')
+                .then(result => result.json())
+                .then(articles => {})
+                .catch(error => console.log(error));
+        });
+    </script>
 </body>
 
 </html>
