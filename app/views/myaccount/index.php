@@ -19,6 +19,7 @@ include_once("../repositories/usersrepository.php"); ?>
 
     <div class="container d-flex flex-column justify-content-between ">
         <h1>My Account!</h1>
+        <a href="logout" class="mt-5">Logout</a>
         <?php
         foreach ($users as $user) {
             if ($user->getId() == $_SESSION["logedin"]) { ?>
