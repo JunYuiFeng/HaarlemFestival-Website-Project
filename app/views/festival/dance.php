@@ -58,7 +58,7 @@
                         </div>
                         <img src="/img/DanceDemoMartin1.png" class="danceDemoMartin1">
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 justify-content-center">
                         <img src="/img/DanceArtist1.png">
                         <div class="col-12">
                             <br></br>
@@ -66,9 +66,8 @@
                                 0
                             </p>
                         </div>
-                        <a href="/festival/dancedetailedpage1">
-                            <button type="button" class="danceViewMore">view more</button>
-                        </a>
+                        <input type="button" onclick="location.href='dancedetailedpage1'" class="danceViewMore" value=" view more">
+
                     </div>
                 </div>
             </div>

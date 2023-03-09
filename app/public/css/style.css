@@ -825,6 +825,51 @@ footer #envelopeImg {
   width: 500px;
 }
 
+#danceDetailedPageBody {
+  background-color: #000000;
+  color: white;
+}
+#danceDetailedPageBody .danceTopSongs {
+  background: linear-gradient(100.1deg, #9A031E 17.05%, #000000 57.56%);
+  color: white;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3%;
+  padding-top: 3%;
+}
+#danceDetailedPageBody .col-2 {
+  margin-bottom: 3%;
+  margin-top: 3%;
+}
+#danceDetailedPageBody .dancedetailedimg1 {
+  padding: 5em;
+  background: #9A031E;
+  box-shadow: 6px 0px 30px -4px #FFB800;
+  border-radius: 56px;
+}
+#danceDetailedPageBody #careerHighlight {
+  background: linear-gradient(245.73deg, #9A031E 17.74%, #000000 101.89%);
+}
+#danceDetailedPageBody .dancePageTitle {
+  color: white;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  filter: drop-shadow(0px 8px 18px #FFB800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #FFB800);
+}
+#danceDetailedPageBody .dancePageTitle h1 {
+  font-weight: 800;
+  font-size: 64px;
+  line-height: normal;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+#danceDetailedPageBody .dancePageTitle h2 {
+  font-weight: 800;
+  font-size: 48px;
+  line-height: normal;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 .kids-welcome-screen {
   margin-bottom: 7%;
   color: #5f0f40;
