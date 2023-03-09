@@ -23,7 +23,7 @@ include_once("../repositories/usersrepository.php"); ?>
         <?php
         foreach ($users as $user) {
             if ($user->getId() == $_SESSION["logedin"]) { ?>
-                <h3>Hello user_id:
+                <h3>Hello,
                     <?= $user->getUsername();
                     ?>
                 </h3>
@@ -39,8 +39,6 @@ include_once("../repositories/usersrepository.php"); ?>
             <form action="" method="post" class="row" id="indexForm">
                 <input type="hidden" name="id" value=<?= $user->getId() ?>>
                 <td class="">
-                    <label class="labels">Id</label>
-                    <?= $user->getId() ?>
                 </td>
                 <td class="">
                     <label class="labels">Username</label>
