@@ -44,6 +44,14 @@
                         <input type="text" placeholder=<?= $user->getPassword() ?>>
                     </td>
                     <td>
+                        <div>
+                            <button> </button>
+                            <div>
+                                <a href="/cms/usermanagement/<?= $user->getId() ?>/admin">Admin</a>
+                                <a href="/cms/usermanagement/<?= $user->getId() ?>/user">User</a>
+                                <a href="/cms/usermanagement/<?= $user->getId() ?>/guest">Guest</a>
+                            </div>
+                        </div>
                         <input type="text" placeholder=<?= $user->getUserType() ?>>
                     </td>
                     <td>
