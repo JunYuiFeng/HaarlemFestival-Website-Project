@@ -14,53 +14,88 @@
 </head>
 
 <body>
-    <h1>Test</h1>
-    <form method="get" action="search.php">
-        <input type="text" name="query" placeholder="Search...">
-        <button type="submit">Search</button>
-    </form>
+    <?php
+    include __DIR__ . '/../header.php';
+    ?>
 
-    <table class="table">
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Password</th>
-            <th scope="col">Role</th>
-        </tr>
-        <?php foreach ($users as $user) { ?>
-            <div class="col-4">
+    <div class="container">
+        <h1>Test</h1>
+        <form id="searchFilter" class="mt-4 mb-4">
+            <input class="p-1" type="text" id="searchInput" placeholder="Search...">
+        </form>
+
+        <table class="table">
+            <thead>
                 <tr>
-                    <td scope="row">
-                        <?= $user->getId() ?>
-                    </td>
-                    <td>
-                        <input type="text" placeholder=<?= $user->getUsername() ?>>
-                    </td>
-                    <td>
-                        <input type="text" placeholder=<?= $user->getEmail() ?>>
-                    </td>
-                    <td>
-                        <input type="text" placeholder=<?= $user->getPassword() ?>>
-                    </td>
-                    <td>
-                        <div>
-                            <button> </button>
-                            <div>
-                                <a href="/cms/usermanagement/<?= $user->getId() ?>/admin">Admin</a>
-                                <a href="/cms/usermanagement/<?= $user->getId() ?>/user">User</a>
-                                <a href="/cms/usermanagement/<?= $user->getId() ?>/guest">Guest</a>
-                            </div>
-                        </div>
-                        <input type="text" placeholder=<?= $user->getUserType() ?>>
-                    </td>
-                    <td>
-                        <input type="submit" value="Update">
-                    </td>
-            </div>
+                    <th scope="col">Id</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Role</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+            </tbody>
+        </table>
+    </div>
 
-        <?php } ?>
-    </table>
+    <script>
+        fetch(`http://localhost/api/cms`)
+            .then(result => result.json())
+            .then(users => {
+                // Create new table rows for each search result
+                users.forEach(user => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                <td>${user.id}</td>
+                <td><input type="text" placeholder="${user.username}"></td>
+                <td><input type="text" placeholder="${user.email}"></td>
+                <td><input type="text" placeholder="${user.password}"></td>
+                <td><input type="text" placeholder="${user.userType}"></td>
+                <td><input type="submit" value="Update"></td>
+            `;
+                    userTableBody.appendChild(row);
+                });
+            })
+    </script>
+
+
+    <script>
+        const searchFilter = document.getElementById("searchFilter");
+        const searchInput = document.getElementById("searchInput");
+        const userTableBody = document.getElementById("userTableBody");
+
+        searchInput.addEventListener("input", function(event) { // add this line
+            const query = searchInput.value; // Get search query from input field
+            fetch(`http://localhost/api/cms?query=${query}`)
+                .then(result => result.json())
+                .then(userResult => {
+                    // Clear existing table rows
+                    userTableBody.innerHTML = "";
+                    if (userResult) {
+                        // Create new table rows for each search result
+                        userResult.forEach(user => {
+                            const row = document.createElement("tr");
+                            row.innerHTML = `
+            <td>${user.id}</td>
+            <td><input type="text" placeholder="${user.username}"></td>
+            <td><input type="text" placeholder="${user.email}"></td>
+            <td><input type="text" placeholder="${user.password}"></td>
+            <td><input type="text" placeholder="${user.userType}"></td>
+            <td><input type="submit" value="Update"></td>
+        `;
+                            userTableBody.appendChild(row);
+                        });
+                    }
+                })
+                .catch(error => console.error(error))
+        });
+    </script>
+
+    <?php
+    include __DIR__ . '/../footer.php';
+    ?>
+
 </body>
 
 </html>

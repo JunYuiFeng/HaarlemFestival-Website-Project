@@ -7,6 +7,7 @@ class CmsController
     private $content;
     private $contentEditorService;
     private $userService;
+    
     function __construct()
     {
         $this->contentEditorService = new EditPageService();

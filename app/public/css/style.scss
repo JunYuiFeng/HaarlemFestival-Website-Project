@@ -427,20 +427,26 @@ footer {
   margin-bottom: 6.5%;
 
   .descriptionSection {
-    margin-right: 30px;
     margin-top: 30px;
+    padding-right: 8%;
 
     h1 {
       font-size: 36pt;
     }
 
-    .michelinLogo {
-      width: 80%;
-    }
+    .michelinLabel {
+      span {
+        display: inline-block;
+      }
 
-    .michelinText {
-      color: #D3072B;
-      font-size: 18pt;
+      .michelinText {
+        color: #D3072B;
+        font-size: 18pt;
+        font-weight: 600;
+      }
+      .michelinLogo {
+        width: 80%;
+      }
     }
 
     .restaurantDescription {
@@ -451,11 +457,17 @@ footer {
     }
 
     button {
+      margin-top: 50px;
       padding: 1% 4%;
       background: #FCDC4D;
       border-radius: 13px;
       border: 0;
+      font-size: 13pt;
     }
+  }
+
+  .coverImg {
+    width: 100%;
   }
 }
 
@@ -480,7 +492,7 @@ footer {
   }
 }
 
-.restaurantReservationBox {
+#restaurantReservationBox {
   background: linear-gradient(180deg, #9A031E 0%, #2B0209 100%);
   color: white;
   height: 100%;
