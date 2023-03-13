@@ -27,6 +27,8 @@ include_once("../repositories/usersrepository.php"); ?>
                     <?= $user->getUsername();
                     ?>
                 </h3>
+
+                  
     </div>
     <div class="container d-flex flex-column justify-content-between ">
         <h3>Update your account</h3>
