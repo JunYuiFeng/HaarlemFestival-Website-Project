@@ -50,9 +50,6 @@ footer {
   font-style: normal;
   font-weight: 500;
 
-  &:hover {
-    opacity: 0.9;
-  }
 
   &.btn-red-gradient {
     background: linear-gradient(92.89deg, #93051f 0%, #37020b 100%);
@@ -61,6 +58,10 @@ footer {
     font-size: 14px;
     line-height: normal;
     padding: 5px 20px;
+    &:hover {
+      opacity: 0.8;
+      background: linear-gradient(92.89deg, #93051f 0%, #37020b 100%);
+    }
   }
 
   &.btn-yellow-gradient {
@@ -70,6 +71,10 @@ footer {
     font-size: 14px;
     line-height: normal;
     padding: 5px 20px;
+    &:hover {
+      opacity: 0.9;
+      background: linear-gradient(92.89deg, #ffd000 0%, #ffd000 100%);
+    }
   }
 }
 
@@ -1439,5 +1444,18 @@ footer {
   50%,
   100% {
     bottom: 100%;
+  }
+}
+
+#addRestaurantPage{
+  font-family: "Inter";
+  input{
+    font-weight: 500;
+    border-radius: 0;
+    border: 1px solid black;
+    padding: 5px 10px;
+  }
+  button{
+    padding: 10px 20px;
   }
 }

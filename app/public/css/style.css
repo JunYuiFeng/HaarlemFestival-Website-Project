@@ -42,9 +42,6 @@ footer #envelopeImg {
   font-style: normal;
   font-weight: 500;
 }
-.btn:hover {
-  opacity: 0.9;
-}
 .btn.btn-red-gradient {
   background: linear-gradient(92.89deg, #93051f 0%, #37020b 100%);
   border-radius: 0;
@@ -53,6 +50,10 @@ footer #envelopeImg {
   line-height: normal;
   padding: 5px 20px;
 }
+.btn.btn-red-gradient:hover {
+  opacity: 0.8;
+  background: linear-gradient(92.89deg, #93051f 0%, #37020b 100%);
+}
 .btn.btn-yellow-gradient {
   background: linear-gradient(92.89deg, #ffd000 0%, #ffd000 100%);
   border-radius: 0;
@@ -60,6 +61,10 @@ footer #envelopeImg {
   font-size: 14px;
   line-height: normal;
   padding: 5px 20px;
+}
+.btn.btn-yellow-gradient:hover {
+  opacity: 0.9;
+  background: linear-gradient(92.89deg, #ffd000 0%, #ffd000 100%);
 }
 
 /* index */
@@ -1267,4 +1272,16 @@ footer #envelopeImg {
   50%, 100% {
     bottom: 100%;
   }
+}
+#addRestaurantPage {
+  font-family: "Inter";
+}
+#addRestaurantPage input {
+  font-weight: 500;
+  border-radius: 0;
+  border: 1px solid black;
+  padding: 5px 10px;
+}
+#addRestaurantPage button {
+  padding: 10px 20px;
 }/*# sourceMappingURL=style.css.map */
