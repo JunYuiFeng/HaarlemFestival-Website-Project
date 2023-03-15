@@ -20,7 +20,7 @@ class CmsController
             $query = $_GET['query'];
             $userResult = array();
             foreach ($users as $user) {
-                if ($user->getId() == $query || strtolower($user->getUsername()) == strtolower($query) || strtolower($user->getEmail()) == strtolower($query)) {
+                if (stristr($user->getId(), $query) || stristr($user->getUsername(), $query) || stristr($user->getEmail(), $query)){
                     $userResult[] = $user;
                 }
             }

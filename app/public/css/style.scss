@@ -310,25 +310,6 @@ footer {
   }
 }
 
-.btn {
-  border: none;
-  background-color: inherit;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  display: inline-block;
-}
-
-/* On mouse-over */
-
-.btn:hover {
-  background: #eee;
-}
-
-.default {
-  color: black;
-}
-
 .restaurantsSection {
   margin-top: 60px;
   margin-bottom: 88px;
@@ -346,7 +327,7 @@ footer {
       background: linear-gradient(180deg, #95051e 0%, #2e0209 100%);
       color: white;
       padding: 18px;
-      height: 790px;
+      height: 95%;
 
       img {
         margin: 10px;

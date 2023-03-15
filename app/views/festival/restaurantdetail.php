@@ -146,8 +146,8 @@
                                                         ?></label>
                             </div>
                             <div>
-                                <input type="checkbox" id="option2" name="options" value="option2">
-                                <label for="option2">Session 2 at 19:15 - 21:15</label>
+                                <input type="checkbox" class="btn-check" name="options" id="check1" autocomplete="off" checked>
+                                <label class="btn-outline-primary" for="check1">Session 2 at 19:15 - 21:15</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="option3" name="options" value="option3">
@@ -156,10 +156,12 @@
                         </div>
                         <div class="col ">
                             <h3><b>Choose a day:</b></h3>
-                            <div >
-                                <input type="checkbox" id="option1" name="options" value="option1">
-                                <label for="option1">Thursday, 27th July</label>
-                            </div>
+                            <button type="button" class="btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                Saturday 28th July
+                            </button>
+                            <button type="button" class="btn btn-primary btn-xs" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                Saturday 28th July
+                            </button>
                             <div>
                                 <input type="checkbox" id="option2" name="options" value="option2">
                                 <label for="option2">Saturday 28th July</label>
@@ -180,12 +182,14 @@
                     </div>
 
                     <textarea rows="5" cols="40" name="message" placeholder="Any special request or for example diets, allergies etc, can be written here..."></textarea>
-                    <div class="text-center"><p class="reservationExtraFeeText">**A fee of €10,- per person will be charged when a reservation is made on this site. This fee will be deducted from the final check on visiting the restaurant . ** </p></div>
+                    <div class="text-center">
+                        <p class="reservationExtraFeeText">**A fee of €10,- per person will be charged when a reservation is made on this site. This fee will be deducted from the final check on visiting the restaurant . ** </p>
+                    </div>
                     <div class="d-flex justify-content-center"> <button class="addToCart"><b>Add to cart</b></button></div>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 
     <?php
     include __DIR__ . '/../footer.php';

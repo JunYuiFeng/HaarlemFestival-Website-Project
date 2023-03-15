@@ -40,9 +40,14 @@
     </div>
 
     <script>
+        const searchFilter = document.getElementById("searchFilter");
+        const searchInput = document.getElementById("searchInput");
+        const userTableBody = document.getElementById("userTableBody");
+
         fetch(`http://localhost/api/cms`)
             .then(result => result.json())
             .then(users => {
+
                 // Create new table rows for each search result
                 users.forEach(user => {
                     const row = document.createElement("tr");
@@ -57,22 +62,20 @@
                     userTableBody.appendChild(row);
                 });
             })
-    </script>
 
+        searchInput.addEventListener("input", function(event) {
 
-    <script>
-        const searchFilter = document.getElementById("searchFilter");
-        const searchInput = document.getElementById("searchInput");
-        const userTableBody = document.getElementById("userTableBody");
-
-        searchInput.addEventListener("input", function(event) { // add this line
             const query = searchInput.value; // Get search query from input field
+
             fetch(`http://localhost/api/cms?query=${query}`)
                 .then(result => result.json())
                 .then(userResult => {
+
                     // Clear existing table rows
                     userTableBody.innerHTML = "";
+
                     if (userResult) {
+
                         // Create new table rows for each search result
                         userResult.forEach(user => {
                             const row = document.createElement("tr");
