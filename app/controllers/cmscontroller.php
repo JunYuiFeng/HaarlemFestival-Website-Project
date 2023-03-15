@@ -11,6 +11,7 @@ class CmsController
     private $contentEditorService;
     private $restaurantManagementService;
     private $msg;
+    private $userService;
 
 
     function __construct()
