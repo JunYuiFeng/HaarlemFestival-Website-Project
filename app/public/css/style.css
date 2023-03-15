@@ -870,6 +870,11 @@ footer #envelopeImg {
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+#myProfileIndexBody {
+  background: linear-gradient(101.77deg, #9A031E 18.12%, #000000 127.71%);
+  color: white;
+}
+
 .kids-welcome-screen {
   margin-bottom: 7%;
   color: #5f0f40;

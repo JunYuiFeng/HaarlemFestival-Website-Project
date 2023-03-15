@@ -2,14 +2,14 @@
 
 class User
 {
-    private  $id;
-    private  $username;
-    private  $email;
-    private  $password;
-    private  $userType;
-    private  $resetLinkToken;
+    private $id;
+    private $username;
+    private $email;
+    private $password;
+    private $userType;
+    private $resetLinkToken;
     private $registrationDate;
-
+    private $masked_password;
 
 
 
@@ -102,6 +102,15 @@ class User
     {
         return $this->password;
     }
+    public function getPasswordAsStars()
+    {
+        $this->masked_password = "";
+        foreach (str_split($this->password) as $char) {
+            $this->masked_password .= "*";
+        }
+        return $this->masked_password;
+    }
+
 
     /**
      * Set the value of password
@@ -120,6 +129,11 @@ class User
      */
     public function getUserType()
     {
+        if ($this->userType == "admin") {
+            $this->userType = 0;
+        } else {
+            $this->userType = 1;
+        }
         return $this->userType;
     }
 
@@ -134,27 +148,32 @@ class User
 
         return $this;
     }
-    public function editUser(){
-        
+    public function editUser()
+    {
+
     }
 
-    public function createUser(){
+    public function createUser()
+    {
         return $this->username;
     }
 
-    public function getUser($username){
+    public function getUser($username)
+    {
         return $this->username;
     }
-    public function removeUser(){
+    public function removeUser()
+    {
         return $this->username;
     }
-    public function updateUser(){
+    public function updateUser()
+    {
         return $this->username;
     }
 
     /**
      * Get the value of registrationDate
-     */ 
+     */
     public function getRegistrationDate()
     {
         return $this->registrationDate;
@@ -164,7 +183,7 @@ class User
      * Set the value of registrationDate
      *
      * @return  self
-     */ 
+     */
     public function setRegistrationDate($registrationDate)
     {
         $this->registrationDate = $registrationDate;

@@ -1,5 +1,3 @@
-<?
-include_once("../repositories/usersrepository.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,70 +5,82 @@ include_once("../repositories/usersrepository.php"); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food</title>
+    <title>Index</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
     <?php
-    include __DIR__ . '/../header.php'; ?>
+    include __DIR__ . '/../header.php';
+    ?>
+    <section class="vh-100">
+        <div class="container-fluid login">
+            <div class="row">
+                <div class="col-sm-3 px-0 d-none d-sm-block">
+                    <button>
+                        Upload Profile Picture
+                    </button>
+                </div>
+                <div class="col-sm-5 text-black">
+                    <div class="d-flex h-custom-2 px-5 ms-xl-4 pt-xl-0 mt-xl-n5" style="margin-top:3em;">
 
-    <div class="container d-flex flex-column justify-content-between ">
-        <h1>My Account!</h1>
-        <a href="logout" class="mt-5">Logout</a>
-        <?php
-        foreach ($users as $user) {
-            if ($user->getId() == $_SESSION["logedin"]) { ?>
-                <h3>Hello,
-                    <?= $user->getUsername();
-                    ?>
-                </h3>
+                        <form method="post" action="" style="width: 23rem;">
+                            <h1 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">My Account!</h1>
+                            <?php
+                            foreach ($users as $user) {
+                                if ($user->getId() == $_SESSION["logedin"]) { ?>
+                                    <h3>Hello,
+                                        <?= $user->getUsername();
+                                        ?>
+                                    <? } ?>
+                                <?php } ?>
 
-                  
-    </div>
-    <div class="container d-flex flex-column justify-content-between ">
-        <h3>Update your account</h3>
-    </div>
-    <div class="row" id="indexContent">
-        <div class="col 2">
-            porfile picture
+                                <input type="hidden" name="id" value=<?= $user->getId() ?>>
+                                <div class="user-box">
+                                    <input type="text" name="username" placeholder=<?= $user->getUsername() ?>>
+                                    <label>Username</label>
+                                </div>
+                                <div class="user-box">
+                                    <input type="text" name="email" placeholder=<?= $user->getEmail() ?>>
+                                    <label>Email</label>
+                                </div>
+                                <div class="user-box">
+                                    <input type="text" name="password" placeholder=<?= $user->getPasswordAsStars() ?>>
+                                    <label>Password</label>
+                                </div>
+
+                                <p class="error-message">
+                                    <?php echo isset($msg) ? $msg : '' ?>
+                                </p>
+
+                                <button type="submit" name="update" value="update">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    Update
+                                </button>
+                                <button style="margin-left: 9em;">
+                                    <a href="logout" class="mt-5">Logout</a>
+                                </button>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="col-sm-4 px-0 d-none d-sm-block">
+                    <img src="/img/MyAccountIndexImg.png" alt="profile pic" class="img-fluid" style="
+  height: 90%;float :right;">
+                </div>
+            </div>
+
         </div>
-        <div class="col 4">
-            <form action="" method="post" class="row" id="indexForm">
-                <input type="hidden" name="id" value=<?= $user->getId() ?>>
-                <td class="">
-                </td>
-                <td class="">
-                    <label class="labels">Username</label>
-                    <input type="text" name="username" placeholder=<?= $user->getUsername() ?>>
-                </td>
-                <td class="">
-                    <label class="labels">Email</label>
-                    <input type="text" name="email" placeholder=<?= $user->getEmail() ?>>
-                </td>
-                <td class="">
-                    <label class="labels">Password</label>
-                    <input type="text" name="password" placeholder=<?= $user->getPassword() ?>>
-                </td>
-                <td class="col 4" class="">
-                    <button type="submit" name="update">Update</button>
-                </td>
 
-            </form>
-        </div>
-        <div class="col 4">
-
-        </div>
-    </div>
-        <? } ?>
-    <?php } ?>
-
+    </section>
     <?php
     include __DIR__ . '/../footer.php';
     ?>
-
 </body>
 
 </html>
