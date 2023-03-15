@@ -16,27 +16,29 @@
     ?>
     <div class="container restaurantDetailPageContainer">
         <div class="row">
-            <div class="col descriptionSection">
+            <div class="col-5 descriptionSection">
                 <div class="row">
                     <div class="col">
                         <h1><b><?= $restaurant->getName() ?></b></h1>
                     </div>
-                    <div class="col">
-                        <div class="row float-end michelineLabel">
-                            <div class="col">
-                                <img class="michelinLogo" src="/img/MichelineLogo.png" alt="MichelineLogo">
-                            </div>
-                            <div class="col">
-                                <p class="michelinText">Michelin</p>
+
+                    <?php if ($restaurant->getHasMichelin() == true) : ?>
+                        <div class="col">
+                            <div class="float-end michelinLabel">
+                                <span><img class="michelinLogo" src="/img/MichelineLogo.png" alt="MichelineLogo"></span>
+                                <span>
+                                    <p class="michelinText">Michelin</p>
+                                </span>
                             </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
+
                 </div>
                 <p class="restaurantDescription"><?= $restaurant->getDescription() ?></p>
-                <button class="float-end"><b>Reserve</b></button>
+                <button class="float-end" onclick="location.href='#restaurantReservationBox'"><b>Reserve</b></button>
             </div>
-            <div class="col">
-                <img src="/img/<?= $restaurant->getCoverImg() ?>" alt="">
+            <div class="col-7 colCoverImg">
+                <img class="coverImg float-end" src="/img/<?= $restaurant->getCoverImg() ?>" alt="">
             </div>
         </div>
 
@@ -59,10 +61,10 @@
                         <h2><b>Prices</b></h2>
                         <ul>
                             <li>
-                                <h3><?='€' . $restaurant->getPriceAboveAge12() . ' per person'?></h3>
+                                <h3><?= '€' . number_format($restaurant->getPriceAboveAge12(), 2, '.', '') . ' per person' ?></h3>
                             </li>
                             <li>
-                                <h3><?='€' . $restaurant->getPriceAge12AndUnder() . ' for children under 12 years old'?></h3>
+                                <h3><?= '€' . number_format($restaurant->getPriceAge12AndUnder(), 2, '.', '') . ' for children under 12 years old' ?></h3>
                             </li>
                         </ul>
                     </div>
@@ -122,7 +124,7 @@
             </div>
 
             <div class="col">
-                <div class="container restaurantReservationBox">
+                <div class="container" id="restaurantReservationBox">
                     <h2 class="d-flex justify-content-center"><b>Reservation</b></h2>
 
                     <div class="row">
@@ -136,7 +138,12 @@
                             <h3><b>Available time:</b></h3>
                             <div>
                                 <input type="checkbox" id="option1" name="options" value="option1">
-                                <label for="option1">Sesion 1 at 17:00 - 19:00</label>
+                                <label for="option1"><?php foreach ($sessions as $session) {
+                                                            if ($session->getName() == 'Session 1') {
+                                                                echo $session->getName() . ' at ' . $session->getStartTime()->format('H:i') . ' - ' . $session->getEndTime()->format('H:i');
+                                                            }
+                                                        }
+                                                        ?></label>
                             </div>
                             <div>
                                 <input type="checkbox" id="option2" name="options" value="option2">
@@ -147,9 +154,9 @@
                                 <label for="option3">Session 3 at 21:30 - 23:30</label>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col ">
                             <h3><b>Choose a day:</b></h3>
-                            <div>
+                            <div >
                                 <input type="checkbox" id="option1" name="options" value="option1">
                                 <label for="option1">Thursday, 27th July</label>
                             </div>
@@ -173,13 +180,12 @@
                     </div>
 
                     <textarea rows="5" cols="40" name="message" placeholder="Any special request or for example diets, allergies etc, can be written here..."></textarea>
-                    <p class="reservationExtraFeeText">**A fee of €10,- per person will be charged when a reservation is made on this site. This fee will be deducted from the final check on visiting the restaurant . ** </p>
-
-                    <button class="addToCart"><b>Add to cart</b></button>
+                    <div class="text-center"><p class="reservationExtraFeeText">**A fee of €10,- per person will be charged when a reservation is made on this site. This fee will be deducted from the final check on visiting the restaurant . ** </p></div>
+                    <div class="d-flex justify-content-center"> <button class="addToCart"><b>Add to cart</b></button></div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
 
     <?php
     include __DIR__ . '/../footer.php';

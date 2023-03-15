@@ -1,6 +1,6 @@
 <?php
 
-class User
+class User implements \JsonSerializable
 {
     private  $id;
     private  $username;
@@ -10,6 +10,17 @@ class User
     private  $resetLinkToken;
     private $registrationDate;
 
+    public function jsonSerialize(): mixed
+    {
+        return get_object_vars($this);
+    }
+
+
+    //public function __construct($username, $password)
+    //{
+    //    $this->username = $username;
+    //   $this->password = $password;
+    //}
 
     // public function __construct($id, $username, $email, $password, $userType)
     // {
@@ -125,6 +136,23 @@ class User
         $this->userType = $userType;
 
         return $this;
+    }
+    public function editUser(){
+        
+    }
+
+    public function createUser(){
+        return $this->username;
+    }
+
+    public function getUser($username){
+        return $this->username;
+    }
+    public function removeUser(){
+        return $this->username;
+    }
+    public function updateUser(){
+        return $this->username;
     }
 
     /**

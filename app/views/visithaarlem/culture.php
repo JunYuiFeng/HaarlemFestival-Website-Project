@@ -18,9 +18,9 @@
 
 
     <div class="container">
-        <div class="row">
-            <h1 id="header">Haarlem</h1><br>
-            <h3 id="header">for culture</h3>
+        <div class="row foodPageTitle">
+            <h1>Haarlem</h1><br>
+            <h2>for culture</h2>
         </div>
     </div>
     <img src="/img/CulturepageImg.png" alt="VisitHaarlemCulture1" id="VisitHaarlemCultureImg1">
@@ -32,7 +32,7 @@
         </div>
     </div>
     <!--change to cultureBox later-->
-    <div class="row" >
+    <div class="row">
         <div class="col-md-4">
             <div class="MuseumBox">
                 <img src="/img/MuseumBox.png" class="boxImg">
@@ -52,47 +52,49 @@
         <div class="col-md-4">
             <div class="MuseumBox">
                 <img src="/img/Festivalbox.png" class="boxImg">
-                <a href="/visithaarlem/festivalCulture" class="text-reset">
+                <a href="/visithaarlem/cultureFestival" class="text-reset">
                     <img src="/img/festivalBoxV2.png" class="img-top" alt="museumBoxV2" class="boxImg">
                 </a>
             </div>
         </div>
     </div>
 
-    <div class="cardCulture">
+    <div class="container">
         <br></br>
         <h2 class="col-md-12">Museum</h2>
-        <div class="cardCulture1">
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="/img/CultureMuseumImg1.png" alt="CultureMuseumImg1">
+        <div id="aaa">
+            <div class="cardCulture1">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="/img/CultureMuseumImg1.png" alt="CultureMuseumImg1">
+                    </div>
+                    <div class="col-md-6">
+                        <h1>Verwey Museum Haarlem </h1>
+                        <p>Haarlem’s most well known museum, Verwey showcases art and artifacts from Haarlem’s history.
+                        </p>
+                        </p>
+                    </div>
                 </div>
+            </div>
+        </div>
+        <button type="button" class="buttonViewMore">View more museum</button>
+
+        <div class="cardCulture2">
+            <div class="row" style="transform: matrix(-1, 0, 0, 1, 0, 0);">
                 <div class="col-md-6">
                     <h1>Verwey Museum Haarlem </h1>
-                    <p>Haarlem’s most well known museum, Verwey showcases art and artifacts from Haarlem’s history.
+                    <p>This classical windmill was build 1773 and rebuild it in 2002 because it was eaten by
+                        fire.
                     </p>
-                    </p>
+                </div>
+                <div class="col-md-6">
+                    <img src="/img/CultureMuseumImg2.png" alt="CultureMuseumImg2">
                 </div>
             </div>
         </div>
     </div>
-    <button type="button" class="buttonViewMore">View more museum</button>
 
-    <div class="cardCulture2">
-        <div class="row" style="transform: matrix(-1, 0, 0, 1, 0, 0);">
-            <div class="col-md-6">
-                <h1>Verwey Museum Haarlem </h1>
-                <p>This classical windmill was build 1773 and rebuild it in 2002 because it was eaten by
-                    fire.
-                </p>
-            </div>
-            <div class="col-md-6">
-                <img src="/img/CultureMuseumImg2.png" alt="CultureMuseumImg2">
-            </div>
-        </div>
-    </div>
-
-    <div class="cardCulture">
+    <div class="container">
         <br></br>
         <h2 class="col-md-12">Theatre</h2>
         <div class="cardCulture1">
@@ -102,7 +104,8 @@
                 </div>
                 <div class="col-md-6">
                     <h1>Verwey Museum Haarlem </h1>
-                    <p>Haarlem’s most well known museum, Verwey showcases art and artifacts from Haarlem’s history.
+                    <p>Haarlem’s most well known museum, Verwey showcases art and artifacts from Haarlem’s
+                        history.
                     </p>
                     <p><b>Address</b>: Spaarne 96, 2011 CL Haarlem <br>
                         <b>Phone</b>: 023 542 7270 <br>
@@ -115,23 +118,23 @@
                 </div>
             </div>
         </div>
-    </div>
-    <button type="button" class="buttonViewMore">View more museum</button>
+        <button type="button" class="buttonViewMore">View more museum</button>
 
-    <div class="cardCulture2">
-        <div class="row" style="transform: matrix(-1, 0, 0, 1, 0, 0);">
-            <div class="col-md-6">
-                <h1>Verwey Museum Haarlem </h1>
-                <p>This classical windmill was build 1773 and rebuild it in 2002 because it was eaten by
-                    fire.
-                </p>
-            </div>
-            <div class="col-md-6">
-                <img src="/img/CultureTheaterImg2.png" alt="CultureMuseumImg1">
+        <div class="cardCulture2">
+            <div class="row" style="transform: matrix(-1, 0, 0, 1, 0, 0);">
+                <div class="col-md-6">
+                    <h1>Verwey Museum Haarlem </h1>
+                    <p>This classical windmill was build 1773 and rebuild it in 2002 because it was eaten by
+                        fire.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <img src="/img/CultureTheaterImg2.png" alt="CultureMuseumImg1">
+                </div>
             </div>
         </div>
     </div>
-    <div class="cardCulture">
+    <div class="container">
         <br></br>
         <h2 class="col-md-12">Festival</h2>
         <div class="cardCulture1">
@@ -141,28 +144,30 @@
                 </div>
                 <div class="col-md-6">
                     <h1>Verwey Museum Haarlem </h1>
-                    <p>Haarlem’s most well known museum, Verwey showcases art and artifacts from Haarlem’s history.
+                    <p>Haarlem’s most well known museum, Verwey showcases art and artifacts from Haarlem’s
+                        history.
                     </p>
                     </p>
                 </div>
             </div>
         </div>
-    </div>
-    <button type="button" class="buttonViewMore">View more museum</button>
-    <div class="cardCulture2">
-        <div class="row" style="transform: matrix(-1, 0, 0, 1, 0, 0);">
-            <div class="col-md-6">
-                <h1>Verwey Museum Haarlem </h1>
-                <p>This classical windmill was build 1773 and rebuild it in 2002 because it was eaten by
-                    fire.
-                </p>
-            </div>
-            <div class="col-md-6">
-                <img src="/img/CultureFestival2Img.png" alt="CultureFestival1Img">
+        <button type="button" class="buttonViewMore">View more museum</button>
+        <div class="cardCulture2">
+            <div class="row" style="transform: matrix(-1, 0, 0, 1, 0, 0);">
+                <div class="col-md-6">
+                    <h1>Verwey Museum Haarlem </h1>
+                    <p>This classical windmill was build 1773 and rebuild it in 2002 because it was eaten by
+                        fire.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <img src="/img/CultureFestival2Img.png" alt="CultureFestival1Img">
+                </div>
             </div>
         </div>
-    </div>
 
+
+    </div>
 
 
 

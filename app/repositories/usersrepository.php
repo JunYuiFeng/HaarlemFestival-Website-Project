@@ -3,7 +3,7 @@ require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/user.php';
 
 class UsersRepository extends Repository
-{
+{    
     function getAll()
     {
         try {
@@ -74,6 +74,24 @@ class UsersRepository extends Repository
             echo $e;
         }
     }
+    function editUser($username,$email,$password,$id){
+        try{
+            $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email, password = :password WHERE id = :id');
+            $stmt->execute(array(':username' =>$username, ':email' => $email, ':password' => $password, ':id' => $id));
+        } catch (PDOException $e)
+        {
+            echo $e;
+        }
+    }   
+    function deleteUser($id){
+        try{
+            $stmt = $this->connection->prepare("DELETE FROM users WHERE id = :id");
+            $stmt->execute();
+        } catch (PDOException $e)
+        {
+            echo $e;
+        }
+    }
 
     function setResetLinkToken($userEmail, $token)
     {
@@ -128,3 +146,5 @@ class UsersRepository extends Repository
         }
     }
 }
+
+
