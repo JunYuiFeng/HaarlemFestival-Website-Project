@@ -50,6 +50,7 @@ class CmsController
             }
         }
 
+        require __DIR__ . '/../views/cms/usermanagement.php';
     }
     public function sortItem($users, $item, $sortType)
     {
