@@ -20,12 +20,18 @@ class CmsController
             switch ($_POST['action']) {
                 case 'update':
                     $this->updateItem();
+                    
+        $users = $this->userService->getAll();
                     break;
                 case 'delete':
                     $this->delete();
+                    
+        $users = $this->userService->getAll();
                     break;
                 case 'create':
                     $this->create();
+                    
+        $users = $this->userService->getAll();
                     break;
                 case 'sortIdAsc':
                     sort($users);
