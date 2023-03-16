@@ -42,9 +42,6 @@ footer #envelopeImg {
   font-style: normal;
   font-weight: 500;
 }
-.btn:hover {
-  opacity: 0.9;
-}
 .btn.btn-red-gradient {
   background: linear-gradient(92.89deg, #93051f 0%, #37020b 100%);
   border-radius: 0;
@@ -53,6 +50,10 @@ footer #envelopeImg {
   line-height: normal;
   padding: 5px 20px;
 }
+.btn.btn-red-gradient:hover {
+  opacity: 0.8;
+  background: linear-gradient(92.89deg, #93051f 0%, #37020b 100%);
+}
 .btn.btn-yellow-gradient {
   background: linear-gradient(92.89deg, #ffd000 0%, #ffd000 100%);
   border-radius: 0;
@@ -60,6 +61,10 @@ footer #envelopeImg {
   font-size: 14px;
   line-height: normal;
   padding: 5px 20px;
+}
+.btn.btn-yellow-gradient:hover {
+  opacity: 0.9;
+  background: linear-gradient(92.89deg, #ffd000 0%, #ffd000 100%);
 }
 
 /* index */
@@ -374,18 +379,22 @@ footer #envelopeImg {
   margin-bottom: 6.5%;
 }
 .restaurantDetailPageContainer .descriptionSection {
-  margin-right: 30px;
   margin-top: 30px;
+  padding-right: 8%;
 }
 .restaurantDetailPageContainer .descriptionSection h1 {
   font-size: 36pt;
 }
-.restaurantDetailPageContainer .descriptionSection .michelinLogo {
-  width: 80%;
+.restaurantDetailPageContainer .descriptionSection .michelinLabel span {
+  display: inline-block;
 }
-.restaurantDetailPageContainer .descriptionSection .michelinText {
+.restaurantDetailPageContainer .descriptionSection .michelinLabel .michelinText {
   color: #D3072B;
   font-size: 18pt;
+  font-weight: 600;
+}
+.restaurantDetailPageContainer .descriptionSection .michelinLabel .michelinLogo {
+  width: 80%;
 }
 .restaurantDetailPageContainer .descriptionSection .restaurantDescription {
   font-size: 13pt;
@@ -394,10 +403,15 @@ footer #envelopeImg {
   margin-top: 8px;
 }
 .restaurantDetailPageContainer .descriptionSection button {
+  margin-top: 50px;
   padding: 1% 4%;
   background: #FCDC4D;
   border-radius: 13px;
   border: 0;
+  font-size: 13pt;
+}
+.restaurantDetailPageContainer .coverImg {
+  width: 100%;
 }
 
 .restaurantRow2Box {
@@ -418,7 +432,7 @@ footer #envelopeImg {
   margin-top: 5%;
 }
 
-.restaurantReservationBox {
+#restaurantReservationBox {
   background: linear-gradient(180deg, #9A031E 0%, #2B0209 100%);
   color: white;
   height: 100%;
@@ -426,14 +440,14 @@ footer #envelopeImg {
   border-radius: 40px;
   padding-top: 7%;
 }
-.restaurantReservationBox h2 {
+#restaurantReservationBox h2 {
   font-size: 20pt;
   margin-bottom: 6%;
 }
-.restaurantReservationBox h3 {
+#restaurantReservationBox h3 {
   font-size: 16pt;
 }
-.restaurantReservationBox .addToCart {
+#restaurantReservationBox .addToCart {
   padding: 1% 3%;
   background: #FCDC4D;
   border-radius: 13px;
@@ -1363,4 +1377,16 @@ footer #envelopeImg {
   50%, 100% {
     bottom: 100%;
   }
+}
+#addRestaurantPage {
+  font-family: "Inter";
+}
+#addRestaurantPage input {
+  font-weight: 500;
+  border-radius: 0;
+  border: 1px solid black;
+  padding: 5px 10px;
+}
+#addRestaurantPage button {
+  padding: 10px 20px;
 }/*# sourceMappingURL=style.css.map */

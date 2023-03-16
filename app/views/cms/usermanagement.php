@@ -19,113 +19,90 @@
     include __DIR__ . '/../header.php';
     ?>
 
-    <h1>Test</h1>
-    <form method="get" action="search.php">
-        <input type="text" name="query" placeholder="Search...">
-        <button type="submit">Search</button>
-    </form>
-
     <div class="container">
+        <h1>Test</h1>
+        <form id="searchFilter" class="mt-4 mb-4">
+            <input class="p-1" type="text" id="searchInput" placeholder="Search...">
+        </form>
+
         <table class="table">
-            <form method="POST">
+            <thead>
                 <tr>
-                    <th scope="">Id <button name="action" type="submit" value="sortIdASC">&#x25b4;</button><button
+                    <th scope="col">Id<button name="action" type="submit" value="sortIdASC">&#x25b4;</button><button
                             name="action" type="submit" value="sortIdDESC">&#x25be;</th>
+                    <th scope="col">Username<button name="action" type="submit"
+                            value="sortUsernameASC">&#x25b4;</button><button name="action" type="submit"
+                            value="sortUsernameDESC">&#x25be;</th>
+                    <th scope="col">Email<button name="action" type="submit"
+                            value="sortEmailASC">&#x25b4;</button><button name="action" type="submit"
+                            value="sortEmailDESC">&#x25be;</th>
 
-                    <th scope="">Username<button name="action" type="submit" value="sortUsernameASC">&#x25b4;</button><button
-                            name="action" type="submit" value="sortUsernameDESC">&#x25be;</th>
-
-                    <th scope="">Email<button name="action" type="submit" value="sortEmailASC">&#x25b4;</button><button
-                            name="action" type="submit" value="sortEmailDESC">&#x25be;</th>
-
-                    <th scope="">Password<button name="action" type="submit" id="submit"
-                            value="sortpassword">&#x25b4;&#x25be;</button></th>
-                            
-                    <th scope="">Role<button name="action" type="submit" id="submit"
-                            value="sortrole">&#x25b4;&#x25be;</button></th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Role</th>
                 </tr>
-            </form>
-            <?php foreach ($users as $user) { ?>
-                <div class="">
-                    <form method="POST">
-                        <tr>
-                            <td scope="row">
-                                <input type="hidden" name="id" value="<?= $user->getId() ?>">
-                                <?= $user->getId() ?>
-                            </td>
-                            <td>
-                                <input type="text" name="username" placeholder=<?= $user->getUsername() ?>>
-                            </td>
-                            <td>
-                                <input type="text" name="email" placeholder=<?= $user->getEmail() ?>>
-                            </td>
-                            <td>
-                                <input type="text" name="password" placeholder=<?= $user->getPassword() ?>>
-                            </td>
-                            <td>
-                                <div>
-                                    <select name="userType" id="userType">
-                                        <?php
-                                        if ($user->getUserType() == 0) {
-                                            ?>
-                                            <option value="admin" selected>Admin</option>
-                                            <option value="user">User</option>
-                                        <?php } else { ?>
-
-                                            <option value="admin">Admin</option>
-                                            <option value="user" selected>User</option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </td>
-                            <td>
-                                <button type="submit" name="action" value="update">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    Update
-                                </button>
-                                <input type="submit" name="action" value="delete">
-                            </td>
-                        </tr>
-                    </form>
-                </div>
-            <?php } ?>
-            <form method="POST">
-                <td scope="row">
-                    <?= $user->getId() + 1 ?>
-                </td>
-                <td>
-                    <input type="text" name="username">
-                </td>
-                <td>
-                    <input type="text" name="email">
-                </td>
-                <td>
-                    <input type="text" name="password">
-                </td>
-                <td>
-                    <div>
-                        <select name="userType" id="userType">
-                            <?php if ($user->getUserType() == 0) { ?>
-                                <option value="admin" selected>Admin</option>
-                                <option value="user">User</option>
-                            <?php } else { ?>
-                                <option value="admin">Admin</option>
-                                <option value="user" selected>User</option>
-                            <?php } ?>
-                        </select>
-                    </div>
-
-                </td>
-                <td>
-                    <input type="submit" value="create" name="action">
-                </td>
-            </form>
+            </thead>
+            <tbody id="userTableBody">
+            </tbody>
         </table>
-
     </div>
+
+    <script>
+        fetch(`http://localhost/api/cms`)
+            .then(result => result.json())
+            .then(users => {
+                // Create new table rows for each search result
+                users.forEach(user => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                <td>${user.id}</td>
+                <td><input type="text" placeholder="${user.username}"></td>
+                <td><input type="text" placeholder="${user.email}"></td>
+                <td><input type="text" placeholder="${user.password}"></td>
+                <td><input type="text" placeholder="${user.userType}"></td>
+                <td><input type="submit" value="Update"></td>
+            `;
+                    userTableBody.appendChild(row);
+                });
+            })
+    </script>
+
+
+    <script>
+        const searchFilter = document.getElementById("searchFilter");
+        const searchInput = document.getElementById("searchInput");
+        const userTableBody = document.getElementById("userTableBody");
+
+        searchInput.addEventListener("input", function (event) { // add this line
+            const query = searchInput.value; // Get search query from input field
+            fetch(`http://localhost/api/cms?query=${query}`)
+                .then(result => result.json())
+                .then(userResult => {
+                    // Clear existing table rows
+                    userTableBody.innerHTML = "";
+                    if (userResult) {
+                        // Create new table rows for each search result
+                        userResult.forEach(user => {
+                            const row = document.createElement("tr");
+                            row.innerHTML = `
+            <td>${user.id}</td>
+            <td><input type="text" placeholder="${user.username}"></td>
+            <td><input type="text" placeholder="${user.email}"></td>
+            <td><input type="text" placeholder="${user.password}"></td>
+            <td><input type="text" placeholder="${user.userType}"></td>
+            <td><input type="submit" value="Update"></td>
+        `;
+                            userTableBody.appendChild(row);
+                        });
+                    }
+                })
+                .catch(error => console.error(error))
+        });
+    </script>
+
+    <?php
+    include __DIR__ . '/../footer.php';
+    ?>
+
 </body>
 
 </html>

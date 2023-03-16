@@ -59,7 +59,7 @@
                     $cardClass = "card restaurantRight";
                 }
 
-                if ($restaurant->getIsFestival() == 0)
+                if ($restaurant->getIsFestival() == false)
                 {
                     return false;
                 }
