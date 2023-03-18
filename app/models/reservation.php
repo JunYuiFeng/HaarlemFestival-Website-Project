@@ -6,7 +6,7 @@ class Reservation
     private int $sessionId;
     private int $amountAbove12;
     private int $amountUnderOr12;
-    private int $date;
+    private string $date;
     private string $comments;
 
     /**

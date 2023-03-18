@@ -14,9 +14,4 @@ class SessionService
     {
         return $this->repository->getSessionsByRestaurantId($id);
     }
-
-    function getAll()
-    {
-        return $this->repository->getAll();
-    }
 }

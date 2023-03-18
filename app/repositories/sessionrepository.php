@@ -20,21 +20,4 @@ class SessionRepository extends Repository
             echo $e;
         }
     }
-
-    function getAll()
-     {
-        try {
-            $stmt = $this->connection->prepare("SELECT * FROM `Session` ");
-            $stmt->execute();
-
-            $stmt->setFetchMode(PDO::FETCH_CLASS, "Session");
-            $sessions = $stmt->fetchAll();
-
-            return $sessions;
-
-        } catch (PDOException $e)
-        {
-            echo $e;
-        }
-    }
 }

@@ -424,7 +424,11 @@ footer #envelopeImg {
 #restaurantReservationBox h3 {
   font-size: 16pt;
 }
-#restaurantReservationBox .addToCart {
+#restaurantReservationBox .reservationQuantityOfPoeple input {
+  height: 30px;
+}
+
+#addToCart {
   padding: 1% 3%;
   background: #FCDC4D;
   border-radius: 13px;

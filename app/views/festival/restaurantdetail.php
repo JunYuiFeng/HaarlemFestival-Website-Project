@@ -118,82 +118,83 @@
             <div class="col-4"><button><b>Build your own personal program</b></button></div>
         </div>
 
-        <div class="row">
-            <div class="col-7">
-                <img class="img-fluid" src="/img/RatatouilleImg2.jpg" alt="">
-            </div>
+        <form id="reservationForm" method="POST">
+            <div class="row">
+                <div class="col-7">
+                    <img class="img-fluid" src="/img/RatatouilleImg2.jpg" alt="">
+                </div>
 
-            <div class="col">
-                <div class="container" id="restaurantReservationBox">
-                    <h2 class="d-flex justify-content-center"><b>Reservation</b></h2>
+                <div class="col">
+                    <div class="container" id="restaurantReservationBox">
+                        <h2 class="d-flex justify-content-center"><b>Reservation</b></h2>
 
-                    <div class="row">
-                        <div class="col">
-                            <h3><b>How many poeple?</b></h3>
-                            <label for="quantity">Above 12 years:</label>
-                            <input type="number" id="quantity" name="quantity">
-                            <label for="quantity">12 years or under:</label>
-                            <input type="number" id="quantity" name="quantity">
+                        <div class="row">
+                            <div class="col">
+                                <h3><b>How many people?</b></h3>
 
-                            <h3><b>Available time:</b></h3>
-                            <div>
-                                <input type="checkbox" id="option1" name="options" value="option1">
-                                <label for="option1"><?php foreach ($sessions as $session) {
-                                                            if ($session->getName() == 'Session 1') {
-                                                                echo $session->getName() . ' at ' . $session->getStartTime()->format('H:i') . ' - ' . $session->getEndTime()->format('H:i');
-                                                            }
-                                                        }
-                                                        ?></label>
+                                <div class="form-group row reservationQuantityOfPoeple">
+                                    <label for="amountAbove12" class="col-8 col-form-label">Above 12 years:</label>
+                                    <div class="col-4">
+                                        <input type="number" class="form-control" name="amountAbove12">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row reservationQuantityOfPoeple">
+                                    <label for="amountUnderOr12" class="col-8 col-form-label">12 years or under:</label>
+                                    <div class="col-4">
+                                        <input type="number" class="form-control" name="amountUnderOr12">
+                                    </div>
+                                </div>
+
+                                <h3><b>Available time:</b></h3>
+                                <?php foreach ($sessions as $session) { ?>
+                                    <input type="radio" id="session_<?= $session->getId() ?>" name="sessionId" value="<?= $session->getId() ?>">
+                                    <label for="session_<?= $session->getId() ?>"><?= $session->getName() . ' at ' . $session->getStartTime()->format('H:i') . ' - ' . $session->getEndTime()->format('H:i') ?></label><br>
+                                <?php } ?>
                             </div>
-                            <div>
-                                <input type="checkbox" class="btn-check" name="options" id="check1" autocomplete="off" checked>
-                                <label class="btn-outline-primary" for="check1">Session 2 at 19:15 - 21:15</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="option3" name="options" value="option3">
-                                <label for="option3">Session 3 at 21:30 - 23:30</label>
+
+                            <div class="col ">
+                                <h3><b>Choose a day:</b></h3>
+                                <input type="radio" id="day_1" name="date" value="2022-07-27T00:00:00">
+                                <label for="day_1">Thursday, 27th July</label><br>
+
+                                <input type="radio" id="day_2" name="date" value="2022-07-28T00:00:00">
+                                <label for="day_2">Friday, 28th July</label><br>
+
+                                <input type="radio" id="day_3" name="date" value="2022-07-29T00:00:00">
+                                <label for="day_3">Saturday, 29th July</label><br>
+
+                                <input type="radio" id="day_4" name="date" value="2022-07-30T00:00:00">
+                                <label for="day_4">Sunday, 30th July</label><br>
+
+                                <input type="radio" id="day_5" name="date" value="2022-07-31T00:00:00">
+                                <label for="day_5">Monday, 31st July</label>
                             </div>
                         </div>
-                        <div class="col ">
-                            <h3><b>Choose a day:</b></h3>
-                            <button type="button" class="btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-                                Saturday 28th July
-                            </button>
-                            <button type="button" class="btn btn-primary btn-xs" data-toggle="button" aria-pressed="false" autocomplete="off">
-                                Saturday 28th July
-                            </button>
-                            <div>
-                                <input type="checkbox" id="option2" name="options" value="option2">
-                                <label for="option2">Saturday 28th July</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="option3" name="options" value="option3">
-                                <label for="option3">Friday 29th July</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="option3" name="options" value="option3">
-                                <label for="option3">Sunday, 30th July</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="option3" name="options" value="option3">
-                                <label for="option3">Monday 31st July</label>
-                            </div>
-                        </div>
-                    </div>
 
-                    <textarea rows="5" cols="40" name="message" placeholder="Any special request or for example diets, allergies etc, can be written here..."></textarea>
-                    <div class="text-center">
-                        <p class="reservationExtraFeeText">**A fee of €10,- per person will be charged when a reservation is made on this site. This fee will be deducted from the final check on visiting the restaurant . ** </p>
+                        <textarea name="comment" rows="5" cols="40" placeholder="Any special request or for example diets, allergies etc, can be written here..."></textarea><br>
+
+                        <div class="text-center">
+                            <p class="reservationExtraFeeText">**A fee of €10,- per person will be charged when a reservation is made on this site. This fee will be deducted from the final check on visiting the restaurant . ** </p>
+                        </div>
+
+                        <div class="d-flex justify-content-center"> <button id="addToCart"><b>Add to cart</b></button></div>
                     </div>
-                    <div class="d-flex justify-content-center"> <button class="addToCart"><b>Add to cart</b></button></div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 
     <?php
     include __DIR__ . '/../footer.php';
     ?>
+
+    <script>
+        document.getElementById("addToCart").addEventListener("click", function() {
+            document.getElementById("reservationForm").submit();
+        });
+    </script>
 </body>
 
 </html>

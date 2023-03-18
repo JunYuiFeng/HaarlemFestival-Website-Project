@@ -38,4 +38,18 @@ class RestaurantRepository extends Repository
             echo $e;
         }
     }
+
+    function decreaseSeats($id, $seats)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE Restaurants SET seats = seats - :seats WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':seats', $seats);
+            $stmt->execute();
+
+        } catch (PDOException $e) 
+        {
+            echo $e;
+        }
+    }
 }
