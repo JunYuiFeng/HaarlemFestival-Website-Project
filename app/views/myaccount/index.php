@@ -28,27 +28,32 @@
 
                         <form method="post" action="" style="width: 23rem;">
                             <h1 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">My Account!</h1>
-                            <?php
-                            foreach ($users as $user) {
+                            <?php                            
                                 if ($user->getId() == $_SESSION["logedin"]) { ?>
-                                    <h3>Hello,
+                                    <h3 style="">Hello,
                                         <?= $user->getUsername();
-                                        ?>
-                                    <? } ?>
-                                <?php } ?>
-
+                                        ?></h3>
+                                    <? } ?>     
                                 <input type="hidden" name="id" value=<?= $user->getId() ?>>
                                 <div class="user-box">
-                                    <input type="text" name="username" placeholder=<?= $user->getUsername() ?>>
+                                    <input type="text" name="username" value=<?= $user->getUsername() ?>>
                                     <label>Username</label>
                                 </div>
                                 <div class="user-box">
-                                    <input type="text" name="email" placeholder=<?= $user->getEmail() ?>>
+                                    <input type="text" name="email" value=<?= $user->getEmail() ?>>
                                     <label>Email</label>
                                 </div>
                                 <div class="user-box">
-                                    <input type="text" name="password" placeholder=<?= $user->getPasswordAsStars() ?>>
-                                    <label>Password</label>
+                                    <input type="text" name="oldPassword" value="">
+                                    <label>Old password</label>
+                                </div>
+                                <div class="user-box">
+                                    <input type="text" name="newPassword" value=>
+                                    <label>New password</label>
+                                </div>
+                                <div class="user-box">
+                                    <input type="text" name="confirmationNewPassword" value=>
+                                    <label>New password</label>
                                 </div>
 
                                 <p class="error-message">

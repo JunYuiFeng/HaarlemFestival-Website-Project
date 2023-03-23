@@ -12,9 +12,9 @@ class UserService
         return $this->repository->getAll();
     }
 
-    public function getOne($id)
+    public function getById($id)
     {
-        return $this->repository->getOne($id);
+        return $this->repository->getById($id);
     }
 
     public function addUserAsAdmin($username, $email, $password,$userType)
@@ -26,47 +26,41 @@ class UserService
     {
         return $this->repository->editUserAsAdmin($username, $email, $password, $id, $userType);
     }
+    public function checkPassowrd($password){
+        
+        return $this->repository->checkPassowrd($password);
+    }
     public function editUser($username, $email, $password, $id)
     {
-        $otp = rand(100000, 999999);
-        $_SESSION['otp'] = $otp;
-        $_SESSION['mail'] = $email;
-        require __DIR__ . "/../phpmailer/PHPMailerAutoload.php";
-        $mail = new PHPMailer;
+        // $otp = rand(100000, 999999);
+        // $_SESSION['otp'] = $otp;
+        // $_SESSION['mail'] = $email;
+        // require __DIR__ . "/../phpmailer/PHPMailerAutoload.php";
+        // $mail = new PHPMailer;
 
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = 587;
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'tls';
+        // $mail->isSMTP();
+        // $mail->Host = 'smtp.gmail.com';
+        // $mail->Port = 587;
+        // $mail->SMTPAuth = true;
+        // $mail->SMTPSecure = 'tls';
 
-        $mail->Username = "stevengrazius283@gmail.com";
-        $mail->Password = "TolakAngin";
+        // $mail->Username = "stevengrazius283@gmail.com";
+        // $mail->Password = "TolakAngin";
 
-        $mail->setFrom('stevengrazius283', 'OTP Verification');
-        $mail->addAddress($email);
+        // $mail->setFrom('stevengrazius283', 'OTP Verification');
+        // $mail->addAddress($email);
 
-        $mail->isHTML(true);
-        $mail->Subject = "Your verify code";
-        $mail->Body = "<p>Dear user, </p> <h3>Your verify OTP code is $otp <br></h3>
-                    <br><br>
-                    <p>With regrads,</p>
-                    <b>Programming with Lam</b>
-                    https://www.youtube.com/channel/UCKRZp3mkvL1CBYKFIlxjDdg";
+        // $mail->isHTML(true);
+        // $mail->Subject = "Your verify code";
+        // $mail->Body = "<p>Dear user, </p> <h3>Your verify OTP code is $otp <br></h3>
+        //             <br><br>
+        //             <p>With regrads,</p>
+        //             <b>Programming with Lam</b>
+        //             https://www.youtube.com/channel/UCKRZp3mkvL1CBYKFIlxjDdg";
 
-        if (!$mail->send()) {
-            ?>
-            <script>
-                alert("<?php echo "Register Failed, Invalid Email " ?>");
-            </script>
-            <?php
-        } else {
-            ?>
-            <script>
-                alert("<?php echo "Register Successfully, OTP sent to " . $email ?>");
-            </script>
-            <?php
-        }
+        // // if (!$mail->send()) {
+        // //     
+        // // }
         return $this->repository->editUser($username, $email, $password, $id);
 
     }

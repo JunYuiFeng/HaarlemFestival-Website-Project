@@ -19,6 +19,22 @@ class UsersRepository extends Repository
         }
     }
 
+    function getById($id){
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM Users WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+            $user = $stmt->fetch();
+
+            return $user;
+
+        } catch (PDOException $e) 
+        {
+            echo $e;
+        }
+    }
     
     function getByUsername($username)
     {
@@ -84,10 +100,10 @@ class UsersRepository extends Repository
         }
     }   
     
-    function editUserAsAdmin($username,$email,$password,$id, $userType){
+    function editUserAsAdmin($username,$email,$id, $userType){
         try{
-            $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email, userType =:userType, password = :password WHERE id = :id');
-            $stmt->execute(array(':username' =>$username, ':email' => $email, 'userType'=>$userType, ':password' => $password, ':id' => $id));
+            $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email, userType =:userType  WHERE id = :id');
+            $stmt->execute(array(':username' =>$username, ':email' => $email, 'userType'=>$userType, ':id' => $id));
         } catch (PDOException $e)
         {
             echo $e;
@@ -103,6 +119,22 @@ class UsersRepository extends Repository
         {
             echo $e;
         }
+    }
+    function checkPassowrd($password){
+        try{
+            $stmt = $this->connection->prepare("SELECT * FROM Users WHERE password = :password");
+            $stmt->bindParam(':password', $password);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+            $user = $stmt->fetch();
+
+            return $user;
+        } catch (PDOException $e) 
+        {
+            echo $e;
+        }
+
     }
 
     function setResetLinkToken($userEmail, $token)
@@ -141,7 +173,6 @@ class UsersRepository extends Repository
             echo $e;
         }
     }
-
     function setNewPassword($password, $id): bool
     {
         try {

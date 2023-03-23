@@ -17,6 +17,7 @@
 <body>
     <?php
     include __DIR__ . '/../header.php';
+    require_once __DIR__ . '/../../services/userservice.php';
     ?>
 
     <div class="container">
@@ -37,7 +38,6 @@
                             value="sortEmailASC">&#x25b4;</button><button name="action" type="submit"
                             value="sortEmailDESC">&#x25be;</th>
 
-                    <th scope="col">Password</th>
                     <th scope="col">Role</th>
                 </tr>
             </thead>
@@ -45,8 +45,8 @@
             </tbody>
         </table>
     </div>
-
     <script>
+        // Fetch users from API and create rows for each user in the table
         fetch(`http://localhost/api/cms`)
             .then(result => result.json())
             .then(users => {
@@ -54,19 +54,55 @@
                 users.forEach(user => {
                     const row = document.createElement("tr");
                     row.innerHTML = `
-                <td>${user.id}</td>
-                <td><input type="text" placeholder="${user.username}"></td>
-                <td><input type="text" placeholder="${user.email}"></td>
-                <td><input type="text" placeholder="${user.password}"></td>
-                <td><input type="text" placeholder="${user.userType}"></td>
-                <td><input type="submit" value="Update"></td>
-            `;
+                    <td>${user.id}</td>
+                    <td><input type="text" id="username" name="username" value="${user.username}"></td>
+                    <td><input type="text" id="email" name="email" value="${user.email}"></td>
+                    <td>
+                        <select name="userType" id="userType">
+                            <option value="1" ${user.userType === 1 ? "selected" : ""}>User</option>
+                            <option value="0" ${user.userType === 0 ? "selected" : ""}>Admin</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="hidden" id="id" name="id" value="${user.id}">
+                        <input type="hidden" id="password" name="password" value="${user.password}">
+                    </td>
+                `;
+                    // Create update button and set its click event handler
+                    var buttonUpdate = document.createElement("button");
+                    buttonUpdate.innerHTML = "Update";
+
+                    id = document.getElementById("id").value;
+                    username = document.getElementById("username").value;
+                    email = document.getElementById("email").value;
+                    password = document.getElementById("password").value;
+                    userType = document.getElementById("userType").value;
+
+                    if (userType == "admin") {
+                        userType = 0;
+                    } else {
+                        userType = 1;
+                    }
+                    buttonUpdate.onclick = update(id, username, email, password, userType);
+                    row.appendChild(buttonUpdate);
+
                     userTableBody.appendChild(row);
                 });
-            })
+
+            });
+
+        // Define update function
+        function update(id, username, email, password, userType) {
+
+            // put to service
+            // if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']) || empty($_POST['userType']) || empty($_POST['id'])) {
+            //     $msg = "field empty, please fill in";
+            //     return;
+            // }
+            
+
+        }
     </script>
-
-
     <script>
         const searchFilter = document.getElementById("searchFilter");
         const searchInput = document.getElementById("searchInput");
@@ -84,13 +120,19 @@
                         userResult.forEach(user => {
                             const row = document.createElement("tr");
                             row.innerHTML = `
-            <td>${user.id}</td>
-            <td><input type="text" placeholder="${user.username}"></td>
-            <td><input type="text" placeholder="${user.email}"></td>
-            <td><input type="text" placeholder="${user.password}"></td>
-            <td><input type="text" placeholder="${user.userType}"></td>
-            <td><input type="submit" value="Update"></td>
+                        <td>${user.id}</td>
+                        <td><input type="text" name="username" value="${user.username}"></td>
+                        <td><input type="text" name="email" value="${user.email}"></td>
+                        <td>
+                            <select name="userType" id="userType">
+                                <option value="1" ${user.userType === 1 ? "selected" : ""}>User</option>
+                                <option value="0" ${user.userType === 0 ? "selected" : ""}>Admin</option>
+                            </select>
+                        </td>
+                        <td>
+                        </td>
         `;
+
                             userTableBody.appendChild(row);
                         });
                     }

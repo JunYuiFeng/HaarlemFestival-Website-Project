@@ -24,23 +24,19 @@ class CmsController
 
     public function usermanagement()
     {
+
         $users = $this->userService->getAll();
+        $userService = $this->userService;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             switch ($_POST['action']) {
                 case 'update':
                     $this->updateItem();
-                    
-        $users = $this->userService->getAll();
                     break;
                 case 'delete':
                     $this->delete();
-                    
-        $users = $this->userService->getAll();
                     break;
                 case 'create':
                     $this->create();
-                    
-        $users = $this->userService->getAll();
                     break;
                 case 'sortIdAsc':
                     sort($users);
@@ -92,11 +88,13 @@ class CmsController
     }
     public function updateItem()
     {
+        // put to service
         try {
             if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']) || empty($_POST['userType']) || empty($_POST['id'])) {
                 $msg = "field empty, please fill in";
                 return;
             }
+            echo "update";
             $username = htmlspecialchars($_POST['username']);
             $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
 

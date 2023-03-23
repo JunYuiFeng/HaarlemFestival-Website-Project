@@ -25,39 +25,49 @@ class MyAccountController
 
     public function index()
     {
+        $user = $this->userService->getById($_SESSION["logedin"]);
         if (!isset($_SESSION["logedin"])) {
             header("location: login");
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->updateItem();
+            $this->updateItem($user);
         }
 
         $this->userService = new UserService();
-        $users = $this->userService->getAll();
         require __DIR__ . '/../views/myaccount/index.php';
     }
 
-    public function updateItem()
+    public function updateItem($user)
     {
         try {
-            if(empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])){
+            if (empty($_POST['username']) || empty($_POST['oldPassword']) || empty($_POST['email']) || empty($_POST['newPassword']) || empty($_POST['confirmationNewPassword'])) {
                 $msg = "field empty, please fill in";
                 return;
             }
-            $username = htmlspecialchars($_POST['username']);
-            $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
+            if ($_POST['newPassword'] == $_POST['confirmationNewPassword']) {
+                $password = password_hash(htmlspecialchars($_POST['newPassword']), PASSWORD_DEFAULT);
+                if ($user->getPassword() == $_POST['oldPassword']) {
 
-            $email = htmlspecialchars($_POST['email']);
-            $id = htmlspecialchars($_POST['id']);
+                    $username = htmlspecialchars($_POST['username']);
 
-            $this->userService->editUser($username, $email, $password, $id);
+                    $email = htmlspecialchars($_POST['email']);
+                    $id = htmlspecialchars($_POST['id']);
+
+                    $this->userService->editUser($username, $email, $password, $id);
+
+                } else {
+                    $msg = "old password is incorrect";
+                }
+            } else {
+                $msg = "new password and confirmation new password are not the same";
+            }
 
         } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
-    
+
     public function login()
     {
         if (isset($_SESSION["logedin"])) {
@@ -74,8 +84,7 @@ class MyAccountController
                     if (ctype_digit($res)) {
                         if (strstr($username, "@")) {
                             $user = $this->userService->getByEmail($username);
-                        }
-                        else {
+                        } else {
                             $user = $this->userService->getByUsername($username);
                         }
                         $_SESSION["logedin"] = $user->getId();
@@ -87,7 +96,7 @@ class MyAccountController
             }
         }
 
-         $msg = $this->msg;
+        $msg = $this->msg;
         require __DIR__ . '/../views/myaccount/login.php';
     }
 
