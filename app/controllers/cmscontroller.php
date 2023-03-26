@@ -150,12 +150,12 @@ class CmsController
     {
         if (isset($_GET["webPage"])) {
             $webPage = $_GET["webPage"];
-
-            $this->content = $this->contentEditorService->getPageContent($webPage);
             if (isset($_POST['editor'])) {
                 $editor_data = $_POST['editor'];
                 $this->contentEditorService->setNewPageContent($webPage, $editor_data);
             }
+            $this->content = $this->contentEditorService->getPageContent($webPage);
+
             require __DIR__ . '/../views/cms/editpagecontent.php';
         } else {
             require __DIR__ . '/../views/notfound.php';

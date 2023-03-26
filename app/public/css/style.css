@@ -42,6 +42,9 @@ footer #envelopeImg {
   font-style: normal;
   font-weight: 500;
 }
+.btn:focus {
+  box-shadow: none;
+}
 .btn.btn-red-gradient {
   background: linear-gradient(92.89deg, #93051f 0%, #37020b 100%);
   border-radius: 0;
@@ -278,20 +281,6 @@ footer #envelopeImg {
   padding: 30px;
 }
 
-.btn {
-  border: none;
-  background-color: inherit;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  display: inline-block;
-}
-
-/* On mouse-over */
-.btn:hover {
-  background: #eee;
-}
-
 .default {
   color: black;
 }
@@ -340,13 +329,13 @@ footer #envelopeImg {
   margin: 10px;
 }
 .restaurantEventSection .card .seeMoreBtn {
-  background: #FCDC4D;
+  background: #fcdc4d;
   border-radius: 12px;
   padding: 3% 5%;
 }
 
 .yummieWelcomeParagraph {
-  background: linear-gradient(180deg, #9A031E 0%, #3E030E 100%);
+  background: linear-gradient(180deg, #9a031e 0%, #3e030e 100%);
   color: white;
   padding: 100px 120px;
 }
@@ -356,20 +345,20 @@ footer #envelopeImg {
 }
 .foodEvent .title {
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  color: #9A031E;
+  color: #9a031e;
 }
 
 .personalProgramOffer {
   padding: 50px 40px;
   margin: 40px 0px;
-  background: linear-gradient(180deg, #9A031E 0%, #35020B 100%);
+  background: linear-gradient(180deg, #9a031e 0%, #35020b 100%);
 }
 .personalProgramOffer p {
   color: white;
   font-size: 18pt;
 }
 .personalProgramOffer button {
-  background: #FCDC4D;
+  background: #fcdc4d;
   border-radius: 16px;
   padding: 10px 12px;
 }
@@ -389,7 +378,7 @@ footer #envelopeImg {
   display: inline-block;
 }
 .restaurantDetailPageContainer .descriptionSection .michelinLabel .michelinText {
-  color: #D3072B;
+  color: #d3072b;
   font-size: 18pt;
   font-weight: 600;
 }
@@ -405,7 +394,7 @@ footer #envelopeImg {
 .restaurantDetailPageContainer .descriptionSection button {
   margin-top: 50px;
   padding: 1% 4%;
-  background: #FCDC4D;
+  background: #fcdc4d;
   border-radius: 13px;
   border: 0;
   font-size: 13pt;
@@ -415,7 +404,7 @@ footer #envelopeImg {
 }
 
 .restaurantRow2Box {
-  background: linear-gradient(180deg, #9A031E 0%, #2B0209 100%);
+  background: linear-gradient(180deg, #9a031e 0%, #2b0209 100%);
   color: white;
   height: 100%;
   padding-top: 7%;
@@ -433,7 +422,7 @@ footer #envelopeImg {
 }
 
 #restaurantReservationBox {
-  background: linear-gradient(180deg, #9A031E 0%, #2B0209 100%);
+  background: linear-gradient(180deg, #9a031e 0%, #2b0209 100%);
   color: white;
   height: 100%;
   filter: drop-shadow(4px 4px 20px rgba(0, 0, 0, 0.5));
@@ -449,7 +438,7 @@ footer #envelopeImg {
 }
 #restaurantReservationBox .addToCart {
   padding: 1% 3%;
-  background: #FCDC4D;
+  background: #fcdc4d;
   border-radius: 13px;
   border: 0;
 }
@@ -610,7 +599,7 @@ footer #envelopeImg {
 .cardCulture1 {
   align-items: center;
   width: 100%;
-  background: linear-gradient(96.95deg, #620011 12.24%, #2E0B1F 80.77%);
+  background: linear-gradient(96.95deg, #620011 12.24%, #2e0b1f 80.77%);
   box-shadow: 0px 52px 54px 2px rgba(0, 0, 0, 0.11);
   color: white;
   line-height: 200%;
@@ -620,7 +609,7 @@ footer #envelopeImg {
 
 .cardCulture2 {
   width: 100%;
-  background: linear-gradient(96.95deg, #620011 12.24%, #2E0B1F 80.77%);
+  background: linear-gradient(96.95deg, #620011 12.24%, #2e0b1f 80.77%);
   box-shadow: 0px 52px 54px 2px rgba(0, 0, 0, 0.11);
   transform: matrix(-1, 0, 0, 1, 0, 0);
   color: white;
@@ -649,11 +638,11 @@ footer #envelopeImg {
 }
 
 .danceHomeNameArtist {
-  background: linear-gradient(106.4deg, #FFFFFF 5.75%, #FFFFFF 88.63%);
+  background: linear-gradient(106.4deg, #ffffff 5.75%, #ffffff 88.63%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0px 4px 26px #FFB800;
+  text-shadow: 0px 4px 26px #ffb800;
   position: absolute;
 }
 
@@ -688,7 +677,7 @@ footer #envelopeImg {
 }
 
 #dancePersonalProrgam {
-  background: linear-gradient(180deg, #9A031E 0%, #35020B 100%);
+  background: linear-gradient(180deg, #9a031e 0%, #35020b 100%);
   position: absolute;
   top: 792px;
   left: 120px;
@@ -699,18 +688,18 @@ footer #envelopeImg {
 }
 
 #dancePersonalProgramButton {
-  background: #FCDC4D;
+  background: #fcdc4d;
   border-radius: 16px;
   width: 110%;
   height: 40px;
 }
 
 .danceHomeNameArtistCard {
-  background: linear-gradient(106.4deg, #FFFFFF 5.75%, #FFFFFF 88.63%);
+  background: linear-gradient(106.4deg, #ffffff 5.75%, #ffffff 88.63%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0px 4px 26px #FFB800;
+  text-shadow: 0px 4px 26px #ffb800;
 }
 
 .danceHomeNameArtistCard {
@@ -727,7 +716,7 @@ footer #envelopeImg {
 }
 
 .danceCardType2 {
-  background: linear-gradient(158.75deg, #151515 31.35%, #4A0000 99.61%);
+  background: linear-gradient(158.75deg, #151515 31.35%, #4a0000 99.61%);
   box-shadow: 0px 52px 54px rgba(0, 0, 0, 0.1);
   color: white;
   text-align: center;
@@ -746,7 +735,7 @@ footer #envelopeImg {
 }
 
 .danceViewMore {
-  background: #6A0013;
+  background: #6a0013;
   color: white;
   width: 350px;
   height: 40px;
@@ -759,7 +748,7 @@ footer #envelopeImg {
   background: #151515;
   box-shadow: 0px -4px 63px 22px rgba(255, 184, 0, 0.64), 13px 20px 8px -12px #000000;
   margin: 30px;
-  color: #FFB800;
+  color: #ffb800;
   width: 60%;
   height: 100px;
   margin-top: 70px;
@@ -767,7 +756,7 @@ footer #envelopeImg {
 
 .danceDailyAccessPass {
   align-self: center;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 5px 6px 5px 1px rgba(0, 0, 0, 0.85), 0px 1px 19px 20px rgba(150, 137, 137, 0.47);
   border-radius: 13px;
   height: 90px;
@@ -776,7 +765,7 @@ footer #envelopeImg {
 }
 
 .danceTableContent {
-  background: linear-gradient(101.77deg, #9A031E 18.12%, #000000 127.71%);
+  background: linear-gradient(101.77deg, #9a031e 18.12%, #000000 127.71%);
   border-radius: 24px;
   padding: 20px;
   margin-top: 80px;
@@ -798,7 +787,7 @@ footer #envelopeImg {
 }
 #danceTableContentDay1 .danceTableContentButton {
   margin-top: 50px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 5px 6px 5px 1px rgba(0, 0, 0, 0.85), 0px 1px 19px 20px rgba(150, 137, 137, 0.47);
   border-radius: 13px;
   width: 250px;
@@ -808,7 +797,7 @@ footer #envelopeImg {
 #danceVanueCard {
   padding-bottom: 20px;
   margin-top: 80px;
-  background: conic-gradient(from 75.58deg at -16.05% 100%, #000000 0deg, #6D0000 71.01deg, #000000 360deg);
+  background: conic-gradient(from 75.58deg at -16.05% 100%, #000000 0deg, #6d0000 71.01deg, #000000 360deg);
 }
 
 .danceVanue {
@@ -844,7 +833,7 @@ footer #envelopeImg {
   color: white;
 }
 #danceDetailedPageBody .danceTopSongs {
-  background: linear-gradient(100.1deg, #9A031E 17.05%, #000000 57.56%);
+  background: linear-gradient(100.1deg, #9a031e 17.05%, #000000 57.56%);
   color: white;
   text-align: center;
   margin-left: auto;
@@ -858,18 +847,18 @@ footer #envelopeImg {
 }
 #danceDetailedPageBody .dancedetailedimg1 {
   padding: 5em;
-  background: #9A031E;
-  box-shadow: 6px 0px 30px -4px #FFB800;
+  background: #9a031e;
+  box-shadow: 6px 0px 30px -4px #ffb800;
   border-radius: 56px;
 }
 #danceDetailedPageBody #careerHighlight {
-  background: linear-gradient(245.73deg, #9A031E 17.74%, #000000 101.89%);
+  background: linear-gradient(245.73deg, #9a031e 17.74%, #000000 101.89%);
 }
 #danceDetailedPageBody .dancePageTitle {
   color: white;
   margin-top: 50px;
   margin-bottom: 40px;
-  filter: drop-shadow(0px 8px 18px #FFB800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #FFB800);
+  filter: drop-shadow(0px 8px 18px #ffb800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #ffb800);
 }
 #danceDetailedPageBody .dancePageTitle h1 {
   font-weight: 800;
@@ -885,7 +874,7 @@ footer #envelopeImg {
 }
 
 #myProfileIndexBody {
-  background: linear-gradient(101.77deg, #9A031E 18.12%, #000000 127.71%);
+  background: linear-gradient(101.77deg, #9a031e 18.12%, #000000 127.71%);
   color: white;
 }
 
