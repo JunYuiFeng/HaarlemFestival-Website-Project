@@ -15,6 +15,7 @@
 
 <body>
     <div class="px-5">
+        <h1>Restaurants Overview</h1>
 
         <button class="btn btn-yellow-gradient my-4 py-3" onclick="location.href = 'addrestaurant'">Add new restaurant</button>
 

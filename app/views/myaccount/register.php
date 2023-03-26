@@ -60,7 +60,7 @@
 
 
 
-                            <button type="submit" name="register">
+                            <button type="submit" name="register" class="red-outline-animated">
                                 <span></span>
                                 <span></span>
                                 <span></span>

@@ -29,18 +29,18 @@ class CmsController
             switch ($_POST['action']) {
                 case 'update':
                     $this->updateItem();
-                    
-        $users = $this->userService->getAll();
+
+                    $users = $this->userService->getAll();
                     break;
                 case 'delete':
                     $this->delete();
-                    
-        $users = $this->userService->getAll();
+
+                    $users = $this->userService->getAll();
                     break;
                 case 'create':
                     $this->create();
-                    
-        $users = $this->userService->getAll();
+
+                    $users = $this->userService->getAll();
                     break;
                 case 'sortIdAsc':
                     sort($users);
@@ -80,7 +80,7 @@ class CmsController
         } else { // Otherwise, sort in ascending order
             array_multisort($items, SORT_ASC, $users);
         }
-        foreach($users as $user){
+        foreach ($users as $user) {
             echo $user->getEmail();
         }
         return $users;
@@ -90,6 +90,7 @@ class CmsController
         $id = $_POST["id"];
         $this->userService->deleteUser($id);
     }
+
     public function updateItem()
     {
         try {
@@ -109,7 +110,6 @@ class CmsController
                 $userType = 1;
             }
             $this->userService->editUserAsAdmin($username, $email, $password, $id, $userType);
-
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -141,7 +141,6 @@ class CmsController
             }
             echo "controler";
             $this->userService->addUserAsAdmin($username, $email, $password, $userType);
-
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -162,6 +161,7 @@ class CmsController
             require __DIR__ . '/../views/notfound.php';
         }
     }
+
     public function restaurants()
     {
         $this->restaurants = $this->restaurantManagementService->getAll();
@@ -172,23 +172,41 @@ class CmsController
         }
         require __DIR__ . '/../views/cms/restaurants.php';
     }
+
     public function addrestaurant()
     {
+        if (isset($_GET["edit"])) {
+            $restaurant = $this->restaurantManagementService->getById($_GET["edit"]);
+        }
         if (isset($_POST["addrestaurant"])) {
             foreach ($_POST as $field) {
                 if (empty($field))
                     $this->msg = "Please fill all the fields";
             }
             if ($this->msg == "") {
-                $restaurant = new Restaurant();
-                $coverImg = $_FILES['coverImg'];
-                if ($coverImg && $coverImg['error'] == 0) {
-                    $filename = $coverImg['name'];
-                    $destination = __DIR__ . '/../public/img/' . $filename;
-                    if (move_uploaded_file($coverImg['tmp_name'], $destination)) {
-                        $restaurant->setCoverImg($filename);
+                $restaurant = (!isset($_GET["edit"])) ? new Restaurant() : $restaurant;
+                if (isset($_FILES['coverImg']) && $_FILES['coverImg']['name'] != "") {
+                    $coverImg = $_FILES['coverImg'];
+                    if ($coverImg && $coverImg['error'] == 0) {
+                        $filename = $coverImg['name'];
+                        $destination = __DIR__ . '/../public/img/' . $filename;
+                        if (move_uploaded_file($coverImg['tmp_name'], $destination)) {
+                            $restaurant->setCoverImg($filename);
+                        } else {
+                            $this->msg = "Image couldn't upload. Please try again";
+                        }
+                    } else {
+                        $this->msg = "Image couldn't upload. Please try again";
                     }
+                } else {
+                    if (isset($_GET["edit"])) {
+                        $this->msg = "";
+                        $restaurant->setCoverImg($this->restaurantManagementService->getById($_GET["edit"])->getCoverImg());
+                    } else
+                        $this->msg = "Please upload a cover image";
                 }
+            }
+            if ($this->msg == "") {
                 $restaurant->setName($_POST['name']);
                 $restaurant->setCuisine($_POST['cuisine']);
                 $restaurant->setFoodType($_POST['foodType']);
@@ -205,10 +223,16 @@ class CmsController
                 $restaurant->setWebsite($_POST['website']);
                 $restaurant->setDescription($_POST['description']);
 
-                if ($this->restaurantManagementService->insertRestaurant($restaurant)) {
-                    header("location: restaurants");
+                if (isset($_GET["edit"])) {
+                    if ($this->restaurantManagementService->updateRestaurant($restaurant, $_GET["edit"])) {
+                        header("location: restaurants");
+                    } else
+                        $this->msg = "Something went wrong. Please try again";
                 } else {
-                    $this->msg = "Something went wrong. Please try again";
+                    if ($this->restaurantManagementService->insertRestaurant($restaurant)) {
+                        header("location: restaurants");
+                    } else
+                        $this->msg = "Something went wrong. Please try again";
                 }
             }
         }

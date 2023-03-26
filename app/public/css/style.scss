@@ -1412,118 +1412,117 @@ footer {
     font-family: "Alata", "Sans-serif";
     font-weight: 700;
   }
+}
+.user-box {
+  position: relative;
 
-  .user-box {
-    position: relative;
+  input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #000000;
+    outline: none;
+    background: transparent;
 
-    input {
-      width: 100%;
-      padding: 10px 0;
-      font-size: 16px;
-      color: #000000;
-      margin-bottom: 30px;
-      border: none;
-      border-bottom: 1px solid #000000;
-      outline: none;
-      background: transparent;
-
-      &:focus~label,
-      &:valid~label {
-        top: -20px;
-        left: 0;
-        color: #9a031e;
-        font-size: 12px;
-      }
-    }
-
-    label {
-      position: absolute;
-      top: 0;
+    &:focus~label,
+    &:valid~label {
+      top: -20px;
       left: 0;
-      padding: 10px 0;
-      font-size: 16px;
-      color: #000000;
-      pointer-events: none;
-      transition: 0.5s;
+      color: #9a031e;
+      font-size: 12px;
     }
   }
 
-  button {
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
-    padding: 10px 20px;
-    color: #9a031e;
-    font-size: 13px;
-    text-decoration: none;
-    text-transform: uppercase;
-    overflow: hidden;
+  label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #000000;
+    pointer-events: none;
     transition: 0.5s;
-    margin-top: 5%;
-    letter-spacing: 4px;
+  }
+}
 
-    &:hover {
-      background: #9a031e;
-      color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 0 5px #9a031e, 0 0 25px #9a031e, 0 0 50px #9a031e,
-        0 0 100px #9a031e;
-    }
+button.red-outline-animated {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #9a031e;
+  font-size: 13px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-top: 5%;
+  letter-spacing: 4px;
 
-    span {
-      position: absolute;
-      display: block;
-    }
-
-    span:nth-child(1) {
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #9a031e);
-      animation: btn-anim1 1s linear infinite;
-    }
-
-    span:nth-child(2) {
-      top: -100%;
-      right: 0;
-      width: 2px;
-      height: 100%;
-      background: linear-gradient(180deg, transparent, #9a031e);
-      animation: btn-anim2 1s linear infinite;
-      animation-delay: 0.25s;
-    }
-
-    span:nth-child(3) {
-      bottom: 0;
-      right: -100%;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(270deg, transparent, #9a031e);
-      animation: btn-anim3 1s linear infinite;
-      animation-delay: 0.5s;
-    }
-
-    span:nth-child(4) {
-      bottom: -100%;
-      left: 0;
-      width: 2px;
-      height: 100%;
-      background: linear-gradient(360deg, transparent, #9a031e);
-      animation: btn-anim4 1s linear infinite;
-      animation-delay: 0.75s;
-    }
+  &:hover {
+    background: #9a031e;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #9a031e, 0 0 25px #9a031e, 0 0 50px #9a031e,
+      0 0 100px #9a031e;
   }
 
-  .link-info {
-    color: #9a031e !important;
+  span {
+    position: absolute;
+    display: block;
   }
 
-  .error-message {
-    color: red;
+  span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #9a031e);
+    animation: btn-anim1 1s linear infinite;
   }
+
+  span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #9a031e);
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: 0.25s;
+  }
+
+  span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #9a031e);
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: 0.5s;
+  }
+
+  span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #9a031e);
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: 0.75s;
+  }
+}
+
+.link-info {
+  color: #9a031e !important;
+}
+
+.error-message {
+  color: red;
 }
 
 @keyframes btn-anim1 {
@@ -1572,13 +1571,4 @@ footer {
 
 #addRestaurantPage{
   font-family: "Inter";
-  input{
-    font-weight: 500;
-    border-radius: 0;
-    border: 1px solid black;
-    padding: 5px 10px;
-  }
-  button{
-    padding: 10px 20px;
-  }
 }

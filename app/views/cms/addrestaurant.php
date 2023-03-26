@@ -14,35 +14,79 @@
 </head>
 
 <body>
-    <div class="container" id="addRestaurantPage">
-        <h1 class="my-4">Add New Restaurant</h1>
-        <form action="" method="post" class="d-flex flex-column col-6 px-0" enctype="multipart/form-data">
-
-            <input class="my-1" type="text" name="name" placeholder="name">
-            <input class="my-1" type="text" name="cuisine" placeholder="cuisine">
-            <input class="my-1" type="text" name="foodType" placeholder="food type">
-            <input class="my-1" type="number" step="0.1" name="sessionDuration" placeholder="session duration in hours">
-            <input class="my-1" type="number" step="0.5" name="priceIndicator" placeholder="price indicator">
-            <input class="my-1" type="number" step="0.01" name="priceAge12AndUnder" placeholder="price for age 12 and under">
-            <input class="my-1" type="number" step="0.01" name="priceAboveAge12" placeholder="price for above age 12">
-            <input class="my-1" type="number" step="0.1" name="rating" placeholder="rating">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="hasMichelin">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Michelin Star</label>
+    <div class="container d-flex flex-column justify-content-center align-items-center" id="addRestaurantPage">
+        <h1 class="my-4"><?php echo (isset($_GET['edit'])) ? "Edit Restaurant" : "Add New Restaurant"; ?></h1>
+        <form action="" method="post" class="col-12 px-0 d-flex flex-column align-items-center" enctype="multipart/form-data">
+            <div class="d-flex justify-content-center">
+                <div class="col-6">
+                    <div class="user-box">
+                        <input type="text" name="name" required value="<?php echo (isset($restaurant)) ? $restaurant->getName() : ''; ?>">
+                        <label>Restaurant Name</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="text" name="cuisine" required value="<?php echo (isset($restaurant)) ? $restaurant->getCuisine() : ''; ?>">
+                        <label>Cuisine</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="text" name="foodType" required value="<?php echo (isset($restaurant)) ? $restaurant->getFoodType() : ''; ?>">
+                        <label>Food Type</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="number" step="0.1" name="sessionDuration" required value="<?php echo (isset($restaurant)) ? $restaurant->getSessionDuration() : ''; ?>">
+                        <label>Session Duration</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="number" step="0.5" name="priceIndicator" required value="<?php echo (isset($restaurant)) ? $restaurant->getPriceIndicator() : ''; ?>">
+                        <label>Price Indicator</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="number" step="0.01" name="priceAge12AndUnder" required value="<?php echo (isset($restaurant)) ? $restaurant->getPriceAge12AndUnder() : ''; ?>">
+                        <label>Price for age 12 and under</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="number" step="0.01" name="priceAboveAge12" required value="<?php echo (isset($restaurant)) ? $restaurant->getPriceAboveAge12() : ''; ?>">
+                        <label>Price for above age 12</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="number" step="0.1" name="rating" required value="<?php echo (isset($restaurant)) ? $restaurant->getRating() : ''; ?>">
+                        <label>Rating</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="user-box">
+                        <input type="number" name="phoneNumber" required value="<?php echo (isset($restaurant)) ? $restaurant->getPhoneNumber() : ''; ?>">
+                        <label>Phone Number</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="text" name="address" required value="<?php echo (isset($restaurant)) ? $restaurant->getAddress() : ''; ?>">
+                        <label>Address</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="number" name="seats" required value="<?php echo (isset($restaurant)) ? $restaurant->getSeats() : ''; ?>">
+                        <label>Seats</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="text" name="website" required value="<?php echo (isset($restaurant)) ? $restaurant->getWebsite() : ''; ?>">
+                        <label>Website</label>
+                    </div>
+                    <input class="mb-4 px-0 border-0" type="file" name="coverImg" placeholder="cover image" accept="image/png, image/jpeg">
+                    <div class="user-box">
+                        <input type="text" name="description" required value="<?php echo (isset($restaurant)) ? $restaurant->getDescription() : ''; ?>">
+                        <label>Description</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="hasMichelin" <?php echo (isset($restaurant) && $restaurant->getHasMichelin()) ? "checked" : ''; ?>>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Michelin Star</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="isFestival" <?php echo (isset($restaurant) && $restaurant->getIsFestival()) ?  "checked" : ''; ?>>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Yummy Festival</label>
+                    </div>
+                </div>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="isFestival">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Yummy Festival</label>
-            </div>
-            <input class="my-1" type="number" name="phoneNumber" placeholder="phone number">
-            <input class="my-1" type="text" name="address" placeholder="address">
-            <input class="my-1" type="number" name="seats" placeholder="seats">
-            <input class="my-1" type="text" name="website" placeholder="website">
-            <input class="my-1 px-0 border-0" type="file" name="coverImg" placeholder="cover image" accept="image/png, image/jpeg">
-            <input class="my-1" type="text" name="description" placeholder="description">
-
-            <button class="btn btn-red-gradient my-4" name="addrestaurant" value="yes" type="submit">Add new restaurant</button>
+            <button class="btn btn-red-gradient my-2 py-3 col-6" name="addrestaurant" value="yes" type="submit"><?php echo (isset($_GET['edit'])) ? "Save Restaurant" : "Add Restaurant"; ?></button>
             <p class="error-message"><?php echo isset($this->msg) ? $this->msg : '' ?></p>
+
         </form>
 
     </div>

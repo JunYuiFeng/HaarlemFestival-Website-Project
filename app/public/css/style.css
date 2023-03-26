@@ -1248,10 +1248,11 @@ footer #envelopeImg {
   font-family: "Alata", "Sans-serif";
   font-weight: 700;
 }
-.container-fluid.login .user-box {
+
+.user-box {
   position: relative;
 }
-.container-fluid.login .user-box input {
+.user-box input {
   width: 100%;
   padding: 10px 0;
   font-size: 16px;
@@ -1262,13 +1263,13 @@ footer #envelopeImg {
   outline: none;
   background: transparent;
 }
-.container-fluid.login .user-box input:focus ~ label, .container-fluid.login .user-box input:valid ~ label {
+.user-box input:focus ~ label, .user-box input:valid ~ label {
   top: -20px;
   left: 0;
   color: #9a031e;
   font-size: 12px;
 }
-.container-fluid.login .user-box label {
+.user-box label {
   position: absolute;
   top: 0;
   left: 0;
@@ -1278,7 +1279,8 @@ footer #envelopeImg {
   pointer-events: none;
   transition: 0.5s;
 }
-.container-fluid.login button {
+
+button.red-outline-animated {
   background-color: transparent;
   border: 0;
   cursor: pointer;
@@ -1294,17 +1296,17 @@ footer #envelopeImg {
   margin-top: 5%;
   letter-spacing: 4px;
 }
-.container-fluid.login button:hover {
+button.red-outline-animated:hover {
   background: #9a031e;
   color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 5px #9a031e, 0 0 25px #9a031e, 0 0 50px #9a031e, 0 0 100px #9a031e;
 }
-.container-fluid.login button span {
+button.red-outline-animated span {
   position: absolute;
   display: block;
 }
-.container-fluid.login button span:nth-child(1) {
+button.red-outline-animated span:nth-child(1) {
   top: 0;
   left: -100%;
   width: 100%;
@@ -1312,7 +1314,7 @@ footer #envelopeImg {
   background: linear-gradient(90deg, transparent, #9a031e);
   animation: btn-anim1 1s linear infinite;
 }
-.container-fluid.login button span:nth-child(2) {
+button.red-outline-animated span:nth-child(2) {
   top: -100%;
   right: 0;
   width: 2px;
@@ -1321,7 +1323,7 @@ footer #envelopeImg {
   animation: btn-anim2 1s linear infinite;
   animation-delay: 0.25s;
 }
-.container-fluid.login button span:nth-child(3) {
+button.red-outline-animated span:nth-child(3) {
   bottom: 0;
   right: -100%;
   width: 100%;
@@ -1330,7 +1332,7 @@ footer #envelopeImg {
   animation: btn-anim3 1s linear infinite;
   animation-delay: 0.5s;
 }
-.container-fluid.login button span:nth-child(4) {
+button.red-outline-animated span:nth-child(4) {
   bottom: -100%;
   left: 0;
   width: 2px;
@@ -1339,10 +1341,12 @@ footer #envelopeImg {
   animation: btn-anim4 1s linear infinite;
   animation-delay: 0.75s;
 }
-.container-fluid.login .link-info {
+
+.link-info {
   color: #9a031e !important;
 }
-.container-fluid.login .error-message {
+
+.error-message {
   color: red;
 }
 
@@ -1380,13 +1384,4 @@ footer #envelopeImg {
 }
 #addRestaurantPage {
   font-family: "Inter";
-}
-#addRestaurantPage input {
-  font-weight: 500;
-  border-radius: 0;
-  border: 1px solid black;
-  padding: 5px 10px;
-}
-#addRestaurantPage button {
-  padding: 10px 20px;
 }/*# sourceMappingURL=style.css.map */

@@ -15,9 +15,19 @@ class RestaurantsManagementService
         return $this->repository->getAll();
     }
 
+    public function getById($id)
+    {
+        return $this->repository->getById($id);
+    }
+
     public function insertRestaurant($restaurant)
     {
         return $this->repository->insertRestaurant($restaurant);
+    }
+
+    public function updateRestaurant($restaurant, $id)
+    {
+        return $this->repository->updateRestaurant($restaurant, $id);
     }
 
     public function deleteRestaurant($id)
