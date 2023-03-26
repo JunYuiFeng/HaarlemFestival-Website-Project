@@ -118,7 +118,7 @@
             <div class="col-4"><button><b>Build your own personal program</b></button></div>
         </div>
 
-        <form id="reservationForm" method="POST">
+        <form id="reservationForm">
             <div class="row">
                 <div class="col-7">
                     <img class="img-fluid" src="/img/RatatouilleImg2.jpg" alt="">
@@ -131,14 +131,12 @@
                         <div class="row">
                             <div class="col">
                                 <h3><b>How many people?</b></h3>
-
                                 <div class="form-group row reservationQuantityOfPoeple">
                                     <label for="amountAbove12" class="col-8 col-form-label">Above 12 years:</label>
                                     <div class="col-4">
                                         <input type="number" class="form-control" name="amountAbove12">
                                     </div>
                                 </div>
-
 
                                 <div class="form-group row reservationQuantityOfPoeple">
                                     <label for="amountUnderOr12" class="col-8 col-form-label">12 years or under:</label>
@@ -189,11 +187,42 @@
     <?php
     include __DIR__ . '/../footer.php';
     ?>
-
+i
     <script>
-        document.getElementById("addToCart").addEventListener("click", function() {
-            document.getElementById("reservationForm").submit();
+        // document.getElementById("addToCart").addEventListener("click", function() {
+        //     document.getElementById("reservationForm").submit();
+        // });
+
+        const restaurantId = <?= $restaurant->getId() ?>;
+
+        document.querySelector("#addToCart").addEventListener("click", function(event) {
+            event.preventDefault(); // prevent form from submitting
+
+            const formData = new FormData(document.getElementById("reservationForm")); // get form data
+            const reservationData = Object.fromEntries(formData.entries()); // convert form data to object
+
+            reservationData.restaurantId = restaurantId;
+
+            addToCart(reservationData);
         });
+
+
+        function addToCart(reservationData) {
+            fetch('http://localhost/api/cart/addToCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(reservationData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
+                .catch(error => {
+                    console.error('Error adding item to cart:', error);
+                });
+        }
     </script>
 </body>
 

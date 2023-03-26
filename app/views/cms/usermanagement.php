@@ -30,11 +30,10 @@
                     <th scope="col">Id</th>
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Password</th>
-                    <th scope="col">Role</th>
                 </tr>
             </thead>
             <tbody id="userTableBody">
+               
             </tbody>
         </table>
     </div>
@@ -44,30 +43,16 @@
         const searchInput = document.getElementById("searchInput");
         const userTableBody = document.getElementById("userTableBody");
 
-        fetch(`http://localhost/api/cms`)
-            .then(result => result.json())
-            .then(users => {
+        // const userId = document.getElementById("userId").value;
+        // const userName = document.getElementById("userName").value;
+        // const userEmail = document.getElementById("userEmail").value;
 
-                // Create new table rows for each search result
-                users.forEach(user => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                <td>${user.id}</td>
-                <td><input type="text" placeholder="${user.username}"></td>
-                <td><input type="text" placeholder="${user.email}"></td>
-                <td><input type="text" placeholder="${user.password}"></td>
-                <td><input type="text" placeholder="${user.userType}"></td>
-                <td><input type="submit" value="Update"></td>
-            `;
-                    userTableBody.appendChild(row);
-                });
-            })
+        function deleteRow(id) {
+            document.getElementById(id).remove();
+        }
 
-        searchInput.addEventListener("input", function(event) {
-
-            const query = searchInput.value; // Get search query from input field
-
-            fetch(`http://localhost/api/cms?query=${query}`)
+        function fetchUsers(query) {
+            fetch(`http://localhost/api/cms/searchfilter?query=${query}`)
                 .then(result => result.json())
                 .then(userResult => {
 
@@ -80,25 +65,62 @@
                         userResult.forEach(user => {
                             const row = document.createElement("tr");
                             row.innerHTML = `
-            <td>${user.id}</td>
-            <td><input type="text" placeholder="${user.username}"></td>
-            <td><input type="text" placeholder="${user.email}"></td>
-            <td><input type="text" placeholder="${user.password}"></td>
-            <td><input type="text" placeholder="${user.userType}"></td>
-            <td><input type="submit" value="Update"></td>
-        `;
+    <td id="userId">${user.id}</td>
+    <td id="userName"><input type="text" placeholder="${user.username}"></td>
+    <td id="userEmail"><input type="text" placeholder="${user.email}"></td>
+    <td><input id="update" type="submit" value="Update" onclick="update(${user.id}, '${user.username}', '${user.email}')"></td>
+    <td><button class="btn-danger" onclick="delete("")">delete</button></td>
+`;
+
                             userTableBody.appendChild(row);
                         });
                     }
                 })
                 .catch(error => console.error(error))
+        }
+
+        searchInput.addEventListener("input", function(event) {
+            const query = searchInput.value; // Get search query from input field
+            fetchUsers(query);
         });
+
+        // Trigger input event on page load
+        const inputEvent = new Event('input');
+        searchInput.dispatchEvent(inputEvent);
     </script>
+
 
     <?php
     include __DIR__ . '/../footer.php';
     ?>
-
 </body>
 
 </html>
+
+<!-- function update(userId, userName, userEmail) {
+
+fetch(`http://localhost/api/cms/update`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            userId: userId,
+            username: userName,
+            email: userEmail
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            // Handle successful response
+            console.log("User data updated successfully.");
+        } else {
+            // Handle error response
+            console.error("Update request failed.");
+        }
+    })
+    .catch(error => {
+        // Handle network error
+        console.error(error);
+    });
+} -->

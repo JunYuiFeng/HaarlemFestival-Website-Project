@@ -32,4 +32,9 @@ class UserService{
     {
         return $this->repository->getByEmail($email);
     }
+    
+    public function editUserTest($username,$email,$id)
+    {
+        return $this->repository->editUserTest($username,$email,$id);
+    }
 }

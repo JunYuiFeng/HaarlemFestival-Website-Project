@@ -74,6 +74,7 @@ class UsersRepository extends Repository
             echo $e;
         }
     }
+
     function editUser($username,$email,$password,$id){
         try{
             $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email, password = :password WHERE id = :id');
@@ -83,6 +84,26 @@ class UsersRepository extends Repository
             echo $e;
         }
     }   
+
+    function editUserTest($username,$email,$id) {
+        try{
+            $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email WHERE id = :id');
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+            $user = $stmt->fetch();
+
+            return $user;
+
+        } catch (PDOException $e)
+        {
+            echo $e;
+        }
+    }
+
     function deleteUser($id){
         try{
             $stmt = $this->connection->prepare("DELETE FROM users WHERE id = :id");
