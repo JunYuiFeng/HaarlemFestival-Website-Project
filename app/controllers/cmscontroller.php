@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../services/editPageService.php';
-require_once __DIR__ . '/../services/restaurantsManagementService.php';
+require_once __DIR__ . '/../services/restaurantsmanagementservice.php';
+require_once __DIR__ . '/../services/sessionservice.php';
 
 require_once __DIR__ . '/../services/userservice.php';
 
@@ -10,16 +11,18 @@ class CmsController
     private $restaurants;
     private $contentEditorService;
     private $restaurantManagementService;
-    private $msg;
+    private $sessionService;
     private $userService;
+    private $msg;
 
 
     function __construct()
     {
         $this->contentEditorService = new EditPageService();
         $this->restaurantManagementService = new RestaurantsManagementService();
-        $this->msg = "";
         $this->userService = new UserService();
+        $this->sessionService = new SessionService();
+        $this->msg = "";
     }
 
     public function usermanagement()
@@ -238,5 +241,45 @@ class CmsController
         }
 
         require __DIR__ . '/../views/cms/addrestaurant.php';
+    }
+
+    public function managesessions()
+    {
+        if (isset($_GET["edit"])) {
+            $editSession = $this->sessionService->getById($_GET["edit"]);
+        }
+
+        if (isset($_POST["addSession"])) {
+            foreach ($_POST as $field) {
+                if (empty($field))
+                    $this->msg = "Please fill all the fields";
+            }
+            if ($this->msg == "") {
+                $session = (isset($_GET["edit"])) ? $editSession : new Session(); // checking if user edits session or creates new one
+                $session->setName($_POST["name"]);
+                $session->setStartTime($_POST["startTime"]);
+                $session->setEndTime($_POST["endTime"]);
+                $session->setRestaurantId($_POST["restaurantId"]);
+                if (isset($_GET["edit"])) {
+                    if ($this->sessionService->update($session)) {
+                        header("location: managesessions");
+                    } else
+                        $this->msg = "Something went wrong. Please try again";
+                } else {
+                    if ($this->sessionService->insert($session)) {
+                        header("location: managesessions");
+                    } else
+                        $this->msg = "Something went wrong. Please try again";
+                }
+            }
+        }
+
+        if (isset($_GET["delete"])) {
+            $id = $_GET['delete'];
+            $this->sessionService->delete($id);
+            header("location: managesessions");
+        }
+        $sessions = $this->sessionService->getAll();
+        require __DIR__ . '/../views/cms/managesessions.php';
     }
 }

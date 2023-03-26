@@ -3,6 +3,7 @@
 body {
   font-family: "Inter";
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 nav {
