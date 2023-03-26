@@ -32,7 +32,7 @@
                             </div>
                             <p class="error-message"><?php echo isset($this->msg) ? $this->msg : '' ?></p>
 
-                            <button type="submit" name="sendLink">
+                            <button type="submit" name="sendLink" class="red-outline-animated">
                                 <span></span>
                                 <span></span>
                                 <span></span>

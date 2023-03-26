@@ -23,16 +23,19 @@ class VisitHaarlemController
 
     public function food()
     {
+        $this->content = $this->contentEditorService->getPageContent("Food");
         $restaurants = $this->restaurantService->getAll();
         require __DIR__ . '/../views/visithaarlem/food.php';
     }
 
     public function history()
     {
+        $this->content = $this->contentEditorService->getPageContent("History");
         require __DIR__ . '/../views/visithaarlem/history.php';
     }
 
-    public function culture(){        
+    public function culture(){   
+        $this->content = $this->contentEditorService->getPageContent("Culture");
         require __DIR__ . '/../views/visithaarlem/culture.php';
     }
     public function theatre(){
@@ -46,6 +49,7 @@ class VisitHaarlemController
     }
     public function kids()
     {
+        $this->content = $this->contentEditorService->getPageContent("Kids");
         require __DIR__ . '/../views/visithaarlem/kids.php';
     }
 }

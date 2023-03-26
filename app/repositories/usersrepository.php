@@ -56,7 +56,7 @@ class UsersRepository extends Repository
     }
 
 
-    function createUser($username, $email, $password, $userType)
+    function createUserAdAdmin($username, $email, $password, $userType)
     {
         try {
             $sql = 'INSERT INTO `Users`(`username`, `email`, `password`, `userType`) VALUES (:username, :email, :password, :userType)';
@@ -84,29 +84,21 @@ class UsersRepository extends Repository
             echo $e;
         }
     }   
-
-    function editUserTest($username,$email,$id) {
+    
+    function editUserAsAdmin($username,$email,$password,$id, $userType){
         try{
-            $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email WHERE id = :id');
-            $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':id', $id);
-            $stmt->execute();
-
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
-            $user = $stmt->fetch();
-
-            return $user;
-
+            $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email, userType =:userType, password = :password WHERE id = :id');
+            $stmt->execute(array(':username' =>$username, ':email' => $email, 'userType'=>$userType, ':password' => $password, ':id' => $id));
         } catch (PDOException $e)
         {
             echo $e;
         }
-    }
-
+    }   
     function deleteUser($id){
         try{
-            $stmt = $this->connection->prepare("DELETE FROM users WHERE id = :id");
+            $stmt = $this->connection->prepare("DELETE FROM `Users` WHERE id = :id;");
+            
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
         } catch (PDOException $e)
         {

@@ -8,7 +8,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
     </head>
 </head>
@@ -27,9 +28,17 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Id<button name="action" type="submit" value="sortIdASC">&#x25b4;</button><button
+                            name="action" type="submit" value="sortIdDESC">&#x25be;</th>
+                    <th scope="col">Username<button name="action" type="submit"
+                            value="sortUsernameASC">&#x25b4;</button><button name="action" type="submit"
+                            value="sortUsernameDESC">&#x25be;</th>
+                    <th scope="col">Email<button name="action" type="submit"
+                            value="sortEmailASC">&#x25b4;</button><button name="action" type="submit"
+                            value="sortEmailDESC">&#x25be;</th>
+
+                    <th scope="col">Password</th>
+                    <th scope="col">Role</th>
                 </tr>
             </thead>
             <tbody id="userTableBody">

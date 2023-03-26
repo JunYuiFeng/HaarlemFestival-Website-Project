@@ -4,13 +4,16 @@
 body {
   font-family: "Inter";
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 nav {
-  background: linear-gradient(90.05deg,
-      #321325 0.73%,
-      #7f4066 99.97%,
-      #7f4066 99.97%);
+  background: linear-gradient(
+    90.05deg,
+    #321325 0.73%,
+    #7f4066 99.97%,
+    #7f4066 99.97%
+  );
 
   .logo {
     width: 75%;
@@ -18,7 +21,7 @@ nav {
 
   .nav-item {
     font-family: "Inter";
-
+    cursor: pointer;
     .nav-link {
       font-size: 22px;
       margin-left: 20px;
@@ -26,6 +29,70 @@ nav {
     }
   }
 }
+.cart-opened {
+  display: none;
+  position: absolute;
+  top: 80%;
+  right: 6%;
+  height: 400px;
+  z-index: 10;
+  background: linear-gradient(180deg, #9a031e 0%, #330009 100%);
+  border-radius: 20px;
+  color: white;
+  padding: 10px 20px;
+  img{
+    width: 35px;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+  }
+  .items-scroll{
+    overflow-y: scroll;
+    height: 215px;
+  }
+  .item {
+    background: #e3e3e3;
+    backdrop-filter: blur(26px);
+    border-radius: 14px;
+    padding: 10px 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Inter";
+    color: black;
+    h1 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+    p {
+      font-size: 12px;
+      margin-bottom: 0;
+    }
+  }
+  .divider-gradient {
+    height: 1px;
+    width: 100%;
+    margin: 10px 0;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      #ffffff 46.88%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+  p{
+    font-size: 10px ;
+    margin-bottom: 0;
+  }
+  h2{
+    font-size: 16px;
+  }
+}
+.cart-opened.expand {
+  display: block;
+}
+
 
 #transparent-navbar {
   position: absolute;
@@ -49,9 +116,8 @@ footer {
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
-
-  &:hover {
-    opacity: 0.9;
+  &:focus {
+    box-shadow: none;
   }
 
   &.btn-red-gradient {
@@ -61,6 +127,10 @@ footer {
     font-size: 14px;
     line-height: normal;
     padding: 5px 20px;
+    &:hover {
+      opacity: 0.8;
+      background: linear-gradient(92.89deg, #93051f 0%, #37020b 100%);
+    }
   }
 
   &.btn-yellow-gradient {
@@ -70,6 +140,10 @@ footer {
     font-size: 14px;
     line-height: normal;
     padding: 5px 20px;
+    &:hover {
+      opacity: 0.9;
+      background: linear-gradient(92.89deg, #ffd000 0%, #ffd000 100%);
+    }
   }
 }
 
@@ -360,17 +434,16 @@ footer {
     }
 
     .seeMoreBtn {
-      background: #FCDC4D;
+      background: #fcdc4d;
       border-radius: 12px;
       padding: 3% 5%;
     }
   }
 }
 
-
 //======Yummie=======
 .yummieWelcomeParagraph {
-  background: linear-gradient(180deg, #9A031E 0%, #3E030E 100%);
+  background: linear-gradient(180deg, #9a031e 0%, #3e030e 100%);
   color: white;
   padding: 100px 120px;
 }
@@ -380,14 +453,14 @@ footer {
 
   .title {
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    color: #9A031E;
+    color: #9a031e;
   }
 }
 
 .personalProgramOffer {
   padding: 50px 40px;
   margin: 40px 0px;
-  background: linear-gradient(180deg, #9A031E 0%, #35020B 100%);
+  background: linear-gradient(180deg, #9a031e 0%, #35020b 100%);
 
   p {
     color: white;
@@ -395,12 +468,11 @@ footer {
   }
 
   button {
-    background: #FCDC4D;
+    background: #fcdc4d;
     border-radius: 16px;
     padding: 10px 12px;
   }
 }
-
 
 //========Restaurant detail page==========
 .restaurantDetailPageContainer {
@@ -421,7 +493,7 @@ footer {
       }
 
       .michelinText {
-        color: #D3072B;
+        color: #d3072b;
         font-size: 18pt;
         font-weight: 600;
       }
@@ -440,7 +512,7 @@ footer {
     button {
       margin-top: 50px;
       padding: 1% 4%;
-      background: #FCDC4D;
+      background: #fcdc4d;
       border-radius: 13px;
       border: 0;
       font-size: 13pt;
@@ -453,7 +525,7 @@ footer {
 }
 
 .restaurantRow2Box {
-  background: linear-gradient(180deg, #9A031E 0%, #2B0209 100%);
+  background: linear-gradient(180deg, #9a031e 0%, #2b0209 100%);
   color: white;
   height: 100%;
   padding-top: 7%;
@@ -474,7 +546,7 @@ footer {
 }
 
 #restaurantReservationBox {
-  background: linear-gradient(180deg, #9A031E 0%, #2B0209 100%);
+  background: linear-gradient(180deg, #9a031e 0%, #2b0209 100%);
   color: white;
   height: 100%;
   filter: drop-shadow(4px 4px 20px rgba(0, 0, 0, 0.5));
@@ -554,7 +626,6 @@ footer {
 //visit haarlem for history page end
 //culture
 
-
 .cultureTitle {
   color: #5f0f40;
   margin-top: 50px;
@@ -587,17 +658,13 @@ footer {
 .boxImg {
   width: 300px;
   margin-left: 25%;
-
 }
-
 
 .boxImgDetailedPage {
   width: 250px;
   margin-left: 0;
   margin-right: auto;
-
 }
-
 
 .MuseumBox {
   margin-top: 30px;
@@ -669,7 +736,6 @@ footer {
   align-content: center;
 }
 
-
 #VisitHaarlemMuseumImg1 {
   width: 750px;
   height: 770px;
@@ -683,7 +749,7 @@ footer {
 .cardCulture1 {
   align-items: center;
   width: 100%;
-  background: linear-gradient(96.95deg, #620011 12.24%, #2E0B1F 80.77%);
+  background: linear-gradient(96.95deg, #620011 12.24%, #2e0b1f 80.77%);
   box-shadow: 0px 52px 54px 2px rgba(0, 0, 0, 0.11);
   color: white;
   line-height: 200%;
@@ -692,17 +758,14 @@ footer {
 }
 
 .cardCulture2 {
-
   width: 100%;
-  background: linear-gradient(96.95deg, #620011 12.24%, #2E0B1F 80.77%);
+  background: linear-gradient(96.95deg, #620011 12.24%, #2e0b1f 80.77%);
   box-shadow: 0px 52px 54px 2px rgba(0, 0, 0, 0.11);
   transform: matrix(-1, 0, 0, 1, 0, 0);
   color: white;
   line-height: 200%;
   padding: 30px;
 }
-
-
 
 #cultureText1 {
   margin: 50px;
@@ -726,11 +789,11 @@ footer {
 }
 
 .danceHomeNameArtist {
-  background: linear-gradient(106.4deg, #FFFFFF 5.75%, #FFFFFF 88.63%);
+  background: linear-gradient(106.4deg, #ffffff 5.75%, #ffffff 88.63%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0px 4px 26px #FFB800;
+  text-shadow: 0px 4px 26px #ffb800;
   position: absolute;
 }
 
@@ -752,7 +815,6 @@ footer {
 #danceHomeNameArtist4 {
   left: 416px;
   top: 401px;
-
 }
 
 #danceHomeNameArtist5 {
@@ -766,7 +828,7 @@ footer {
 }
 
 #dancePersonalProrgam {
-  background: linear-gradient(180deg, #9A031E 0%, #35020B 100%);
+  background: linear-gradient(180deg, #9a031e 0%, #35020b 100%);
   position: absolute;
   top: 792px;
   left: 120px;
@@ -777,18 +839,18 @@ footer {
 }
 
 #dancePersonalProgramButton {
-  background: #FCDC4D;
+  background: #fcdc4d;
   border-radius: 16px;
   width: 110%;
   height: 40px;
 }
 
 .danceHomeNameArtistCard {
-  background: linear-gradient(106.4deg, #FFFFFF 5.75%, #FFFFFF 88.63%);
+  background: linear-gradient(106.4deg, #ffffff 5.75%, #ffffff 88.63%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0px 4px 26px #FFB800;
+  text-shadow: 0px 4px 26px #ffb800;
 }
 
 .danceHomeNameArtistCard {
@@ -797,7 +859,8 @@ footer {
 
 .danceCardType1 {
   background: #151515;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 21px 18px 52px rgba(0, 0, 0, 0.45);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+    21px 18px 52px rgba(0, 0, 0, 0.45);
   border-radius: 22px;
   color: white;
   padding: 30px;
@@ -805,7 +868,7 @@ footer {
 }
 
 .danceCardType2 {
-  background: linear-gradient(158.75deg, #151515 31.35%, #4A0000 99.61%);
+  background: linear-gradient(158.75deg, #151515 31.35%, #4a0000 99.61%);
   box-shadow: 0px 52px 54px rgba(0, 0, 0, 0.1);
   color: white;
   text-align: center;
@@ -824,7 +887,7 @@ footer {
 }
 
 .danceViewMore {
-  background: #6A0013;
+  background: #6a0013;
   color: white;
   width: 350px;
   height: 40px;
@@ -835,9 +898,10 @@ footer {
 
 #danceAllAccessPass {
   background: #151515;
-  box-shadow: 0px -4px 63px 22px rgba(255, 184, 0, 0.64), 13px 20px 8px -12px #000000;
+  box-shadow: 0px -4px 63px 22px rgba(255, 184, 0, 0.64),
+    13px 20px 8px -12px #000000;
   margin: 30px;
-  color: #FFB800;
+  color: #ffb800;
   width: 60%;
   height: 100px;
   margin-top: 70px;
@@ -845,8 +909,9 @@ footer {
 
 .danceDailyAccessPass {
   align-self: center;
-  background: #FFFFFF;
-  box-shadow: 5px 6px 5px 1px rgba(0, 0, 0, 0.85), 0px 1px 19px 20px rgba(150, 137, 137, 0.47);
+  background: #ffffff;
+  box-shadow: 5px 6px 5px 1px rgba(0, 0, 0, 0.85),
+    0px 1px 19px 20px rgba(150, 137, 137, 0.47);
   border-radius: 13px;
   height: 90px;
   margin: 30px;
@@ -854,7 +919,7 @@ footer {
 }
 
 .danceTableContent {
-  background: linear-gradient(101.77deg, #9A031E 18.12%, #000000 127.71%);
+  background: linear-gradient(101.77deg, #9a031e 18.12%, #000000 127.71%);
   border-radius: 24px;
   padding: 20px;
   margin-top: 80px;
@@ -864,11 +929,9 @@ footer {
   position: relative;
 
   z-index: 10;
-
 }
 
 #danceTableContentDay1 {
-
   table,
   th,
   td {
@@ -882,8 +945,9 @@ footer {
 
   .danceTableContentButton {
     margin-top: 50px;
-    background: #FFFFFF;
-    box-shadow: 5px 6px 5px 1px rgba(0, 0, 0, 0.85), 0px 1px 19px 20px rgba(150, 137, 137, 0.47);
+    background: #ffffff;
+    box-shadow: 5px 6px 5px 1px rgba(0, 0, 0, 0.85),
+      0px 1px 19px 20px rgba(150, 137, 137, 0.47);
     border-radius: 13px;
     width: 250px;
     height: 50px;
@@ -894,7 +958,12 @@ footer {
   //background-color: red;
   padding-bottom: 20px;
   margin-top: 80px;
-  background: conic-gradient(from 75.58deg at -16.05% 100%, #000000 0deg, #6D0000 71.01deg, #000000 360deg);
+  background: conic-gradient(
+    from 75.58deg at -16.05% 100%,
+    #000000 0deg,
+    #6d0000 71.01deg,
+    #000000 360deg
+  );
 }
 
 .danceVanue {
@@ -929,9 +998,8 @@ footer {
   background-color: #000000;
   color: white;
 
-
   .danceTopSongs {
-    background: linear-gradient(100.1deg, #9A031E 17.05%, #000000 57.56%);
+    background: linear-gradient(100.1deg, #9a031e 17.05%, #000000 57.56%);
     color: white;
     text-align: center;
     margin-left: auto;
@@ -947,19 +1015,21 @@ footer {
 
   .dancedetailedimg1 {
     padding: 5em;
-    background: #9A031E;
-    box-shadow: 6px 0px 30px -4px #FFB800;
+    background: #9a031e;
+    box-shadow: 6px 0px 30px -4px #ffb800;
     border-radius: 56px;
   }
-  #careerHighlight{
-    background: linear-gradient(245.73deg, #9A031E 17.74%, #000000 101.89%);
+  #careerHighlight {
+    background: linear-gradient(245.73deg, #9a031e 17.74%, #000000 101.89%);
   }
 
   .dancePageTitle {
     color: white;
     margin-top: 50px;
     margin-bottom: 40px;
-    filter: drop-shadow(0px 8px 18px #FFB800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #FFB800);
+    filter: drop-shadow(0px 8px 18px #ffb800)
+      drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
+      drop-shadow(-2px 12px 34px #ffb800);
 
     h1 {
       font-weight: 800;
@@ -975,13 +1045,15 @@ footer {
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
   }
-
 }
 
 // museum
 
 //index
-
+#myProfileIndexBody {
+  background: linear-gradient(101.77deg, #9a031e 18.12%, #000000 127.71%);
+  color: white;
+}
 
 //kids page
 .kids-welcome-screen {
@@ -1397,118 +1469,117 @@ footer {
     font-family: "Alata", "Sans-serif";
     font-weight: 700;
   }
+}
+.user-box {
+  position: relative;
 
-  .user-box {
-    position: relative;
+  input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #000000;
+    outline: none;
+    background: transparent;
 
-    input {
-      width: 100%;
-      padding: 10px 0;
-      font-size: 16px;
-      color: #000000;
-      margin-bottom: 30px;
-      border: none;
-      border-bottom: 1px solid #000000;
-      outline: none;
-      background: transparent;
-
-      &:focus~label,
-      &:valid~label {
-        top: -20px;
-        left: 0;
-        color: #9a031e;
-        font-size: 12px;
-      }
-    }
-
-    label {
-      position: absolute;
-      top: 0;
+    &:focus ~ label,
+    &:valid ~ label {
+      top: -20px;
       left: 0;
-      padding: 10px 0;
-      font-size: 16px;
-      color: #000000;
-      pointer-events: none;
-      transition: 0.5s;
+      color: #9a031e;
+      font-size: 12px;
     }
   }
 
-  button {
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
-    padding: 10px 20px;
-    color: #9a031e;
-    font-size: 13px;
-    text-decoration: none;
-    text-transform: uppercase;
-    overflow: hidden;
+  label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #000000;
+    pointer-events: none;
     transition: 0.5s;
-    margin-top: 5%;
-    letter-spacing: 4px;
+  }
+}
 
-    &:hover {
-      background: #9a031e;
-      color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 0 5px #9a031e, 0 0 25px #9a031e, 0 0 50px #9a031e,
-        0 0 100px #9a031e;
-    }
+button.red-outline-animated {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #9a031e;
+  font-size: 13px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-top: 5%;
+  letter-spacing: 4px;
 
-    span {
-      position: absolute;
-      display: block;
-    }
-
-    span:nth-child(1) {
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #9a031e);
-      animation: btn-anim1 1s linear infinite;
-    }
-
-    span:nth-child(2) {
-      top: -100%;
-      right: 0;
-      width: 2px;
-      height: 100%;
-      background: linear-gradient(180deg, transparent, #9a031e);
-      animation: btn-anim2 1s linear infinite;
-      animation-delay: 0.25s;
-    }
-
-    span:nth-child(3) {
-      bottom: 0;
-      right: -100%;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(270deg, transparent, #9a031e);
-      animation: btn-anim3 1s linear infinite;
-      animation-delay: 0.5s;
-    }
-
-    span:nth-child(4) {
-      bottom: -100%;
-      left: 0;
-      width: 2px;
-      height: 100%;
-      background: linear-gradient(360deg, transparent, #9a031e);
-      animation: btn-anim4 1s linear infinite;
-      animation-delay: 0.75s;
-    }
+  &:hover {
+    background: #9a031e;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #9a031e, 0 0 25px #9a031e, 0 0 50px #9a031e,
+      0 0 100px #9a031e;
   }
 
-  .link-info {
-    color: #9a031e !important;
+  span {
+    position: absolute;
+    display: block;
   }
 
-  .error-message {
-    color: red;
+  span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #9a031e);
+    animation: btn-anim1 1s linear infinite;
   }
+
+  span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #9a031e);
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: 0.25s;
+  }
+
+  span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #9a031e);
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: 0.5s;
+  }
+
+  span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #9a031e);
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: 0.75s;
+  }
+}
+
+.link-info {
+  color: #9a031e !important;
+}
+
+.error-message {
+  color: red;
 }
 
 @keyframes btn-anim1 {
@@ -1553,4 +1624,8 @@ footer {
   100% {
     bottom: 100%;
   }
+}
+
+#addRestaurantPage {
+  font-family: "Inter";
 }

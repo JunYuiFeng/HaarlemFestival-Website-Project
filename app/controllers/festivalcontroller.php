@@ -1,16 +1,19 @@
 <?php
 require_once __DIR__ . '/../services/restaurantservice.php';
+require_once __DIR__ . '/../services/danceservice.php';
 require_once __DIR__ . '/../services/sessionservice.php';
 require_once __DIR__ . '/../services/reservationservice.php';
 
 class FestivalController
 {
     private $restaurantService;
+    private $danceService;
     private $sessionService;
     private $reservationService;
 
     function __construct()
     {
+        $this->danceService = new DanceService();
         $this->restaurantService = new RestaurantService();
         $this->sessionService = new SessionService();
         $this->reservationService = new ReservationService();
@@ -21,8 +24,15 @@ class FestivalController
         require __DIR__ . '/../views/festival/index.php';
     }
 
-    public function dance()
-    {
+    public function dance(){
+        $danecVanueType = "";
+        $DanceCardType = 0;
+        $dances = $this->danceService->getAll();
+        $artists = $this->danceService->getArtistsBySession();
+        $vanues = $this->danceService->getVanue();
+        $dancesByDate27Jul = $this->danceService->getAllByDate('27 Jul');
+        $dancesByDate28Jul = $this->danceService->getAllByDate('28 Jul');
+        $dancesByDate29Jul = $this->danceService->getAllByDate('29 Jul');
         require __DIR__ . '/../views/festival/dance.php';
     }
     public function dancedetailedpage1()
