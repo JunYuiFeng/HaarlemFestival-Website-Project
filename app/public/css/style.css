@@ -36,6 +36,9 @@ footer {
 footer #envelopeImg {
   size: 10px;
 }
+footer .footerImg {
+  width: 30px;
+}
 
 .btn {
   font-family: "Inter";

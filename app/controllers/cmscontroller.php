@@ -24,19 +24,20 @@ class CmsController
 
     public function usermanagement()
     {
-
         $users = $this->userService->getAll();
-        $userService = $this->userService;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            echo "POST";
             switch ($_POST['action']) {
                 case 'update':
+                    echo "update";
                     $this->updateItem();
                     break;
                 case 'delete':
                     $this->delete();
+                    echo "delete";
                     break;
                 case 'create':
-                    $this->create();
+                    $this->createUser();
                     break;
                 case 'sortIdAsc':
                     sort($users);
@@ -90,14 +91,13 @@ class CmsController
     {
         // put to service
         try {
-            if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']) || empty($_POST['userType']) || empty($_POST['id'])) {
+            if (empty($_POST['username']) || empty($_POST['email']) || empty($_POST['userType']) || empty($_POST['id'])) {
                 $msg = "field empty, please fill in";
+                echo "update failed";
                 return;
             }
-            echo "update";
-            $username = htmlspecialchars($_POST['username']);
-            $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
 
+            $username = htmlspecialchars($_POST['username']);
             $email = htmlspecialchars($_POST['email']);
             $id = htmlspecialchars($_POST['id']);
             $userType = htmlspecialchars($_POST['userType']);
@@ -106,7 +106,7 @@ class CmsController
             } else {
                 $userType = 1;
             }
-            $this->userService->editUserAsAdmin($username, $email, $password, $id, $userType);
+            $this->userService->editUserAsAdmin($username, $email, $id, $userType);
 
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -114,7 +114,7 @@ class CmsController
     }
 
 
-    public function create()
+    public function createUser()
     {
         try {
             if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']) || empty($_POST['userType'])) {
@@ -138,7 +138,7 @@ class CmsController
                 $userType = 1;
             }
             echo "controler";
-            $this->userService->addUserAsAdmin($username, $email, $password, $userType);
+            $this->userService->createUser($username, $email, $password, $userType);
 
         } catch (Exception $e) {
             echo $e->getMessage();

@@ -1,4 +1,10 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require '../vendor/autoload.php';
 require_once __DIR__ . "/../repositories/usersrepository.php";
 class UserService
 {
@@ -17,19 +23,53 @@ class UserService
         return $this->repository->getById($id);
     }
 
-    public function addUserAsAdmin($username, $email, $password,$userType)
+    public function CreateUser($username, $email, $password,$userType)
     {
         echo "service";
-        return $this->repository->createUserAdAdmin($username, $email, $password,$userType);
+        return $this->repository->CreateUser($username, $email, $password,$userType);
     }
-    public function editUserAsAdmin($username, $email, $password, $id,$userType)
+    public function editUserAsAdmin($username, $email, $id,$userType)
     {
-        return $this->repository->editUserAsAdmin($username, $email, $password, $id, $userType);
+        echo "service";
+        return $this->repository->editUserAsAdmin($username, $email, $id, $userType);
     }
     public function checkPassowrd($password){
         
         return $this->repository->checkPassowrd($password);
     }
+    
+    public function sendLink(string $email): bool
+    {
+        $mail = new PHPMailer(false); //Create an instance; passing `true` enables exceptions
+        try {
+            //Server settings
+            $mail->isSMTP();
+            //$mail->SMTPDebug = 2;
+            $mail->Host = 'smtp.hostinger.com';
+            $mail->Port = 465;
+            $mail->SMTPAuth = true;                                         //Enable SMTP authentication
+            $mail->Username   = 'haarlemfestival@sahibthecreator.com';                     //SMTP username
+            $mail->Password   = 'WebProjectPassword1$';                               //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+
+            //Recipients
+            $mail->setFrom('haarlemfestival@sahibthecreator.com', 'Haarlem Festival');
+            $name = substr($email, 0, strpos($email, '@'));
+
+            $mail->addAddress($email, $name);     //Add a recipient
+
+            $mail->Subject = 'Update Profile';
+            $mail->Body    = "<p> .... </p>";
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->send();
+            //echo 'Message has been sent';
+            return TRUE;
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            return FALSE;
+        }
+    }
+
     public function editUser($username, $email, $password, $id)
     {
         // $otp = rand(100000, 999999);

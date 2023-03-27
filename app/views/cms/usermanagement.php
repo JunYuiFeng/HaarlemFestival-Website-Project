@@ -19,32 +19,12 @@
     include __DIR__ . '/../header.php';
     require_once __DIR__ . '/../../services/userservice.php';
     ?>
-
-    <div class="container">
-        <h1>Test</h1>
-        <form id="searchFilter" class="mt-4 mb-4">
-            <input class="p-1" type="text" id="searchInput" placeholder="Search...">
-        </form>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Id<button name="action" type="submit" value="sortIdASC">&#x25b4;</button><button
-                            name="action" type="submit" value="sortIdDESC">&#x25be;</th>
-                    <th scope="col">Username<button name="action" type="submit"
-                            value="sortUsernameASC">&#x25b4;</button><button name="action" type="submit"
-                            value="sortUsernameDESC">&#x25be;</th>
-                    <th scope="col">Email<button name="action" type="submit"
-                            value="sortEmailASC">&#x25b4;</button><button name="action" type="submit"
-                            value="sortEmailDESC">&#x25be;</th>
-
-                    <th scope="col">Role</th>
-                </tr>
-            </thead>
-            <tbody id="userTableBody">
-            </tbody>
-        </table>
-    </div>
+    
+    <h1>Test</h1>
+    <form method="get" action="search.php">
+        <input type="text" name="query" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
     <script>
         // Fetch users from API and create rows for each user in the table
         fetch(`http://localhost/api/cms`)
@@ -55,8 +35,8 @@
                     const row = document.createElement("tr");
                     row.innerHTML = `
                     <td>${user.id}</td>
-                    <td><input type="text" id="username" name="username" value="${user.username}"></td>
-                    <td><input type="text" id="email" name="email" value="${user.email}"></td>
+                    <td><input type="text" id="username" name="username" placeholder="${user.username}"value="${user.username}"></td>
+                    <td><input type="text" id="email" name="email" placeholder="${user.email}" value="${user.email}"></td>
                     <td>
                         <select name="userType" id="userType">
                             <option value="1" ${user.userType === 1 ? "selected" : ""}>User</option>
@@ -72,11 +52,11 @@
                     var buttonUpdate = document.createElement("button");
                     buttonUpdate.innerHTML = "Update";
 
-                    id = document.getElementById("id").value;
-                    username = document.getElementById("username").value;
-                    email = document.getElementById("email").value;
-                    password = document.getElementById("password").value;
-                    userType = document.getElementById("userType").value;
+                    id = document.getElementById("id");
+                    username = document.getElementById("username");
+                    email = document.getElementById("email");
+                    password = document.getElementById("password");
+                    userType = document.getElementById("userType");
 
                     if (userType == "admin") {
                         userType = 0;
@@ -93,13 +73,6 @@
 
         // Define update function
         function update(id, username, email, password, userType) {
-
-            // put to service
-            // if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']) || empty($_POST['userType']) || empty($_POST['id'])) {
-            //     $msg = "field empty, please fill in";
-            //     return;
-            // }
-            
 
         }
     </script>
@@ -141,9 +114,9 @@
         });
     </script>
 
-    <?php
-    include __DIR__ . '/../footer.php';
-    ?>
+<?php
+include __DIR__ . '/../footer.php';
+?>
 
 </body>
 
