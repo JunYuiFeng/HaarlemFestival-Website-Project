@@ -19,7 +19,8 @@ class UsersRepository extends Repository
         }
     }
 
-    function getById($id){
+    function getById($id)
+    {
         try {
             $stmt = $this->connection->prepare("SELECT * FROM Users WHERE id = :id");
             $stmt->bindParam(':id', $id);
@@ -29,7 +30,6 @@ class UsersRepository extends Repository
             $user = $stmt->fetch();
 
             return $user;
-
         } catch (PDOException $e) 
         {
             echo $e;
@@ -90,6 +90,7 @@ class UsersRepository extends Repository
             echo $e;
         }
     }
+
     function editUser($username,$email,$password,$id){
         try{
             $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email, password = :password WHERE id = :id');

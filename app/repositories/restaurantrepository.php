@@ -35,6 +35,20 @@ class RestaurantRepository extends Repository
         }
     }
 
+    function decreaseSeats($id, $seats)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE Restaurants SET seats = seats - :seats WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':seats', $seats);
+            $stmt->execute();
+
+        } catch (PDOException $e) 
+        {
+            echo $e;
+        }
+    }
+    
     function insertRestaurant(Restaurant $restaurant): bool
     {
         try {
@@ -63,6 +77,34 @@ class RestaurantRepository extends Repository
         } catch (PDOException $e) {
             echo $e;
             return false;
+        }
+    }
+
+    function updateRestaurant($restaurant, $id)
+    {
+        try {
+            $stmt = $this->connection->prepare('UPDATE Restaurants SET `name` = :name, `cuisine` = :cuisine, `foodType` = :foodType, `sessionDuration` = :sessionDuration, `priceIndicator`=:priceIndicator, `priceAge12AndUnder`=:priceAge12AndUnder, `rating`=:rating, `hasMichelin`=:hasMichelin, `isFestival`=:isFestival, `priceAboveAge12`=:priceAboveAge12, `phoneNumber`=:phoneNumber, `address`=:address, `seats`=:seats, `website`=:website, `coverImg`=:coverImg, `description`=:description WHERE id = :id');
+            return $stmt->execute([
+                ':name' => $restaurant->getName(),
+                ':cuisine' => $restaurant->getCuisine(),
+                ':foodType' => $restaurant->getFoodType(),
+                ':sessionDuration' => $restaurant->getSessionDuration(),
+                ':priceIndicator' => $restaurant->getPriceIndicator(),
+                ':priceAge12AndUnder' => $restaurant->getPriceAge12AndUnder(),
+                ':rating' => $restaurant->getRating(),
+                ':hasMichelin' => $restaurant->getHasMichelin() ? 1 : 0,
+                ':isFestival' => $restaurant->getIsFestival() ? 1 : 0,
+                ':priceAboveAge12' => $restaurant->getPriceAboveAge12(),
+                ':phoneNumber' => $restaurant->getPhoneNumber(),
+                ':address' => $restaurant->getAddress(),
+                ':seats' => $restaurant->getSeats(),
+                ':website' => $restaurant->getWebsite(),
+                ':coverImg' => $restaurant->getCoverImg(),
+                ':description' => $restaurant->getDescription(),
+                ':id' => $id
+            ]);
+        } catch (PDOException $e) {
+            echo $e;
         }
     }
 

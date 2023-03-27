@@ -4,9 +4,10 @@ require_once __DIR__ . '/../models/session.php';
 
 class SessionRepository extends Repository
 {
-    function getSessionsByRestaurantId($id) {
+    function getSessionsByRestaurantId($id)
+    {
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM `Session` WHERE restaurantId = :id");
+            $stmt = $this->connection->prepare("SELECT * FROM `Sessions` WHERE restaurantId = :id");
             $stmt->bindParam(':id', $id);
             $stmt->execute();
 
@@ -14,27 +15,94 @@ class SessionRepository extends Repository
             $sessions = $stmt->fetchAll();
 
             return $sessions;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
 
-        } catch (PDOException $e)
-        {
+    function getById($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM `Sessions` WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, "Session");
+            $session = $stmt->fetch();
+
+            return $session;
+        } catch (PDOException $e) {
             echo $e;
         }
     }
 
     function getAll()
-     {
+    {
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM `Session` ");
+            $stmt = $this->connection->prepare("SELECT * FROM `Sessions` ");
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, "Session");
             $sessions = $stmt->fetchAll();
 
             return $sessions;
-
-        } catch (PDOException $e)
-        {
+        } catch (PDOException $e) {
             echo $e;
+        }
+    }
+
+
+    function insert(Session $session): bool
+    {
+        try {
+            $sql = 'INSERT INTO `Sessions`(`name`, `startTime`, `restaurantId`, `endTime`) VALUES (:name, :startTime, :restaurantId, :endTime)';
+
+            $statement = $this->connection->prepare($sql);
+
+            $startTime = $session->getStartTime()->format('H:i');
+            $endTime = $session->getEndTime()->format('H:i');
+            return $statement->execute([
+                ':name' => $session->getName(),
+                ':startTime' => $startTime,
+                ':endTime' => $endTime,
+                ':restaurantId' => $session->getRestaurantId()
+            ]);
+        } catch (PDOException $e) {
+            echo $e;
+            return false;
+        }
+    }
+
+    function update($session)
+    {
+        try {
+            $stmt = $this->connection->prepare('UPDATE `Sessions` SET `name`=:name,`startTime`=:startTime,`restaurantId`=:restaurantId,`endTime`=:endTime WHERE id = :id');
+
+            $startTime = $session->getStartTime()->format('H:i');
+            $endTime = $session->getEndTime()->format('H:i');
+
+            return $stmt->execute([
+                ':name' => $session->getName(),
+                ':startTime' => $startTime,
+                ':endTime' => $endTime,
+                ':restaurantId' => $session->getRestaurantId(),
+                ':id' => $session->getId()
+            ]);
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function delete($id): bool
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM `Sessions` WHERE id = :id");
+            return $stmt->execute([
+                ':id' => $id
+            ]);
+        } catch (PDOException $e) {
+            echo $e;
+            return false;
         }
     }
 }

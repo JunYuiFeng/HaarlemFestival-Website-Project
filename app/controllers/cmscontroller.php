@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../services/editPageService.php';
-require_once __DIR__ . '/../services/restaurantsManagementService.php';
+require_once __DIR__ . '/../services/restaurantsmanagementservice.php';
+require_once __DIR__ . '/../services/sessionservice.php';
 
 require_once __DIR__ . '/../services/userservice.php';
 
@@ -10,16 +11,18 @@ class CmsController
     private $restaurants;
     private $contentEditorService;
     private $restaurantManagementService;
-    private $msg;
+    private $sessionService;
     private $userService;
+    private $msg;
 
 
     function __construct()
     {
         $this->contentEditorService = new EditPageService();
         $this->restaurantManagementService = new RestaurantsManagementService();
-        $this->msg = "";
         $this->userService = new UserService();
+        $this->sessionService = new SessionService();
+        $this->msg = "";
     }
 
     public function usermanagement()
@@ -31,13 +34,18 @@ class CmsController
                 case 'update':
                     echo "update";
                     $this->updateItem();
+
+                    $users = $this->userService->getAll();
                     break;
                 case 'delete':
                     $this->delete();
-                    echo "delete";
+
+                    $users = $this->userService->getAll();
                     break;
                 case 'create':
-                    $this->createUser();
+                    $this->create();
+
+                    $users = $this->userService->getAll();
                     break;
                 case 'sortIdAsc':
                     sort($users);
@@ -77,7 +85,7 @@ class CmsController
         } else { // Otherwise, sort in ascending order
             array_multisort($items, SORT_ASC, $users);
         }
-        foreach($users as $user){
+        foreach ($users as $user) {
             echo $user->getEmail();
         }
         return $users;
@@ -87,6 +95,7 @@ class CmsController
         $id = $_POST["id"];
         $this->userService->deleteUser($id);
     }
+
     public function updateItem()
     {
         // put to service
@@ -107,7 +116,6 @@ class CmsController
                 $userType = 1;
             }
             $this->userService->editUserAsAdmin($username, $email, $id, $userType);
-
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -139,7 +147,6 @@ class CmsController
             }
             echo "controler";
             $this->userService->createUser($username, $email, $password, $userType);
-
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -149,17 +156,18 @@ class CmsController
     {
         if (isset($_GET["webPage"])) {
             $webPage = $_GET["webPage"];
-
-            $this->content = $this->contentEditorService->getPageContent($webPage);
             if (isset($_POST['editor'])) {
                 $editor_data = $_POST['editor'];
                 $this->contentEditorService->setNewPageContent($webPage, $editor_data);
             }
+            $this->content = $this->contentEditorService->getPageContent($webPage);
+
             require __DIR__ . '/../views/cms/editpagecontent.php';
         } else {
             require __DIR__ . '/../views/notfound.php';
         }
     }
+
     public function restaurants()
     {
         $this->restaurants = $this->restaurantManagementService->getAll();
@@ -170,23 +178,41 @@ class CmsController
         }
         require __DIR__ . '/../views/cms/restaurants.php';
     }
+
     public function addrestaurant()
     {
+        if (isset($_GET["edit"])) {
+            $restaurant = $this->restaurantManagementService->getById($_GET["edit"]);
+        }
         if (isset($_POST["addrestaurant"])) {
             foreach ($_POST as $field) {
                 if (empty($field))
                     $this->msg = "Please fill all the fields";
             }
             if ($this->msg == "") {
-                $restaurant = new Restaurant();
-                $coverImg = $_FILES['coverImg'];
-                if ($coverImg && $coverImg['error'] == 0) {
-                    $filename = $coverImg['name'];
-                    $destination = __DIR__ . '/../public/img/' . $filename;
-                    if (move_uploaded_file($coverImg['tmp_name'], $destination)) {
-                        $restaurant->setCoverImg($filename);
+                $restaurant = (!isset($_GET["edit"])) ? new Restaurant() : $restaurant;
+                if (isset($_FILES['coverImg']) && $_FILES['coverImg']['name'] != "") {
+                    $coverImg = $_FILES['coverImg'];
+                    if ($coverImg && $coverImg['error'] == 0) {
+                        $filename = $coverImg['name'];
+                        $destination = __DIR__ . '/../public/img/' . $filename;
+                        if (move_uploaded_file($coverImg['tmp_name'], $destination)) {
+                            $restaurant->setCoverImg($filename);
+                        } else {
+                            $this->msg = "Image couldn't upload. Please try again";
+                        }
+                    } else {
+                        $this->msg = "Image couldn't upload. Please try again";
                     }
+                } else {
+                    if (isset($_GET["edit"])) {
+                        $this->msg = "";
+                        $restaurant->setCoverImg($this->restaurantManagementService->getById($_GET["edit"])->getCoverImg());
+                    } else
+                        $this->msg = "Please upload a cover image";
                 }
+            }
+            if ($this->msg == "") {
                 $restaurant->setName($_POST['name']);
                 $restaurant->setCuisine($_POST['cuisine']);
                 $restaurant->setFoodType($_POST['foodType']);
@@ -203,14 +229,60 @@ class CmsController
                 $restaurant->setWebsite($_POST['website']);
                 $restaurant->setDescription($_POST['description']);
 
-                if ($this->restaurantManagementService->insertRestaurant($restaurant)) {
-                    header("location: restaurants");
+                if (isset($_GET["edit"])) {
+                    if ($this->restaurantManagementService->updateRestaurant($restaurant, $_GET["edit"])) {
+                        header("location: restaurants");
+                    } else
+                        $this->msg = "Something went wrong. Please try again";
                 } else {
-                    $this->msg = "Something went wrong. Please try again";
+                    if ($this->restaurantManagementService->insertRestaurant($restaurant)) {
+                        header("location: restaurants");
+                    } else
+                        $this->msg = "Something went wrong. Please try again";
                 }
             }
         }
 
         require __DIR__ . '/../views/cms/addrestaurant.php';
+    }
+
+    public function managesessions()
+    {
+        if (isset($_GET["edit"])) {
+            $editSession = $this->sessionService->getById($_GET["edit"]);
+        }
+
+        if (isset($_POST["addSession"])) {
+            foreach ($_POST as $field) {
+                if (empty($field))
+                    $this->msg = "Please fill all the fields";
+            }
+            if ($this->msg == "") {
+                $session = (isset($_GET["edit"])) ? $editSession : new Session(); // checking if user edits session or creates new one
+                $session->setName($_POST["name"]);
+                $session->setStartTime($_POST["startTime"]);
+                $session->setEndTime($_POST["endTime"]);
+                $session->setRestaurantId($_POST["restaurantId"]);
+                if (isset($_GET["edit"])) {
+                    if ($this->sessionService->update($session)) {
+                        header("location: managesessions");
+                    } else
+                        $this->msg = "Something went wrong. Please try again";
+                } else {
+                    if ($this->sessionService->insert($session)) {
+                        header("location: managesessions");
+                    } else
+                        $this->msg = "Something went wrong. Please try again";
+                }
+            }
+        }
+
+        if (isset($_GET["delete"])) {
+            $id = $_GET['delete'];
+            $this->sessionService->delete($id);
+            header("location: managesessions");
+        }
+        $sessions = $this->sessionService->getAll();
+        require __DIR__ . '/../views/cms/managesessions.php';
     }
 }

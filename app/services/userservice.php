@@ -9,10 +9,17 @@ require_once __DIR__ . "/../repositories/usersrepository.php";
 class UserService
 {
     private $repository;
+
     public function __construct()
     {
         $this->repository = new UsersRepository();
     }
+
+    public function getById($id)
+    {
+        return $this->repository->getById($id);
+    }
+    
     public function getAll()
     {
         return $this->repository->getAll();
@@ -117,5 +124,10 @@ class UserService
     public function getByEmail($email)
     {
         return $this->repository->getByEmail($email);
+    }
+    
+    public function editUserTest($username,$email,$id)
+    {
+        return $this->repository->editUserTest($username,$email,$id);
     }
 }

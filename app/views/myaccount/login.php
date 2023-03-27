@@ -35,7 +35,7 @@
                             </div>
                             <p class="error-message"><?php echo isset($msg) ? $msg : '' ?></p>
 
-                            <button type="submit" name="login">
+                            <button type="submit" name="login" class="red-outline-animated">
                                 <span></span>
                                 <span></span>
                                 <span></span>

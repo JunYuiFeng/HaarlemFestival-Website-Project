@@ -1,13 +1,19 @@
 <?php
-class Reservation 
+class Reservation implements \JsonSerializable
 {
     private int $id;
     private int $restaurantId;
     private int $sessionId;
     private int $amountAbove12;
     private int $amountUnderOr12;
-    private int $date;
+    private string $date;
     private string $comments;
+    private string $status;
+
+    public function jsonSerialize(): mixed
+    {
+        return get_object_vars($this);
+    }
 
     /**
      * Get the value of id
@@ -145,6 +151,26 @@ class Reservation
     public function setComments($comments)
     {
         $this->comments = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of status
+     */ 
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set the value of status
+     *
+     * @return  self
+     */ 
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
         return $this;
     }

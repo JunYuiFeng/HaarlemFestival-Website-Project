@@ -81,7 +81,7 @@
                                     </p>
                                 </div>
                                 <div class="col align-self-end">
-                                    <button class="seeMoreBtn" onclick="location.href='restaurantdetail?id= <?=$restaurant->getId()?>'"><b>See more info and reserve</b></button>
+                                    <button class="seeMoreBtn" onclick="location.href='restaurantdetail?id=<?=$restaurant->getId()?>'"><b>See more info and reserve</b></button>
                                 </div>
                             </div>
                         </div>
