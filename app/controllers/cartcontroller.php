@@ -12,7 +12,15 @@ class CartController
 
     public function index() 
     {
-        //$cart = $this->cartService->getCart();
+        $items = array();
+
+        if (isset($_SESSION["cart"])) {
+            $cart = $_SESSION["cart"];
+        }
+
+        var_dump($items);
+        //session_destroy();
+
         require __DIR__ . '/../views/cart/index.php';
     }
 

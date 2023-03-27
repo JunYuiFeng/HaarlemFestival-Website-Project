@@ -153,6 +153,7 @@ class User implements \JsonSerializable
 
         return $this;
     }
+    
     public function editUser()
     {
 

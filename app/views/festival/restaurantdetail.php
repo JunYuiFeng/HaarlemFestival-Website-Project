@@ -189,11 +189,14 @@
     ?>
 i
     <script>
+        var cartAmount = document.getElementById("cartAmount");
+        getCartAmount();
         // document.getElementById("addToCart").addEventListener("click", function() {
         //     document.getElementById("reservationForm").submit();
         // });
 
         const restaurantId = <?= $restaurant->getId() ?>;
+        var getUserType = <?= $loggedInUser ? $loggedInUser->getUserType() : 0 ?>;
 
         document.querySelector("#addToCart").addEventListener("click", function(event) {
             event.preventDefault(); // prevent form from submitting
@@ -203,7 +206,11 @@ i
 
             reservationData.restaurantId = restaurantId;
 
-            addToCart(reservationData);
+            if(getUserType == 1){
+                addToCart(reservationData);
+            }else{
+                addToCartVisitor(reservationData);
+            }
         });
 
 
@@ -221,6 +228,31 @@ i
                 })
                 .catch(error => {
                     console.error('Error adding item to cart:', error);
+                });
+        }
+
+        function addToCartVisitor(reservationData) {
+            fetch('/api/cart/addToCartVisitor', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(reservationData)
+                })
+                .then(getCartAmount())
+                .catch(error => {
+                    console.error('Error adding item to cart:', error);
+                });
+        }
+
+        function getCartAmount() {
+            fetch('/api/cart/getCartAmount')
+                .then(response => response.json())
+                .then(data => {
+                    cartAmount.innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error getting amount:', error);
                 });
         }
     </script>

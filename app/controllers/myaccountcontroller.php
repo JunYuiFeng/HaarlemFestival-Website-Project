@@ -87,7 +87,7 @@ class MyAccountController
             }
         }
 
-         $msg = $this->msg;
+        $msg = $this->msg;
         require __DIR__ . '/../views/myaccount/login.php';
     }
 

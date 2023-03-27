@@ -19,6 +19,23 @@ class UsersRepository extends Repository
         }
     }
 
+    function getById($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM Users WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+            $user = $stmt->fetch();
+
+            return $user;
+        } catch (PDOException $e) 
+        {
+            echo $e;
+        }
+    }
+
     
     function getByUsername($username)
     {

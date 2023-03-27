@@ -583,8 +583,29 @@ footer {
 }
 
 //=============Checkout page================
+.checkPaymentSection {
+  h1 {
+    font-size: 20pt;
+  }
+}
+
 .checkoutOrderSummarySection {
   background: #FCDC4D;
+  h1 {
+    font-size: 20pt;
+  }
+  h2 {
+    font-size: 14pt;
+  }
+  p {
+    line-height: normal;
+  }
+
+  .checkTotal {
+    .amount {
+      font-size: 24pt;
+    }
+  }
 }
 
 //visit haarlem for history page start

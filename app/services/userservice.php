@@ -3,10 +3,17 @@ require_once __DIR__ . "/../repositories/usersrepository.php";
 class UserService
 {
     private $repository;
+
     public function __construct()
     {
         $this->repository = new UsersRepository();
     }
+
+    public function getById($id)
+    {
+        return $this->repository->getById($id);
+    }
+    
     public function getAll()
     {
         return $this->repository->getAll();

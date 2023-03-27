@@ -48,7 +48,7 @@ class RestaurantRepository extends Repository
             echo $e;
         }
     }
-}
+    
     function insertRestaurant(Restaurant $restaurant): bool
     {
         try {

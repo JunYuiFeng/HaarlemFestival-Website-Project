@@ -39,7 +39,7 @@ class CartController extends Controller
             $body = file_get_contents("php://input");
             $objects = json_decode($body);
 
-            $reservationDate = new DateTime($objects->date);
+            $reservationDate = $objects->date;
             $restaurantId = $objects->restaurantId;
             $sessionId = $objects->sessionId;
             $amountAbove12 = $objects->amountAbove12;
@@ -56,8 +56,27 @@ class CartController extends Controller
             $reservation->setComments($comment);
             $reservation->setStatus($status);
 
-            $_SESSION['cart'][] =+ $reservation;
+            $_SESSION['cart'][] = $reservation;
+        }
+    }
 
+    function getCartAmount()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $cart = array();
+
+            if (isset($_SESSION['cart'])) {
+                $cart = $_SESSION['cart'];
+            }
+
+            $amount = 0;
+
+            foreach ($cart as $reservation) {
+                $amount++;
+            }
+
+            header("Content-Type: application/json");
+            echo json_encode($amount);
         }
     }
     

@@ -510,8 +510,24 @@ footer #envelopeImg {
   font-size: 8pt;
 }
 
+.checkPaymentSection h1 {
+  font-size: 20pt;
+}
+
 .checkoutOrderSummarySection {
   background: #FCDC4D;
+}
+.checkoutOrderSummarySection h1 {
+  font-size: 20pt;
+}
+.checkoutOrderSummarySection h2 {
+  font-size: 14pt;
+}
+.checkoutOrderSummarySection p {
+  line-height: normal;
+}
+.checkoutOrderSummarySection .checkTotal .amount {
+  font-size: 24pt;
 }
 
 .history-header {
