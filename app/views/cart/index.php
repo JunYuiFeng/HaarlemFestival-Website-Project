@@ -20,6 +20,19 @@
             <div class="container checkPaymentSection">
                 <h1>Payment</h1>
                 <hr>
+                <p>Pay With:</p>
+                <input type="radio" id="card" name="cardType">
+                <label for="card">Card</label>
+                <input type="radio" id="ideal" name="cardType">
+                <label for="ideal">Ideal</label><br><br>
+
+                <label for="">Card Number</label>
+                <input type="text" class="form-control" placeholder="1234 5678 9101 1121"><br>
+
+                <label for="">Expiration Date</label>
+                <input type="text" class="form-control" placeholder="MM/YY"><br>
+
+                <button class="btn btn-primary"> Pay 300</button>
             </div>
         </div>
 
@@ -27,33 +40,38 @@
             <div class="container checkoutOrderSummarySection">
                 <h1>Order Summary</h1>
                 <hr>
-                <?php foreach ($items as $item) {?>
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <div class="row d-flex align-items-center">
-                            <div class="col-1">
-                                <img src="/img/ReservationIcon.png" alt="">
-                            </div>
-                            <div class="col-4">
-                                <h2><b>restaurant</b></h2>
-                                <p><b>Comment:</b> Alergic to shelfish</p>
-                                <p><b>People:</b> 4</p>
-                            </div>
-                            <div class="col-2">
-                                <p>27 July</p>
-                                <p>Session2</p>
-                            </div>
-                            <div class="col-3 d-flex" style="width: 23.5%">
-                                <button class="btn btn-dark w-30">-</button>
-                                <input type="text" name="quantity" id="quantity-input" class="form-control">
-                                <button class="btn btn-dark w-30">+</button>
-                            </div>
-                            <div class="col-2">
-                                <p><b>€110,00</b></p>
+                <?php foreach ($items as $item) { ?>
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-1">
+                                    <img src="/img/ReservationIcon.png" alt="">
+                                </div>
+                                <div class="col-4">
+                                    <h2><b><?= $this->restaurantService->getById($item->getRestaurantId())->getName() ?></b></h2>
+                                    <p><b>Comment:</b> <?= $item->getComments() ?></p>
+                                    <p><b>People:</b> <?= $item->getAmountAbove12() + $item->getAmountUnderOr12() ?></p>
+                                </div>
+                                <div class="col-2">
+                                    <p>
+                                        <?php
+                                        $date = new DateTime($item->getDate());
+                                        echo $date->format('F jS');
+                                        ?>
+                                    </p>
+                                    <p>Session2</p>
+                                </div>
+                                <div class="col-3 d-flex" style="width: 23.5%">
+                                    <button class="btn btn-dark w-30">-</button>
+                                    <input type="text" name="quantity" id="quantity-input" class="form-control">
+                                    <button class="btn btn-dark w-30">+</button>
+                                </div>
+                                <div class="col-2">
+                                    <p><b>€110,00</b></p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 <?php } ?>
 
                 <hr>

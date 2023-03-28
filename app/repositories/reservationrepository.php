@@ -4,22 +4,60 @@ require_once __DIR__ . '/../models/reservation.php';
 
 class ReservationRepository extends Repository
 {
-    function insertReservation($restaurantId, $sessionId, $amountAbove12, $amountUnderOr12, $reservationDate, $comments, $status)
+    function insertReservation($reservation)
     {
         try {
+            $reservationDate = new DateTime($reservation->getDate());
             $formattedDate = $reservationDate->format('Y-m-d H:i:s');
 
             $stmt = $this->connection->prepare("INSERT INTO `Reservations`(`restaurantId`, `sessionId`, `amountAbove12`, `amountUnderOr12`, `date`, `comments`, `status`) 
         VALUES (:restaurantId, :sessionId, :amountAbove12, :amountUnderOr12, :reservationDate, :comments, :status)");
-            $stmt->bindParam(':restaurantId', $restaurantId);
-            $stmt->bindParam(':sessionId', $sessionId);
-            $stmt->bindParam(':amountAbove12', $amountAbove12);
-            $stmt->bindParam(':amountUnderOr12', $amountUnderOr12);
+            $stmt->bindParam(':restaurantId', ($reservation->getRestaurantId()));
+            $stmt->bindParam(':sessionId', ($reservation->getSessionId()));
+            $stmt->bindParam(':amountAbove12', ($reservation->getAmountAbove12()));
+            $stmt->bindParam(':amountUnderOr12', ($reservation->getAmountUnderOr12()));
             $stmt->bindParam(':reservationDate', $formattedDate);
-            $stmt->bindParam(':comments', $comments);
-            $stmt->bindParam(':status', $status);
+            $stmt->bindParam(':comments', ($reservation->getComments()));
+            $stmt->bindParam(':status', ($reservation->getStatus()));
 
             $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function getLastReservationId()
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT `id` FROM `Reservations` ORDER BY `id` DESC LIMIT 1");
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function getFromCartByUserId($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT *
+            FROM Reservations
+            WHERE id IN (
+                SELECT itemId
+                FROM CartItems
+                WHERE cartId = (
+                    SELECT id
+                    FROM Carts
+                    WHERE userId = :id))");
+            $stmt->bindParam(':id', $id);
+
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, "Reservation");
+            $reservations = $stmt->fetchAll();
+
+            return $reservations;
         } catch (PDOException $e) {
             echo $e;
         }

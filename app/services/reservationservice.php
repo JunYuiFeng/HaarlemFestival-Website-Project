@@ -10,9 +10,19 @@ class ReservationService
         $this->repository = new ReservationRepository();
     }
 
-    function insertReservation($restaurantId, $sessionId, $amountAbove12, $amountUnderOr12, $reservationDate, $comments, $status)
+    function insertReservation($reservation)
     {
-        $this->repository->insertReservation($restaurantId, $sessionId, $amountAbove12, $amountUnderOr12, $reservationDate, $comments, $status);
+        $this->repository->insertReservation($reservation);
 
+    }
+
+    function getLastReservationId()
+    {
+        return $this->repository->getLastReservationId();
+    }
+
+    function getFromCartByUserId($id)
+    {
+        return $this->repository->getFromCartByUserId($id);
     }
 }

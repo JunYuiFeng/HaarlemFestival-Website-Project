@@ -66,22 +66,18 @@ class FestivalController
             $sessions = $this->sessionService->getSessionsByRestaurantId($id);
         }
 
-        $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
-        var_dump($loggedInUser);
+        if (isset($_SESSION["logedin"]))
+        {
+            $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
+        }
+        else
+        {
+            $loggedInUser = null;
+        }
 
-        // if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        //     $restaurantId = htmlspecialchars($restaurant->getId());
-        //     $sessionId = htmlspecialchars($_POST['sessionId']);
-        //     $amountAbove12 = htmlspecialchars($_POST['amountAbove12']);
-        //     $amountUnderOr12 = htmlspecialchars($_POST['amountUnderOr12']);
-        //     $reservationDateStr = htmlspecialchars($_POST['date']);
-        //     $reservationDate = new DateTime($reservationDateStr);
-        //     $comment = htmlspecialchars($_POST['comment']);
-        //     $status = htmlspecialchars('active');
-
-        //     $this->reservationService->insertReservation($restaurantId, $sessionId, $amountAbove12, $amountUnderOr12, $reservationDate, $comment, $status);
-        //     $this->restaurantService->decreaseSeats($restaurantId, $amountAbove12 + $amountUnderOr12); //decrease seats of a restaurant based on the amount of people that are reserving
-        // }
+       // $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
+        //var_dump($loggedInUser);
+        
         require __DIR__ . '/../views/festival/restaurantdetail.php';
     }
 }
