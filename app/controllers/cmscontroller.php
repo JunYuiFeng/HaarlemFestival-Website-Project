@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../services/editPageService.php';
 require_once __DIR__ . '/../services/restaurantsmanagementservice.php';
 require_once __DIR__ . '/../services/sessionservice.php';
-
+require_once __DIR__ . '/../services/orderservice.php';
 require_once __DIR__ . '/../services/userservice.php';
 
 class CmsController
@@ -13,6 +13,7 @@ class CmsController
     private $restaurantManagementService;
     private $sessionService;
     private $userService;
+    private $orderService;
     private $msg;
 
 
@@ -22,6 +23,7 @@ class CmsController
         $this->restaurantManagementService = new RestaurantsManagementService();
         $this->userService = new UserService();
         $this->sessionService = new SessionService();
+        $this->orderService = new OrderService();
         $this->msg = "";
     }
 
@@ -281,5 +283,11 @@ class CmsController
         }
         $sessions = $this->sessionService->getAll();
         require __DIR__ . '/../views/cms/managesessions.php';
+    }
+
+    public function manageorders()
+    {
+        $orders = $this->orderService->getAll();
+        require __DIR__ . '/../views/cms/manageorders.php';
     }
 }
