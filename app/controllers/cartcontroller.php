@@ -27,36 +27,39 @@ class CartController
         $items = array();
         $totalAmount = 0;
 
-        if (isset($_SESSION["cart"])&&!isset($_SESSION["logedin"])) {
-            $items = $_SESSION["cart"];
-
-            foreach ($_SESSION["cart"] as $item) {
-                $totalAmount += $item["price"];
-            }
-        }
-        else
-        {
+        if (isset($_SESSION["logedin"])) {
             $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
             $userId = $loggedInUser->getId();
             $items = $this->reservationService->getFromCartByUserId($userId);
-        }
+            var_dump($items);
 
-        if (isset($_SESSION["cart"])&&!isset($_SESSION["logedin"])) {
-            foreach ($_SESSION["cart"] as $item) {
-                $totalAmount += $item["price"];
-            }
+            // foreach ($_SESSION["cart"] as $item) {
+            //     $totalAmount += $item["price"];
+            // }
         }
         else
         {
-            $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
-            $userId = $loggedInUser->getId();
-            $items = $this->reservationService->getFromCartByUserId($userId);
-            foreach ($items as $item) {
-                $quantity = $item->getAmountAbove12();
+            if(isset($_SESSION["cart"])) {
+                $items = $_SESSION["cart"];
+            }
+        }
+
+        // if (isset($_SESSION["cart"])&&!isset($_SESSION["logedin"])) {
+        //     foreach ($_SESSION["cart"] as $item) {
+        //         $totalAmount += $item["price"];
+        //     }
+        // }
+        // else
+        // {
+        //     $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
+        //     $userId = $loggedInUser->getId();
+        //     $items = $this->reservationService->getFromCartByUserId($userId);
+        //     foreach ($items as $item) {
+        //         $quantity = $item->getAmountAbove12();
                 
-            }
-        }
-        return $totalAmount;
+        //     }
+        // }
+        // return $totalAmount;
 
         //var_dump($items);
         //session_destroy();

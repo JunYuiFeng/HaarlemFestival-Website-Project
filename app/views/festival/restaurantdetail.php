@@ -198,7 +198,7 @@ i
             getCartAmount();
         }
         else {
-            getCartAmountVisitor();
+            //getCartAmountVisitor();
         }
 
         document.querySelector("#addToCart").addEventListener("click", function(event) {

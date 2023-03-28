@@ -37,41 +37,46 @@
         </div>
 
         <div class="col">
-            <div class="container checkoutOrderSummarySection">
+            <div class="container h-100 checkoutOrderSummarySection">
                 <h1>Order Summary</h1>
                 <hr>
-                <?php foreach ($items as $item) { ?>
-                    <div class="card mb-2">
-                        <div class="card-body">
-                            <div class="row d-flex align-items-center">
-                                <div class="col-1">
-                                    <img src="/img/ReservationIcon.png" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <h2><b><?= $this->restaurantService->getById($item->getRestaurantId())->getName() ?></b></h2>
-                                    <p><b>Comment:</b> <?= $item->getComments() ?></p>
-                                    <p><b>People:</b> <?= $item->getAmountAbove12() + $item->getAmountUnderOr12() ?></p>
-                                </div>
-                                <div class="col-2">
-                                    <p>
-                                        <?php
-                                        $date = new DateTime($item->getDate());
-                                        echo $date->format('F jS');
-                                        ?>
-                                    </p>
-                                    <p>Session2</p>
-                                </div>
-                                <div class="col-3 d-flex" style="width: 23.5%">
-                                    <button class="btn btn-dark w-30">-</button>
-                                    <input type="text" name="quantity" id="quantity-input" class="form-control">
-                                    <button class="btn btn-dark w-30">+</button>
-                                </div>
-                                <div class="col-2">
-                                    <p><b>€110,00</b></p>
+                <?php if (!empty($items)) { ?>
+                    <?php foreach ($items as $item) { ?>
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <div class="row d-flex align-items-center">
+                                    <div class="col-1">
+                                        <img src="/img/ReservationIcon.png" alt="">
+                                    </div>
+                                    <div class="col-4">
+                                        <h2><b><?= $this->restaurantService->getById($item->getRestaurantId())->getName() ?></b></h2>
+                                        <p><b>Comment:</b> <?= $item->getComments() ?></p>
+                                        <p><b>People:</b> <?= $item->getAmountAbove12() + $item->getAmountUnderOr12() ?></p>
+                                    </div>
+                                    <div class="col-2">
+                                        <p>
+                                            <?php
+                                            $date = new DateTime($item->getDate());
+                                            echo $date->format('F jS');
+                                            ?>
+                                        </p>
+                                        <p>Session2</p>
+                                    </div>
+                                    <div class="col-3 d-flex" style="width: 23.5%">
+                                        <button class="btn btn-dark w-30">-</button>
+                                        <input type="text" name="quantity" id="quantity-input" class="form-control">
+                                        <button class="btn btn-dark w-30">+</button>
+                                    </div>
+                                    <div class="col-2">
+                                        <p><b>€110,00</b></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
+                <?php } 
+                else { ?>
+                    <p>There are no items in your cart.</p>
                 <?php } ?>
 
                 <hr>
