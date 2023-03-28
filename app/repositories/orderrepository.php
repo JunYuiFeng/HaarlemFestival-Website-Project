@@ -23,10 +23,25 @@ class OrderRepository extends Repository
     function getAll()
     {
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM `Orders` ");
+            $stmt = $this->connection->prepare("SELECT * FROM `Orders`");
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, "Order");
+            $orders = $stmt->fetchAll();
+
+            return $orders;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function getAllAsJSON()
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM `Orders`");
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $orders = $stmt->fetchAll();
 
             return $orders;

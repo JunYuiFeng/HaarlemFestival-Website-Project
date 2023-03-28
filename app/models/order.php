@@ -1,6 +1,6 @@
 <?php
 
-class Order
+class Order 
 {
     private  $id;
     private  $userId;

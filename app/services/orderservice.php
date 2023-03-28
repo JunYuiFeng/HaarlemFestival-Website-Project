@@ -18,4 +18,9 @@ class OrderService
     {
         return $this->repository->getAll();
     }
+
+    public function getAllAsJSON()
+    {
+        return $this->repository->getAllAsJSON();
+    }
 }
