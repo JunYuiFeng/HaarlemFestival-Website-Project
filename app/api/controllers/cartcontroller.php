@@ -1,15 +1,23 @@
 <?php
 require_once __DIR__ . '/../../services/reservationservice.php';
+require_once __DIR__ . '/../../services/cartservice.php';
 require_once __DIR__ . '/controller.php';
+include_once("../services/userservice.php");
+
 
 class CartController extends Controller
 {
     private $reservationService;
+    private $cartService;
+    private $userService;
+
 
     function __construct()
     {
         parent::__construct();
         $this->reservationService = new ReservationService();
+        $this->cartService = new CartService();
+        $this->userService = new UserService();
     }
 
     function addToCart()
@@ -17,23 +25,41 @@ class CartController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $body = file_get_contents("php://input");
             $objects = json_decode($body);
-    
-            $reservationDate = new DateTime($objects->date);
-            $restaurantId = $objects->restaurantId;
-            $sessionId = $objects->sessionId;
-            $amountAbove12 = $objects->amountAbove12;
-            $amountUnderOr12 = $objects->amountUnderOr12;
-            $comment = $objects->comment;
-            $status = htmlspecialchars('active');
-    
-            $this->reservationService->insertReservation($restaurantId, $sessionId, $amountAbove12, $amountUnderOr12, $reservationDate, $comment, $status);
-    
-            header("Content-Type: application/json");
-            echo json_encode($objects);
+
+
+            $reservation = new Reservation();
+            $reservation->setRestaurantId($objects->restaurantId);
+            $reservation->setSessionId($objects->sessionId);
+            $reservation->setAmountAbove12($objects->amountAbove12);
+            $reservation->setAmountUnderOr12($objects->amountUnderOr12);
+            $reservation->setDate($objects->date);
+            $reservation->setComments($objects->comment);
+            $reservation->setStatus(htmlspecialchars('active'));
+            $this->reservationService->insertReservation($reservation);
+            
+            $reservationId = $this->reservationService->getLastReservationId();
+            $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
+            $userId = $loggedInUser->getId();
+            $cartId = $this->cartService->getCartIdByUserId($userId);
+
+            $this->cartService->insertToCartItems($cartId['id'], $reservationId['id'], "reservation", 1);
         }
     }
 
-    function addToCartVisitor()
+    function getCartAmount()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
+            $userId = $loggedInUser->getId();
+            $cartAmount = $this->cartService->getQuantityByUserId($userId);
+
+            header("Content-Type: application/json");
+            echo json_encode($cartAmount['quantity']);
+        }
+    }
+
+    function addToCartAsVisitor()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $body = file_get_contents("php://input");
@@ -42,9 +68,9 @@ class CartController extends Controller
             $reservationDate = $objects->date;
             $restaurantId = $objects->restaurantId;
             $sessionId = $objects->sessionId;
-            $amountAbove12 = $objects->amountAbove12;
-            $amountUnderOr12 = $objects->amountUnderOr12;
-            $comment = $objects->comment;
+            $amountAbove12 = !empty($objects->amountAbove12) ? $objects->amountAbove12 : 0;
+            $amountUnderOr12 = !empty($objects->amountUnderOr12) ? $objects->amountUnderOr12 : 0; //ternary operator to check if $amountUnderOr12 is empty or not, and if it is empty, then return 0
+            $comment = !empty($objects->comment) ? $objects->comment : "";
             $status = htmlspecialchars('active');
 
             $reservation = new Reservation();
@@ -60,7 +86,7 @@ class CartController extends Controller
         }
     }
 
-    function getCartAmount()
+    function getCartAmountAsVisitor()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $cart = array();
