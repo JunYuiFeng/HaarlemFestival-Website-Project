@@ -21,7 +21,7 @@ class Controller
         $this->respondWithCode($httpcode, $data);
     }
 
-    private function respondWithCode($httpcode, $data = null)
+    function respondWithCode($httpcode, $data = null)
     {
         header('Content-Type: application/json; charset=utf-8');
         http_response_code($httpcode);
