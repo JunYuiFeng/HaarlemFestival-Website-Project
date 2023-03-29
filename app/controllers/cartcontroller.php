@@ -2,24 +2,26 @@
 require_once __DIR__ . '/../services/cartservice.php';
 require_once __DIR__ . '/../services/restaurantservice.php';
 require_once __DIR__ . '/../services/reservationservice.php';
-include_once("../services/userservice.php");
+require_once __DIR__ . '/../services/sessionservice.php';
+require_once __DIR__ . '/controller.php';
 
 
 
-
-class CartController 
+class CartController extends Controller
 {
     private $cartService;
-    //private $restaurantService;
+    private $restaurantService;
     private $reservationService;
-    private $userService;
+    private $sessionService;
+    protected $loggedInUser;
 
-    public function __construct() 
+    public function __construct()
     {
+        parent::__construct();
         $this->cartService = new CartService();
-        //$this->restaurantService = new RestaurantService();
+        $this->restaurantService = new RestaurantService();
         $this->reservationService = new ReservationService();
-        $this->userService = new UserService();
+        $this->sessionService = new SessionService();
     }
 
     public function index() 
@@ -28,11 +30,14 @@ class CartController
         $totalAmount = 0;
 
         if (isset($_SESSION["logedin"])) {
-            $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
-            $userId = $loggedInUser->getId();
-            $items = $this->reservationService->getFromCartByUserId($userId);
-            var_dump($items);
-
+            $loggedInUser = $this->loggedInUser;
+            $items = $this->reservationService->getFromCartByUserId($loggedInUser->getId());
+            foreach ($items as $item) {
+                $totalAmount += $item->getAmountAbove12() * 10;
+                $totalAmount += $item->getAmountUnderOr12() * 10;
+                $totalAmount += $this->reservationService->getPrice($item->getId());
+            }
+            //var_dump($totalAmount);
             // foreach ($_SESSION["cart"] as $item) {
             //     $totalAmount += $item["price"];
             // }
@@ -43,27 +48,30 @@ class CartController
                 $items = $_SESSION["cart"];
             }
         }
-
-        // if (isset($_SESSION["cart"])&&!isset($_SESSION["logedin"])) {
-        //     foreach ($_SESSION["cart"] as $item) {
-        //         $totalAmount += $item["price"];
-        //     }
-        // }
-        // else
-        // {
-        //     $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
-        //     $userId = $loggedInUser->getId();
-        //     $items = $this->reservationService->getFromCartByUserId($userId);
-        //     foreach ($items as $item) {
-        //         $quantity = $item->getAmountAbove12();
-                
-        //     }
-        // }
-        // return $totalAmount;
-
-        //var_dump($items);
         //session_destroy();
 
         require __DIR__ . '/../views/cart/index.php';
+    }
+
+    function removeItem() 
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') 
+        {
+            $id = $_GET["id"];
+            if (isset($_SESSION["logedin"])) {
+                $this->reservationService->deleteReservation($id);
+            }
+            else
+            {
+                if(isset($_SESSION["cart"])) {
+                    foreach ($_SESSION["cart"] as $key => $item) {
+                        if ($key == $id) {
+                            unset($_SESSION["cart"][$key]);
+                        }
+                    }
+                }
+            }
+        }
+        header("Location: /cart/index");
     }
 }

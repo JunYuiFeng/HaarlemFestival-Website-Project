@@ -24,4 +24,9 @@ class CartService
     {
         return $this->repository->getQuantityByUserId($id);
     }
+
+    function getQuantityByItemId($id)
+    {
+        return $this->repository->getQuantityByItemId($id);
+    }
 }

@@ -187,7 +187,7 @@
     <?php
     include __DIR__ . '/../footer.php';
     ?>
-i
+    
     <script>
         var cartAmount = document.getElementById("cartAmount");
 
@@ -198,7 +198,7 @@ i
             getCartAmount();
         }
         else {
-            //getCartAmountVisitor();
+            getCartAmountAsVisitor();
         }
 
         document.querySelector("#addToCart").addEventListener("click", function(event) {
@@ -211,7 +211,7 @@ i
             if(getUserType == 1){
                 addToCart(reservationData);
             }else{
-                addToCartVisitor(reservationData);
+                addToCartAsVisitor(reservationData);
             }
         });
 

@@ -3,25 +3,25 @@ require_once __DIR__ . '/../services/editPageService.php';
 require_once __DIR__ . '/../services/restaurantsmanagementservice.php';
 require_once __DIR__ . '/../services/sessionservice.php';
 require_once __DIR__ . '/../services/orderservice.php';
-require_once __DIR__ . '/../services/userservice.php';
+require_once __DIR__ . '/controller.php';
 
-class CmsController
+
+class CmsController extends Controller
 {
     private $content;
     private $restaurants;
     private $contentEditorService;
     private $restaurantManagementService;
     private $sessionService;
-    private $userService;
     private $orderService;
     private $msg;
 
 
     function __construct()
     {
+        parent::__construct();
         $this->contentEditorService = new EditPageService();
         $this->restaurantManagementService = new RestaurantsManagementService();
-        $this->userService = new UserService();
         $this->sessionService = new SessionService();
         $this->orderService = new OrderService();
         $this->msg = "";

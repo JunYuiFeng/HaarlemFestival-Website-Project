@@ -65,22 +65,22 @@ class CartController extends Controller
             $body = file_get_contents("php://input");
             $objects = json_decode($body);
 
-            $reservationDate = $objects->date;
-            $restaurantId = $objects->restaurantId;
-            $sessionId = $objects->sessionId;
-            $amountAbove12 = !empty($objects->amountAbove12) ? $objects->amountAbove12 : 0;
-            $amountUnderOr12 = !empty($objects->amountUnderOr12) ? $objects->amountUnderOr12 : 0;
-            $comment = !empty($objects->comment) ? $objects->comment : "";
-            $status = htmlspecialchars('active');
+            // $reservationDate = $objects->date;
+            // $restaurantId = $objects->restaurantId;
+            // $sessionId = $objects->sessionId;
+            // $amountAbove12 = !empty($objects->amountAbove12) ? $objects->amountAbove12 : 0;
+            // $amountUnderOr12 = !empty($objects->amountUnderOr12) ? $objects->amountUnderOr12 : 0;
+            // $comment = !empty($objects->comment) ? $objects->comment : "";
+            // $status = htmlspecialchars('active');
 
             $reservation = new Reservation();
-            $reservation->setRestaurantId($restaurantId);
-            $reservation->setSessionId($sessionId);
-            $reservation->setAmountAbove12($amountAbove12);
-            $reservation->setAmountUnderOr12($amountUnderOr12);
-            $reservation->setDate($reservationDate);
-            $reservation->setComments($comment);
-            $reservation->setStatus($status);
+            $reservation->setRestaurantId($objects->restaurantId);
+            $reservation->setSessionId($objects->sessionId);
+            $reservation->setAmountAbove12(!empty($objects->amountAbove12) ? $objects->amountAbove12 : 0);
+            $reservation->setAmountUnderOr12(!empty($objects->amountUnderOr12) ? $objects->amountUnderOr12 : 0);
+            $reservation->setDate($objects->date);
+            $reservation->setComments(!empty($objects->comment) ? $objects->comment : "");
+            $reservation->setStatus(htmlspecialchars('active'));
 
             $_SESSION['cart'][] = $reservation;
         }
