@@ -177,7 +177,7 @@
                             <p class="reservationExtraFeeText">**A fee of €10,- per person will be charged when a reservation is made on this site. This fee will be deducted from the final check on visiting the restaurant . ** </p>
                         </div>
 
-                        <div class="d-flex justify-content-center"> <button id="addToCart"><b>Add to cart</b></button></div>
+                        <div class="d-flex justify-content-center"> <button id="addToCart" type="button"><b>Add to cart</b></button></div>
                     </div>
                 </div>
             </div>
@@ -190,16 +190,18 @@
 i
     <script>
         var cartAmount = document.getElementById("cartAmount");
-        getCartAmount();
-        // document.getElementById("addToCart").addEventListener("click", function() {
-        //     document.getElementById("reservationForm").submit();
-        // });
 
         const restaurantId = <?= $restaurant->getId() ?>;
         var getUserType = <?= $loggedInUser ? $loggedInUser->getUserType() : 0 ?>;
 
+        if (getUserType == 1) {
+            getCartAmount();
+        }
+        else {
+            getCartAmountVisitor();
+        }
+
         document.querySelector("#addToCart").addEventListener("click", function(event) {
-            event.preventDefault(); // prevent form from submitting
 
             const formData = new FormData(document.getElementById("reservationForm")); // get form data
             const reservationData = Object.fromEntries(formData.entries()); // convert form data to object
@@ -214,25 +216,8 @@ i
         });
 
 
-        function addToCart(reservationData) {
-            fetch('http://localhost/api/cart/addToCart', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(reservationData)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data)
-                })
-                .catch(error => {
-                    console.error('Error adding item to cart:', error);
-                });
-        }
-
-        function addToCartVisitor(reservationData) {
-            fetch('/api/cart/addToCartVisitor', {
+        async function addToCart(reservationData) {
+            await fetch('/api/cart/addToCart', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -241,18 +226,44 @@ i
                 })
                 .then(getCartAmount())
                 .catch(error => {
-                    console.error('Error adding item to cart:', error);
+                    console.error(error);
                 });
         }
 
-        function getCartAmount() {
+        function getCartAmount(userId) {
             fetch('/api/cart/getCartAmount')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    cartAmount.innerHTML = data;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+        async function addToCartAsVisitor(reservationData) {
+            await fetch('/api/cart/addToCartAsVisitor', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(reservationData)
+                })
+                .then(getCartAmountAsVisitor())
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+        function getCartAmountAsVisitor() {
+            fetch('/api/cart/getCartAmountAsVisitor')
                 .then(response => response.json())
                 .then(data => {
                     cartAmount.innerHTML = data;
                 })
                 .catch(error => {
-                    console.error('Error getting amount:', error);
+                    console.error(error);
                 });
         }
     </script>

@@ -88,6 +88,7 @@ class MyAccountController
                             $user = $this->userService->getByUsername($username);
                         }
                         $_SESSION["logedin"] = $user->getId();
+                        unset($_SESSION['cart']);
                         header("location: index");
                     } else {
                         $this->msg = "incorrect username or password";
