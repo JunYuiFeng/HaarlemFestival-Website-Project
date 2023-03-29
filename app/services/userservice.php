@@ -25,15 +25,13 @@ class UserService
         return $this->repository->getAll();
     }
 
-    public function CreateUser($username, $email, $password,$userType)
+    public function CreateUser($username, $email, $password, $userType)
     {
-        echo "service";
-        return $this->repository->CreateUser($username, $email, $password,$userType);
+        return $this->repository->CreateUser($username, $email, $password, $userType);
     }
-    public function editUserAsAdmin($username, $email, $id,$userType)
+    public function editUserAsAdmin($id, $username, $email,$userType)
     {
-        echo "service";
-        return $this->repository->editUserAsAdmin($username, $email, $id, $userType);
+        return $this->repository->editUserAsAdmin($id, $username, $email, $userType);
     }
     public function checkPassowrd($password){
         
@@ -121,8 +119,8 @@ class UserService
         return $this->repository->getByEmail($email);
     }
     
-    public function editUserTest($username,$email,$id)
-    {
-        return $this->repository->editUserTest($username,$email,$id);
-    }
+    // public function editUserTest($username,$email,$id)
+    // {
+    //     return $this->repository->editUserTest($username,$email,$id);
+    // }
 }

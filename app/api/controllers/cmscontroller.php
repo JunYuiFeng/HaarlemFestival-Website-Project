@@ -22,58 +22,35 @@ class CmsController extends Controller
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            
+
             $body = file_get_contents("php://input");
-            $objects = json_decode($body);
+            $user = json_decode($body);
 
-            echo json_encode(var_dump($objects));
-            if(!isset($_POST['userName'])){
+            if (empty($user->id) || empty($user->username) || empty($user->email) || empty($user->type)) {
+                $this->respondWithError(400, "Not all data was provided");
                 return;
             }
-
-            $username = htmlspecialchars($_POST['userName']);
-            $email = htmlspecialchars($_POST['email']);
-            $id = htmlspecialchars($_POST['id']);
-            $userType = htmlspecialchars($_POST['userType']);
-            $actionType = htmlspecialchars($_POST['actionType']);
-            switch ($actionType) {
-                case 'update':
-
-                    $this->updateUser($id, $username, $email, $userType);
-                    break;
-                case 'delete':
-                    $this->deleteUser($id);
-                    break;
-                default:
-                    break;
-            }
+            if ($this->userService->editUserAsAdmin($user->id, $user->username, $user->email, $user->type))
+                $this->respond();
+            else
+                $this->respondWithError(500, "Something went wrong");
         }
-    }
-    
-    public function updateUser($id, $username,$email, $userType)
-    {
-        try {
-            if (empty($id) || empty($username) || empty($email) || empty($userType)) {
-                $msg = "field empty, please fill in";
+
+        if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+
+            $body = file_get_contents("php://input");
+            $user = json_decode($body);
+
+            if (empty($user->id)) {
+                $this->respondWithError(400, "Id was not provided");
                 return;
             }
-            if ($userType == "admin") {
-                $userType = 0;
-            } else {
-                $userType = 1;
-            }
-            $this->userService->editUserAsAdmin($username, $email, $id, $userType);
-        } catch (Exception $e) {
-            echo $e->getMessage();
+            if ($this->userService->deleteUser($user->id))
+                $this->respond();
+            else
+                $this->respondWithError(500, "Something went wrong");
         }
     }
-    
-    public function deleteUser($id)
-    {
-        echo "delete";
-        $this->userService->deleteUser($id);
-    }
-
 
     function searchFilter()
     {

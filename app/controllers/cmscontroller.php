@@ -31,18 +31,7 @@ class CmsController
     {
         $users = $this->userService->getAll();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            echo "POST";
             switch ($_POST['action']) {
-                case 'update':
-                    echo "update";
-                    $this->updateItem();
-                    $users = $this->userService->getAll();
-                    break;
-                case 'delete':
-                    $this->deleteUser();
-
-                    $users = $this->userService->getAll();
-                    break;
                 case 'create':
                     $this->createUser();
                     $users = $this->userService->getAll();
@@ -100,8 +89,6 @@ class CmsController
                 echo $_POST['password'];
                 echo $_POST['email'];
                 echo $_POST['userType'];
-
-
                 return;
             }
             $username = htmlspecialchars($_POST['username']);
@@ -114,7 +101,6 @@ class CmsController
             } else {
                 $userType = 1;
             }
-            echo "controler";
             $this->userService->createUser($username, $email, $password, $userType);
         } catch (Exception $e) {
             echo $e->getMessage();

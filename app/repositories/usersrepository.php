@@ -101,10 +101,10 @@ class UsersRepository extends Repository
         }
     }   
     
-    function editUserAsAdmin($username,$email,$id, $userType){
+    function editUserAsAdmin($id, $username, $email, $userType){
         try{
             $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email, userType =:userType  WHERE id = :id');
-            $stmt->execute(array(':username' =>$username, ':email' => $email, 'userType'=>$userType, ':id' => $id));
+            return $stmt->execute(array(':username' =>$username, ':email' => $email, 'userType'=>$userType, ':id' => $id));
         } catch (PDOException $e)
         {
             echo $e;
@@ -115,7 +115,7 @@ class UsersRepository extends Repository
             $stmt = $this->connection->prepare("DELETE FROM `Users` WHERE id = :id;");
             
             $stmt->bindParam(':id', $id);
-            $stmt->execute();
+            return $stmt->execute();
         } catch (PDOException $e)
         {
             echo $e;
