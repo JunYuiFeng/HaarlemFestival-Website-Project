@@ -37,12 +37,40 @@
                     <th scope="col">Email<button name="action" type="submit"
                             value="sortEmailASC">&#x25b4;</button><button name="action" type="submit"
                             value="sortEmailDESC">&#x25be;</th>
-
-                    <th scope="col">Password</th>
                     <th scope="col">Role</th>
+                    <th scope="col">Action</th>
+
                 </tr>
             </thead>
             <tbody id="userTableBody">
+
+            </tbody>
+            <tbody>
+                <form method="POST">
+                    <td scope="row">
+                    </td>
+                    <td>
+                        <input type="text" name="username" placeholder="username">
+                    </td>
+                    <td>
+                        <input type="text" name="email" placeholder="email">
+                    </td>
+                    <td>
+                        <input type="text" name="password" placeholder="password">
+                    </td>
+                    <td>
+                        <div>
+                            <select name="userType" id="userType">
+                                <option value="admin">Admin</option>
+                                <option value="user" selected>User</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="submit" value="create" name="action">
+                    </td>
+            </tbody>
+            </form>
 
             </tbody>
         </table>
@@ -75,13 +103,13 @@
                         userResult.forEach(user => {
                             const row = document.createElement("tr");
                             row.innerHTML = `
-    <td id="userId">${user.id}</td>
-    <td id="userName"><input type="text" placeholder="${user.username}"></td>
-    <td id="userEmail"><input type="text" placeholder="${user.email}"></td>
-    <td><input id="update" type="submit" value="Update" onclick="update(${user.id}, '${user.username}', '${user.email}')"></td>
-    <td><button class="btn-danger" onclick="delete("")">delete</button></td>
-`;
-
+                                <td id="userId">${user.id}</td>
+                                <td><input id="userName${user.id}" value='${user.username}' ></td>
+                                <td><input  id="userEmail${user.id}" value='${user.email}' ></td>
+                                <td><input id="userType${user.id}" type="text" value="${user.userType}"></td>
+                                <td><input id="update${user.id}" type="submit" value="Update" onclick="updateUser(${user.id}, '${user.username}', '${user.email}','${user.userType}')"></td>
+                                <td><button class="btn-danger" onclick="deleteUser(${user.id})">delete</button></td>
+    `;
                             userTableBody.appendChild(row);
                         });
                     }
@@ -99,44 +127,66 @@
         searchInput.dispatchEvent(inputEvent);
     </script>
 
-    <<<<<<< HEAD <?php
+    <?php
     include __DIR__ . '/../footer.php';
     ?>
-
-        =======
-
-        <?php
-        include __DIR__ . '/../footer.php';
-        ?>
-        >>>>>>> main
 </body>
 
 </html>
-
-<!-- function update(userId, userName, userEmail) {
-
-fetch(`http://localhost/api/cms/update`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            userId: userId,
-            username: userName,
-            email: userEmail
+<script>
+    function deleteUser() {
+        alert( document.getElementById('userName' + user.id));
+        fetch(`http://localhost/api/cms`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: userId,
+                actionType: "delete",
+            })
         })
-    })
-    .then(response => {
-        if (response.ok) {
-            // Handle successful response
-            console.log("User data updated successfully.");
-        } else {
-            // Handle error response
-            console.error("Update request failed.");
-        }
-    })
-    .catch(error => {
-        // Handle network error
-        console.error(error);
-    });
-} -->
+            .then(response => {
+                if (response.ok) {
+                    // Handle successful response
+                    console.log("User data deleted successfully.");
+                } else {
+                    // Handle error response
+                    console.error("Delete request failed.");
+                }
+            })
+            .catch(error => {
+                // Handle network error
+                console.error(error);
+            });
+    }
+    function updateUser(userId, userName, userEmail, userType) {
+        alert("Update request sent.");
+        fetch(`http://localhost/api/cms`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: userId,
+                userName: userName,
+                email: userEmail,
+                userType: userType,
+                actionType: "update"
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Handle successful response
+                    console.log("User data updated successfully." + response.json());
+                } else {
+                    // Handle error response
+                    console.error("Update request failed.");
+                }
+            })
+            .catch(error => {
+                // Handle network error
+                console.error(error);
+            });
+    }
+</script>

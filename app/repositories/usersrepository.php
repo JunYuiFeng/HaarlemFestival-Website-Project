@@ -103,7 +103,6 @@ class UsersRepository extends Repository
     
     function editUserAsAdmin($username,$email,$id, $userType){
         try{
-            echo "repost";
             $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email, userType =:userType  WHERE id = :id');
             $stmt->execute(array(':username' =>$username, ':email' => $email, 'userType'=>$userType, ':id' => $id));
         } catch (PDOException $e)

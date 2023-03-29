@@ -25,11 +25,6 @@ class UserService
         return $this->repository->getAll();
     }
 
-    public function getById($id)
-    {
-        return $this->repository->getById($id);
-    }
-
     public function CreateUser($username, $email, $password,$userType)
     {
         echo "service";

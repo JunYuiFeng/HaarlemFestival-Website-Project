@@ -11,6 +11,69 @@ class CmsController extends Controller
         parent::__construct();
         $this->userService = new UserService();
     }
+    function index()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $users = $this->userService->getAll();
+
+            header("Content-Type: application/json");
+            echo json_encode($users);
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            
+            $body = file_get_contents("php://input");
+            $objects = json_decode($body);
+
+            echo json_encode(var_dump($objects));
+            if(!isset($_POST['userName'])){
+                return;
+            }
+
+            $username = htmlspecialchars($_POST['userName']);
+            $email = htmlspecialchars($_POST['email']);
+            $id = htmlspecialchars($_POST['id']);
+            $userType = htmlspecialchars($_POST['userType']);
+            $actionType = htmlspecialchars($_POST['actionType']);
+            switch ($actionType) {
+                case 'update':
+
+                    $this->updateUser($id, $username, $email, $userType);
+                    break;
+                case 'delete':
+                    $this->deleteUser($id);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    
+    public function updateUser($id, $username,$email, $userType)
+    {
+        try {
+            if (empty($id) || empty($username) || empty($email) || empty($userType)) {
+                $msg = "field empty, please fill in";
+                return;
+            }
+            if ($userType == "admin") {
+                $userType = 0;
+            } else {
+                $userType = 1;
+            }
+            $this->userService->editUserAsAdmin($username, $email, $id, $userType);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+    
+    public function deleteUser($id)
+    {
+        echo "delete";
+        $this->userService->deleteUser($id);
+    }
+
 
     function searchFilter()
     {

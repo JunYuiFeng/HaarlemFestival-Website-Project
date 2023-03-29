@@ -34,17 +34,15 @@ class CmsController
                 case 'update':
                     echo "update";
                     $this->updateItem();
-
                     $users = $this->userService->getAll();
                     break;
                 case 'delete':
-                    $this->delete();
+                    $this->deleteUser();
 
                     $users = $this->userService->getAll();
                     break;
                 case 'create':
-                    $this->create();
-
+                    $this->createUser();
                     $users = $this->userService->getAll();
                     break;
                 case 'sortIdAsc':
@@ -90,37 +88,6 @@ class CmsController
         }
         return $users;
     }
-    public function delete()
-    {
-        $id = $_POST["id"];
-        $this->userService->deleteUser($id);
-    }
-
-    public function updateItem()
-    {
-        // put to service
-        try {
-            if (empty($_POST['username']) || empty($_POST['email']) || empty($_POST['userType']) || empty($_POST['id'])) {
-                $msg = "field empty, please fill in";
-                echo "update failed";
-                return;
-            }
-
-            $username = htmlspecialchars($_POST['username']);
-            $email = htmlspecialchars($_POST['email']);
-            $id = htmlspecialchars($_POST['id']);
-            $userType = htmlspecialchars($_POST['userType']);
-            if ($userType == "admin") {
-                $userType = 0;
-            } else {
-                $userType = 1;
-            }
-            $this->userService->editUserAsAdmin($username, $email, $id, $userType);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
 
     public function createUser()
     {
