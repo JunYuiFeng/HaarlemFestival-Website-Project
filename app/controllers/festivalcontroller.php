@@ -3,20 +3,19 @@ require_once __DIR__ . '/../services/restaurantservice.php';
 require_once __DIR__ . '/../services/danceservice.php';
 require_once __DIR__ . '/../services/sessionservice.php';
 require_once __DIR__ . '/../services/reservationservice.php';
-include_once("../services/userservice.php");
+require_once __DIR__ . '/controller.php';
 
-class FestivalController 
+class FestivalController extends Controller
 {
     private $restaurantService;
     private $danceService;
     private $sessionService;
     private $reservationService;
-    private $loggedInUser;
-    private $userService;
+    protected $loggedInUser;
 
     function __construct()
     {
-        $this->userService = new UserService();
+        parent::__construct();
         $this->danceService = new DanceService();
         $this->restaurantService = new RestaurantService();
         $this->sessionService = new SessionService();
@@ -58,21 +57,14 @@ class FestivalController
 
     public function restaurantdetail()
     {
+        $loggedInUser = $this->loggedInUser;
+
         $restaurant = null;
 
         if (isset($_GET['id'])) {
             $id = htmlspecialchars($_GET['id']);
             $restaurant = $this->restaurantService->getById($id);
             $sessions = $this->sessionService->getSessionsByRestaurantId($id);
-        }
-
-        if (isset($_SESSION["logedin"]))
-        {
-            $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
-        }
-        else
-        {
-            $loggedInUser = null;
         }
 
        // $loggedInUser = $this->userService->getById($_SESSION["logedin"]);

@@ -25,4 +25,14 @@ class ReservationService
     {
         return $this->repository->getFromCartByUserId($id);
     }
+
+    function deleteReservation($id)
+    {
+        $this->repository->deleteReservation($id);
+    }
+
+    function getPrice($id)
+    {
+        return $this->repository->getPrice($id);
+    }
 }

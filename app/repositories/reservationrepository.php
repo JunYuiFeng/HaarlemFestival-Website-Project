@@ -62,4 +62,36 @@ class ReservationRepository extends Repository
             echo $e;
         }
     }
+
+    function deleteReservation($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM `Reservations` WHERE `id` = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function getPrice($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT
+            SUM(Reservations.amountUnderOr12 * Restaurants.priceAge12AndUnder) +
+            SUM(Reservations.amountAbove12 * Restaurants.priceAboveAge12) AS totalAmount
+          FROM
+            Reservations, Restaurants
+          WHERE
+            Reservations.restaurantId = Restaurants.id AND
+            Reservations.id = :id;
+          ");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $result = $stmt->fetchColumn();
+            return $result;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }    
 }

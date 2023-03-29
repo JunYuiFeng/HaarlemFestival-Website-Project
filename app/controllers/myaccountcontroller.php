@@ -4,21 +4,20 @@ include_once("../services/registerservice.php");
 
 require_once __DIR__ . "/../models/user.php";
 include_once("../services/resetpasswordservice.php");
-include_once("../services/userservice.php");
+require_once __DIR__ . '/controller.php';
 
 
 
-class MyAccountController
+class MyAccountController extends Controller
 {
     private $loginService;
     private $registerService;
     private $msg;
-    private $userService;
 
     function __construct()
     {
+        parent::__construct();
         $this->loginService = new LoginService();
-        $this->userService = new UserService();
         $this->registerService = new RegisterService();
         $this->msg = "";
     }

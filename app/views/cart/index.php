@@ -16,69 +16,106 @@
     ?>
 
     <div class="row">
-        <div class="col">
-            <div class="container checkPaymentSection">
-                <h1>Payment</h1>
-                <hr>
-                <p>Pay With:</p>
-                <input type="radio" id="card" name="cardType">
-                <label for="card">Card</label>
-                <input type="radio" id="ideal" name="cardType">
-                <label for="ideal">Ideal</label><br><br>
+        <div class="col-5">
+            <div class="container checkPaymentSection d-flex pt-5">
+                <div>
+                    <h1>Payment</h1>
+                    <hr>
+                    <p>Pay With:</p>
+                    <input type="radio" id="card" name="cardType">
+                    <label for="card">Card</label>
+                    <input type="radio" id="ideal" name="cardType">
+                    <label for="ideal">Ideal</label><br><br>
 
-                <label for="">Card Number</label>
-                <input type="text" class="form-control" placeholder="1234 5678 9101 1121"><br>
+                    <label for="">Card Number</label>
+                    <input type="text" class="form-control" placeholder="1234 5678 9101 1121"><br>
 
-                <label for="">Expiration Date</label>
-                <input type="text" class="form-control" placeholder="MM/YY"><br>
+                    <div class="d-flex justify-content-between">
+                        <div class="me-2">
+                            <label for="">Expiration Date</label>
+                            <input type="text" class="form-control" placeholder="MM/YY"><br>
+                        </div>
+                        <div class="ms-2">
+                            <label for="">CVV</label>
+                            <input type="text" class="form-control" placeholder="123"><br>
+                        </div>
+                    </div>
 
-                <button class="btn btn-primary"> Pay 300</button>
+                    <button class="btn btn-primary btn-lg"> Pay €<?= number_format($totalAmount, 2) ?> </button><br><br>
+
+                    <p>
+                        Your personal data will be used to process your order, support your experience throughout this website,
+                        and for other purposes described in our privacy policy.
+                    </p>
+                </div>
             </div>
         </div>
 
-        <div class="col">
-            <div class="container checkoutOrderSummarySection">
+        <div class="col-7">
+            <div class="container h-100 checkoutOrderSummarySection pt-5">
                 <h1>Order Summary</h1>
                 <hr>
-                <?php foreach ($items as $item) { ?>
-                    <div class="card mb-2">
-                        <div class="card-body">
-                            <div class="row d-flex align-items-center">
-                                <div class="col-1">
-                                    <img src="/img/ReservationIcon.png" alt="">
-                                </div>
-                                <div class="col-4">
-                                    <h2><b><?= $this->restaurantService->getById($item->getRestaurantId())->getName() ?></b></h2>
-                                    <p><b>Comment:</b> <?= $item->getComments() ?></p>
-                                    <p><b>People:</b> <?= $item->getAmountAbove12() + $item->getAmountUnderOr12() ?></p>
-                                </div>
-                                <div class="col-2">
-                                    <p>
-                                        <?php
-                                        $date = new DateTime($item->getDate());
-                                        echo $date->format('F jS');
-                                        ?>
-                                    </p>
-                                    <p>Session2</p>
-                                </div>
-                                <div class="col-3 d-flex" style="width: 23.5%">
-                                    <button class="btn btn-dark w-30">-</button>
-                                    <input type="text" name="quantity" id="quantity-input" class="form-control">
-                                    <button class="btn btn-dark w-30">+</button>
-                                </div>
-                                <div class="col-2">
-                                    <p><b>€110,00</b></p>
+                <?php if (!empty($items)) { ?>
+                    <?php foreach ($items as $key => $item) { ?>
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <div class="row d-flex align-items-center">
+                                    <div class="col-1">
+                                        <img src="/img/ReservationIcon.png" alt="">
+                                    </div>
+                                    <div class="col-3">
+                                        <h2><b><?= $this->restaurantService->getById($item->getRestaurantId())->getName() ?></b></h2>
+                                        <p><b>Comment:</b> <?= $item->getComments() ?></p>
+                                        <p><b>People:</b> <?= $item->getAmountAbove12() + $item->getAmountUnderOr12() ?></p>
+                                    </div>
+                                    <div class="col-2">
+                                        <p>
+                                            <?php
+                                            $date = new DateTime($item->getDate());
+                                            echo $date->format('F jS');
+                                            ?>
+                                        </p>
+                                        <p><?= $this->sessionService->getById($item->getSessionId())->getName() ?></p>
+                                    </div>
+                                    <div class="col-2 d-flex" style="width: 20%">
+                                        <button class="btn btn-dark w-30">-</button>
+                                        <input type="text" name="quantity" id="quantity-input" class="form-control" value="<?php if(isset($_SESSION["logedin"])) {
+                                            echo $this->cartService->getQuantityByItemId($item->getId())["quantity"];
+                                        } else {
+                                            echo 1;
+                                        }
+                                        ?>">
+                                        <button class="btn btn-dark w-30">+</button>
+                                    </div>
+                                    <div class="col-2" style="width: 13%">
+                                        <p><b>€<?php if(isset($_SESSION["logedin"])) { 
+                                            number_format($this->reservationService->getPrice($item->getId()), 2);
+                                         }
+                                         else {
+                                            echo 100;
+                                         } ?></b></p>
+                                    </div>
+                                    <div class="col-2">
+                                    <a class="btn btn-danger" href="removeItem?id=<?php if(isset($_SESSION["logedin"])) {
+                                        echo $item->getId();
+                                    } else {
+                                        echo $key;
+                                    }
+                                    ?>">Remove</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
+                <?php } else { ?>
+                    <p>There are no items in your cart.</p>
                 <?php } ?>
 
                 <hr>
 
                 <div class="d-flex justify-content-between checkTotal">
                     <p>Total</p>
-                    <p class="amount">€300</p>
+                    <p class="amount">€<?= number_format($totalAmount, 2) ?></p>
                 </div>
 
             </div>
@@ -87,6 +124,7 @@
     <?php
     include __DIR__ . '/../footer.php';
     ?>
+     
     <script>
         getCartAmount();
 
