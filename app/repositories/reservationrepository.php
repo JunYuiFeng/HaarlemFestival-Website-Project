@@ -93,5 +93,22 @@ class ReservationRepository extends Repository
         } catch (PDOException $e) {
             echo $e;
         }
-    }    
+    }
+
+    public function getReservationWithRestaurantAndSessionAsJSON($reservationId)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT r.id as reservationId, r.amountAbove12 AS amountOfPeopleAbove12,r.amountLess12 AS amountOfPeopleLess12,  re.id AS restaurantId, re.name AS restaurantName, re.cuisine AS restaurantCuisine, re.isFestival, re.address AS restaurantAddress, s.name as sessionName, s.startTime as sessionStartTime FROM Reservations r, Restaurants re, Sessions s WHERE r.restaurantId = re.id AND r.sessionId = s.id AND r.id = :id");
+            $stmt->bindParam(':id', $reservationId);
+
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $reservation = $stmt->fetch();
+
+            return $reservation;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
 }

@@ -3,6 +3,7 @@ require_once __DIR__ . '/../services/editPageService.php';
 require_once __DIR__ . '/../services/restaurantsmanagementservice.php';
 require_once __DIR__ . '/../services/sessionservice.php';
 require_once __DIR__ . '/../services/orderservice.php';
+require_once __DIR__ . '/../services/apikeyservice.php';
 require_once __DIR__ . '/controller.php';
 
 
@@ -14,6 +15,7 @@ class CmsController extends Controller
     private $restaurantManagementService;
     private $sessionService;
     private $orderService;
+    private $apiKeyService;
     private $msg;
 
 
@@ -24,6 +26,7 @@ class CmsController extends Controller
         $this->restaurantManagementService = new RestaurantsManagementService();
         $this->sessionService = new SessionService();
         $this->orderService = new OrderService();
+        $this->apiKeyService = new APIKeyService();
         $this->msg = "";
     }
 
@@ -245,5 +248,14 @@ class CmsController extends Controller
     {
         $orders = $this->orderService->getAll();
         require __DIR__ . '/../views/cms/manageorders.php';
+    }
+
+    public function manageapikeys()
+    {
+        if(isset($_POST['createKey'])){
+            $this->apiKeyService->create();
+        }
+        $apiKeys = $this->apiKeyService->getAll();
+        require __DIR__ . '/../views/cms/manageapikeys.php';
     }
 }
