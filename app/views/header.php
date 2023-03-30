@@ -99,34 +99,34 @@
     document.getElementsByClassName("cart-opened")[0].classList.toggle("expand")
   }
 
-  // var cartAmount = document.getElementById("cartAmount");
+  var cartAmount = document.getElementById("cartAmount");
 
-  // if (getUserType == 1) {
-  //   getCartAmount();
-  // } else {
-  //   getCartAmountAsVisitor();
-  // }
+  if (<?= isset($_SESSION["logedin"]) ?>) {
+    getCartAmount();
+  } else {
+    getCartAmountAsVisitor();
+  }
 
-  // function getCartAmount(userId) {
-  //   fetch('/api/cart/getCartAmount')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       console.log(data);
-  //       cartAmount.innerHTML = data;
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // }
+  function getCartAmount(userId) {
+    fetch('/api/cart/getCartAmount')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        cartAmount.innerHTML = data;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
-  // function getCartAmountAsVisitor() {
-  //   fetch('/api/cart/getCartAmountAsVisitor')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       cartAmount.innerHTML = data;
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // }
+  function getCartAmountAsVisitor() {
+    fetch('/api/cart/getCartAmountAsVisitor')
+      .then(response => response.json())
+      .then(data => {
+        cartAmount.innerHTML = data;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 </script>

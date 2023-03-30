@@ -192,9 +192,8 @@
         var cartAmount = document.getElementById("cartAmount");
 
         const restaurantId = <?= $restaurant->getId() ?>;
-        var getUserType = <?= $loggedInUser ? $loggedInUser->getUserType() : 0 ?>;
 
-        if (getUserType == 1) {
+        if (<?= isset($_SESSION["logedin"])?>) {
             getCartAmount();
         }
         else {
@@ -208,7 +207,7 @@
 
             reservationData.restaurantId = restaurantId;
 
-            if(getUserType == 1){
+            if(<?= isset($_SESSION["logedin"])?>){
                 addToCart(reservationData);
             }else{
                 addToCartAsVisitor(reservationData);
@@ -230,7 +229,7 @@
                 });
         }
 
-        function getCartAmount(userId) {
+        function getCartAmount() {
             fetch('/api/cart/getCartAmount')
                 .then(response => response.json())
                 .then(data => {

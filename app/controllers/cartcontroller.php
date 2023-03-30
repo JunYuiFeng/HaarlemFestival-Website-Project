@@ -41,10 +41,6 @@ class CartController extends Controller
                 $totalAmount += $item->getAmountUnderOr12() * 10;
                 $totalAmount += $this->reservationService->getPrice($item->getId());
             }
-            //var_dump($totalAmount);
-            // foreach ($_SESSION["cart"] as $item) {
-            //     $totalAmount += $item["price"];
-            // }
         } else {
             if (isset($_SESSION["cart"])) {
                 $items = $_SESSION["cart"];
