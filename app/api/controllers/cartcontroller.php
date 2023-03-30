@@ -50,8 +50,7 @@ class CartController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-            $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
-            $userId = $loggedInUser->getId();
+            $userId = $_SESSION["logedin"];
             $cartAmount = $this->cartService->getQuantityByUserId($userId);
 
             header("Content-Type: application/json");

@@ -108,10 +108,12 @@
   }
 
   function getCartAmount(userId) {
+    console.log("getCartAmount");
     fetch('/api/cart/getCartAmount')
       .then(response => response.json())
       .then(data => {
         console.log(data);
+        data = data == null ? 0 : data;
         cartAmount.innerHTML = data;
       })
       .catch(error => {
