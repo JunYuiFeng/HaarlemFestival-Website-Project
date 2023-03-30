@@ -23,7 +23,7 @@
         foreach ($artists as $artist) {
             ?>
             <h1 class="danceHomeNameArtist" id="danceHomeNameArtist<?= $count ?>">
-                <?= $artist->getArtist() ?>
+                <?= $artist->getName()?>
             </h1>
             <?php
             $count++;
@@ -50,14 +50,14 @@
         <?php
         $count = 1;
         foreach ($artists as $artist) {
-            if ($artist->getArtist() != "Martin Garrix" && $artist->getArtist() != "Afrojack") {
+            if ($artist->getName() != "Martin Garrix" && $artist->getName() != "Afrojack") {
                 continue;
             }
             ?>
             <div class="col-5 align-self-center" id="danceCard1">
                 <div class="danceCardType1">
                     <h3 class="danceHomeNameArtistCard" style="">
-                        <?= $artist->getArtist() ?>
+                        <?= $artist->getName() ?>
                     </h3>
                     <div class="row">
                         <div class="col-6">

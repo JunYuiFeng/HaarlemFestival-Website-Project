@@ -8,7 +8,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
     </head>
 </head>
@@ -32,9 +33,26 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Id<button name="action" type="submit" value="sortIdASC">&#x25b4;</button><button name="action" type="submit" value="sortIdDESC">&#x25be;</th>
-                    <th scope="col">Username<button name="action" type="submit" value="sortUsernameASC">&#x25b4;</button><button name="action" type="submit" value="sortUsernameDESC">&#x25be;</th>
-                    <th scope="col">Email<button name="action" type="submit" value="sortEmailASC">&#x25b4;</button><button name="action" type="submit" value="sortEmailDESC">&#x25be;</th>
+                    <th scope="col">Id
+                        <button name="action" onclick="sort('idASC')" value="sortIdASC">&#x25b4;</button>
+                        <button name="action" onclick="sort('idDESC')" value="sortIdASC">&#x25b4;</button>
+                    </th>
+
+                    <th scope="col">Username
+                        <button name="action" onclick="sort('usernameASC')" type="submit"
+                            value="sortUsernameASC">&#x25b4;</button>
+                        <button name="action" type="submit" onclick="sort('usernameDESC')"
+                            value="sortUsernameDESC">&#x25be;</button>
+                    </th>
+                    <th scope="col">Email
+                        <button name="action" type="submit" onclick="sort('emailASC')"
+                            value="sortEmailASC">&#x25b4;</button>
+                        <button name="action" type="submit" onclick="sort('emailDESC')" value="sortEmailDESC">&#x25be;
+                        </button>
+                    </th>
+                    <th scope="col">
+                        Registration Date
+                    </th>
                     <th scope="col">Role</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -56,6 +74,9 @@
                         <input type="text" name="password" placeholder="password" class="pb-1">
                     </td>
                     <td>
+                        <input type="text" name="registrationDate" placeholder="registrationDate" class="pb-1
+                    </td>
+                    <td>
                         <div>
                             <select name="userType" id="userType" class="px-2 py-1">
                                 <option value="admin">Admin</option>
@@ -64,7 +85,8 @@
                         </div>
                     </td>
                     <td>
-                        <button class="btn btn-primary" type="submit" name="action" value="create" id="createUserBtn">Create</button>
+                        <button class="btn btn-primary" type="submit" name="action" value="create"
+                            id="createUserBtn">Create</button>
                     </td>
             </tbody>
             </form>
@@ -84,34 +106,84 @@
         const searchInput = document.getElementById("searchInput");
         const userTableBody = document.getElementById("userTableBody");
 
-        function fetchUsers(query) {
-            fetch(`http://localhost/api/cms/searchfilter?query=${query}`)
+        function sort(itemToSort) {
+            const sortDirection = itemToSort.toLowerCase().endsWith("asc") ? 1 : -1;
+            const itemKey = itemToSort.toLowerCase().replace(/asc|desc/g, "").trim();
+
+            fetch(`http://localhost/api/cms`)
                 .then(result => result.json())
                 .then(userResult => {
+                    // Sort the results by the selected item and direction
+                    userResult.sort((a, b) => {
+                        if (a[itemKey] < b[itemKey]) {
+                            return -sortDirection;
+                        } else if (a[itemKey] > b[itemKey]) {
+                            return sortDirection;
+                        } else {
+                            return 0;
+                        }
+                    });
 
                     // Clear existing table rows
                     userTableBody.innerHTML = "";
 
                     if (userResult) {
-
-                        // Create new table rows for each search result
+                        // Create new table rows for each sorted result
                         userResult.forEach(user => {
+                            if (user.type == 0) {
+                                user.userType = "Admin";
+                            } else {
+                                user.userType = "User";
+                            }
                             const row = document.createElement("tr");
                             row.innerHTML = `
-                                <td id="userId">${user.id}</td>
-                                <td><input id="userName_${user.id}" value='${user.username}' ></td>
-                                <td><input  id="userEmail_${user.id}" value='${user.email}' ></td>
-                                <td><input id="userType_${user.id}" type="text" value="${user.userType}"></td>
-                                <td><button class="btn btn-warning" id="update${user.id}" onclick="updateUser(${user.id})">Update</button</td>
-                                <td><button class="btn btn-danger" onclick="deleteUser(${user.id})">Delete</button></td>`;
+            <td id="userId">${user.id}</td>
+            <td><input id="userName_${user.id}" value='${user.username}' ></td>
+            <td><input  id="userEmail_${user.id}" value='${user.email}' ></td>
+            <td><input id="userType_${user.id}" type="text" value="${user.userType}"></td>
+            <td><button class="btn btn-warning" id="update${user.id}" onclick="updateUser(${user.id})">Update</button</td>
+            <td><button class="btn btn-danger" id="delete${user.id}" onclick="deleteUser(${user.id})">Delete</button></td>
+          `;
                             userTableBody.appendChild(row);
                         });
                     }
                 })
-                .catch(error => console.error(error))
+                .catch(error => console.log(error));
         }
+        function fetchUsers(query) {
+    fetch(`http://localhost/api/cms/searchfilter?query=${query}`)
+        .then(result => result.json())
+        .then(userResult => {
 
-        searchInput.addEventListener("input", function(event) {
+            // Clear existing table rows
+            userTableBody.innerHTML = "";
+
+            if (userResult) {
+
+                // Create new table rows for each search result
+                userResult.forEach(user => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                    
+                        <td id="userId">${user.id}</td>
+                        <td><input id="userName_${user.id}" value='${user.username}' ></td>
+                        <td><input  id="userEmail_${user.id}" value='${user.email}' ></td>
+                        <td><input id="userRegistrasionDate_${user.registrationDate}" value='${user.registrationDate}'></td>
+                        <td>
+                            <select id="userType_${user.id}">
+                                <option value="0" ${user.userType === "Admin" ? "selected" : ""}>Admin</option>
+                                <option value="1" ${user.userType === "User" ? "selected" : ""}>User</option>
+                            </select>
+                        </td>
+                        <td><button class="btn btn-warning" id="update${user.id}" onclick="updateUser(${user.id})">Update</button></td>
+                        <td><button class="btn btn-danger" onclick="deleteUser(${user.id})">Delete</button></td>`;
+                    userTableBody.appendChild(row);
+                });
+            }
+        })
+        .catch(error => console.error(error))
+}
+        searchInput.addEventListener("input", function (event) {
             const query = searchInput.value; // Get search query from input field
             fetchUsers(query);
         });
@@ -126,14 +198,14 @@
                 return;
             }
             fetch(`http://localhost/api/cms`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        id: id,
-                    })
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: id,
                 })
+            })
                 .then(response => {
                     if (response.ok) {
                         document.getElementById("outputMessage").innerText = "User id: " + id + " has been deleted.";

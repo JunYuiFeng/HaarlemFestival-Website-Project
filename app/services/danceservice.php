@@ -18,15 +18,9 @@ class DanceService
     {
         return $this->repository->getAllByDate($date);
     }
-
-
-    public function getVanue()
+    public function getAllArtist()
     {
-        return $this->repository->getVanue();
-    }
-    public function getArtistsBySession()
-    {
-        return $this->repository->getArtistsBySession();
+        return $this->repository->getAllArtist();
     }
     public function getById($id)
     {
