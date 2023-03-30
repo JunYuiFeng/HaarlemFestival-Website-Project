@@ -26,23 +26,22 @@ class CartController extends Controller
             $body = file_get_contents("php://input");
             $objects = json_decode($body);
 
-
             $reservation = new Reservation();
-            $reservation->setRestaurantId($objects->restaurantId);
-            $reservation->setSessionId($objects->sessionId);
-            $reservation->setAmountAbove12(!empty($objects->amountAbove12) ? $objects->amountAbove12 : 0);
-            $reservation->setAmountUnderOr12(!empty($objects->amountUnderOr12) ? $objects->amountUnderOr12 : 0); //ternary operator to check if $amountUnderOr12 is empty or not, and if it is empty, then return 0
-            $reservation->setDate($objects->date);
-            $reservation->setComments(!empty($objects->comment) ? $objects->comment : "");
+            $reservation->setRestaurantId(htmlspecialchars($objects->restaurantId));
+            $reservation->setSessionId(htmlspecialchars($objects->sessionId));
+            $reservation->setAmountAbove12(htmlspecialchars(!empty($objects->amountAbove12) ? $objects->amountAbove12 : 0));
+            $reservation->setAmountUnderOr12(htmlspecialchars(!empty($objects->amountUnderOr12) ? $objects->amountUnderOr12 : 0)); //ternary operator to check if $amountUnderOr12 is empty or not, and if it is empty, then return 0
+            $reservation->setDate(htmlspecialchars($objects->date));
+            $reservation->setComments(htmlspecialchars(!empty($objects->comment) ? $objects->comment : ""));
             $reservation->setStatus(htmlspecialchars('active'));
             $this->reservationService->insertReservation($reservation);
-            
+
             $reservationId = $this->reservationService->getLastReservationId();
             $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
             $userId = $loggedInUser->getId();
             $cartId = $this->cartService->getCartIdByUserId($userId);
 
-            $this->cartService->insertToCartItems($cartId['id'], $reservationId['id'], "reservation", 1);
+            $cartItems = $this->cartService->insertToCartItems($cartId['id'], $reservationId['id'], "reservation", 1);
         }
     }
 
@@ -65,24 +64,27 @@ class CartController extends Controller
             $body = file_get_contents("php://input");
             $objects = json_decode($body);
 
-            // $reservationDate = $objects->date;
-            // $restaurantId = $objects->restaurantId;
-            // $sessionId = $objects->sessionId;
-            // $amountAbove12 = !empty($objects->amountAbove12) ? $objects->amountAbove12 : 0;
-            // $amountUnderOr12 = !empty($objects->amountUnderOr12) ? $objects->amountUnderOr12 : 0;
-            // $comment = !empty($objects->comment) ? $objects->comment : "";
-            // $status = htmlspecialchars('active');
-
             $reservation = new Reservation();
-            $reservation->setRestaurantId($objects->restaurantId);
-            $reservation->setSessionId($objects->sessionId);
-            $reservation->setAmountAbove12(!empty($objects->amountAbove12) ? $objects->amountAbove12 : 0);
-            $reservation->setAmountUnderOr12(!empty($objects->amountUnderOr12) ? $objects->amountUnderOr12 : 0);
-            $reservation->setDate($objects->date);
-            $reservation->setComments(!empty($objects->comment) ? $objects->comment : "");
+            $reservation->setRestaurantId(htmlspecialchars($objects->restaurantId));
+            $reservation->setSessionId(htmlspecialchars($objects->sessionId));
+            $reservation->setAmountAbove12(htmlspecialchars(!empty($objects->amountAbove12) ? $objects->amountAbove12 : 0));
+            $reservation->setAmountUnderOr12(htmlspecialchars(!empty($objects->amountUnderOr12) ? $objects->amountUnderOr12 : 0)); //ternary operator to check if $amountUnderOr12 is empty or not, and if it is empty, then return 0
+            $reservation->setDate(htmlspecialchars($objects->date));
+            $reservation->setComments(htmlspecialchars(!empty($objects->comment) ? $objects->comment : ""));
             $reservation->setStatus(htmlspecialchars('active'));
+            //$this->reservationService->insertReservation($reservation);
 
-            $_SESSION['cart'][] = $reservation;
+
+            $cart = array();
+
+            if (isset($_SESSION['cart'])) {
+                $cart = $_SESSION['cart'];
+            }
+            else{
+                $vistorSession = $this->cartService->createNewVistorSession();
+                $cart = $vistorSession;
+            }
+            $_SESSION['cart'] = $cart;
         }
     }
 
@@ -105,5 +107,4 @@ class CartController extends Controller
             echo json_encode($amount);
         }
     }
-    
 }

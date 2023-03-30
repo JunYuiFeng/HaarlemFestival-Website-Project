@@ -34,4 +34,9 @@ class CartService
     {
         $this->repository->insert($userId);
     }
+    
+    function createNewVistorSession()
+    {
+        return $this->repository->createNewVistorSession();
+    }
 }

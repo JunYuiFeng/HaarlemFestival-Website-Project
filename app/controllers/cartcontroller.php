@@ -31,16 +31,28 @@ class CartController extends Controller
     public function index()
     {
         //$this->cartService->insert($this->loggedInUser->getId());
-        $items = array();
         $totalAmount = 0;
-
+        $data = array();
+    
         if (isset($_SESSION["logedin"])) {
             $loggedInUser = $this->loggedInUser;
             $items = $this->reservationService->getFromCartByUserId($loggedInUser->getId());
             foreach ($items as $item) {
+                $itemData = array(
+                    'id' => $item->getId(),
+                    'comment' => $item->getComments(),
+                    'amountAbove12' => $item->getAmountAbove12(),
+                    'amountUnderOr12' => $item->getAmountUnderOr12(),
+                    'price' => number_format($this->reservationService->getPrice($item->getId()), 2),
+                    'restaurant' => $this->restaurantService->getById($item->getRestaurantId())->getName(),
+                    'session' => $this->sessionService->getById($item->getSessionId())->getName(),
+                    'date' => $item->getDate()
+                );
                 $totalAmount += $item->getAmountAbove12() * 10;
                 $totalAmount += $item->getAmountUnderOr12() * 10;
                 $totalAmount += $this->reservationService->getPrice($item->getId());
+                $data[] = $itemData;
+                //var_dump($itemData);
             }
         } else {
             if (isset($_SESSION["cart"])) {
@@ -51,10 +63,10 @@ class CartController extends Controller
             }
         }
         //session_destroy();
-
+    
         require __DIR__ . '/../views/cart/index.php';
     }
-
+    
     function removeItem()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {

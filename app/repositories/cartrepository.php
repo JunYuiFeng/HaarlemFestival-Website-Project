@@ -6,12 +6,31 @@ use Ramsey\Uuid\Uuid;
 
 class CartRepository extends Repository
 {
-    function insertToCartItems(int $cartId, int $itemId, string $type, int $quantity)
+    function insertToCartItems($cartId, $itemId, $type, $quantity)
     {
         try {
-            $stmt = $this->connection->prepare("INSERT INTO `CartItems`(`cartId`, `itemId`, `type`, `quantity`)
-             VALUES (:cartId, :itemId, :type, :quantity)");
+            $uuid = Uuid::uuid4()->toString();
+            $stmt = $this->connection->prepare("INSERT INTO `CartItems`(`id`,`cartId`, `itemId`, `type`, `quantity`)
+             VALUES (:id, :cartId, :itemId, :type, :quantity)");
 
+            $stmt->bindParam(':id', $uuid);
+            $stmt->bindParam(':cartId', $cartId);
+            $stmt->bindParam(':itemId', $itemId);
+            $stmt->bindParam(':type', $type);
+            $stmt->bindParam(':quantity', $quantity);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function insertToCartItemsAsVisitor($id, $cartId, $itemId, $type, $quantity)
+    {
+        try {
+            $stmt = $this->connection->prepare("INSERT INTO `CartItems`(`id`,`cartId`, `itemId`, `type`, `quantity`)
+             VALUES (:id, :cartId, :itemId, :type, :quantity)");
+
+            $stmt->bindParam(':id', $id);
             $stmt->bindParam(':cartId', $cartId);
             $stmt->bindParam(':itemId', $itemId);
             $stmt->bindParam(':type', $type);
@@ -75,6 +94,20 @@ class CartRepository extends Repository
             $stmt->bindParam(':id', $uuid);
             $stmt->bindParam(':userId', $userId);
             $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function createNewVistorSession()
+    {
+        try {
+            $uuid = Uuid::uuid4()->toString();
+            $stmt = $this->connection->prepare("INSERT INTO `VisitorSession`(`id`) VALUES (:id)");
+            $stmt->bindParam(':id', $uuid);
+            $stmt->execute();
+
+            return $uuid;
         } catch (PDOException $e) {
             echo $e;
         }
