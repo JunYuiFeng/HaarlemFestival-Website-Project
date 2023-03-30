@@ -50,6 +50,21 @@ class CmsController extends Controller
             else
                 $this->respondWithError(500, "Something went wrong");
         }
+
+        if($_SERVER['REQUEST_METHOD'] == 'SORT'){
+            $body = file_get_contents("php://input");
+            $user = json_decode($body);
+
+            
+            if (empty($user->username) || empty($user->email) || empty($user->type)) {
+                $this->respondWithError(400, "Not all data was provided");
+                return;
+            }
+            if ($this->userService->createUser($user->username, $user->email, $user->type))
+                $this->respond();
+            else
+                $this->respondWithError(500, "Something went wrong");
+        }
     }
 
     function searchFilter()

@@ -67,9 +67,6 @@
                                     <span></span>
                                     Update
                                 </button>
-                                <button style="margin-left: 9em;">
-                                    <a href="logout" class="mt-5">Logout</a>
-                                </button>
                         </form>
                     </div>
 

@@ -96,11 +96,11 @@ class User implements \JsonSerializable
      */
     public function getUserType()
     {
-        // if($this->userType == 0){
-        //     $this->userType = "admin";
-        // } else {
-        //     $this->userType = "user";
-        // }
+         if($this->userType == 0){
+             $this->userType = "admin";
+         } else {
+             $this->userType = "user";
+        }
         return $this->userType;
     }
 

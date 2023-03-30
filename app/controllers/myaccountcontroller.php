@@ -54,6 +54,7 @@ class MyAccountController extends Controller
                     $id = htmlspecialchars($_POST['id']);
 
                     $this->userService->editUser($username, $email, $password, $id);
+                    $this->userService->sendLink($email);
 
                 } else {
                     $msg = "old password is incorrect";
