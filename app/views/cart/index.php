@@ -56,7 +56,7 @@
                 <h1>Order Summary</h1>
                 <hr>
                 <?php if (!empty($items)) { ?>
-                    <?php foreach ($items as $key => $item) { ?>
+                    <?php foreach ($data as $item) { ?>
                         <div class="card mb-2">
                             <div class="card-body">
                                 <div class="row d-flex align-items-center">
@@ -64,32 +64,27 @@
                                         <img src="/img/ReservationIcon.png" alt="">
                                     </div>
                                     <div class="col-3">
-                                        <h2><b><?= $this->restaurantService->getById($item->getRestaurantId())->getName() ?></b></h2>
-                                        <p><b>Comment:</b> <?= $item->getComments() ?></p>
-                                        <p><b>People:</b> <?= $item->getAmountAbove12() + $item->getAmountUnderOr12() ?></p>
+                                        <h2><b><?= $item['restaurant'] ?></b></h2>
+                                        <p><b>Comment:</b> <?= $item['comment']?></p>
+                                        <p><b>People:</b> <?= $item['amountAbove12'] + $item['amountUnderOr12'] ?></p>
                                     </div>
                                     <div class="col-2">
                                         <p>
                                             <?php
-                                            $date = new DateTime($item->getDate());
+                                            $date = new DateTime($item['date']);
                                             echo $date->format('F jS');
                                             ?>
                                         </p>
-                                        <p><?= $this->sessionService->getById($item->getSessionId())->getName() ?></p>
+                                        <p><?= $item['session'] ?></p>
                                     </div>
                                     <div class="col-2 d-flex" style="width: 20%">
                                         <button class="btn btn-dark w-30">-</button>
-                                        <input type="text" name="quantity" id="quantity-input" class="form-control" value="<?php if(isset($_SESSION["logedin"])) {
-                                            echo $this->cartService->getQuantityByItemId($item->getId())["quantity"];
-                                        } else {
-                                            echo 1;
-                                        }
-                                        ?>">
+                                        <input type="text" name="quantity" id="quantity-input" class="form-control" value="1">
                                         <button class="btn btn-dark w-30">+</button>
                                     </div>
                                     <div class="col-3" style="width: 13%">
                                         <p><b>€<?php if(isset($_SESSION["logedin"])) { 
-                                            echo number_format($this->reservationService->getPrice($item->getId()), 2);
+                                            echo number_format($item['price'], 2);
                                          }
                                          else {
                                             echo 100;
@@ -97,7 +92,7 @@
                                     </div>
                                     <div class="col-2">
                                     <a class="btn btn-danger" href="removeItem?id=<?php if(isset($_SESSION["logedin"])) {
-                                        echo $item->getId();
+                                        echo $item['id'];
                                     } else {
                                         echo $key;
                                     }
@@ -117,6 +112,8 @@
                     <p>Total</p>
                     <p class="amount">€<?= number_format($totalAmount, 2) ?></p>
                 </div>
+
+                <p>9% VAT</p>
 
             </div>
         </div>
