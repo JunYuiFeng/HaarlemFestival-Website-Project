@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/repository.php';
+require_once '../vendor/autoload.php';
+use Ramsey\Uuid\Uuid;
 
 
 class CartRepository extends Repository
@@ -18,7 +20,6 @@ class CartRepository extends Repository
         } catch (PDOException $e) {
             echo $e;
         }
-
     }
 
     function getCartIdByUserId($id)
@@ -65,4 +66,18 @@ class CartRepository extends Repository
             echo $e;
         }
     }
+
+    function insert($userId)
+    {
+        try {
+            $uuid = Uuid::uuid4()->toString();
+            $stmt = $this->connection->prepare("INSERT INTO `Carts`(`Id`, `userId`) VALUES (:id, :userId)");
+            $stmt->bindParam(':id', $uuid);
+            $stmt->bindParam(':userId', $userId);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+    
 }

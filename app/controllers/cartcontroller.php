@@ -30,6 +30,7 @@ class CartController extends Controller
 
     public function index()
     {
+        //$this->cartService->insert($this->loggedInUser->getId());
         $items = array();
         $totalAmount = 0;
 
