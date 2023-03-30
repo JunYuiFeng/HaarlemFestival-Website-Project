@@ -3,6 +3,8 @@ require_once __DIR__ . '/../services/restaurantservice.php';
 require_once __DIR__ . '/../services/danceservice.php';
 require_once __DIR__ . '/../services/sessionservice.php';
 require_once __DIR__ . '/../services/reservationservice.php';
+require_once __DIR__ . '/../services/artistservice.php';
+require_once __DIR__ . '/../services/venueservice.php';
 require_once __DIR__ . '/controller.php';
 
 class FestivalController extends Controller
@@ -11,12 +13,16 @@ class FestivalController extends Controller
     private $danceService;
     private $sessionService;
     private $reservationService;
+    private $artistService;
+    private $venueService;
     protected $loggedInUser;
 
     function __construct()
     {
         parent::__construct();
         $this->danceService = new DanceService();
+        $this->venueService = new VenueService();
+        $this->artistService = new ArtistService();
         $this->restaurantService = new RestaurantService();
         $this->sessionService = new SessionService();
         $this->reservationService = new ReservationService();
@@ -31,8 +37,8 @@ class FestivalController extends Controller
         $danecVanueType = "";
         $DanceCardType = 0;
         $dances = $this->danceService->getAll();
-        $artists = $this->danceService->getArtistsBySession();
-        $vanues = $this->danceService->getVanue();
+        $artists = $this->artistService->getAll();
+        $venues = $this->venueService->getAll();
         $dancesByDate27Jul = $this->danceService->getAllByDate('27 Jul');
         $dancesByDate28Jul = $this->danceService->getAllByDate('28 Jul');
         $dancesByDate29Jul = $this->danceService->getAllByDate('29 Jul');
