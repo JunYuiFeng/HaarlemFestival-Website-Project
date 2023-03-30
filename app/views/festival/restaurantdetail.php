@@ -250,7 +250,10 @@
                     },
                     body: JSON.stringify(reservationData)
                 })
-                .then(getCartAmountAsVisitor())
+                .then(setTimeout(function(){
+                    getCartAmountAsVisitor();
+                }, 100)
+                )
                 .catch(error => {
                     console.error(error);
                 });

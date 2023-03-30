@@ -41,7 +41,7 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-primary btn-lg"> Pay €<?= number_format($totalAmount, 2) ?> </button><br><br>
+                    <a class="btn btn-primary btn-lg" href="payment"> Pay €<?= number_format($totalAmount, 2) ?> </a><br><br>
 
                     <p>
                         Your personal data will be used to process your order, support your experience throughout this website,
@@ -87,9 +87,9 @@
                                         ?>">
                                         <button class="btn btn-dark w-30">+</button>
                                     </div>
-                                    <div class="col-2" style="width: 13%">
+                                    <div class="col-3" style="width: 13%">
                                         <p><b>€<?php if(isset($_SESSION["logedin"])) { 
-                                            number_format($this->reservationService->getPrice($item->getId()), 2);
+                                            echo number_format($this->reservationService->getPrice($item->getId()), 2);
                                          }
                                          else {
                                             echo 100;
