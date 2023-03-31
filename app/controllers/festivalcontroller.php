@@ -109,12 +109,13 @@ class FestivalController extends Controller
             ->build();
 
         $dataUri = $result->getDataUri();
+        $eventName = "SALAM";
+        ob_start();
+        require __DIR__ . '/../views/ticket.php';
 
-
-        //require __DIR__ . '/../views/ticket.php';
-
-        $html = file_get_contents('../views/ticket.php');
-        //var_dump($html);
+        //$html = file_get_contents('../views/ticket.php');
+        $html = ob_get_clean();
+        // var_dump($html);
 
         // create an mPDF object
         $mpdf = new Mpdf();

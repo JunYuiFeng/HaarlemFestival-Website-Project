@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-6">
                 <h4 class="mb-0"><b>EVENT</b></h4>
-                <h4 class="mb-5"><?= $_GET['eventName']?> </h4>
+                <h4 class="mb-5"><?= $eventName ?> </h4>
 
                 <h4 class="mb-0"><b>LOCATION</b></h4>
                 <h4 class="mb-5">87 venue street</h4>
@@ -42,7 +42,7 @@
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
         var element = document.getElementById('ticket');
         const formData = new FormData();
@@ -60,7 +60,7 @@
                 })
                 .catch(error => console.log(error));
         });
-    </script>
+    </script> -->
 </body>
 
 </html>
