@@ -86,7 +86,7 @@
                                         <p><b>€<?= number_format($item['price'], 2); ?></b></p>
                                     </div>
                                     <div class="col-2">
-                                    <a class="btn btn-danger" href="removeItem?id=<?$item['id'];?>">Remove</a>
+                                    <a class="btn btn-danger" href="removeItem?id=<?=$item['id'];?>">Remove</a>
                                     </div>
                                 </div>
                             </div>
@@ -120,17 +120,6 @@
             const newValue = event.target.value.replace(/[^\d]/g, ''); // remove non-numeric characters
             event.target.value = newValue;
         });
-
-        function getCartAmount() {
-            fetch('/api/cart/getCartAmount')
-                .then(response => response.json())
-                .then(data => {
-                    cartAmount.innerHTML = data;
-                })
-                .catch(error => {
-                    console.error('Error getting amount:', error);
-                });
-        }
     </script>
 </body>
 

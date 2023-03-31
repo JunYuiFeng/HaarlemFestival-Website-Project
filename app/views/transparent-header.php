@@ -54,11 +54,7 @@
 <script>
     var cartAmount = document.getElementById("cartAmount");
 
-    if (<?= isset($_SESSION["logedin"]) ?>) {
-        getCartAmount();
-    } else {
-        getCartAmountAsVisitor();
-    }
+    <?php echo (isset($_SESSION['logedin'])) ? 'getCartAmount();' : 'getCartAmountAsVisitor();' ?>
 
     function getCartAmount(userId) {
         fetch('/api/cart/getCartAmount')
