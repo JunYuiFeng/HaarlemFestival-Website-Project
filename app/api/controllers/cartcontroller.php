@@ -74,32 +74,33 @@ class CartController extends Controller
             $reservation->setDate(htmlspecialchars($objects->date));
             $reservation->setComments(htmlspecialchars(!empty($objects->comment) ? $objects->comment : ""));
             $reservation->setStatus(htmlspecialchars('active'));
-            //$this->reservationService->insertReservation($reservation);
+            $this->reservationService->insertReservation($reservation);
 
-            //$reservationId = $this->reservationService->getLastReservationId();
-            //$cartItems = $this->cartService->insertToCartItems($_SESSION['cart'], $reservationId['id'], "reservation", 1);
-            header("Content-Type: application/json");
-            echo json_encode($_SESSION['cart']);
+            $reservationId = $this->reservationService->getLastReservationId();
+            $cartItems = $this->cartService->insertToCartItems($_SESSION['cart'], $reservationId['id'], "reservation", 1);
+            // header("Content-Type: application/json");
+            // echo json_encode($_SESSION['cart']);
         }
     }
 
     function getCartAmountAsVisitor()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $cart = array();
+            $cartAmount = $this->cartService->getQuantityByCartId($_SESSION['cart']);
+            // $cart = array();
 
-            if (isset($_SESSION['cart'])) {
-                $cart = $_SESSION['cart'];
-            }
+            // if (isset($_SESSION['cart'])) {
+            //     $cart = $_SESSION['cart'];
+            // }
 
-            $amount = 0;
+            // $amount = 0;
 
-            foreach ($cart as $reservation) {
-                $amount++;
-            }
+            // foreach ($cart as $reservation) {
+            //     $amount++;
+            // }
 
             header("Content-Type: application/json");
-            echo json_encode($amount);
+            echo json_encode($cartAmount['quantity']);
         }
     }
 }

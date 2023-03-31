@@ -187,6 +187,79 @@
     <?php
     include __DIR__ . '/../footer.php';
     ?>
+
+<script>
+        var cartAmount = document.getElementById("cartAmount");
+
+        const restaurantId = <?= $restaurant->getId() ?>;
+
+        <?php echo (isset($_SESSION['logedin'])) ? 'getCartAmount();' : 'getCartAmountAsVisitor();' ?>
+
+        document.querySelector("#addToCart").addEventListener("click", function(event) {
+
+            const formData = new FormData(document.getElementById("reservationForm")); // get form data
+            const reservationData = Object.fromEntries(formData.entries()); // convert form data to object
+
+            reservationData.restaurantId = restaurantId;
+
+            <?php echo (isset($_SESSION['logedin'])) ? 'addToCart(reservationData);' : 'addToCartAsVisitor(reservationData);' ?>
+        });
+
+
+        async function addToCart(reservationData) {
+            await fetch('/api/cart/addToCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(reservationData)
+                })
+                .then(getCartAmount())
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+        function getCartAmount() {
+            fetch('/api/cart/getCartAmount')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    cartAmount.innerHTML = data;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+        function addToCartAsVisitor(reservationData) {
+            fetch('/api/cart/addToCartAsVisitor', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(reservationData)
+                })
+                .then(setTimeout(function(){
+                    getCartAmountAsVisitor();
+                }, 100)
+                )
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+        function getCartAmountAsVisitor() {
+            fetch('/api/cart/getCartAmountAsVisitor')
+                .then(response => response.json())
+                .then(data => {
+                    cartAmount.innerHTML = data;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+    </script>
     
 </body>
 

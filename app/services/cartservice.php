@@ -39,4 +39,9 @@ class CartService
     {
         return $this->repository->createVisitorCart();
     }
+
+    function getQuantityByCartId($id)
+    {
+        return $this->repository->getQuantityByCartId($id);
+    }
 }

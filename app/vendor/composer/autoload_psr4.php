@@ -6,11 +6,17 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'setasign\\Fpdi\\' => array($vendorDir . '/setasign/fpdi/src'),
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
     'Ramsey\\Collection\\' => array($vendorDir . '/ramsey/collection/src'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
+    'Mpdf\\' => array($vendorDir . '/mpdf/mpdf/src'),
     'Mollie\\Api\\' => array($vendorDir . '/mollie/mollie-api-php/src'),
+    'Http\\Message\\' => array($vendorDir . '/php-http/message-factory/src'),
     'Endroid\\QrCode\\' => array($vendorDir . '/endroid/qr-code/src'),
+    'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
     'DASPRiD\\Enum\\' => array($vendorDir . '/dasprid/enum/src'),
     'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),

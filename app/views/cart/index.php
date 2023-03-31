@@ -55,7 +55,7 @@
             <div class="container h-100 checkoutOrderSummarySection pt-5">
                 <h1>Order Summary</h1>
                 <hr>
-                <?php if (!empty($items)) { ?>
+                <?php if (!empty($data)) { ?>
                     <?php foreach ($data as $item) { ?>
                         <div class="card mb-2">
                             <div class="card-body">
@@ -83,20 +83,10 @@
                                         <button class="btn btn-dark w-30">+</button>
                                     </div>
                                     <div class="col-3" style="width: 13%">
-                                        <p><b>€<?php if(isset($_SESSION["logedin"])) { 
-                                            echo number_format($item['price'], 2);
-                                         }
-                                         else {
-                                            echo 100;
-                                         } ?></b></p>
+                                        <p><b>€<?= number_format($item['price'], 2); ?></b></p>
                                     </div>
                                     <div class="col-2">
-                                    <a class="btn btn-danger" href="removeItem?id=<?php if(isset($_SESSION["logedin"])) {
-                                        echo $item['id'];
-                                    } else {
-                                        echo $key;
-                                    }
-                                    ?>">Remove</a>
+                                    <a class="btn btn-danger" href="removeItem?id=<?$item['id'];?>">Remove</a>
                                     </div>
                                 </div>
                             </div>

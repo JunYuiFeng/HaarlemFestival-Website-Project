@@ -70,6 +70,19 @@ class CartRepository extends Repository
         }
     }
 
+    function getQuantityByCartId($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT SUM(quantity) AS quantity FROM `CartItems` WHERE cartId = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
 
     function getQuantityByItemId($id)
     {

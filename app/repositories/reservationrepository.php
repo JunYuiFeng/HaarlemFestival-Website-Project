@@ -63,6 +63,28 @@ class ReservationRepository extends Repository
         }
     }
 
+    function getFromCartByCartId($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT *
+            FROM Reservations
+            WHERE id IN (
+                SELECT itemId
+                FROM CartItems
+                WHERE cartId = :id)");
+            $stmt->bindParam(':id', $id);
+
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, "Reservation");
+            $reservations = $stmt->fetchAll();
+
+            return $reservations;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
     function deleteReservation($id)
     {
         try {

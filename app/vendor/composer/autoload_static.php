@@ -7,10 +7,15 @@ namespace Composer\Autoload;
 class ComposerStaticInit504995c47f73ed3125e3b9cae3f84e4c
 {
     public static $files = array (
+        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        's' => 
+        array (
+            'setasign\\Fpdi\\' => 14,
+        ),
         'R' => 
         array (
             'Ramsey\\Uuid\\' => 12,
@@ -18,11 +23,18 @@ class ComposerStaticInit504995c47f73ed3125e3b9cae3f84e4c
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
+            'Psr\\Http\\Message\\' => 17,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
+            'Mpdf\\' => 5,
             'Mollie\\Api\\' => 11,
+        ),
+        'H' => 
+        array (
+            'Http\\Message\\' => 13,
         ),
         'E' => 
         array (
@@ -30,6 +42,7 @@ class ComposerStaticInit504995c47f73ed3125e3b9cae3f84e4c
         ),
         'D' => 
         array (
+            'DeepCopy\\' => 9,
             'DASPRiD\\Enum\\' => 13,
         ),
         'C' => 
@@ -44,6 +57,10 @@ class ComposerStaticInit504995c47f73ed3125e3b9cae3f84e4c
     );
 
     public static $prefixDirsPsr4 = array (
+        'setasign\\Fpdi\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/setasign/fpdi/src',
+        ),
         'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
@@ -52,17 +69,37 @@ class ComposerStaticInit504995c47f73ed3125e3b9cae3f84e4c
         array (
             0 => __DIR__ . '/..' . '/ramsey/collection/src',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/src',
+        ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'Mpdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mpdf/mpdf/src',
         ),
         'Mollie\\Api\\' => 
         array (
             0 => __DIR__ . '/..' . '/mollie/mollie-api-php/src',
         ),
+        'Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/message-factory/src',
+        ),
         'Endroid\\QrCode\\' => 
         array (
             0 => __DIR__ . '/..' . '/endroid/qr-code/src',
+        ),
+        'DeepCopy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
         'DASPRiD\\Enum\\' => 
         array (
