@@ -64,6 +64,9 @@ class CartController extends Controller
             $body = file_get_contents("php://input");
             $objects = json_decode($body);
 
+            $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : $this->cartService->createVisitorCart();
+            $_SESSION['cart'] = $cart;
+
             $reservation = new Reservation();
             $reservation->setRestaurantId(htmlspecialchars($objects->restaurantId));
             $reservation->setSessionId(htmlspecialchars($objects->sessionId));
@@ -74,17 +77,10 @@ class CartController extends Controller
             $reservation->setStatus(htmlspecialchars('active'));
             //$this->reservationService->insertReservation($reservation);
 
-
-            $cart = array();
-
-            if (isset($_SESSION['cart'])) {
-                $cart = $_SESSION['cart'];
-            }
-            else{
-                $vistorSession = $this->cartService->createNewVistorSession();
-                $cart = $vistorSession;
-            }
-            $_SESSION['cart'] = $cart;
+            //$reservationId = $this->reservationService->getLastReservationId();
+            //$cartItems = $this->cartService->insertToCartItems($_SESSION['cart'], $reservationId['id'], "reservation", 1);
+            header("Content-Type: application/json");
+            echo json_encode($_SESSION['cart']);
         }
     }
 

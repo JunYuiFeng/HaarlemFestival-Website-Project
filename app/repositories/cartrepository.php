@@ -9,11 +9,9 @@ class CartRepository extends Repository
     function insertToCartItems($cartId, $itemId, $type, $quantity)
     {
         try {
-            $uuid = Uuid::uuid4()->toString();
-            $stmt = $this->connection->prepare("INSERT INTO `CartItems`(`id`,`cartId`, `itemId`, `type`, `quantity`)
-             VALUES (:id, :cartId, :itemId, :type, :quantity)");
+            $stmt = $this->connection->prepare("INSERT INTO `CartItems`(`cartId`, `itemId`, `type`, `quantity`)
+             VALUES (:cartId, :itemId, :type, :quantity)");
 
-            $stmt->bindParam(':id', $uuid);
             $stmt->bindParam(':cartId', $cartId);
             $stmt->bindParam(':itemId', $itemId);
             $stmt->bindParam(':type', $type);
@@ -99,18 +97,16 @@ class CartRepository extends Repository
         }
     }
 
-    function createNewVistorSession()
+    function createVisitorCart()
     {
         try {
             $uuid = Uuid::uuid4()->toString();
-            $stmt = $this->connection->prepare("INSERT INTO `VisitorSession`(`id`) VALUES (:id)");
+            $stmt = $this->connection->prepare("INSERT INTO `Carts`(`Id`) VALUES (:id)");
             $stmt->bindParam(':id', $uuid);
             $stmt->execute();
-
             return $uuid;
         } catch (PDOException $e) {
             echo $e;
         }
     }
-    
 }
