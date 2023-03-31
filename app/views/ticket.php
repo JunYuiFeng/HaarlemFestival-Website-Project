@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-6">
                 <h4 class="mb-0"><b>EVENT</b></h4>
-                <h4 class="mb-5">DJ Martix </h4>
+                <h4 class="mb-5"><?= $_GET['eventName']?> </h4>
 
                 <h4 class="mb-0"><b>LOCATION</b></h4>
                 <h4 class="mb-5">87 venue street</h4>
@@ -45,13 +45,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
         var element = document.getElementById('ticket');
-        let formdata = new FormData();
+        const formData = new FormData();
 
-        html2pdf(element).toPdf().output('datauristring').then(function(pdfAsString) {
-            // The PDF has been converted to a Data URI string and passed to this function.
-            // Use pdfAsString however you like (send as email, etc)! For instance:
-            console.log(pdfAsString);
-            formdata.append("submit", pdfAsString)
+        html2pdf().from(element).outputPdf().then(function(pdf) {
+            const newpdf = btoa(pdf);
+            console.log(newpdf)
+            formData.append("file", newpdf);
+            fetch('/api/cart/sendTicket', {
+                    method: 'POST',
+                    body: newpdf
+                })
+                .then(result => {
+                    console.log(result.json())
+                })
+                .catch(error => console.log(error));
         });
     </script>
 </body>

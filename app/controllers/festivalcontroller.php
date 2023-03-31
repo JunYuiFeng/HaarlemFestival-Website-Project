@@ -16,6 +16,7 @@ use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
 use Endroid\QrCode\Label\Font\NotoSans;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
+use Mpdf\Mpdf;
 
 class FestivalController extends Controller
 {
@@ -108,13 +109,20 @@ class FestivalController extends Controller
             ->build();
 
         $dataUri = $result->getDataUri();
-        require __DIR__ . '/../views/ticket.php';
 
-        if (isset($_POST["submit"])) {
-            $pdfdoc        = $_POST['fileDataURI'];
-            $b64file         = trim(str_replace('data:application/pdf;base64,', '', $pdfdoc));
-            $b64file        = str_replace(' ', '+', $b64file);
-            $decoded_pdf    = base64_decode($b64file);
-        }
+
+        //require __DIR__ . '/../views/ticket.php';
+
+        $html = file_get_contents('../views/ticket.php');
+        //var_dump($html);
+
+        // create an mPDF object
+        $mpdf = new Mpdf();
+
+        // convert the HTML to PDF
+        $mpdf->WriteHTML($html);
+
+        // output the PDF to the browser or save it to a file
+        $mpdf->Output('output.pdf', 'D');
     }
 }
