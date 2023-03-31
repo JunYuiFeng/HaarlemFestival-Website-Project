@@ -86,7 +86,7 @@
                                         <p><b>€<?= number_format($item['price'], 2); ?></b></p>
                                     </div>
                                     <div class="col-2">
-                                    <a class="btn btn-danger" href="removeItem?id=<?$item['id'];?>">Remove</a>
+                                    <a class="btn btn-danger" href="removeItem?id=<?=$item['id'];?>">Remove</a>
                                     </div>
                                 </div>
                             </div>

@@ -84,18 +84,8 @@ class CartController extends Controller
     function removeItem()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $id = htmlspecialchars($_GET["id"]);
-            if (isset($_SESSION["logedin"])) {
-                $this->reservationService->deleteReservation($id);
-            } else {
-                if (isset($_SESSION["cart"])) {
-                    foreach ($_SESSION["cart"] as $key => $item) {
-                        if ($key == $id) {
-                            unset($_SESSION["cart"][$key]);
-                        }
-                    }
-                }
-            }
+            $id = htmlspecialchars($_GET['id']);
+            $this->reservationService->deleteReservation($id);
         }
         header("Location: /cart/index");
     }
