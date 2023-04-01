@@ -97,7 +97,20 @@ class CartRepository extends Repository
         }
     }
 
-    function insert($userId)
+    // function insert($userId)
+    // {
+    //     try {
+    //         $uuid = Uuid::uuid4()->toString();
+    //         $stmt = $this->connection->prepare("INSERT INTO `Carts`(`Id`, `userId`) VALUES (:id, :userId)");
+    //         $stmt->bindParam(':id', $uuid);
+    //         $stmt->bindParam(':userId', $userId);
+    //         $stmt->execute();
+    //     } catch (PDOException $e) {
+    //         echo $e;
+    //     }
+    // }
+
+    function createRegisterUserCart($userId)
     {
         try {
             $uuid = Uuid::uuid4()->toString();
@@ -118,6 +131,18 @@ class CartRepository extends Repository
             $stmt->bindParam(':id', $uuid);
             $stmt->execute();
             return $uuid;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function changeVisitorCartToRegisterUserCart($visitorCartId, $userId)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE `Carts` SET `userId` = :userId WHERE `Id` = :visitorCartId");
+            $stmt->bindParam(':userId', $userId);
+            $stmt->bindParam(':visitorCartId', $visitorCartId);
+            $stmt->execute();
         } catch (PDOException $e) {
             echo $e;
         }

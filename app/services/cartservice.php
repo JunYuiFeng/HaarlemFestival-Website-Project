@@ -30,9 +30,14 @@ class CartService
         return $this->repository->getQuantityByItemId($id);
     }
 
-    function insert($userId)
+    // function insert($userId)
+    // {
+    //     $this->repository->insert($userId);
+    // }
+
+    function createRegisterUserCart($userId)
     {
-        $this->repository->insert($userId);
+        $this->repository->createRegisterUserCart($userId);
     }
 
     function createVisitorCart()
@@ -43,5 +48,10 @@ class CartService
     function getQuantityByCartId($id)
     {
         return $this->repository->getQuantityByCartId($id);
+    }
+
+    function changeVisitorCartToRegisterUserCart($visitorCartId, $userId)
+    {
+        $this->repository->changeVisitorCartToRegisterUserCart($visitorCartId, $userId);
     }
 }
