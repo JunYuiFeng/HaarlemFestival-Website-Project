@@ -17,36 +17,10 @@
 
     <div class="row">
         <div class="col-5">
-            <div class="container checkPaymentSection d-flex pt-5">
+            <div class="container checkoutPaymentSection pt-5">
                 <div>
-                    <h1>Payment</h1>
-                    <hr>
-                    <p>Pay With:</p>
-                    <input type="radio" id="card" name="cardType">
-                    <label for="card">Card</label>
-                    <input type="radio" id="ideal" name="cardType">
-                    <label for="ideal">Ideal</label><br><br>
-
-                    <label for="">Card Number</label>
-                    <input type="text" class="form-control" placeholder="1234 5678 9101 1121"><br>
-
-                    <div class="d-flex justify-content-between">
-                        <div class="me-2">
-                            <label for="">Expiration Date</label>
-                            <input type="text" class="form-control" placeholder="MM/YY"><br>
-                        </div>
-                        <div class="ms-2">
-                            <label for="">CVV</label>
-                            <input type="text" class="form-control" placeholder="123"><br>
-                        </div>
-                    </div>
-
-                    <a class="btn btn-primary btn-lg" href="payment"> Pay €<?= number_format($totalAmount, 2) ?> </a><br><br>
-
-                    <p>
-                        Your personal data will be used to process your order, support your experience throughout this website,
-                        and for other purposes described in our privacy policy.
-                    </p>
+                    <h1 class="d-flex justify-content-center"><b>Checkout</b></h1><br>
+                    <img class="d-flex justify-content-center" src="/img/favpng_online-shopping-shopping-cart-service.png" alt="">
                 </div>
             </div>
         </div>
@@ -65,7 +39,7 @@
                                     </div>
                                     <div class="col-3">
                                         <h2><b><?= $item['restaurant'] ?></b></h2>
-                                        <p><b>Comment:</b> <?= $item['comment']?></p>
+                                        <p><b>Comment:</b> <?= $item['comment'] ?></p>
                                         <p><b>People:</b> <?= $item['amountAbove12'] + $item['amountUnderOr12'] ?></p>
                                     </div>
                                     <div class="col-2">
@@ -86,7 +60,7 @@
                                         <p><b>€<?= number_format($item['price'], 2); ?></b></p>
                                     </div>
                                     <div class="col-2">
-                                    <a class="btn btn-danger" href="removeItem?id=<?=$item['id'];?>">Remove</a>
+                                        <a class="btn btn-danger" href="removeItem?id=<?= $item['id']; ?>">Remove</a>
                                     </div>
                                 </div>
                             </div>
@@ -105,13 +79,20 @@
 
                 <p>9% VAT</p>
 
+                <a class="btn btn-primary btn-lg" href="<?php
+                                                            if (!isset($_SESSION["logedin"])) {
+                                                                echo 'javascript:void(0);" onclick="if (confirm(\'You need to create an account first to pay\')) {location.href=\'payment\';}"';
+                                                            } else {
+                                                                echo 'payment';
+                                                            }
+                                                            ?>">Pay €<?= number_format($totalAmount, 2) ?></a>
             </div>
         </div>
     </div>
     <?php
     include __DIR__ . '/../footer.php';
     ?>
-     
+
     <script>
         getCartAmount();
 

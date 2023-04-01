@@ -202,7 +202,7 @@
 
             reservationData.restaurantId = restaurantId;
 
-            <?php echo (isset($_SESSION['logedin'])) ? 'addToCart(reservationData);' : 'addToCartAsVisitor(reservationData);' ?>
+            addToCart(reservationData); 
         });
 
 
@@ -214,7 +214,7 @@
                     },
                     body: JSON.stringify(reservationData)
                 })
-                .then(getCartAmount())
+                .then(() => <?php echo (isset($_SESSION['logedin'])) ? 'getCartAmount()' : 'getCartAmountAsVisitor()' ?>)
                 .catch(error => {
                     console.error(error);
                 });
@@ -227,23 +227,6 @@
                     console.log(data);
                     cartAmount.innerHTML = data;
                 })
-                .catch(error => {
-                    console.error(error);
-                });
-        }
-
-        function addToCartAsVisitor(reservationData) {
-            fetch('/api/cart/addToCartAsVisitor', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(reservationData)
-                })
-                .then(setTimeout(function(){
-                    getCartAmountAsVisitor();
-                }, 100)
-                )
                 .catch(error => {
                     console.error(error);
                 });

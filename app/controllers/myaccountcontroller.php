@@ -1,6 +1,7 @@
 <?php
 include_once("../services/loginservice.php");
 include_once("../services/registerservice.php");
+require_once __DIR__ . '/../services/cartservice.php';
 
 require_once __DIR__ . "/../models/user.php";
 include_once("../services/resetpasswordservice.php");
@@ -10,6 +11,7 @@ require_once __DIR__ . '/controller.php';
 
 class MyAccountController extends Controller
 {
+    private $cartService;
     private $loginService;
     private $registerService;
     private $msg;
@@ -17,6 +19,7 @@ class MyAccountController extends Controller
     function __construct()
     {
         parent::__construct();
+        $this->cartService = new CartService();
         $this->loginService = new LoginService();
         $this->registerService = new RegisterService();
         $this->msg = "";
@@ -119,6 +122,15 @@ class MyAccountController extends Controller
                             $password = $_POST["password"];
 
                             $res = $this->registerService->register($email, $username, $password);
+
+                            if (isset($_SESSION['cart'])) {
+                                $this->cartService->changeVisitorCartToRegisterUserCart($_SESSION['cart'], $res);
+                                unset($_SESSION['cart']);
+                            }
+                            else {
+                                $this->cartService->createRegisterUserCart($res);
+                            }
+
                             if (ctype_digit($res)) {
                                 $_SESSION["logedin"] = $res;
                                 header("location: index");

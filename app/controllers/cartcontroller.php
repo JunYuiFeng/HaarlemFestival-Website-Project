@@ -18,6 +18,7 @@ class CartController extends Controller
     private $paymentService;
     protected $loggedInUser;
 
+
     public function __construct()
     {
         parent::__construct();
@@ -30,13 +31,22 @@ class CartController extends Controller
 
     public function index()
     {
-        //$this->cartService->insert($this->loggedInUser->getId());
+
+        $VAT = 1.09; //VAT is 9%
         $totalAmount = 0;
+        $items = array();
         $data = array();
 
         if (isset($_SESSION["logedin"])) {
             $loggedInUser = $this->loggedInUser;
             $items = $this->reservationService->getFromCartByUserId($loggedInUser->getId());
+        } else {
+            if (isset($_SESSION['cart'])) {
+                $items = $this->reservationService->getFromCartByCartId($_SESSION['cart']);
+            }
+        }
+
+        if (!empty($items)) {
             foreach ($items as $item) {
                 $itemData = array(
                     'id' => $item->getId(),
@@ -51,33 +61,14 @@ class CartController extends Controller
                 $totalAmount += $item->getAmountAbove12() * 10;
                 $totalAmount += $item->getAmountUnderOr12() * 10;
                 $totalAmount += $this->reservationService->getPrice($item->getId());
-                $data[] = $itemData;
-                //var_dump($itemData);
-            }
-        } else {
-            if(isset($_SESSION['cart']))
-            {
-                $items = $this->reservationService->getFromCartByCartId($_SESSION['cart']);
-                foreach ($items as $item) {
-                    $itemData = array(
-                        'id' => $item->getId(),
-                        'comment' => $item->getComments(),
-                        'amountAbove12' => $item->getAmountAbove12(),
-                        'amountUnderOr12' => $item->getAmountUnderOr12(),
-                        'price' => number_format($this->reservationService->getPrice($item->getId()), 2),
-                        'restaurant' => $this->restaurantService->getById($item->getRestaurantId())->getName(),
-                        'session' => $this->sessionService->getById($item->getSessionId())->getName(),
-                        'date' => $item->getDate()
-                    );
-                    $totalAmount += $item->getAmountAbove12() * 10;
-                    $totalAmount += $item->getAmountUnderOr12() * 10;
-                    $totalAmount += $this->reservationService->getPrice($item->getId());
-                    $data[] = $itemData;
-                }
-                //session_destroy();
-            }
 
+                $data[] = $itemData;
+            }
         }
+        //var_dump($items);
+        $totalAmount = $totalAmount * $VAT;
+        $_SESSION['totalAmount'] = $totalAmount;
+        //var_dump($totalAmount);
         require __DIR__ . '/../views/cart/index.php';
     }
 
@@ -92,24 +83,37 @@ class CartController extends Controller
 
     function payment()
     {
-        $mollie = new \Mollie\Api\MollieApiClient();
-        $mollie->setApiKey('test_Ds3fz4U9vNKxzCfVvVHJT2sgW5ECD8');
+        if (isset($_SESSION["logedin"])) {
+            try {
+                $mollie = new \Mollie\Api\MollieApiClient();
+                $mollie->setApiKey('test_Ds3fz4U9vNKxzCfVvVHJT2sgW5ECD8');
 
-        $payment = $mollie->payments->create([
-            "amount" => [
-                "currency" => "EUR",
-                "value" => "10.00"
-            ],
-            "description" => "Test payment",
-            "redirectUrl" => "https://example.com/return",
-            "webhookUrl" => "https://example.com/webhook",
-        ]);
+                $payment = $mollie->payments->create([
+                    "amount" => [
+                        "currency" => "EUR",
+                        "value" => number_format($_SESSION['totalAmount'], 2, '.', '')
+                    ],
+                    "description" => "Test payment",
+                    "redirectUrl" => "https://example.com/return",
+                    "webhookUrl" => "https://example.com/webhook",
+                ]);
+
+                //$this->paymentService->insert($payment->id, $payment->status, $payment->amount->value);
+
+                header("Location: " . $payment->getCheckoutUrl(), true, 303);
+
+            } catch (\Mollie\Api\Exceptions\ApiException $e) {
+                echo "API call failed: " . htmlspecialchars($e->getMessage());
+            }
+        } else {
+            header("Location: /myaccount/register");
+        }
+
 
         //var_dump($payment->status);
 
-        $this->paymentService->insert($payment->id, $payment->status, $payment->amount->value);
+        //$this->paymentService->insert($payment->id, $payment->status, $payment->amount->value);
 
-        header("Location: " . $payment->getCheckoutUrl(), true, 303);
         //echo "Payment created: " . $payment->id;
     }
 }
