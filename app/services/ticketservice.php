@@ -19,10 +19,8 @@ class TicketService
     }
 
 
-    public function sendTickets(string $email, string $attachment): bool
+    public function sendTickets(string $email, array $attachments): bool
     {
-        //$token = uniqid();
-        //$link = '<a href="http://127.0.0.1/myaccount/changepassword?token=' . $token . '" >Reset Password</a>';
         $mail = new PHPMailer(false); //Create an instance; passing `true` enables exceptions
         try {
             //Server settings
@@ -41,8 +39,9 @@ class TicketService
 
             $mail->addAddress($email, $name);     //Add a recipient
 
-            //$mail->addAttachment($attachment, 'ticket.pdf');    //Optional name
-            $mail->addStringAttachment($attachment, 'ticket.pdf');
+            for ($i = 0; $i < sizeof($attachments); $i++) {
+                $mail->addStringAttachment($attachments[$i], "ticket{$i}.pdf");
+            }
 
 
             $mail->Subject = 'Your Tickets';
@@ -50,7 +49,6 @@ class TicketService
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->send();
 
-            //$this->repository->setResetLinkToken($email, $token);
             return TRUE;
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -75,7 +73,7 @@ class TicketService
     {
         $ticketToken = new TicketToken();
         $ticketToken->setToken(bin2hex(random_bytes(32))); // Generating 64 characters long string for token
-        $ticketToken->setOrderId($orderId); 
+        $ticketToken->setOrderId($orderId);
         while (!$this->repository->create($ticketToken)) {
             // If it returns false, wait for a short time before trying again
             usleep(100000); // Wait for 0.1 seconds
