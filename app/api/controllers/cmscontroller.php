@@ -11,6 +11,7 @@ class CmsController extends Controller
         parent::__construct();
         $this->userService = new UserService();
     }
+    
     function index()
     {
 

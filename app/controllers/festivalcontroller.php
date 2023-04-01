@@ -5,18 +5,9 @@ require_once __DIR__ . '/../services/sessionservice.php';
 require_once __DIR__ . '/../services/reservationservice.php';
 require_once __DIR__ . '/../services/artistservice.php';
 require_once __DIR__ . '/../services/venueservice.php';
+require_once __DIR__ . '/../services/ticketservice.php';
 require_once __DIR__ . '/controller.php';
 
-require  '../vendor/autoload.php';
-
-use Endroid\QrCode\Builder\Builder;
-use Endroid\QrCode\Encoding\Encoding;
-use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
-use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
-use Endroid\QrCode\Label\Font\NotoSans;
-use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
-use Endroid\QrCode\Writer\PngWriter;
-use Mpdf\Mpdf;
 
 class FestivalController extends Controller
 {
@@ -26,7 +17,9 @@ class FestivalController extends Controller
     private $reservationService;
     private $artistService;
     private $venueService;
+    private $ticketService;
     protected $loggedInUser;
+
 
     function __construct()
     {
@@ -91,39 +84,14 @@ class FestivalController extends Controller
         require __DIR__ . '/../views/festival/restaurantdetail.php';
     }
 
-    public function ticket()
+    public function validateTicket()
     {
-        $result = Builder::create()
-            ->writer(new PngWriter())
-            ->writerOptions([])
-            ->data("http://127.0.0.1/")
-            ->encoding(new Encoding('UTF-8'))
-            ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
-            ->size(300)
-            ->margin(10)
-            ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
-            ->labelText('Ticket 1')
-            ->labelFont(new NotoSans(20))
-            ->labelAlignment(new LabelAlignmentCenter())
-            ->validateResult(false)
-            ->build();
+        if (isset($_GET['token'])) {
+            $token = $_GET['token'];
+            $this->ticketService = new TicketService();
+            $ticketStatus = $this->ticketService->validateToken($token);
 
-        $dataUri = $result->getDataUri();
-        $eventName = "SALAM";
-        ob_start();
-        require __DIR__ . '/../views/ticket.php';
-
-        //$html = file_get_contents('../views/ticket.php');
-        $html = ob_get_clean();
-        // var_dump($html);
-
-        // create an mPDF object
-        $mpdf = new Mpdf();
-
-        // convert the HTML to PDF
-        $mpdf->WriteHTML($html);
-
-        // output the PDF to the browser or save it to a file
-        $mpdf->Output('output.pdf', 'D');
+            require __DIR__ . '/../views/festival/ticketvalidation.php';
+        }
     }
 }
