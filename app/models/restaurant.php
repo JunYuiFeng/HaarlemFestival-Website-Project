@@ -14,7 +14,6 @@ class Restaurant
     private ?float $priceAboveAge12;
     private int $phoneNumber;
     private string $address;
-    private ?int $seats;
     private ?string $website;
     private string $coverImg;
     private string $description;
@@ -276,26 +275,6 @@ class Restaurant
     public function setAddress($address)
     {
         $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of seats
-     */ 
-    public function getSeats()
-    {
-        return $this->seats;
-    }
-
-    /**
-     * Set the value of seats
-     *
-     * @return  self
-     */ 
-    public function setSeats($seats)
-    {
-        $this->seats = $seats;
 
         return $this;
     }

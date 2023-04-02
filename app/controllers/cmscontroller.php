@@ -2,6 +2,8 @@
 require_once __DIR__ . '/../services/editPageService.php';
 require_once __DIR__ . '/../services/restaurantsmanagementservice.php';
 require_once __DIR__ . '/../services/sessionservice.php';
+require_once __DIR__ . '/../services/reservationservice.php';
+require_once __DIR__ . '/../services/restaurantservice.php';
 require_once __DIR__ . '/../services/orderservice.php';
 require_once __DIR__ . '/../services/apikeyservice.php';
 require_once __DIR__ . '/controller.php';
@@ -11,9 +13,11 @@ class CmsController extends Controller
 {
     private $content;
     private $restaurants;
+    private $restaurantService;
     private $contentEditorService;
     private $restaurantManagementService;
     private $sessionService;
+    private $reservationService;
     private $orderService;
     private $apiKeyService;
     private $msg;
@@ -24,7 +28,9 @@ class CmsController extends Controller
         parent::__construct();
         $this->contentEditorService = new EditPageService();
         $this->restaurantManagementService = new RestaurantsManagementService();
+        $this->restaurantService = new RestaurantService();
         $this->sessionService = new SessionService();
+        $this->reservationService = new ReservationService();
         $this->orderService = new OrderService();
         $this->apiKeyService = new APIKeyService();
         $this->msg = "";
@@ -242,6 +248,25 @@ class CmsController extends Controller
         }
         $sessions = $this->sessionService->getAll();
         require __DIR__ . '/../views/cms/managesessions.php';
+    }
+
+    public function managereservations()
+    {
+        $reservationData = array();
+
+        foreach ($this->reservationService->getAll() as $reservation) {
+            $reservationData[] = array(
+                "id" => $reservation->getId(),
+                "date" => $reservation->getDate(),
+                "amountAbove12" => $reservation->getAmountAbove12(),
+                "amountUnderOr12" => $reservation->getAmountUnderOr12(),
+                "comments" => $reservation->getComments(),
+                "status" => $reservation->getStatus(),
+                "session" => $this->sessionService->getById($reservation->getSessionId())->getName(),
+                "restaurant" => $this->restaurantService->getById($reservation->getRestaurantId())->getName()
+            );
+        }
+        require __DIR__ . '/../views/cms/managereservations.php';
     }
 
     public function manageorders()

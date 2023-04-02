@@ -10,6 +10,11 @@ class ReservationService
         $this->repository = new ReservationRepository();
     }
 
+    function getAll()
+    {
+        return $this->repository->getAll();
+    }
+
     function insertReservation($reservation)
     {
         $this->repository->insertReservation($reservation);

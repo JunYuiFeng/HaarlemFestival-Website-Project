@@ -39,4 +39,9 @@ class SessionService
     {
         return $this->repository->delete($id);
     }
+
+    function decreaseSeats($id, $amount)
+    {
+        return $this->repository->decreaseSeats($id, $amount);
+    }
 }

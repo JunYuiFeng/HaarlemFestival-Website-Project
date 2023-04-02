@@ -4,6 +4,21 @@ require_once __DIR__ . '/../models/reservation.php';
 
 class ReservationRepository extends Repository
 {
+    function getAll()
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM `Reservations`");
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, "Reservation");
+            $reservations = $stmt->fetchAll();
+
+            return $reservations;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
     function insertReservation($reservation)
     {
         try {

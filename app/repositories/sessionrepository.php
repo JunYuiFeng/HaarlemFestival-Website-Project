@@ -105,4 +105,18 @@ class SessionRepository extends Repository
             return false;
         }
     }
+
+    function decreaseSeats($id, $amount)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE `Sessions` SET `seats` = `seats` - :amount WHERE id = :id");
+            return $stmt->execute([
+                ':id' => $id,
+                ':amount' => $amount
+            ]);
+        } catch (PDOException $e) {
+            echo $e;
+            return false;
+        }
+    }
 }
