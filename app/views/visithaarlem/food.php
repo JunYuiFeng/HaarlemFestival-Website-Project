@@ -20,9 +20,6 @@
 
     <div class="container restaurantsSection">
         <h1>Restaurants</h1>
-        <button class="btn default">
-            <h3><b>Sort by</b></h3>
-        </button>
         <div class="row restaurant">
             <?php
             foreach ($restaurants as $index => $restaurant) {
@@ -36,7 +33,7 @@
             ?>
                 <div class="col-6">
                     <div class="<?= $cardClass ?>">
-                        <img src="/img/<?= $restaurant->getCoverImg() ?>" alt="RatatouilleCoverImg">
+                        <img src="/img/<?= $restaurant->getCoverImg() ?>" alt="<?=$restaurant->getCoverImg()?>">
                         <div class="card-body">
                             <h2><?= $restaurant->getName() ?></h2>
                             <p><?= $restaurant->getDescription() ?> </p>
@@ -46,7 +43,6 @@
                                 <b>Price range</b>: <?php for ($i = 0; $i < $restaurant->getPriceIndicator(); $i++) {
                                                         echo '€';
                                                     } ?><br>
-                                <b>Opening hours</b>
                             </p>
                         </div>
                     </div>

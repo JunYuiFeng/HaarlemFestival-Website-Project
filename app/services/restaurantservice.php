@@ -19,9 +19,4 @@ class RestaurantService
     {
         return $this->repository->getById($id);
     }
-
-    public function decreaseSeats($id, $seats)
-    {
-        return $this->repository->decreaseSeats($id, $seats);
-    }
 }

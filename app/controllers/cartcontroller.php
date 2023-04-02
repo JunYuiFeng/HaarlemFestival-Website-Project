@@ -4,6 +4,7 @@ require_once __DIR__ . '/../services/restaurantservice.php';
 require_once __DIR__ . '/../services/reservationservice.php';
 require_once __DIR__ . '/../services/sessionservice.php';
 require_once __DIR__ . '/../services/paymentservice.php';
+require_once __DIR__ . '/../services/orderservice.php';
 require_once __DIR__ . '/controller.php';
 require_once '../vendor/autoload.php';
 
@@ -16,6 +17,7 @@ class CartController extends Controller
     private $reservationService;
     private $sessionService;
     private $paymentService;
+    private $orderService;
     protected $loggedInUser;
 
 
@@ -26,12 +28,12 @@ class CartController extends Controller
         $this->restaurantService = new RestaurantService();
         $this->reservationService = new ReservationService();
         $this->sessionService = new SessionService();
+        $this->orderService = new OrderService();
         $this->paymentService = new PaymentService();
     }
 
     public function index()
     {
-
         $VAT = 1.09; //VAT is 9%
         $totalAmount = 0;
         $items = array();
@@ -88,6 +90,8 @@ class CartController extends Controller
                 $mollie = new \Mollie\Api\MollieApiClient();
                 $mollie->setApiKey('test_Ds3fz4U9vNKxzCfVvVHJT2sgW5ECD8');
 
+                $order = $this->orderService->insertIntoOrder($this->loggedInUser->getId(), date("Y-m-d"), "pending");
+
                 $payment = $mollie->payments->create([
                     "amount" => [
                         "currency" => "EUR",
@@ -95,10 +99,13 @@ class CartController extends Controller
                     ],
                     "description" => "Test payment",
                     "redirectUrl" => "https://example.com/return",
-                    "webhookUrl" => "https://example.com/webhook",
+                    "webhookUrl" => "https://example.com/webhook", //webhookUrl: "https://......./api/webhook"
+                    "metadata" => [
+                        "order_id" => $order->getId(),
+                    ],
                 ]);
 
-                //$this->paymentService->insert($payment->id, $payment->status, $payment->amount->value);
+                $this->paymentService->insert($payment->id, $order->getId(), $payment->amount->value);
 
                 header("Location: " . $payment->getCheckoutUrl(), true, 303);
 
@@ -108,11 +115,6 @@ class CartController extends Controller
         } else {
             header("Location: /myaccount/register");
         }
-
-
-        //var_dump($payment->status);
-
-        //$this->paymentService->insert($payment->id, $payment->status, $payment->amount->value);
 
         //echo "Payment created: " . $payment->id;
     }

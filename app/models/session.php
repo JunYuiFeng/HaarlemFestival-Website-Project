@@ -6,6 +6,7 @@ class Session
     private $startTime;
     private int $restaurantId;
     private $endTime;
+    private int $seats;
 
     
 
@@ -105,6 +106,26 @@ class Session
     public function setEndTime($endTime)
     {
         $this->endTime = $endTime;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of seats
+     */ 
+    public function getSeats()
+    {
+        return $this->seats;
+    }
+
+    /**
+     * Set the value of seats
+     *
+     * @return  self
+     */ 
+    public function setSeats($seats)
+    {
+        $this->seats = $seats;
 
         return $this;
     }

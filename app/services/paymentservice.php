@@ -11,8 +11,8 @@ class PaymentService
         $this->repository = new PaymentRepository();
     }
 
-    function insert($id, $status, $amount)
+    function insert($id, $orderId, $amount)
     {
-        $this->repository->insert($id, $status, $amount);
+        $this->repository->insert($id, $orderId, $amount);
     }
 }

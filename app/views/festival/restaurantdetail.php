@@ -145,14 +145,14 @@
                                     </div>
                                 </div>
 
-                                <h3><b>Available time:</b></h3>
+                                <h3 class="mt-4"><b>Available time:</b></h3>
                                 <?php foreach ($sessions as $session) { ?>
                                     <input type="radio" id="session_<?= $session->getId() ?>" name="sessionId" value="<?= $session->getId() ?>">
                                     <label for="session_<?= $session->getId() ?>"><?= $session->getName() . ' at ' . $session->getStartTime()->format('H:i') . ' - ' . $session->getEndTime()->format('H:i') ?></label><br>
                                 <?php } ?>
                             </div>
 
-                            <div class="col ">
+                            <div class="col ms-3">
                                 <h3><b>Choose a day:</b></h3>
                                 <input type="radio" id="day_1" name="date" value="2022-07-27T00:00:00">
                                 <label for="day_1">Thursday, 27th July</label><br>
@@ -171,7 +171,7 @@
                             </div>
                         </div>
 
-                        <textarea name="comment" rows="5" cols="40" placeholder="Any special request or for example diets, allergies etc, can be written here..."></textarea><br>
+                        <textarea class="mt-4" name="comment" rows="5" cols="52" placeholder="Any special request or for example diets, allergies etc, can be written here..."></textarea><br>
 
                         <div class="text-center">
                             <p class="reservationExtraFeeText">**A fee of €10,- per person will be charged when a reservation is made on this site. This fee will be deducted from the final check on visiting the restaurant . ** </p>
