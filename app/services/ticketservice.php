@@ -69,6 +69,11 @@ class TicketService
             return "Ticket is valid!";
     }
 
+    public function setTicketAsUsed($token)
+    {
+        return $this->repository->setUsed($token);
+    }
+
     public function generateToken($orderId)
     {
         $ticketToken = new TicketToken();

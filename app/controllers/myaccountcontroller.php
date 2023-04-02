@@ -27,18 +27,69 @@ class MyAccountController extends Controller
 
     public function index()
     {
-        $user = $this->userService->getById($_SESSION["logedin"]);
         if (!isset($_SESSION["logedin"])) {
             header("location: login");
         }
+        $this->userService = new UserService();
+        $user = $this->userService->getById($_SESSION["logedin"]);
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->updateItem($user);
+        if (isset($_POST['updateUsername'])) {
+            $validation = $this->userService->validateUsernameAndEmail($_POST['username'], $_POST['email'], $_SESSION["logedin"]);
+            if (is_bool($validation)) {
+                if ($this->userService->updateUsernameAndEmail($_POST['username'], $_POST['email'], $_SESSION["logedin"])) {
+                    $this->userService->sendConfirmationEmail($user->getEmail(), $user->getUsername());
+                    $msg = "Profile information was successfully updated";
+                    $user = $this->userService->getById($_SESSION["logedin"]);
+                } else {
+                    $msg = "Something went wrong";
+                }
+            } else {
+                $msg = $validation;
+            }
+        }
+        if (isset($_POST['updatePassword'])) {
+            if ($_POST['newPassword'] == $_POST['confirmNewPassword']) {
+                $validation = $this->userService->validatePassword($_POST['newPassword']);
+                if (is_bool($validation)) {
+                    $oldPass = $_POST['oldPassword'];
+                    $newPass = $_POST['newPassword'];
+                    if (password_verify($oldPass, $user->getPassword())) {
+                        $hasshedPassword = password_hash($newPass, PASSWORD_DEFAULT);
+                        $this->userService->updatePassword($hasshedPassword, $user->getId());
+                        $this->userService->sendConfirmationEmail($user->getEmail(), $user->getUsername());
+                        $msg = "Password was changed successfully";
+                        $user = $this->userService->getById($_SESSION["logedin"]);
+                    } else {
+                        $msg = "Old password is not valid";
+                    }
+                } else {
+                    $msg = $validation;
+                }
+            } else {
+                $msg = "New password do not match";
+            }
+        }
+        if (isset($_FILES['profile_picture'])) {
+            $file = $_FILES['profile_picture'];
+            $upload_dir = __DIR__ . '/../public/img/profile-pictures/';
+            $upload_file = $upload_dir . basename($file['name']);
+            if (move_uploaded_file($file['tmp_name'], $upload_file)) {
+                if ($this->userService->updateProfilePicture($file['name'], $user->getId())) {
+                    $msg = "Image uploaded successfully";
+                    $user = $this->userService->getById($_SESSION["logedin"]);
+                } else {
+                    $msg = "Something went wrong";
+                }
+            } else {
+                $msg = "Error while uploading file";
+            }
         }
 
-        $this->userService = new UserService();
+
+
         require __DIR__ . '/../views/myaccount/index.php';
     }
+
 
     public function updateItem($user)
     {
@@ -57,15 +108,13 @@ class MyAccountController extends Controller
                     $id = htmlspecialchars($_POST['id']);
 
                     $this->userService->editUser($username, $email, $password, $id);
-                    $this->userService->sendLink($email);
-
+                    //$this->userService->sendLink($email);
                 } else {
                     $msg = "old password is incorrect";
                 }
             } else {
                 $msg = "new password and confirmation new password are not the same";
             }
-
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -91,6 +140,9 @@ class MyAccountController extends Controller
                             $user = $this->userService->getByUsername($username);
                         }
                         $_SESSION["logedin"] = $user->getId();
+                        if ($user->getUserType() == "employee") {
+                            $_SESSION["employee"] = $user->getId();
+                        }
                         unset($_SESSION['cart']);
                         header("location: index");
                     } else {
@@ -126,8 +178,7 @@ class MyAccountController extends Controller
                             if (isset($_SESSION['cart'])) {
                                 $this->cartService->changeVisitorCartToRegisterUserCart($_SESSION['cart'], $res);
                                 unset($_SESSION['cart']);
-                            }
-                            else {
+                            } else {
                                 $this->cartService->createRegisterUserCart($res);
                             }
 
@@ -165,6 +216,7 @@ class MyAccountController extends Controller
         }
         require __DIR__ . '/../views/myaccount/resetpassword.php';
     }
+
     public function changePassword()
     {
         if (isset($_GET["token"])) {
@@ -192,11 +244,6 @@ class MyAccountController extends Controller
         } else {
             require __DIR__ . '/../views/notfound.php';
         }
-    }
-
-    public function validate($user)
-    {
-        return $user->validate();
     }
 
     public function logout()

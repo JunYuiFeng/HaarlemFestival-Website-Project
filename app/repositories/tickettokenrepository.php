@@ -85,4 +85,18 @@ class TicketTokenRepository extends Repository
             return false;
         }
     }
+    
+    function setUsed ($token): bool
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE `TicketTokens` SET isUsed = 1 WHERE token = :token");
+            return $stmt->execute([
+                ':token' => $token
+            ]);
+        } catch (PDOException $e) {
+            echo $e;
+            return false;
+        }
+    }
+
 }

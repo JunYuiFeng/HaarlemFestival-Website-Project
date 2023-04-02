@@ -40,10 +40,6 @@ class RegisterService
             return "Username can contain only letters and numbers";
         }
 
-
-        // if (password_verify($password, $loginUser->getPassword())) {
-        //     return TRUE;
-        // }
         return FALSE;
     }
 }

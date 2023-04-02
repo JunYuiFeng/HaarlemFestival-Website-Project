@@ -8,6 +8,7 @@ class User implements \JsonSerializable
     private $password;
     private $userType;
     private $resetLinkToken;
+    private $profilePicture;
     private $registrationDate;
     private $masked_password;
 
@@ -32,15 +33,6 @@ class User implements \JsonSerializable
     //     $this->password = $password;
     //     $this->userType = $userType;
     // }
-
-    public function validate()
-    {
-        if ($this->username == 'admin' && $this->password == 'admin') {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public function getId(): int
     {
@@ -96,12 +88,14 @@ class User implements \JsonSerializable
      */
     public function getUserType()
     {
-        if($this->userType == 0){
-            $this->userType = "admin";
-        } else {
-            $this->userType = "user";
+        if ($this->userType == 0) {
+            return "admin";
+        } else if ($this->userType == 1) {
+            return "user";
+        } else if ($this->userType == 2) {
+            return "employee";
         }
-        return $this->userType;
+        return $this->userType; // in case if statements are false
     }
 
     public function setUserType($userType)
@@ -111,9 +105,36 @@ class User implements \JsonSerializable
         return $this;
     }
 
-    public function createUser()
+    public function getProfilePicture()
     {
-        return $this->username;
+        return $this->profilePicture;;
+    }
+
+    /**
+     * Set the value of registrationDate
+     *
+     * @return  self
+     */
+    public function setProfilePicture($profilePicture)
+    {
+        $this->profilePicture = $profilePicture;
+        return $this;
+    }
+
+    public function getResetLinkToken()
+    {
+        return $this->resetLinkToken;;
+    }
+
+    /**
+     * Set the value of registrationDate
+     *
+     * @return  self
+     */
+    public function setResetLinkToken($resetLinkToken)
+    {
+        $this->resetLinkToken = $resetLinkToken;
+        return $this;
     }
 
     public function getRegistrationDate()

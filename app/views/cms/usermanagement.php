@@ -8,8 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
     </head>
 </head>
@@ -39,14 +38,11 @@
                     </th>
 
                     <th scope="col">Username
-                        <button name="action" onclick="sort('usernameASC')" type="submit"
-                            value="sortUsernameASC">&#x25b4;</button>
-                        <button name="action" type="submit" onclick="sort('usernameDESC')"
-                            value="sortUsernameDESC">&#x25be;</button>
+                        <button name="action" onclick="sort('usernameASC')" type="submit" value="sortUsernameASC">&#x25b4;</button>
+                        <button name="action" type="submit" onclick="sort('usernameDESC')" value="sortUsernameDESC">&#x25be;</button>
                     </th>
                     <th scope="col">Email
-                        <button name="action" type="submit" onclick="sort('emailASC')"
-                            value="sortEmailASC">&#x25b4;</button>
+                        <button name="action" type="submit" onclick="sort('emailASC')" value="sortEmailASC">&#x25b4;</button>
                         <button name="action" type="submit" onclick="sort('emailDESC')" value="sortEmailDESC">&#x25be;
                         </button>
                     </th>
@@ -78,21 +74,20 @@
                     </td>
                     <td>
                         <div>
-                            <select name="userType" id="userType" class="px-2 py-1">
-                                <option value="admin">Admin</option>
-                                <option value="user" selected>User</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <button class="btn btn-primary" type="submit" name="action" value="create"
-                            id="createUserBtn">Create</button>
-                    </td>
-            </tbody>
-            </form>
+                            <select name=" userType" id="userType" class="px-2 py-1">
+                        <option value="admin">Admin</option>
+                        <option value="user" selected>User</option>
+                        </select>
+    </div>
+    </td>
+    <td>
+        <button class="btn btn-primary" type="submit" name="action" value="create" id="createUserBtn">Create</button>
+    </td>
+    </tbody>
+    </form>
 
-            </tbody>
-        </table>
+    </tbody>
+    </table>
     </div>
 
 
@@ -150,20 +145,21 @@
                 })
                 .catch(error => console.log(error));
         }
+
         function fetchUsers(query) {
-    fetch(`http://localhost/api/cms/searchfilter?query=${query}`)
-        .then(result => result.json())
-        .then(userResult => {
+            fetch(`http://localhost/api/cms/searchfilter?query=${query}`)
+                .then(result => result.json())
+                .then(userResult => {
 
-            // Clear existing table rows
-            userTableBody.innerHTML = "";
+                    // Clear existing table rows
+                    userTableBody.innerHTML = "";
 
-            if (userResult) {
+                    if (userResult) {
 
-                // Create new table rows for each search result
-                userResult.forEach(user => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
+                        // Create new table rows for each search result
+                        userResult.forEach(user => {
+                            const row = document.createElement("tr");
+                            row.innerHTML = `
                     
                         <td id="userId">${user.id}</td>
                         <td><input id="userName_${user.id}" value='${user.username}' ></td>
@@ -177,13 +173,13 @@
                         </td>
                         <td><button class="btn btn-warning" id="update${user.id}" onclick="updateUser(${user.id})">Update</button></td>
                         <td><button class="btn btn-danger" onclick="deleteUser(${user.id})">Delete</button></td>`;
-                    userTableBody.appendChild(row);
-                });
-            }
-        })
-        .catch(error => console.error(error))
-}
-        searchInput.addEventListener("input", function (event) {
+                            userTableBody.appendChild(row);
+                        });
+                    }
+                })
+                .catch(error => console.error(error))
+        }
+        searchInput.addEventListener("input", function(event) {
             const query = searchInput.value; // Get search query from input field
             fetchUsers(query);
         });
@@ -198,14 +194,14 @@
                 return;
             }
             fetch(`http://localhost/api/cms`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    id: id,
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: id,
+                    })
                 })
-            })
                 .then(response => {
                     if (response.ok) {
                         document.getElementById("outputMessage").innerText = "User id: " + id + " has been deleted.";

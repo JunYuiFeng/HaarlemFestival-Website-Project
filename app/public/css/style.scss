@@ -1486,8 +1486,10 @@ footer {
   }
 }
 
-.container-fluid.login {
+.container-fluid.myaccount {
   font-family: "Inter", "Alata", "Sans-serif";
+  padding-right: 0;
+  padding-left: 30px;
 
   h1 {
     font-family: "Alata", "Sans-serif";
@@ -1652,4 +1654,8 @@ button.red-outline-animated {
 
 #addRestaurantPage {
   font-family: "Inter";
+}
+
+.hidden {
+  display: none;
 }

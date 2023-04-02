@@ -3,7 +3,7 @@ require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/user.php';
 
 class UsersRepository extends Repository
-{    
+{
     function getAll()
     {
         try {
@@ -19,7 +19,7 @@ class UsersRepository extends Repository
         }
     }
 
-    function getById($id)
+    function getById($id): User
     {
         try {
             $stmt = $this->connection->prepare("SELECT * FROM Users WHERE id = :id");
@@ -30,12 +30,11 @@ class UsersRepository extends Repository
             $user = $stmt->fetch();
 
             return $user;
-        } catch (PDOException $e) 
-        {
+        } catch (PDOException $e) {
             echo $e;
         }
     }
-    
+
     function getByUsername($username)
     {
         try {
@@ -47,9 +46,7 @@ class UsersRepository extends Repository
             $user = $stmt->fetch();
 
             return $user;
-
-        } catch (PDOException $e) 
-        {
+        } catch (PDOException $e) {
             echo $e;
         }
     }
@@ -65,8 +62,7 @@ class UsersRepository extends Repository
             $user = $stmt->fetch();
 
             return $user;
-        } catch (PDOException $e) 
-        {
+        } catch (PDOException $e) {
             echo $e;
         }
     }
@@ -91,38 +87,59 @@ class UsersRepository extends Repository
         }
     }
 
-    function editUser($username,$email,$password,$id){
-        try{
-            $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email, password = :password WHERE id = :id');
-            $stmt->execute(array(':username' =>$username, ':email' => $email, ':password' => $password, ':id' => $id));
-        } catch (PDOException $e)
-        {
-            echo $e;
-        }
-    }   
-    
-    function editUserAsAdmin($id, $username, $email, $userType){
-        try{
-            $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email, userType =:userType  WHERE id = :id');
-            return $stmt->execute(array(':username' =>$username, ':email' => $email, 'userType'=>$userType, ':id' => $id));
-        } catch (PDOException $e)
-        {
-            echo $e;
-        }
-    }   
-    function deleteUser($id){
-        try{
-            $stmt = $this->connection->prepare("DELETE FROM `Users` WHERE id = :id;");
-            
-            $stmt->bindParam(':id', $id);
-            return $stmt->execute();
-        } catch (PDOException $e)
-        {
+    function updateUsernameAndEmail($username, $email, $id)
+    {
+        try {
+            $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email WHERE id = :id');
+            return $stmt->execute(array(':username' => $username, ':email' => $email, ':id' => $id));
+        } catch (PDOException $e) {
             echo $e;
         }
     }
-    function checkPassowrd($password){
-        try{
+
+    function updateProfilePicture($profilePicture, $id)
+    {
+        try {
+            $stmt = $this->connection->prepare('UPDATE Users SET profilePicture = :profilePicture WHERE id = :id');
+            return $stmt->execute(array(':profilePicture' => $profilePicture, ':id' => $id));
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function editUser($username, $email, $password, $id)
+    {
+        try {
+            $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email, password = :password WHERE id = :id');
+            $stmt->execute(array(':username' => $username, ':email' => $email, ':password' => $password, ':id' => $id));
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function editUserAsAdmin($id, $username, $email, $userType)
+    {
+        try {
+            $stmt = $this->connection->prepare('UPDATE Users SET username = :username, email = :email, userType =:userType  WHERE id = :id');
+            return $stmt->execute(array(':username' => $username, ':email' => $email, 'userType' => $userType, ':id' => $id));
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+    function deleteUser($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM `Users` WHERE id = :id;");
+
+            $stmt->bindParam(':id', $id);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+    function checkPassowrd($password)
+    {
+        try {
             $stmt = $this->connection->prepare("SELECT * FROM Users WHERE password = :password");
             $stmt->bindParam(':password', $password);
             $stmt->execute();
@@ -131,11 +148,9 @@ class UsersRepository extends Repository
             $user = $stmt->fetch();
 
             return $user;
-        } catch (PDOException $e) 
-        {
+        } catch (PDOException $e) {
             echo $e;
         }
-
     }
 
     function setResetLinkToken($userEmail, $token)
@@ -190,5 +205,3 @@ class UsersRepository extends Repository
         }
     }
 }
-
-

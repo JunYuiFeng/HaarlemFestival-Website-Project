@@ -19,8 +19,7 @@ class LoginService
             if ($username == $user->getUsername()) {
                 $loginUser = $user;
                 break;
-            }
-            else if ($username == $user->getEmail()) {
+            } else if ($username == $user->getEmail()) {
                 $loginUser = $user;
                 break;
             }
@@ -35,5 +34,7 @@ class LoginService
     public function logout()
     {
         unset($_SESSION["logedin"]);
+        if (isset($_SESSION["employee"]))
+            unset($_SESSION["employee"]);
     }
 }

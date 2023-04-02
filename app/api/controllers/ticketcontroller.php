@@ -60,6 +60,23 @@ class TicketController extends Controller
         }
     }
 
+    public function validate()
+    {
+        if (isset($_GET['token'])) {
+            $token = $_GET['token'];
+            $ticketStatus = $this->ticketService->validateToken($token);
+            $this->respond($ticketStatus);
+        }
+    }
+
+    public function updateStatus()
+    {
+        if (isset($_GET['token'])) {
+            $token = $_GET['token'];
+            $this->respond($this->ticketService->setTicketAsUsed($token));
+        }
+    }
+
     private function generateTicket($event, $location, $date, $orderId)
     {
         $token = $this->ticketService->generateToken($orderId);
@@ -67,7 +84,7 @@ class TicketController extends Controller
         $result = Builder::create()
             ->writer(new PngWriter())
             ->writerOptions([])
-            ->data("http://127.0.0.1/festival/validateticket?token=" . $token)
+            ->data($token) //"http://127.0.0.1/festival/validateticket?token=" .
             ->encoding(new Encoding('UTF-8'))
             ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
             ->size(300)

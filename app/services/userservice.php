@@ -15,11 +15,11 @@ class UserService
         $this->repository = new UsersRepository();
     }
 
-    public function getById($id)
+    public function getById($id): User
     {
         return $this->repository->getById($id);
     }
-    
+
     public function getAll()
     {
         return $this->repository->getAll();
@@ -29,16 +29,33 @@ class UserService
     {
         return $this->repository->CreateUser($username, $email, $password, $userType);
     }
-    public function editUserAsAdmin($id, $username, $email,$userType)
+
+    public function updateUsernameAndEmail($username, $email, $id)
+    {
+        return $this->repository->updateUsernameAndEmail($username, $email, $id);
+    }
+
+    public function updateProfilePicture($profilePicture, $id)
+    {
+        return $this->repository->updateProfilePicture($profilePicture, $id);
+    }
+
+    public function updatePassword($password, $id)
+    {
+        return $this->repository->setNewPassword($password, $id);
+    }
+
+    public function editUserAsAdmin($id, $username, $email, $userType)
     {
         return $this->repository->editUserAsAdmin($id, $username, $email, $userType);
     }
-    public function checkPassowrd($password){
-        
+    public function checkPassowrd($password)
+    {
+
         return $this->repository->checkPassowrd($password);
     }
-    
-    public function sendLink(string $email): bool
+
+    public function sendConfirmationEmail(string $email, $username): bool
     {
         $mail = new PHPMailer(false); //Create an instance; passing `true` enables exceptions
         try {
@@ -54,12 +71,12 @@ class UserService
 
             //Recipients
             $mail->setFrom('haarlemfestival@sahibthecreator.com', 'Haarlem Festival');
-            $name = substr($email, 0, strpos($email, '@'));
 
-            $mail->addAddress($email, $name);     //Add a recipient
 
-            $mail->Subject = 'Update Profile';
-            $mail->Body    = "<p> .... </p>";
+            $mail->addAddress($email, $username);     //Add a recipient
+
+            $mail->Subject = 'Profile Information has been updated';
+            $mail->Body    = "<p>Dear {$username}, <br> Your profile information has been updated.</p>";
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->send();
             //echo 'Message has been sent';
@@ -72,53 +89,83 @@ class UserService
 
     public function editUser($username, $email, $password, $id)
     {
-        // $otp = rand(100000, 999999);
-        // $_SESSION['otp'] = $otp;
-        // $_SESSION['mail'] = $email;
-        // require __DIR__ . "/../phpmailer/PHPMailerAutoload.php";
-        // $mail = new PHPMailer;
 
-        // $mail->isSMTP();
-        // $mail->Host = 'smtp.gmail.com';
-        // $mail->Port = 587;
-        // $mail->SMTPAuth = true;
-        // $mail->SMTPSecure = 'tls';
-
-        // $mail->Username = "stevengrazius283@gmail.com";
-        // $mail->Password = "TolakAngin";
-
-        // $mail->setFrom('stevengrazius283', 'OTP Verification');
-        // $mail->addAddress($email);
-
-        // $mail->isHTML(true);
-        // $mail->Subject = "Your verify code";
-        // $mail->Body = "<p>Dear user, </p> <h3>Your verify OTP code is $otp <br></h3>
-        //             <br><br>
-        //             <p>With regrads,</p>
-        //             <b>Programming with Lam</b>
-        //             https://www.youtube.com/channel/UCKRZp3mkvL1CBYKFIlxjDdg";
-
-        // // if (!$mail->send()) {
-        // //     
-        // // }
         return $this->repository->editUser($username, $email, $password, $id);
-
     }
     public function deleteUser($id)
     {
         return $this->repository->deleteUser($id);
     }
 
-    public function getByUsername($username)
+    public function getByUsername($username): User
     {
         return $this->repository->getByUsername($username);
     }
 
-    public function getByEmail($email)
+    public function getByEmail($email): User
     {
         return $this->repository->getByEmail($email);
     }
+
+    public function validateUsernameAndEmail($username, $email, $id = null)
+    {
+        if ($username == '' || $email == '')
+            return "Please fill all the fields";
+
+        if (!$this->checkEmailAvailability($email, $id))
+            return "Email is already taken";
+
+        if (!$this->checkUsernameAvailability($username, $id))
+            return "Username is already taken";
+
+        if (!(strlen($username) > 1 && strlen($username) < 30  && ctype_alnum($username)))
+            return "Username can contain only letters and numbers";
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+            return "Email is invalid";
+
+        return TRUE;
+    }
+
+    public function validatePassword($password)
+    {
+        if (strlen($password) >= 6 && strlen($password) < 50) {
+            return TRUE;
+        } else {
+            return "Password should be at least 6 characters and maximum 50";
+        }
+    }
+
     
+
+    public function checkUsernameAvailability($username, $id = NULL): bool
+    {
+        $user = $this->repository->getByUsername($username);
+        if ($user != null) {
+            if ($id != NULL) {
+                if ($user->getId() == $id) {
+                    return TRUE;
+                }
+            }
+            return FALSE;
+        }
+        return TRUE;
+    }
+
+    public function checkEmailAvailability($email, $id = NULL): bool
+    {
+        $user = $this->repository->getByEmail($email);
+        if ($user != null) {
+            if ($id != NULL) {
+                if ($user->getId() == $id) {
+                    return TRUE;
+                }
+            }
+            return FALSE;
+        }
+        return TRUE;
+    }
+
     // public function editUserTest($username,$email,$id)
     // {
     //     return $this->repository->editUserTest($username,$email,$id);
