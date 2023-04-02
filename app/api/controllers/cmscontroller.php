@@ -23,14 +23,15 @@ class CmsController extends Controller
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
             $body = file_get_contents("php://input");
             $user = json_decode($body);
 
             if (empty($user->id) || empty($user->username) || empty($user->email) || empty($user->type)) {
+                
                 $this->respondWithError(400, "Not all data was provided");
                 return;
             }
+            echo $user->type;
             if ($this->userService->editUserAsAdmin($user->id, $user->username, $user->email, $user->type))
                 $this->respond();
             else
@@ -47,21 +48,6 @@ class CmsController extends Controller
                 return;
             }
             if ($this->userService->deleteUser($user->id))
-                $this->respond();
-            else
-                $this->respondWithError(500, "Something went wrong");
-        }
-
-        if($_SERVER['REQUEST_METHOD'] == 'SORT'){
-            $body = file_get_contents("php://input");
-            $user = json_decode($body);
-
-            
-            if (empty($user->username) || empty($user->email) || empty($user->type)) {
-                $this->respondWithError(400, "Not all data was provided");
-                return;
-            }
-            if ($this->userService->createUser($user->username, $user->email, $user->type))
                 $this->respond();
             else
                 $this->respondWithError(500, "Something went wrong");

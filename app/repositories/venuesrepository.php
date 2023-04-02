@@ -8,7 +8,7 @@ class VenueRepository extends Repository
 {
     function getAll(){
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM Vanues");
+            $stmt = $this->connection->prepare("SELECT * FROM Venues");
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, "Venue");
