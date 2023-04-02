@@ -33,15 +33,26 @@ class FestivalController extends Controller
         require __DIR__ . '/../views/festival/index.php';
     }
 
-    public function dance(){
-        $danecVanueType = "";
+    public function dance()
+    {
         $DanceCardType = 0;
-        $dances = $this->danceService->getAll();
+        $tickets = $this->danceService->getAll();
+        // $days = $this->danceService->getAllDate();
         $artists = $this->artistService->getAll();
         $venues = $this->venueService->getAll();
-        $dancesByDate27Jul = $this->danceService->getAllByDate('27 Jul');
-        $dancesByDate28Jul = $this->danceService->getAllByDate('28 Jul');
-        $dancesByDate29Jul = $this->danceService->getAllByDate('29 Jul');
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            switch ($_POST['action']) {
+                case 'add':
+                    $danceId = htmlspecialchars($_POST['danceId']);
+                    $userId = htmlspecialchars($_SESSION["logedin"]);
+                    $ticketAmount = htmlspecialchars($_POST['ticketAmount']);
+                    $this->danceService->addDanceTocard($danceId, $userId, $ticketAmount);
+                    break;
+                default:
+                    break;
+            }
+        }
         require __DIR__ . '/../views/festival/dance.php';
     }
 
@@ -73,9 +84,9 @@ class FestivalController extends Controller
             $sessions = $this->sessionService->getSessionsByRestaurantId($id);
         }
 
-       // $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
+        // $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
         //var_dump($loggedInUser);
-        
+
         require __DIR__ . '/../views/festival/restaurantdetail.php';
     }
 }

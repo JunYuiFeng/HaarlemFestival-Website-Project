@@ -4,12 +4,13 @@
         private $day;
         private $date;
         private $time;
-        private $vanue;
+        private $venue;
         private $artist;
         private $session;
         private $duration;
         private $ticketAvailable;
         private $price;
+        private $venueId;
 
         public function getId(){
             return $this->id;
@@ -18,13 +19,18 @@
             return $this->day;
         }
         public function getDate(){
+            $this->date = date("d-m-Y", strtotime($this->date));
             return $this->date;
         }
         public function getTime(){
+            $this->time = date("h:i A", strtotime($this->time));
             return $this->time;
         }
-        public function getVanue(){
-            return $this->vanue;
+        public function getVenueId(){
+            return $this->venueId;
+        }
+        public function getVenue(){
+            return $this->venue;
         }
         public function getArtist(){
             return $this->artist;

@@ -7,7 +7,12 @@ class DanceRepository extends Repository
     function getAll()
     {
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM `Dance` ORDER BY `Dance`.`id` ASC");
+            $stmt = $this->connection->prepare("SELECT t.id, t.date, t.day, t.time, t.session, t.duration, v.vanuesName AS venue, GROUP_CONCAT(a.name) AS artist,t.ticketAvailable ,t.price
+            FROM Tickets t
+            JOIN Venues v ON t.venueId = v.id
+            JOIN DanceArtists da ON da.danceId = t.id
+            JOIN Artists a ON da.artistId = a.id
+            GROUP BY t.id;");
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, "Dance");
@@ -19,6 +24,22 @@ class DanceRepository extends Repository
         {
             echo $e;
         }
+    }
+    function getAllDate(){
+        try {
+            $stmt = $this->connection->prepare("SELECT DISTINCT date FROM Tickets");
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, "Dance");
+            $dances = $stmt->fetchAll();
+
+            return $dances;
+
+        } catch (PDOException $e)
+        {
+            echo $e;
+        }
+
     }
     function getAllArtist(){
         try {
@@ -35,9 +56,27 @@ class DanceRepository extends Repository
             echo $e;
         }
     }
+    function addDanceTocard($danceId,$userId,$ticketAmount){
+        try {
+            $stmt = $this->connection->prepare("INSERT INTO CartItems (cartId, itemId, type, quantity) 
+            VALUES ('7149e134-9835-4f40-a4a8-194db4ab0982', :danceId, 'ticket', :ticketAmount);");
+            $stmt->bindParam(':danceId', $danceId);
+            // $stmt->bindParam(':userId', $userId);
+            $stmt->bindParam(':ticketAmount', $ticketAmount);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, "Dance");
+            $dances = $stmt->fetchAll();
+
+            return $dances;
+
+        } catch (PDOException $e)
+        {
+        }
+    }
     function getAllByDate($date){
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM `Dance` WHERE date = :date ORDER BY `Dance`.`id` ASC");
+            $stmt = $this->connection->prepare("SELECT * FROM `Tickets` WHERE date = :date ORDER BY `Dance`.`id` ASC");
             
             $stmt->bindParam(':date', $date);
             $stmt->execute();
@@ -88,7 +127,7 @@ class DanceRepository extends Repository
     function getById($id)
     {
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM Dance WHERE id = :id");
+            $stmt = $this->connection->prepare("SELECT * FROM Tickets WHERE id = :id");
             $stmt->bindParam(':id', $id);
             $stmt->execute();
 

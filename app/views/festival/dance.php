@@ -23,7 +23,7 @@
         foreach ($artists as $artist) {
             ?>
             <h1 class="danceHomeNameArtist" id="danceHomeNameArtist<?= $count ?>">
-                <?= $artist->getName()?>
+                <?= $artist->getName() ?>
             </h1>
             <?php
             $count++;
@@ -90,17 +90,17 @@
         }
         $count = 3;
         foreach ($artists as $artist) {
-            if ($artist->getArtist() == "Martin Garrix" || $artist->getArtist() == "Afrojack") {
+            if ($artist->getName() == "Martin Garrix" || $artist->getName() == "Afrojack") {
                 continue;
             } ?>
             <div class="col-3">
                 <div class="danceCardType2">
                     <h4>
-                        <?= $artist->getArtist() ?>
+                        <?= $artist->getName() ?>
                     </h4>
                     <img src="/img/DanceArtist<?= $count ?>.png">
                     <p>
-                        dance and house
+                        <?= $artist->getStyle() ?>
                     </p>
                     <br>
                     <p>Apollo</p>
@@ -138,11 +138,7 @@
         </div>
         <div class="container">
             <div class="danceTableContent">
-                <h2>
-                    27 Jul
-                </h2>
                 <div id="danceTableContentDay1">
-
                     <div class="col-10">
                         <table>
                             <tr>
@@ -153,40 +149,76 @@
                                 <th>Ticket available</th>
                                 <th>Price</th>
                             </tr>
-                            <tr>
-                                <?php
-                                foreach ($dancesByDate27Jul as $danceByDate27Jul) { ?>
-                                    <td>
-                                        <?= $danceByDate27Jul->getDay() ?>
-                                    </td>
-                                    <td>
-                                        <?php
-                                        $time = DateTime::createFromFormat('H:i:s.u', $danceByDate27Jul->getTime());
-                                        echo $formatted_time = $time->format('H:i');
-                                        ?>
-                                    </td>
-                                    <td>
-                                        <?= $danceByDate27Jul->getVanue() ?>
-                                    </td>
-                                    <td>
-                                        <?= $danceByDate27Jul->getArtist() ?>
-                                    </td>
-                                    <td>
-                                        <?= $danceByDate27Jul->getAvaliableTickets() ?>
-                                    </td>
-                                    <td>&#8364;
-                                        <?= $danceByDate27Jul->getPrice() ?>
-                                    </td>
-                                </tr>
+                            <?php
+                            //foreach ($days as $day) {
+                            ?>
+
+                            <h2>
+                                <?php //$day->getDate() ?>
+                            </h2>
+                            <?php
+                            foreach ($tickets as $ticket) { ?>
+
+                                <form method="POST">
+                                    <tr>
+                                        <td>
+                                            <?= $ticket->getDay() ?>
+                                            <input type="hidden" value=<?= $ticket->getId() ?> id='danceId' name='danceId'>
+                                        </td>
+                                        <td>
+                                            <?= $ticket->getTime() ?>
+                                        </td>
+                                        <td>
+                                            <?= $ticket->getVenue() ?>
+                                        </td>
+                                        <td>
+                                            <?= $ticket->getArtist() ?>
+                                        </td>
+                                        <td>
+                                            <?= $ticket->getAvaliableTickets() ?>
+                                        </td>
+                                        <td>&#8364;
+                                            <?= $ticket->getPrice() ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($ticket->getAvaliableTickets() != 0) { ?>
+                                            <td>
+                                                <label>
+                                                    amount of ticket
+                                                </label>
+                                                <input type="number"  name="ticketAmount"> 
+                                            </td>
+                                            <td>
+                                                <button name="action" value="add" id="buttonAddToCard<?= $ticket->getId() ?>"
+                                                    type="submit">Add to cart</button>
+                                            </td>
+                                        <?php } else {
+                                                ?>
+                                            <p>
+                                                Sold out
+                                            </p>
+                                        <? } ?>
+                                        </td>
+                                        <td>
+                                            <?= $ticket->getDate() ?>
+                                            <?php
+                                            //if ($ticket->getDate() != $day->getDate()) {
+                                            //}
+                                            ?>
+                                        </td>
+                                    </tr>
+
+                                </form>
                             <?php }
-                                ?>
+
+
+                            ?>
                         </table>
                         <div class="row">
                             <div class="col-4">
 
                             </div>
                             <div class="col-4">
-                                <button type="button" class="danceTableContentButton">Add to cart</button>
                             </div>
                             <div class="col-4">
 
@@ -213,27 +245,26 @@
             <div class="row">
                 <?php
                 $count = 1;
-                foreach ($vanues as $vanue) {
+                foreach ($venues as $venue) {
                     ?>
                     <div class="col-2">
                         <?php if ($count % 2 == 0) {
-                            
                             $danceVanueType = "danceVanueType2";
-                        }
-                        else{
-                        $danceVanueType = "danceVanueType1"; 
-                        }?>
+                        } else {
+                            $danceVanueType = "danceVanueType1";
+                        } ?>
 
-                        <div class="<?=$danceVanueType?>">
+                        <div class="<?= $danceVanueType ?>">
                             <div class="danceVanue">
                                 <h4>
-                                    <?=$vanue->getVanue(); ?>
+                                    <?= $venue->getVanueName(); ?>
                                 </h4>
-                                <lael>
-                                </lael>
+                                <label>
+                                    <?= $venue->getAddress(); ?>
+                                </label>
                             </div>
                             <div>
-                                <img src="/img/DanceVanueImg<?=$count?>.png" class="danceVanueImg">
+                                <img src="/img/DanceVanueImg<?= $count ?>.png" class="danceVanueImg">
                             </div>
                         </div>
                     </div>
