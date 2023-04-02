@@ -74,7 +74,7 @@
                         <input type="text" name="password" placeholder="password" class="pb-1">
                     </td>
                     <td>
-                        <input type="text" name="registrationDate" placeholder="registrationDate" class="pb-1
+                        <input type="hidden" name="registrationDate" placeholder="registrationDate" class="pb-1">
                     </td>
                     <td>
                         <div>
@@ -130,7 +130,7 @@
                     if (userResult) {
                         // Create new table rows for each sorted result
                         userResult.forEach(user => {
-                            if (user.type == 0) {
+                            if (user.userType == 0) {
                                 user.userType = "Admin";
                             } else {
                                 user.userType = "User";
@@ -140,7 +140,12 @@
             <td id="userId">${user.id}</td>
             <td><input id="userName_${user.id}" value='${user.username}' ></td>
             <td><input  id="userEmail_${user.id}" value='${user.email}' ></td>
-            <td><input id="userType_${user.id}" type="text" value="${user.userType}"></td>
+            <td><input id="userRegistrasionDate_${user.id}" value='${user.registrationDate}'></td>
+            <td>
+                            <select id="userType_${user.id}">
+                                <option value="0" ${user.userType === "Admin" ? "selected" : ""}>Admin</option>
+                                <option value="1" ${user.userType === "User" ? "selected" : ""}>User</option>
+                            </select>
             <td><button class="btn btn-warning" id="update${user.id}" onclick="updateUser(${user.id})">Update</button</td>
             <td><button class="btn btn-danger" id="delete${user.id}" onclick="deleteUser(${user.id})">Delete</button></td>
           `;
@@ -151,19 +156,24 @@
                 .catch(error => console.log(error));
         }
         function fetchUsers(query) {
-    fetch(`http://localhost/api/cms/searchfilter?query=${query}`)
-        .then(result => result.json())
-        .then(userResult => {
+            fetch(`http://localhost/api/cms/searchfilter?query=${query}`)
+                .then(result => result.json())
+                .then(userResult => {
 
-            // Clear existing table rows
-            userTableBody.innerHTML = "";
+                    // Clear existing table rows
+                    userTableBody.innerHTML = "";
 
-            if (userResult) {
+                    if (userResult) {
 
-                // Create new table rows for each search result
-                userResult.forEach(user => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
+                        // Create new table rows for each search result
+                        userResult.forEach(user => {
+                            if (user.userType == 0) {
+                                user.userType = "Admin";
+                            } else {
+                                user.userType = "User";
+                            }
+                            const row = document.createElement("tr");
+                            row.innerHTML = `
                     
                         <td id="userId">${user.id}</td>
                         <td><input id="userName_${user.id}" value='${user.username}' ></td>
@@ -177,12 +187,12 @@
                         </td>
                         <td><button class="btn btn-warning" id="update${user.id}" onclick="updateUser(${user.id})">Update</button></td>
                         <td><button class="btn btn-danger" onclick="deleteUser(${user.id})">Delete</button></td>`;
-                    userTableBody.appendChild(row);
-                });
-            }
-        })
-        .catch(error => console.error(error))
-}
+                            userTableBody.appendChild(row);
+                        });
+                    }
+                })
+                .catch(error => console.error(error))
+        }
         searchInput.addEventListener("input", function (event) {
             const query = searchInput.value; // Get search query from input field
             fetchUsers(query);

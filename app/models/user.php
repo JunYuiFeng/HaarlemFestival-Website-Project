@@ -9,7 +9,6 @@ class User implements \JsonSerializable
     private $userType;
     private $resetLinkToken;
     private $registrationDate;
-    private $masked_password;
 
 
     public function jsonSerialize(): mixed
@@ -46,23 +45,10 @@ class User implements \JsonSerializable
     {
         return $this->id;
     }
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
     public function getUsername()
     {
         return $this->username;
     }
-
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
     public function getEmail()
     {
         return $this->email;
@@ -80,20 +66,6 @@ class User implements \JsonSerializable
         return $this->password;
     }
 
-    public function getPasswordAsStars()
-    {
-        $this->masked_password = "";
-        foreach (str_split($this->password) as $char) {
-            $this->masked_password .= "*";
-        }
-        return $this->masked_password;
-    }
-
-
-
-    /**
-     * Get the value of userType
-     */
     public function getUserType()
     {
         if($this->userType == 0){
@@ -102,18 +74,6 @@ class User implements \JsonSerializable
             $this->userType = "user";
         }
         return $this->userType;
-    }
-
-    public function setUserType($userType)
-    {
-        $this->userType = $userType;
-
-        return $this;
-    }
-
-    public function createUser()
-    {
-        return $this->username;
     }
 
     public function getRegistrationDate()

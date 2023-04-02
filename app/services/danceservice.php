@@ -18,6 +18,10 @@ class DanceService
     {
         return $this->repository->getAllByDate($date);
     }
+    public function getAllDate()
+    {
+        return $this->repository->getAllDate();
+    }
     public function getAllArtist()
     {
         return $this->repository->getAllArtist();
@@ -25,5 +29,9 @@ class DanceService
     public function getById($id)
     {
         return $this->repository->getById($id);
+    }
+    public function addDanceTocard($danceId,$userId,$ticketAmount)
+    {
+        return $this->repository->addDanceTocard($danceId,$userId,$ticketAmount);
     }
 }
