@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../repositories/restaurantrepository.php';
+include_once("../repositories/restaurantrepository.php");
 
-class RestaurantService 
+class RestaurantService
 {
     private $repository;
 
@@ -18,5 +18,20 @@ class RestaurantService
     public function getById($id)
     {
         return $this->repository->getById($id);
+    }
+
+    public function insertRestaurant($restaurant)
+    {
+        return $this->repository->insertRestaurant($restaurant);
+    }
+
+    public function updateRestaurant($restaurant, $id)
+    {
+        return $this->repository->updateRestaurant($restaurant, $id);
+    }
+
+    public function deleteRestaurant($id)
+    {
+        return $this->repository->deleteRestaurant($id);
     }
 }

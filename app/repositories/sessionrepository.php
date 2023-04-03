@@ -71,7 +71,7 @@ class SessionRepository extends Repository
     function insert(Session $session): bool
     {
         try {
-            $sql = 'INSERT INTO `Sessions`(`name`, `startTime`, `restaurantId`, `endTime`) VALUES (:name, :startTime, :restaurantId, :endTime)';
+            $sql = 'INSERT INTO `Sessions`(`name`, `startTime`, `restaurantId`, `endTime`, seats) VALUES (:name, :startTime, :restaurantId, :endTime, :seats)';
 
             $statement = $this->connection->prepare($sql);
 
@@ -81,6 +81,7 @@ class SessionRepository extends Repository
                 ':name' => $session->getName(),
                 ':startTime' => $startTime,
                 ':endTime' => $endTime,
+                ':seats' => $session->getSeats(),
                 ':restaurantId' => $session->getRestaurantId()
             ]);
         } catch (PDOException $e) {
@@ -92,7 +93,7 @@ class SessionRepository extends Repository
     function update($session)
     {
         try {
-            $stmt = $this->connection->prepare('UPDATE `Sessions` SET `name`=:name,`startTime`=:startTime,`restaurantId`=:restaurantId,`endTime`=:endTime WHERE id = :id');
+            $stmt = $this->connection->prepare('UPDATE `Sessions` SET `name`=:name,`startTime`=:startTime,`restaurantId`=:restaurantId,`endTime`=:endTime, `seats`=:seats WHERE id = :id');
 
             $startTime = $session->getStartTime()->format('H:i');
             $endTime = $session->getEndTime()->format('H:i');
@@ -102,6 +103,7 @@ class SessionRepository extends Repository
                 ':startTime' => $startTime,
                 ':endTime' => $endTime,
                 ':restaurantId' => $session->getRestaurantId(),
+                ':seats' => $session->getSeats(),
                 ':id' => $session->getId()
             ]);
         } catch (PDOException $e) {
