@@ -41,7 +41,7 @@ class FestivalController extends Controller
     {
         $DanceCardType = 0;
         $tickets = $this->danceService->getAll();
-        // $days = $this->danceService->getAllDate();
+        $days = $this->danceService->getAllDate();
         $artists = $this->artistService->getAll();
         $venues = $this->venueService->getAll();
 
