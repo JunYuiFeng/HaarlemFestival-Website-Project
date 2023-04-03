@@ -134,14 +134,14 @@
                                 <div class="form-group row reservationQuantityOfPoeple">
                                     <label for="amountAbove12" class="col-8 col-form-label">Above 12 years:</label>
                                     <div class="col-4">
-                                        <input type="number" class="form-control" name="amountAbove12">
+                                        <input type="number" class="form-control" name="amountAbove12" min="0">
                                     </div>
                                 </div>
 
                                 <div class="form-group row reservationQuantityOfPoeple">
                                     <label for="amountUnderOr12" class="col-8 col-form-label">12 years or under:</label>
                                     <div class="col-4">
-                                        <input type="number" class="form-control" name="amountUnderOr12">
+                                        <input type="number" class="form-control" name="amountUnderOr12" min="0">
                                     </div>
                                 </div>
 
@@ -224,7 +224,6 @@
             fetch('/api/cart/getCartAmount')
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
                     cartAmount.innerHTML = data;
                 })
                 .catch(error => {

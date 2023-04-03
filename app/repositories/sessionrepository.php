@@ -12,9 +12,25 @@ class SessionRepository extends Repository
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, "Session");
+
             $sessions = $stmt->fetchAll();
 
             return $sessions;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function getSessionsArrayByRestaurantId($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM `Sessions` WHERE restaurantId = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result;
         } catch (PDOException $e) {
             echo $e;
         }

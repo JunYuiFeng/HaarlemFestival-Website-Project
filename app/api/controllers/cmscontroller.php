@@ -1,15 +1,18 @@
 <?php
 require_once __DIR__ . '/../../services/userservice.php';
+require_once __DIR__ . '/../../services/sessionservice.php';
 require_once __DIR__ . '/controller.php';
 
 class CmsController extends Controller
 {
     private $userService;
+    private $sessionsService;
 
     public function __construct()
     {
         parent::__construct();
         $this->userService = new UserService();
+        $this->sessionsService = new SessionService();
     }
     
     function index()
@@ -74,4 +77,17 @@ class CmsController extends Controller
         header("Content-Type: application/json");
         echo json_encode($userResult);
     }
+
+    function getSessionsBySelectedRestaurant()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $body = file_get_contents("php://input");
+            $object = json_decode($body);
+    
+            $sessions = $this->sessionsService->getSessionsArrayByRestaurantId($object->restaurantId);
+        }
+    
+        header("Content-Type: application/json");
+        echo json_encode($sessions);
+    }    
 }
