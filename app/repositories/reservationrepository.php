@@ -27,13 +27,13 @@ class ReservationRepository extends Repository
 
             $stmt = $this->connection->prepare("INSERT INTO `Reservations`(`restaurantId`, `sessionId`, `amountAbove12`, `amountUnderOr12`, `date`, `comments`, `status`) 
         VALUES (:restaurantId, :sessionId, :amountAbove12, :amountUnderOr12, :reservationDate, :comments, :status)");
-            $stmt->bindParam(':restaurantId', ($reservation->getRestaurantId()));
-            $stmt->bindParam(':sessionId', ($reservation->getSessionId()));
-            $stmt->bindParam(':amountAbove12', ($reservation->getAmountAbove12()));
-            $stmt->bindParam(':amountUnderOr12', ($reservation->getAmountUnderOr12()));
-            $stmt->bindParam(':reservationDate', $formattedDate);
-            $stmt->bindParam(':comments', ($reservation->getComments()));
-            $stmt->bindParam(':status', ($reservation->getStatus()));
+            $stmt->bindValue(':restaurantId', ($reservation->getRestaurantId()));
+            $stmt->bindValue(':sessionId', ($reservation->getSessionId()));
+            $stmt->bindValue(':amountAbove12', ($reservation->getAmountAbove12()));
+            $stmt->bindValue(':amountUnderOr12', ($reservation->getAmountUnderOr12()));
+            $stmt->bindValue(':reservationDate', $formattedDate);
+            $stmt->bindValue(':comments', ($reservation->getComments()));
+            $stmt->bindValue(':status', ($reservation->getStatus()));
 
             $stmt->execute();
         } catch (PDOException $e) {
@@ -144,6 +144,19 @@ class ReservationRepository extends Repository
             $reservation = $stmt->fetch();
 
             return $reservation;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function updateStatus($id, $status)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE `Reservations` SET `status`= :status WHERE id = :id");
+            $stmt->bindParam(':status', $status);
+            $stmt->bindParam(':id', $id);
+            
+            $stmt->execute();
         } catch (PDOException $e) {
             echo $e;
         }
