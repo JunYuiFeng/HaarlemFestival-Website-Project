@@ -38,7 +38,7 @@ class RestaurantRepository extends Repository
     function insertRestaurant(Restaurant $restaurant): bool
     {
         try {
-            $sql = 'INSERT INTO `Restaurants` (`name`, `cuisine`, `foodType`, `sessionDuration`, `priceIndicator`, `priceAge12AndUnder`, `rating`, `hasMichelin`, `isFestival`, `priceAboveAge12`, `phoneNumber`, `address`, `seats`, `website`, `coverImg`, `description`) VALUES (:name, :cuisine, :foodType, :sessionDuration, :priceIndicator, :priceAge12AndUnder, :rating, :hasMichelin, :isFestival, :priceAboveAge12, :phoneNumber, :address, :seats, :website, :coverImg, :description)';
+            $sql = 'INSERT INTO `Restaurants` (`name`, `cuisine`, `foodType`, `sessionDuration`, `priceIndicator`, `priceAge12AndUnder`, `rating`, `hasMichelin`, `isFestival`, `priceAboveAge12`, `phoneNumber`, `address`, `website`, `coverImg`, `description`) VALUES (:name, :cuisine, :foodType, :sessionDuration, :priceIndicator, :priceAge12AndUnder, :rating, :hasMichelin, :isFestival, :priceAboveAge12, :phoneNumber, :address, :website, :coverImg, :description)';
 
             $statement = $this->connection->prepare($sql);
 
@@ -55,7 +55,6 @@ class RestaurantRepository extends Repository
                 ':priceAboveAge12' => $restaurant->getPriceAboveAge12(),
                 ':phoneNumber' => $restaurant->getPhoneNumber(),
                 ':address' => $restaurant->getAddress(),
-                ':seats' => $restaurant->getSeats(),
                 ':website' => $restaurant->getWebsite(),
                 ':coverImg' => $restaurant->getCoverImg(),
                 ':description' => $restaurant->getDescription()
@@ -69,7 +68,7 @@ class RestaurantRepository extends Repository
     function updateRestaurant($restaurant, $id)
     {
         try {
-            $stmt = $this->connection->prepare('UPDATE Restaurants SET `name` = :name, `cuisine` = :cuisine, `foodType` = :foodType, `sessionDuration` = :sessionDuration, `priceIndicator`=:priceIndicator, `priceAge12AndUnder`=:priceAge12AndUnder, `rating`=:rating, `hasMichelin`=:hasMichelin, `isFestival`=:isFestival, `priceAboveAge12`=:priceAboveAge12, `phoneNumber`=:phoneNumber, `address`=:address, `seats`=:seats, `website`=:website, `coverImg`=:coverImg, `description`=:description WHERE id = :id');
+            $stmt = $this->connection->prepare('UPDATE Restaurants SET `name` = :name, `cuisine` = :cuisine, `foodType` = :foodType, `sessionDuration` = :sessionDuration, `priceIndicator`=:priceIndicator, `priceAge12AndUnder`=:priceAge12AndUnder, `rating`=:rating, `hasMichelin`=:hasMichelin, `isFestival`=:isFestival, `priceAboveAge12`=:priceAboveAge12, `phoneNumber`=:phoneNumber, `address`=:address, `website`=:website, `coverImg`=:coverImg, `description`=:description WHERE id = :id');
             return $stmt->execute([
                 ':name' => $restaurant->getName(),
                 ':cuisine' => $restaurant->getCuisine(),
@@ -83,7 +82,6 @@ class RestaurantRepository extends Repository
                 ':priceAboveAge12' => $restaurant->getPriceAboveAge12(),
                 ':phoneNumber' => $restaurant->getPhoneNumber(),
                 ':address' => $restaurant->getAddress(),
-                ':seats' => $restaurant->getSeats(),
                 ':website' => $restaurant->getWebsite(),
                 ':coverImg' => $restaurant->getCoverImg(),
                 ':description' => $restaurant->getDescription(),

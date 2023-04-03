@@ -341,7 +341,7 @@ footer .footerImg {
   background: linear-gradient(180deg, #95051e 0%, #2e0209 100%);
   color: white;
   padding: 18px;
-  height: 620px;
+  height: auto;
 }
 .restaurantEventSection .card img {
   margin: 10px;

@@ -194,18 +194,17 @@ class CmsController extends Controller
                 $restaurant->setPriceAboveAge12($_POST['priceAboveAge12']);
                 $restaurant->setPhoneNumber($_POST['phoneNumber']);
                 $restaurant->setAddress($_POST['address']);
-                $restaurant->setSeats($_POST['seats']);
                 $restaurant->setWebsite($_POST['website']);
                 $restaurant->setDescription($_POST['description']);
 
                 if (isset($_GET["edit"])) {
                     if ($this->restaurantManagementService->updateRestaurant($restaurant, $_GET["edit"])) {
-                        header("location: restaurants");
+                        header("location: managerestaurants");
                     } else
                         $this->msg = "Something went wrong. Please try again";
                 } else {
                     if ($this->restaurantManagementService->insertRestaurant($restaurant)) {
-                        header("location: restaurants");
+                        header("location: managerestaurants");
                     } else
                         $this->msg = "Something went wrong. Please try again";
                 }
