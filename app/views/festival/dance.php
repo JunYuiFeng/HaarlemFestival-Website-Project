@@ -62,16 +62,24 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="">
-                                <p>dance / electronic</p>
+                                <p>
+                                    <?= $artist->getStyle() ?>
+                                </p>
                                 <br></br>
-                                <p>animal</p>
-                                <p>in the name of love</p>
-                                <p>high on life</p>
+                                <p>
+                                    <?= $artist->getFirstSong() ?>
+                                </p>
+                                <p>
+                                    <?= $artist->getSecondSong() ?>
+                                </p>
+                                <p>
+                                    <?= $artist->getThirdSong() ?>
+                                </p>
                             </div>
                             <img src="/img/DanceDemoMartin1.png" class="danceDemoMartin1">
                         </div>
                         <div class="col-6 justify-content-center">
-                            <img src="/img/DanceArtist<?= $count ?>.png">
+                            <img src="/img/<?= $artist->getIndexPicture() ?>">
                             <div class="col-12">
                                 <br></br>
                                 <p class="danceCardLine">
@@ -80,7 +88,6 @@
                             </div>
                             <input type="button" onclick="location.href='dancedetailedpage1'" class="danceViewMore"
                                 value=" view more">
-
                         </div>
                     </div>
                 </div>
@@ -98,21 +105,27 @@
                     <h4>
                         <?= $artist->getName() ?>
                     </h4>
-                    <img src="/img/DanceArtist<?= $count ?>.png">
+                    <img src="/img/<?= $artist->getIndexPicture() ?>">
                     <p>
                         <?= $artist->getStyle() ?>
                     </p>
-                    <br>
-                    <p>Apollo</p>
-                    <p>Bella Ciao</p>
-                    <p>Spaceman</p>
+                    <br></br>
+                    <p>
+                        <?= $artist->getFirstSong() ?>
+                    </p>
+                    <p>
+                        <?= $artist->getSecondSong() ?>
+                    </p>
+                    <p>
+                        <?= $artist->getThirdSong() ?>
+                    </p>
+
+                    <input type="button" onclick="location.href='dancedetailedpage1'"  value=" view more">
                 </div>
+
             </div>
-            <?
-            $count++;
+        <?
         } ?>
-
-
         <div class="row justify-content-center">
 
             <div class="d-flex justify-content-around">
@@ -139,81 +152,69 @@
         <div class="container">
             <div class="danceTableContent">
                 <div id="danceTableContentDay1">
-                    <div class="col-10">
-                        <table>
-                            <tr>
-                                <th>Day</th>
-                                <th>Time</th>
-                                <th>Venue</th>
-                                <th>Artist</th>
-                                <th>Ticket available</th>
-                                <th>Price</th>
-                            </tr>
-                            <?php
-                            //foreach ($days as $day) {
-                            ?>
+                    <div class="col-10" style=" ">
+                        <?php foreach ($days as $day) { ?>
+                            <h5>
+                                <?= $day->getDate() ?>
+                            </h5>
+                            <table style="margin: 2%; width: 110%;">
+                                <tr>
+                                    <th>Day</th>
+                                    <th>Time</th>
+                                    <th>Venue</th>
+                                    <th>Artist</th>
+                                    <th>Ticket available</th>
+                                    <th>Price</th>
+                                </tr>
+                                <?php
+                                foreach ($tickets as $ticket) {
+                                    ?>
+                                    <?php
+                                    if ($ticket->getDate() == $day->getDate()) { ?>
+                                        <form method="POST" name="table<?= $day->getDate() ?>">
+                                            <tr>
+                                                <td>
+                                                    <?= $ticket->getDay() ?>
+                                                    <input type="hidden" value=<?= $ticket->getId() ?> id='danceId' name='danceId'>
+                                                </td>
+                                                <td>
+                                                    <?= $ticket->getTime() ?>
+                                                </td>
+                                                <td>
+                                                    <?= $ticket->getVenue() ?>
+                                                </td>
+                                                <td>
+                                                    <?= $ticket->getArtist() ?>
+                                                </td>
+                                                <td>
+                                                    <?= $ticket->getAvaliableTickets() ?>
+                                                </td>
+                                                <td>&#8364;
+                                                    <?= $ticket->getPrice() ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($ticket->getAvaliableTickets() != 0) { ?>
+                                                        <label>
+                                                            amount of ticket
+                                                        </label>
+                                                        <input type="number" name="ticketAmount">
+                                                        <button name="action" value="add" id="buttonAddToCard<?= $ticket->getId() ?>"
+                                                            type="submit">Add to cart</button>
+                                                    <?php } else {
+                                                        ?>
+                                                        <p>
+                                                            Sold out
+                                                        </p>
+                                                    <? } ?>
+                                                </td>
+                                            </tr>
+                                        </form>
+                                    <?php } ?>
+                                <?php } ?>
+                            </table>
+                        <?php }
 
-                            <h2>
-                                <?php //$day->getDate() ?>
-                            </h2>
-                            <?php
-                            foreach ($tickets as $ticket) { ?>
-
-                                <form method="POST">
-                                    <tr>
-                                        <td>
-                                            <?= $ticket->getDay() ?>
-                                            <input type="hidden" value=<?= $ticket->getId() ?> id='danceId' name='danceId'>
-                                        </td>
-                                        <td>
-                                            <?= $ticket->getTime() ?>
-                                        </td>
-                                        <td>
-                                            <?= $ticket->getVenue() ?>
-                                        </td>
-                                        <td>
-                                            <?= $ticket->getArtist() ?>
-                                        </td>
-                                        <td>
-                                            <?= $ticket->getAvaliableTickets() ?>
-                                        </td>
-                                        <td>&#8364;
-                                            <?= $ticket->getPrice() ?>
-                                        </td>
-                                        <td>
-                                            <?php if ($ticket->getAvaliableTickets() != 0) { ?>
-                                            <td>
-                                                <label>
-                                                    amount of ticket
-                                                </label>
-                                                <input type="number"  name="ticketAmount"> 
-                                            </td>
-                                            <td>
-                                                <button name="action" value="add" id="buttonAddToCard<?= $ticket->getId() ?>"
-                                                    type="submit">Add to cart</button>
-                                            </td>
-                                        <?php } else {
-                                                ?>
-                                            <p>
-                                                Sold out
-                                            </p>
-                                        <? } ?>
-                                        </td>
-                                        <td>
-                                            <?= $ticket->getDate() ?>
-                                            <?php
-                                            //if ($ticket->getDate() != $day->getDate()) {
-                                            //}
-                                            ?>
-                                        </td>
-                                    </tr>
-
-                                </form>
-                            <?php }
-
-
-                            ?>
-                        </table>
+                        ?>
                         <div class="row">
                             <div class="col-4">
 

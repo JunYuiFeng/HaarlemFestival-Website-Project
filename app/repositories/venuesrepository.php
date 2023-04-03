@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/repository.php';
-require_once __DIR__ . '/../models/dance.php';
+require_once __DIR__ . '/../models/ticket.php';
 require_once __DIR__ . '/../models/venue.php';
 
 class VenueRepository extends Repository
