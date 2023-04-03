@@ -17,7 +17,11 @@
     <?php include_once("header.php"); ?>
 
     <div class="py-3 px-5">
-        <h1 class="text-center fw-bolder text-light ff-alata display-4">Dashboard</h1>
+        <div class="row">
+            <button class="btn btn-warning col-2" onclick="document.location.href='../myaccount/index'">Go back to website</button>
+
+            <h1 class="col-8 text-center fw-bolder text-light ff-alata display-4">Dashboard</h1>
+        </div>
 
         <div class="row w-100  mt-5">
             <div class="col-4 bg-light bg-gradient p-4 d-flex flex-column rounded ">
