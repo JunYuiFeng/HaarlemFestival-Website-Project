@@ -257,7 +257,7 @@
                         <div class="<?= $danceVanueType ?>">
                             <div class="danceVanue">
                                 <h4>
-                                    <?= $venue->getVanueName(); ?>
+                                    <?= $venue->getName(); ?>
                                 </h4>
                                 <label>
                                     <?= $venue->getAddress(); ?>
