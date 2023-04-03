@@ -11,14 +11,14 @@
                         <!-- Right -->
                         <div>
                             <h6 class="text-uppercase fw-bold mb-3">
-                                <img src="/img/HaarlemFooterLogo.png">
+                                <a href="/"><img src="/img/HaarlemFooterLogo.png"></a>
                             </h6>
-                            <p class="">
+                            <p class="d-flex align-items-center">
                                 <img src="/img/opened envelope.png">
                                 support@haarlemfestival.nl
                             </p>
                             <p>
-                                © 2023 Haarlem Festival. All rights reserved.
+                                &copy 2023 Haarlem Festival.<br> All rights reserved.
                             </p>
                         </div>
                         <!-- Right -->
@@ -30,29 +30,20 @@
                 <!-- Grid column -->
                 <div class="col mb-3">
                     <!-- Section: Social media -->
-                    <section class="d-flex justify-content-lg-between p-20">
+                    <section class="d-flex justify-content-center p-20">
                         <!-- Right -->
                         <div class="row">
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <i class="fas fa-gem me-3">Social media</i>
+                            <h6 class="text-uppercase fw-bold mb-0">
+                                <p>Social media</p>
                             </h6>
                             <div class="col 4">
 
-                                <img src="/img/Instagram-Logo.png" alt="Instagram" class="footerImg" width="60px">
+                                <img src="/img/Instagram-Logo.png" alt="Instagram Icon" class="footerImg">
 
-                                <img src="/img/TikTok.png" alt="Tiktok" class="footerImg" width="50px">
+                                <img src="/img/TikTok.png" alt="Tiktok Icon" class="footerImg" style="width:45px">
 
-                                <a href="" class="col-4">
-                                    <i class="fab fa-facebook-f" class="footerImg">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                            fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-                                            <circle cx="8" cy="8" r="6.5" stroke="white" stroke-width="3"
-                                                fill="white" />
-                                            <path
-                                                d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
-                                        </svg>
-                                    </i>
-                                </a>
+                                <img src="/img/Facebook.png" alt="Facebook Icon" class="footerImg">
+
                             </div>
                         </div>
                     </section>
@@ -63,22 +54,22 @@
 
                         <div>
                             <h6 class="text-uppercase fw-bold mb-4">
-                                <i class="fas fa-gem me-3">Main page</i>
+                                <p>Main page</p>
                             </h6>
                             <p>
-                                <a href="/" class="text-reset">Home</a>
+                                <a href="/" class="text-reset text-decoration-none">Home</a>
                             </p>
                             <p>
-                                <a href="/visithaarlem/food" class="text-reset">Food</a>
+                                <a href="/visithaarlem/food" class="text-reset text-decoration-none">Food</a>
                             </p>
                             <p>
-                                <a href="/visithaarlem/history" class="text-reset">History</a>
+                                <a href="/visithaarlem/history" class="text-reset text-decoration-none">History</a>
                             </p>
                             <p>
-                                <a href="/visithaarlem/culture" class="text-reset">Culture</a>
+                                <a href="/visithaarlem/culture" class="text-reset text-decoration-none">Culture</a>
                             </p>
                             <p>
-                                <a href="/visithaarlem/kids" class="text-reset">Kids</a>
+                                <a href="/visithaarlem/kids" class="text-reset text-decoration-none">Kids</a>
                             </p>
                         </div>
                         <!-- Right -->
@@ -91,19 +82,16 @@
                         <!-- Right -->
                         <div>
                             <h6 class="text-uppercase fw-bold mb-4">
-                                <i class="fas fa-gem me-3">Festival Page</i>
+                                <p>Festival Page</p>
                             </h6>
                             <p>
-                                <a href="/visithaarlem/festival" class="text-reset">Overview</a>
+                                <a href="/festival/index" class="text-reset text-decoration-none">Overview</a>
                             </p>
                             <p>
-                                <a href="/visithaarlem/festival" class="text-reset">Yummie!</a>
+                                <a href="/festival/yummie" class="text-reset text-decoration-none">Yummie!</a>
                             </p>
                             <p>
-                                <a href="/visithaarlem/festival" class="text-reset">Dance!</a>
-                            </p>
-                            <p>
-                                <a href="/visithaarlem/festival" class="text-reset">Stroll through history</a>
+                                <a href="/festival/dance" class="text-reset text-decoration-none">Dance!</a>
                             </p>
                         </div>
                         <!-- Right -->
