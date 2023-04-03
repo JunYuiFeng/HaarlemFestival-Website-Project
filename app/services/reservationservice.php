@@ -45,4 +45,9 @@ class ReservationService
     {
         return $this->repository->getPrice($id);
     }
+
+    function updateStatus($id, $status)
+    {
+        $this->repository->updateStatus($id, $status);   
+    }
 }

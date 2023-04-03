@@ -257,6 +257,37 @@ class CmsController extends Controller
 
     public function managereservations()
     {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $reservation = new Reservation();
+            $reservation->setRestaurantId($_POST['restaurant']);
+            $reservation->setDate($_POST['date']);
+            $reservation->setAmountAbove12($_POST['amountAbove12']);
+            $reservation->setAmountUnderOr12($_POST['amountUnderOr12']);
+            $reservation->setSessionId($_POST['session']);
+            $reservation->setStatus($_POST['status']);
+            $reservation->setComments($_POST['comment']);
+
+            $this->reservationService->insertReservation($reservation);
+        }
+
+        if (isset($_GET["deactivateid"])) {
+            $id = htmlspecialchars($_GET['deactivateid']);
+            $this->reservationService->updateStatus($id, 'unactive');
+
+            header("location: managereservations");
+        }
+
+        if (isset($_GET["activateid"])) {
+            $id = htmlspecialchars($_GET['activateid']);
+            $this->reservationService->updateStatus($id, 'active');
+            
+            header("location: managereservations");
+        }
+
+        $restaurants = $this->restaurantService->getAll();
+        //$sessions = $this->sessionService->getSessionsByRestaurantId();
         $reservationData = array();
 
         foreach ($this->reservationService->getAll() as $reservation) {

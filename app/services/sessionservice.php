@@ -15,6 +15,11 @@ class SessionService
         return $this->repository->getSessionsByRestaurantId($id);
     }
 
+    function getSessionsArrayByRestaurantId($id)
+    {
+        return $this->repository->getSessionsArrayByRestaurantId($id);
+    }
+
     function getById($id) 
     {
         return $this->repository->getById($id);

@@ -34,6 +34,12 @@ class CartController extends Controller
 
     public function index()
     {
+        // $mollie = new \Mollie\Api\MollieApiClient();
+        // $mollie->setApiKey('test_Ds3fz4U9vNKxzCfVvVHJT2sgW5ECD8');
+
+        // $invoice = $mollie->invoices->get("tr_F7puMvpQEz");
+        // var_dump($invoice);
+
         $VAT = 1.09; //VAT is 9%
         $totalAmount = 0;
         $items = array();
@@ -98,7 +104,7 @@ class CartController extends Controller
                         "value" => number_format($_SESSION['totalAmount'], 2, '.', '')
                     ],
                     "description" => "Test payment",
-                    "redirectUrl" => "https://example.com/return",
+                    "redirectUrl" => "http://localhost/cart",
                     "webhookUrl" => "https://example.com/webhook", //webhookUrl: "https://......./api/webhook"
                     "metadata" => [
                         "order_id" => $order->getId(),
