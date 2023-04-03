@@ -14,8 +14,10 @@
 </head>
 
 <body>
+    <?php include_once("header.php"); ?>
+
     <div class="container d-flex flex-column justify-content-center align-items-center" id="addRestaurantPage">
-        <h1 class="my-4"><?php echo (isset($_GET['edit'])) ? "Edit Restaurant" : "Add New Restaurant"; ?></h1>
+        <h1 class="text-center my-4"><?php echo (isset($_GET['edit'])) ? "Edit Restaurant" : "Add New Restaurant"; ?></h1>
         <form action="" method="post" class="col-12 px-0 d-flex flex-column align-items-center" enctype="multipart/form-data">
             <div class="d-flex justify-content-center">
                 <div class="col-6">

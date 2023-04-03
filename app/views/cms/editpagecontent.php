@@ -10,6 +10,8 @@
 </head>
 
 <body>
+    <?php include_once("header.php"); ?>
+
     <div class="container">
         <h1 class="text-center">Content Managing System</h1>
 

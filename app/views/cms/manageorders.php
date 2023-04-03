@@ -15,6 +15,8 @@
 </head>
 
 <body>
+    <?php include_once("header.php"); ?>
+
     <div class="px-5">
         <h1 class="text-center">Orders Overview</h1>
 

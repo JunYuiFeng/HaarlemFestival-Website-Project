@@ -29,68 +29,25 @@ nav {
     }
   }
 }
-.cart-opened {
-  display: none;
-  position: absolute;
-  top: 80%;
-  right: 6%;
-  height: 400px;
-  z-index: 10;
-  background: linear-gradient(180deg, #9a031e 0%, #330009 100%);
-  border-radius: 20px;
-  color: white;
-  padding: 10px 20px;
-  img {
-    width: 35px;
-    cursor: pointer;
-    position: absolute;
-    right: 10px;
-  }
-  .items-scroll {
-    overflow-y: scroll;
-    height: 215px;
-  }
-  .item {
-    background: #e3e3e3;
-    backdrop-filter: blur(26px);
-    border-radius: 14px;
-    padding: 10px 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: "Inter";
-    color: black;
-    h1 {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 0;
-    }
-    p {
-      font-size: 12px;
-      margin-bottom: 0;
-    }
-  }
-  .divider-gradient {
-    height: 1px;
-    width: 100%;
-    margin: 10px 0;
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0) 0%,
-      #ffffff 46.88%,
-      rgba(255, 255, 255, 0) 100%
-    );
-  }
-  p {
-    font-size: 10px;
-    margin-bottom: 0;
-  }
-  h2 {
-    font-size: 16px;
-  }
+
+.ff-alata{
+  font-family: 'Alata';
 }
-.cart-opened.expand {
-  display: block;
+.admin-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    90.05deg,
+    #321325 0.73%,
+    #7f4066 99.97%,
+    #7f4066 99.97%
+  );
+  .logo{
+    width: 10%;
+    cursor: pointer;
+  }
 }
 
 #transparent-navbar {

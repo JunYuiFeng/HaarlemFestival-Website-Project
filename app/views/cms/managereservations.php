@@ -14,8 +14,10 @@
 </head>
 
 <body>
+    <?php include_once("header.php"); ?>
+
     <div class="container">
-        <h1>Reservation Overview</h1>
+        <h1 class="text-center">Reservation Overview</h1>
         <div class="row">
             <div class="col-4">
                 <form action="">

@@ -14,10 +14,7 @@
 </head>
 
 <body>
-    <?php
-    include __DIR__ . '/../header.php';
-    require_once __DIR__ . '/../../services/userservice.php';
-    ?>
+    <?php include_once("header.php"); ?>
 
     <div class="container">
         <h1 class="text-center my-4">Manage Users</h1>
@@ -75,25 +72,20 @@
                     <td>
                         <div>
                             <select name=" userType" id="userType" class="px-2 py-1">
-                        <option value="admin">Admin</option>
-                        <option value="user" selected>User</option>
-                        </select>
+                                <option value="admin">Admin</option>
+                                <option value="user" selected>User</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" type="submit" name="action" value="create" id="createUserBtn">Create</button>
+                    </td>
+            </tbody>
+            </form>
+
+            </tbody>
+        </table>
     </div>
-    </td>
-    <td>
-        <button class="btn btn-primary" type="submit" name="action" value="create" id="createUserBtn">Create</button>
-    </td>
-    </tbody>
-    </form>
-
-    </tbody>
-    </table>
-    </div>
-
-
-    <?php
-    include __DIR__ . '/../footer.php';
-    ?>
 
 
     <script>
@@ -189,7 +181,7 @@
                 })
                 .catch(error => console.error(error))
         }
-        searchInput.addEventListener("input", function (event) {
+        searchInput.addEventListener("input", function(event) {
             const query = searchInput.value; // Get search query from input field
             fetchUsers(query);
         });

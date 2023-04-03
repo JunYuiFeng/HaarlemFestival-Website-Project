@@ -14,6 +14,8 @@
 </head>
 
 <body>
+    <?php include_once("header.php"); ?>
+
     <div class="px-5">
         <h1 class="text-center py-2">API Keys Overview</h1>
         <form action="" method="post">

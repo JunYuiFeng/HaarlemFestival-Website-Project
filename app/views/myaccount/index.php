@@ -42,14 +42,20 @@
                     <p class="text-success">
                         <?php echo isset($msg) ? $msg : '' ?>
                     </p>
+
                     <?php
-                    if (isset($_SESSION['employee'])) {
-                    ?>
+                    if ($user->getUserType() == "admin") { ?>
+                        <button class="btn btn-danger w-100" onclick="document.location.href='../cms/index'">Go To CMS</button>
+                    <?php } ?>
+
+                    <?php
+                    if (isset($_SESSION['employee'])) {?>
                         <button class="btn btn-primary w-100" onclick="toggleScanning()">Scan Tickets</button>
                         <div class="hidden mt-3 w-100" id="reader"></div>
                         <p id="ticketStatus" class="text-success fw-bolder fs-1"></p>
                         <button class="btn btn-danger hidden" id="ticketStatusUpdateBtn" onclick="markTicketAsScanned()">Mark Ticket as Scanned</button>
                     <?php } ?>
+
                     <button class="btn btn-success w-100" onclick="toggleUsernameForm()">Change Email or Username</button>
                     <form method="post" action="" class="hidden w-100" id="editUsernameForm">
 

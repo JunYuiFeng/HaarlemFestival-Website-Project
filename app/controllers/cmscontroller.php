@@ -36,7 +36,12 @@ class CmsController extends Controller
         $this->msg = "";
     }
 
-    public function usermanagement()
+    public function index()
+    {
+        require __DIR__ . '/../views/cms/index.php';
+    }
+
+    public function manageusers()
     {
         $users = $this->userService->getAll();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -68,7 +73,7 @@ class CmsController extends Controller
             }
         }
 
-        require __DIR__ . '/../views/cms/usermanagement.php';
+        require __DIR__ . '/../views/cms/manageusers.php';
     }
     public function sortItem($users, $item, $sortType)
     {
@@ -132,15 +137,15 @@ class CmsController extends Controller
         }
     }
 
-    public function restaurants()
+    public function managerestaurants()
     {
         $this->restaurants = $this->restaurantManagementService->getAll();
         if (isset($_GET["delete"])) {
             $id = $_GET['delete'];
             $this->restaurantManagementService->deleteRestaurant($id);
-            header("location: restaurants");
+            header("location: managerestaurants");
         }
-        require __DIR__ . '/../views/cms/restaurants.php';
+        require __DIR__ . '/../views/cms/managerestaurants.php';
     }
 
     public function addrestaurant()

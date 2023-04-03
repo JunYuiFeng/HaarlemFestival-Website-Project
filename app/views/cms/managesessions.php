@@ -14,8 +14,10 @@
 </head>
 
 <body>
+    <?php include_once("header.php"); ?>
+
     <div class="px-5">
-        <h1>Restaurant Sessions Overview</h1>
+        <h1 class="text-center">Restaurant Sessions Overview</h1>
 
         <button class="btn btn-yellow-gradient my-4 py-3" onclick="location.href='manageSessions#addSession'">Add new session</button>
 
@@ -77,9 +79,9 @@
 
         </form>
     </div>
-            
+
     <script>
-        function ScrollToAddSession(){
+        function ScrollToAddSession() {
             console.log(document.querySelector("form"));
             window.scrollTo(0, document.body.scrollHeight);
         }
