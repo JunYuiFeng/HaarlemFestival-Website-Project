@@ -7,8 +7,13 @@ class DanceRepository extends Repository
     function getAll()
     {
         try {
-            $stmt = $this->connection->prepare("SELECT t.id, t.date, t.time, t.session, t.duration, v.vanuesName AS venue, GROUP_CONCAT(a.name) AS artist,t.ticketAvailable ,t.price FROM Tickets t JOIN Venues v ON t.venueId = v.id JOIN DanceArtists da ON da.danceId = t.id JOIN Artists a ON da.artistId = a.id GROUP BY t.id;
-            ");
+            $stmt = $this->connection->prepare("SELECT t.id, t.date, t.time, t.session, 
+            t.duration, v.name AS venue, GROUP_CONCAT(a.name) 
+            AS artist,t.ticketAvailable ,t.price FROM Tickets t 
+            JOIN Venues v ON t.venueId = v.id 
+            JOIN DanceArtists da ON da.danceId = t.id 
+            JOIN Artists a ON da.artistId = a.id 
+            GROUP BY t.id;");
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, "Ticket");
