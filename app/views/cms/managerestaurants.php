@@ -41,7 +41,7 @@
                     foreach ($props as $propName) {
                         $property = $propName->getName();
                         $methodName = "get" . $property;
-                        echo '<td style="white-space: nowrap;">' . $restaurant->$methodName() . '</td>';
+                        echo '<td class="text-truncate" style="max-width: 300px">' . $restaurant->$methodName() . '</td>';
                     }
                     echo '</tr>';
                 }

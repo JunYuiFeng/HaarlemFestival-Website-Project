@@ -18,9 +18,12 @@
 
     <div class="px-5">
         <h1 class="text-center py-2">API Keys Overview</h1>
-        <form action="" method="post">
-            <button type="submit" name="createKey" class="btn btn-yellow-gradient my-4 py-3" onclick="location.href='manageSessions#addSession'">Create new API Key</button>
-        </form>
+        <div class="d-flex align-items-center">
+            <form action="" method="post" class="col-3">
+                <button type="submit" name="createKey" class="btn btn-yellow-gradient my-4 py-3" onclick="location.href='manageSessions#addSession'">Create new API Key</button>
+            </form>
+            <p class="col-9 text-muted"><b>API endpoint: </b>http://127.0.0.1/api/externalsystem/orders?API_KEY=YOUR_API_KEY</p>
+        </div>
         <table class="table table-bordered table-striped table-hover">
             <?php
             $reflect = new ReflectionClass('APIKey');
@@ -47,7 +50,7 @@
                         } else
                             echo '<td style="white-space: nowrap;">' . $key->$methodName() . '</td>';
                     }
-                    echo '<td class="d-flex flex-column"><a href="?edit=' . $key->getId() . '">Edit</a><a href="?delete=' . $key->getId() . '">Delete</a></td>';
+                    echo '<td class="d-flex flex-column"><button class="btn btn-danger" onclick="document.location.href=`?delete=' . $key->getToken() . '`">Delete</button></td>';
                     echo '</tr>';
                 }
             } else {
@@ -55,6 +58,7 @@
             }
             ?>
         </table>
+
     </div>
 
 </body>

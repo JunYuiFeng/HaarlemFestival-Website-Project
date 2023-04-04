@@ -328,6 +328,13 @@ class CmsController extends Controller
         if (isset($_POST['createKey'])) {
             $this->apiKeyService->create();
         }
+        if (isset($_GET["delete"])) {
+            $token = $_GET['delete'];
+            $apiKey = new ApiKey();
+            $apiKey->setToken($token);
+            $this->apiKeyService->delete($apiKey);
+            header("location: manageapikeys");
+        }
         $apiKeys = $this->apiKeyService->getAll();
         require __DIR__ . '/../views/cms/manageapikeys.php';
     }
