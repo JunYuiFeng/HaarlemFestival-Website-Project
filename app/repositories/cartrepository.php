@@ -163,4 +163,46 @@ class CartRepository extends Repository
             echo $e;
         }
     }
+
+    function decreaseTicketQuantity($ticketId)
+    {
+        try {
+            $this->connection->beginTransaction();
+    
+            $stmt = $this->connection->prepare("UPDATE CartItems 
+                SET quantity = quantity - 1 
+                WHERE itemId = :ticketId AND type = 'ticket'");
+    
+            $stmt->bindParam(':ticketId', $ticketId);
+            $stmt->execute();
+    
+            $stmt = $this->connection->prepare("DELETE FROM CartItems 
+                WHERE itemId = :ticketId AND type = 'ticket' AND quantity <= 0");
+    
+            $stmt->bindParam(':ticketId', $ticketId);
+            $stmt->execute();
+    
+            $this->connection->commit();
+    
+            return true;
+        } catch (PDOException $e) {
+            $this->connection->rollBack(); //If any of the two SQL statements fails, this method will undo any changes made in the transaction, and the function returns false.
+            echo $e;
+            return false;
+        }
+    }
+
+    function increaseTicketQuantity($ticketId) {
+        try {
+            $stmt = $this->connection->prepare("UPDATE CartItems SET quantity = quantity + 1 WHERE itemId = :ticketId");
+            $stmt->bindParam(':ticketId', $ticketId);
+            $stmt->execute();
+            
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+            return false;
+        }
+    }
+    
 }

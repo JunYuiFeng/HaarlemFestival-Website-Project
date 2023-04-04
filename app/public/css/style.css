@@ -469,16 +469,12 @@ footer .footerImg {
   font-size: 8pt;
 }
 
-.checkPaymentSection h1 {
-  font-size: 36pt;
-}
-
 .checkoutOrderSummarySection {
   background: #fcdc4d;
   height: 100%;
 }
 .checkoutOrderSummarySection h1 {
-  font-size: 20pt;
+  font-size: 24pt;
 }
 .checkoutOrderSummarySection h2 {
   font-size: 14pt;

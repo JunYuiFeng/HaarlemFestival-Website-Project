@@ -194,7 +194,7 @@
                                                     <label>
                                                         amount of ticket
                                                     </label>
-                                                    <input type="number" id="ticketAmount">
+                                                    <input type="number" id="ticketAmount<?= $ticket->getId() ?>">
                                                     <button onclick="addTicketToCart(<?= $ticket->getId() ?>)">Add to cart</button>
                                                 <?php } else {
                                                 ?>
@@ -277,10 +277,10 @@
     ?>
 
     <script>
-        getCartAmount() 
-        
+        getCartAmount()
+
         function addTicketToCart(ticketId) {
-            var quantity = document.getElementById('ticketAmount').value ? document.getElementById('ticketAmount').value : 1;
+            var quantity = document.getElementById("ticketAmount" + ticketId).value ? document.getElementById("ticketAmount" + ticketId).value : 1;
             fetch('/api/cart/addTicketToCart', {
                     method: 'POST',
                     headers: {
@@ -291,7 +291,9 @@
                         quantity: quantity
                     })
                 })
+                .then(() => <?php echo (isset($_SESSION['logedin'])) ? 'getCartAmount()' : 'getCartAmountAsVisitor()' ?>)
         }
+
 
         function getCartAmount() {
             fetch('/api/cart/getCartAmount')
