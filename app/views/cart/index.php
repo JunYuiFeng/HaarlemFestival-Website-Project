@@ -17,8 +17,8 @@
     <div class="h-100 checkoutOrderSummarySection p-5">
         <h1>Order Summary</h1>
         <hr>
-        <?php if (!empty($data)) { ?>
-            <?php foreach ($data as $item) { ?>
+        <?php if (!empty($reservationData)) { ?>
+            <?php foreach ($reservationData as $item) { ?>
                 <div class="card mb-2">
                     <div class="card-body">
                         <div class="row d-flex align-items-center">

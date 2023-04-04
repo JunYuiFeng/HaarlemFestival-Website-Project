@@ -30,8 +30,9 @@ class DanceService
     {
         return $this->repository->getById($id);
     }
-    public function addDanceTocard($danceId,$userId,$ticketAmount)
+
+    function getFromCartByUserId($id)
     {
-        return $this->repository->addDanceTocard($danceId,$userId,$ticketAmount);
+        return $this->repository->getFromCartByUserId($id);
     }
 }

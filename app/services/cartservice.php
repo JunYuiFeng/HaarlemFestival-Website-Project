@@ -54,4 +54,9 @@ class CartService
     {
         $this->repository->changeVisitorCartToRegisterUserCart($visitorCartId, $userId);
     }
+
+    function getTicketQuantity($cartId, $ticketId, $type)
+    {
+        return $this->repository->getTicketQuantity($cartId, $ticketId, $type);
+    }
 }

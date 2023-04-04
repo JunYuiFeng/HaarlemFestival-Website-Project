@@ -57,24 +57,7 @@ class DanceRepository extends Repository
             echo $e;
         }
     }
-    function addDanceTocard($danceId,$userId,$ticketAmount){
-        try {
-            $stmt = $this->connection->prepare("INSERT INTO CartItems (cartId, itemId, type, quantity) 
-            VALUES ('7149e134-9835-4f40-a4a8-194db4ab0982', :danceId, 'ticket', :ticketAmount);");
-            $stmt->bindParam(':danceId', $danceId);
-            // $stmt->bindParam(':userId', $userId);
-            $stmt->bindParam(':ticketAmount', $ticketAmount);
-            $stmt->execute();
 
-            $stmt->setFetchMode(PDO::FETCH_CLASS, "Ticket");
-            $dances = $stmt->fetchAll();
-
-            return $dances;
-
-        } catch (PDOException $e)
-        {
-        }
-    }
     function getAllByDate($date){
         try {
             $stmt = $this->connection->prepare("SELECT * FROM `Tickets` WHERE date = :date ORDER BY `Dance`.`id` ASC");
@@ -139,6 +122,30 @@ class DanceRepository extends Repository
 
         } catch (PDOException $e) 
         {
+            echo $e;
+        }
+    }
+
+    function getFromCartByUserId($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT *
+            FROM Tickets
+            WHERE id IN (
+                SELECT itemId
+                FROM CartItems
+                WHERE cartId = (
+                    SELECT id
+                    FROM Carts
+                    WHERE userId = :id))");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, "Ticket");
+            $tickets = $stmt->fetchAll();
+
+            return $tickets;
+        } catch (PDOException $e) {
             echo $e;
         }
     }

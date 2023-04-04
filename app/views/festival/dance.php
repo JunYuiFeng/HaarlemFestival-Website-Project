@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
 
@@ -21,11 +20,11 @@
     <div>
         <?php $count = 1;
         foreach ($artists as $artist) {
-            ?>
+        ?>
             <h1 class="danceHomeNameArtist" id="danceHomeNameArtist<?= $count ?>">
                 <?= $artist->getName() ?>
             </h1>
-            <?php
+        <?php
             $count++;
         } ?>
 
@@ -53,7 +52,7 @@
             if ($artist->getName() != "Martin Garrix" && $artist->getName() != "Afrojack") {
                 continue;
             }
-            ?>
+        ?>
             <div class="col-5 align-self-center" id="danceCard1">
                 <div class="danceCardType1">
                     <h3 class="danceHomeNameArtistCard" style="">
@@ -86,13 +85,12 @@
                                     0
                                 </p>
                             </div>
-                            <input type="button" onclick="location.href='dancedetailedpage1'" class="danceViewMore"
-                                value=" view more">
+                            <input type="button" onclick="location.href='dancedetailedpage1'" class="danceViewMore" value=" view more">
                         </div>
                     </div>
                 </div>
             </div>
-            <?php
+        <?php
             $count++;
         }
         $count = 3;
@@ -120,7 +118,7 @@
                         <?= $artist->getThirdSong() ?>
                     </p>
 
-                    <input type="button" onclick="location.href='dancedetailedpage1'"  value=" view more">
+                    <input type="button" onclick="location.href='dancedetailedpage1'" value=" view more">
                 </div>
 
             </div>
@@ -152,7 +150,7 @@
         <div class="container">
             <div class="danceTableContent">
                 <div id="danceTableContentDay1">
-                    <div class="col-10" style=" ">
+                    <div class="col-10">
                         <?php foreach ($days as $day) { ?>
                             <h5>
                                 <?= $day->getDate() ?>
@@ -168,47 +166,44 @@
                                 </tr>
                                 <?php
                                 foreach ($tickets as $ticket) {
-                                    ?>
+                                ?>
                                     <?php
                                     if ($ticket->getDate() == $day->getDate()) { ?>
-                                        <form method="POST" name="table<?= $day->getDate() ?>">
-                                            <tr>
-                                                <td>
-                                                    <?= $ticket->getDay() ?>
-                                                    <input type="hidden" value=<?= $ticket->getId() ?> id='danceId' name='danceId'>
-                                                </td>
-                                                <td>
-                                                    <?= $ticket->getTime() ?>
-                                                </td>
-                                                <td>
-                                                    <?= $ticket->getVenue() ?>
-                                                </td>
-                                                <td>
-                                                    <?= $ticket->getArtist() ?>
-                                                </td>
-                                                <td>
-                                                    <?= $ticket->getAvaliableTickets() ?>
-                                                </td>
-                                                <td>&#8364;
-                                                    <?= $ticket->getPrice() ?>
-                                                </td>
-                                                <td>
-                                                    <?php if ($ticket->getAvaliableTickets() != 0) { ?>
-                                                        <label>
-                                                            amount of ticket
-                                                        </label>
-                                                        <input type="number" name="ticketAmount">
-                                                        <button name="action" value="add" id="buttonAddToCard<?= $ticket->getId() ?>"
-                                                            type="submit">Add to cart</button>
-                                                    <?php } else {
-                                                        ?>
-                                                        <p>
-                                                            Sold out
-                                                        </p>
-                                                    <? } ?>
-                                                </td>
-                                            </tr>
-                                        </form>
+                                        <tr>
+                                            <td>
+                                                <?= $ticket->getDay() ?>
+                                                <input type="hidden" value=<?= $ticket->getId() ?> id='danceId' name='danceId'>
+                                            </td>
+                                            <td>
+                                                <?= $ticket->getTime() ?>
+                                            </td>
+                                            <td>
+                                                <?= $ticket->getVenue() ?>
+                                            </td>
+                                            <td>
+                                                <?= $ticket->getArtist() ?>
+                                            </td>
+                                            <td>
+                                                <?= $ticket->getAvaliableTickets() ?>
+                                            </td>
+                                            <td>&#8364;
+                                                <?= $ticket->getPrice() ?>
+                                            </td>
+                                            <td>
+                                                <?php if ($ticket->getAvaliableTickets() != 0) { ?>
+                                                    <label>
+                                                        amount of ticket
+                                                    </label>
+                                                    <input type="number" id="ticketAmount">
+                                                    <button onclick="addTicketToCart(<?= $ticket->getId() ?>)">Add to cart</button>
+                                                <?php } else {
+                                                ?>
+                                                    <p>
+                                                        Sold out
+                                                    </p>
+                                                <? } ?>
+                                            </td>
+                                        </tr>
                                     <?php } ?>
                                 <?php } ?>
                             </table>
@@ -225,10 +220,8 @@
 
                                 <button type="button" class="danceTableContentButton">Buy all-access pass for 27th of
                                     July &#8364; 125,00
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-cart" viewBox="0 0 16 16">
-                                        <path
-                                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                                     </svg>
                                 </button>
                             </div>
@@ -247,7 +240,7 @@
                 <?php
                 $count = 1;
                 foreach ($venues as $venue) {
-                    ?>
+                ?>
                     <div class="col-2">
                         <?php if ($count % 2 == 0) {
                             $danceVanueType = "danceVanueType2";
@@ -269,7 +262,7 @@
                             </div>
                         </div>
                     </div>
-                    <?php
+                <?php
                     $count++;
                 } ?>
             </div>
@@ -282,6 +275,35 @@
     <?php
     include __DIR__ . '/../footer.php';
     ?>
+
+    <script>
+        getCartAmount() 
+        
+        function addTicketToCart(ticketId) {
+            var quantity = document.getElementById('ticketAmount').value ? document.getElementById('ticketAmount').value : 1;
+            fetch('/api/cart/addTicketToCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ticketId: ticketId,
+                        quantity: quantity
+                    })
+                })
+        }
+
+        function getCartAmount() {
+            fetch('/api/cart/getCartAmount')
+                .then(response => response.json())
+                .then(data => {
+                    cartAmount.innerHTML = data;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+    </script>
 
 </body>
 

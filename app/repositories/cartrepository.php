@@ -9,9 +9,22 @@ class CartRepository extends Repository
     function insertToCartItems($cartId, $itemId, $type, $quantity)
     {
         try {
-            $stmt = $this->connection->prepare("INSERT INTO `CartItems`(`cartId`, `itemId`, `type`, `quantity`)
-             VALUES (:cartId, :itemId, :type, :quantity)");
-
+            // Check if item already exists in cart
+            $stmt = $this->connection->prepare("SELECT * FROM `CartItems` WHERE `cartId` = :cartId AND `itemId` = :itemId AND `type` = :type");
+            $stmt->bindParam(':cartId', $cartId);
+            $stmt->bindParam(':itemId', $itemId);
+            $stmt->bindParam(':type', $type);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($result) {
+                // Update quantity of existing row
+                $stmt = $this->connection->prepare("UPDATE `CartItems` SET `quantity` = `quantity` + :quantity WHERE `cartId` = :cartId AND `itemId` = :itemId AND `type` = :type");
+            } else {
+                // Insert new row
+                $stmt = $this->connection->prepare("INSERT INTO `CartItems`(`cartId`, `itemId`, `type`, `quantity`) VALUES (:cartId, :itemId, :type, :quantity)");
+            }
+    
             $stmt->bindParam(':cartId', $cartId);
             $stmt->bindParam(':itemId', $itemId);
             $stmt->bindParam(':type', $type);
@@ -21,6 +34,7 @@ class CartRepository extends Repository
             echo $e;
         }
     }
+    
 
     function insertToCartItemsAsVisitor($id, $cartId, $itemId, $type, $quantity)
     {
@@ -97,19 +111,6 @@ class CartRepository extends Repository
         }
     }
 
-    // function insert($userId)
-    // {
-    //     try {
-    //         $uuid = Uuid::uuid4()->toString();
-    //         $stmt = $this->connection->prepare("INSERT INTO `Carts`(`Id`, `userId`) VALUES (:id, :userId)");
-    //         $stmt->bindParam(':id', $uuid);
-    //         $stmt->bindParam(':userId', $userId);
-    //         $stmt->execute();
-    //     } catch (PDOException $e) {
-    //         echo $e;
-    //     }
-    // }
-
     function createRegisterUserCart($userId)
     {
         try {
@@ -143,6 +144,21 @@ class CartRepository extends Repository
             $stmt->bindParam(':userId', $userId);
             $stmt->bindParam(':visitorCartId', $visitorCartId);
             $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function getTicketQuantity($cartId, $ticketId, $type)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT quantity FROM `CartItems` WHERE cartId = :cartId AND itemId = :ticketId AND type = :type");
+            $stmt->bindParam(':cartId', $cartId);
+            $stmt->bindParam(':ticketId', $ticketId);
+            $stmt->bindParam(':type', $type);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
         } catch (PDOException $e) {
             echo $e;
         }

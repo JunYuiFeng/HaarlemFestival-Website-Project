@@ -50,6 +50,23 @@ class CartController extends Controller
         }
     }
 
+    function addTicketToCart ()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $body = file_get_contents("php://input");
+            $objects = json_decode($body);
+
+            $ticketId = htmlspecialchars($objects->ticketId);
+            $quantity = htmlspecialchars($objects->quantity);
+
+            $cartId = $this->cartService->getCartIdByUserId($_SESSION["logedin"]);
+            $cartItem = $this->cartService->insertToCartItems($cartId['id'], $ticketId, "ticket", $quantity);
+
+            var_dump($cartItem);
+            echo json_encode($cartItem);
+        }
+    }
+
     function getCartAmount()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {

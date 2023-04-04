@@ -103,13 +103,23 @@ class ReservationRepository extends Repository
     function deleteReservation($id)
     {
         try {
+            $this->connection->beginTransaction();
             $stmt = $this->connection->prepare("DELETE FROM `Reservations` WHERE `id` = :id");
             $stmt->bindParam(':id', $id);
             $stmt->execute();
+    
+            // Delete the CartItems with itemId equal to $id and type as 'reservation'
+            $stmt = $this->connection->prepare("DELETE FROM `CartItems` WHERE `itemId` = :itemId AND `type` = 'reservation'");
+            $stmt->bindParam(':itemId', $id);
+            $stmt->execute();
+            
+            $this->connection->commit();
         } catch (PDOException $e) {
+            $this->connection->rollBack();
             echo $e;
         }
     }
+    
 
     function getPrice($id)
     {
