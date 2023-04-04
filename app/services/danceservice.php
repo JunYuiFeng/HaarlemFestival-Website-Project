@@ -35,4 +35,19 @@ class DanceService
     {
         return $this->repository->getFromCartByUserId($id);
     }
+
+    function getTicketsFromCartByUserId($userId)
+    {
+        return $this->repository->getTicketsFromCartByUserId($userId);
+    }
+
+    function getTicketFromCartByCartId($cartId)
+    {
+        return $this->repository->getTicketFromCartByCartId($cartId);
+    }
+
+    function removeTicketFromCart($ticketId)
+    {
+        $this->repository->removeTicketFromCart($ticketId);
+    }
 }

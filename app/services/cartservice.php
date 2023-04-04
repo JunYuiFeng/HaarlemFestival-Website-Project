@@ -59,4 +59,14 @@ class CartService
     {
         return $this->repository->getTicketQuantity($cartId, $ticketId, $type);
     }
+
+    function decreaseTicketQuantity($ticketId)
+    {
+        $this->repository->decreaseTicketQuantity($ticketId);
+    }
+    
+    function increaseTicketQuantity($ticketId)
+    {
+        $this->repository->increaseTicketQuantity($ticketId);
+    }
 }

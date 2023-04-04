@@ -43,7 +43,11 @@ class CartController extends Controller
         // $invoice = $mollie->invoices->get("tr_F7puMvpQEz");
         // var_dump($invoice);
 
-        $VAT = 1.09; //VAT is 9%
+        $VAT = 0.09; //VAT is 9%
+        $reservationFeePerPerson = 10;
+        $VATAmount = 0;
+        $reservationFee = 0;
+        $subTotal = 0;
         $totalAmount = 0;
         $reservations = array();
         $tickets = array();
@@ -53,31 +57,29 @@ class CartController extends Controller
         if (isset($_SESSION["logedin"])) {
             $loggedInUser = $this->loggedInUser;
             $reservations = $this->reservationService->getFromCartByUserId($loggedInUser->getId());
-            $tickets = $this->danceService->getFromCartByUserId($loggedInUser->getId());
-            $cartId = $this->cartService->getCartIdByUserId($loggedInUser->getId());
+            $tickets = $this->danceService->getTicketsFromCartByUserId($loggedInUser->getId());
         } else {
             if (isset($_SESSION['cart'])) {
                 $reservations = $this->reservationService->getFromCartByCartId($_SESSION['cart']);
+                $tickets = $this->danceService->getTicketFromCartByCartId($_SESSION['cart']);
             }
         }
 
-        // if (!empty($tickets)) {
-        //     foreach ($tickets as $ticket) {
-        //         $item = array(
-        //             'id' => $ticket->getId(),
-        //             'quantity' => $this->cartService->getTicketQuantity($cartId, $ticket->getId(), 'ticket')['quantity'],
-        //             'price' => number_format($ticket->getPrice() * $this->cartService->getTicketQuantity($cartId, $ticket->getId(), 'ticket')['quantity'], 2),
-        //             'artist' => $ticket->getArtist(),
-        //             'venue' => $ticket->getVenue(),
-        //             'date' => $ticket->getDate()
-        //         );
-        //         // $totalAmount += $ticket->getAmount() * 10;
-        //         // $totalAmount += $this->danceService->getPrice($ticket->getId());
+        if (!empty($tickets)) {
+            foreach ($tickets as $ticket) {
+                $item = array(
+                    'id' => $ticket->getId(),
+                    'quantity' => $ticket->getQuantity(),
+                    'price' => number_format($ticket->getPrice() * $ticket->getQuantity(), 2),
+                    'artist' => $ticket->getArtist(),
+                    'venue' => $ticket->getVenue(),
+                    'date' => $ticket->getDate()
+                );
+                $subTotal += ($ticket->getPrice() * $ticket->getQuantity());
 
-        //         var_dump($item);
-        //         $ticketData[] = $item;
-        //     }
-        // }
+                $ticketData[] = $item;
+            }
+        }
         
         if (!empty($reservations)) {
             foreach ($reservations as $reservation) {
@@ -91,25 +93,53 @@ class CartController extends Controller
                     'session' => $this->sessionService->getById($reservation->getSessionId())->getName(),
                     'date' => $reservation->getDate()
                 );
-                $totalAmount += $reservation->getAmountAbove12() * 10;
-                $totalAmount += $reservation->getAmountUnderOr12() * 10;
-                $totalAmount += $this->reservationService->getPrice($reservation->getId());
+                $reservationFee += ($reservation->getAmountAbove12() + $reservation->getAmountUnderOr12()) * $reservationFeePerPerson;
+                $subTotal += $this->reservationService->getPrice($reservation->getId());
 
                 $reservationData[] = $item;
             }
         }
-        //var_dump($items);
-        $totalAmount = $totalAmount * $VAT;
+
+        $totalAmount = $subTotal + $reservationFee;
+        $VATAmount = $totalAmount * $VAT;
+        $totalAmount += $VATAmount;
         $_SESSION['totalAmount'] = $totalAmount;
-        //var_dump($totalAmount);
+
         require __DIR__ . '/../views/cart/index.php';
     }
 
-    function removeItem()
+    function removeReservation()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $id = htmlspecialchars($_GET['id']);
             $this->reservationService->deleteReservation($id);
+        }
+        header("Location: /cart/index");
+    }
+
+    function removeTicket()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $id = htmlspecialchars($_GET['id']);
+            $this->danceService->removeTicketFromCart($id);
+        }
+        header("Location: /cart/index");
+    }
+
+    function decreaseTicketQuantity()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $ticketId = htmlspecialchars($_GET['ticketId']);
+            $this->cartService->decreaseTicketQuantity($ticketId);
+        }
+        header("Location: /cart/index");
+    }
+
+    function increaseTicketQuantity()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $ticketId = htmlspecialchars($_GET['ticketId']);
+            $this->cartService->increaseTicketQuantity($ticketId);
         }
         header("Location: /cart/index");
     }
@@ -129,8 +159,8 @@ class CartController extends Controller
                         "value" => number_format($_SESSION['totalAmount'], 2, '.', '')
                     ],
                     "description" => "Test payment",
-                    "redirectUrl" => "http://localhost/cart",
-                    "webhookUrl" => "https://example.com/webhook", //webhookUrl: "https://......./api/webhook"
+                    "redirectUrl" => "https://example.com/cart",
+                    "webhookUrl" => "https://example.com/api/webhook", //webhookUrl: "https://......./api/webhook"
                     "metadata" => [
                         "order_id" => $order->getId(),
                     ],
@@ -146,7 +176,5 @@ class CartController extends Controller
         } else {
             header("Location: /myaccount/register");
         }
-
-        //echo "Payment created: " . $payment->id;
     }
 }
