@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../../services/orderservice.php';
+require_once __DIR__ . '/../../services/cartservice.php';
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/controller.php';
 
@@ -7,11 +8,13 @@ require_once __DIR__ . '/controller.php';
 class WebHookController extends Controller
 {
     private $orderService;  
+    private $cartService;
 
     function __construct()
     {
         parent::__construct();
         $this->orderService = new OrderService();
+        $this->cartService = new CartService();
     }
 
     function index()
@@ -32,6 +35,7 @@ class WebHookController extends Controller
             $this->orderService->updateOrderStatus($orderId, $payment->status);
         
             if ($payment->isPaid() && ! $payment->hasRefunds() && ! $payment->hasChargebacks()) {
+                $this->cartService->deleteCartItemsByUserId($payment->metadata->user_id);
                 /*
                  * The payment is paid and isn't refunded or charged back.
                  * At this point you'd probably want to start the process of delivering the product to the customer.

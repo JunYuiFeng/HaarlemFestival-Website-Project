@@ -69,4 +69,9 @@ class CartService
     {
         $this->repository->increaseTicketQuantity($ticketId);
     }
+
+    function deleteCartItemsByUserId($userId)
+    {
+        $this->repository->deleteCartItemsByUserId($userId);
+    }
 }

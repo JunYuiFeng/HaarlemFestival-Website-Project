@@ -28,20 +28,18 @@ class DanceRepository extends Repository
     function getTicketsFromCartByUserId($userId)
     {
         try {
-            $stmt = $this->connection->prepare("SELECT t.id as id, ci.quantity, t.price, 
-            (SELECT GROUP_CONCAT(a.name SEPARATOR ', ') 
-             FROM DanceArtists da JOIN Artists a ON da.artistId = a.id 
-             WHERE da.danceId = t.id) as artist,
-            (SELECT GROUP_CONCAT(v.name SEPARATOR ', ') 
-             FROM Tickets t2 JOIN Venues v ON t2.venueId = v.id 
-             WHERE t2.id = t.id) as venue,
-            t.date 
-          FROM Carts c 
-          JOIN CartItems ci ON c.Id = ci.cartId 
-          JOIN Tickets t ON ci.itemId = t.id 
-          WHERE c.userId = :userId
-          GROUP BY t.id;
-          ");
+            $stmt = $this->connection->prepare("SELECT t.id, ci.quantity, t.price, 
+            GROUP_CONCAT(a.name SEPARATOR ', ') AS artist,
+            GROUP_CONCAT(v.name SEPARATOR ', ') AS venue,
+            t.date, t.session 
+            FROM Carts c 
+            JOIN CartItems ci ON c.Id = ci.cartId 
+            JOIN Tickets t ON ci.itemId = t.id 
+            JOIN DanceArtists da ON t.id = da.danceId 
+            JOIN Artists a ON da.artistId = a.id 
+            JOIN Venues v ON t.venueId = v.id 
+            WHERE c.userId = :userId
+            GROUP BY t.id, t.session;");
             $stmt->bindParam(':userId', $userId);
             $stmt->execute();
 
@@ -57,20 +55,18 @@ class DanceRepository extends Repository
     function getTicketFromCartByCartId($cartId)
     {
         try {
-            $stmt = $this->connection->prepare("SELECT t.id as id, ci.quantity, t.price, 
-            (SELECT GROUP_CONCAT(a.name SEPARATOR ', ') 
-             FROM DanceArtists da JOIN Artists a ON da.artistId = a.id 
-             WHERE da.danceId = t.id) as artist,
-            (SELECT GROUP_CONCAT(v.name SEPARATOR ', ') 
-             FROM Tickets t2 JOIN Venues v ON t2.venueId = v.id 
-             WHERE t2.id = t.id) as venue,
+            $stmt = $this->connection->prepare("SELECT t.id as id, ci.quantity, t.price, t.session,
+            GROUP_CONCAT(DISTINCT a.name SEPARATOR ', ') as artist,
+            GROUP_CONCAT(DISTINCT v.name SEPARATOR ', ') as venue,
             t.date 
           FROM Carts c 
           JOIN CartItems ci ON c.Id = ci.cartId 
           JOIN Tickets t ON ci.itemId = t.id 
+          JOIN DanceArtists da ON t.id = da.danceId 
+          JOIN Artists a ON da.artistId = a.id 
+          JOIN Venues v ON t.venueId = v.id 
           WHERE c.Id = :cartId
-          GROUP BY t.id;                           
-          ");
+          GROUP BY t.id, t.session;");
             $stmt->bindParam(':cartId', $cartId);
             $stmt->execute();
 

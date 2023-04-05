@@ -159,10 +159,11 @@ class CartController extends Controller
                         "value" => number_format($_SESSION['totalAmount'], 2, '.', '')
                     ],
                     "description" => "Test payment",
-                    "redirectUrl" => "https://example.com/cart",
-                    "webhookUrl" => "https://example.com/api/webhook", //webhookUrl: "https://......./api/webhook"
+                    "redirectUrl" => "https://4474-217-105-28-29.eu.ngrok.io/cart",
+                    "webhookUrl" => "https://4474-217-105-28-29.eu.ngrok.io/api/webhook", //webhookUrl: "https://......./api/webhook"
                     "metadata" => [
                         "order_id" => $order->getId(),
+                        "user_id" => $order->getUserId(),
                     ],
                 ]);
 

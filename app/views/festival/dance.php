@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dance</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
@@ -55,7 +55,7 @@
         ?>
             <div class="col-5 align-self-center" id="danceCard1">
                 <div class="danceCardType1">
-                    <h3 class="danceHomeNameArtistCard" style="">
+                    <h3 class="danceHomeNameArtistCard">
                         <?= $artist->getName() ?>
                     </h3>
                     <div class="row">
@@ -127,8 +127,7 @@
         <div class="row justify-content-center">
 
             <div class="d-flex justify-content-around">
-                <button type="button" id="danceAllAccessPass"> Buy ticket for all-access pass for Friday, Saturday,
-                    Sunday:
+                <button type="button" id="danceAllAccessPass"> Buy ticket for all-access pass for entire festival:
                     €250,00</button>
             </div>
             <div class="col-4 d-flex justify-content-around">

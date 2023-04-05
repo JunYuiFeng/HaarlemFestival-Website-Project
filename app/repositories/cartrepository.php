@@ -204,5 +204,16 @@ class CartRepository extends Repository
             return false;
         }
     }
+
+    function deleteCartItemsByUserId($userId)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM `CartItems` WHERE cartId = (SELECT id FROM `Carts` WHERE userId = :userId)");
+            $stmt->bindParam(':userId', $userId);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
     
 }
