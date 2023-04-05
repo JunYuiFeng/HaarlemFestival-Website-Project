@@ -9,6 +9,11 @@
         private $indexPicture;
         private $firstDetailedPicture;
         private $secondDetailedPicture;
+        private $firstSongSourceCode;
+        private $secondSongSourceCode;
+        private $thirdSongSourceCode;
+        private $detailedPicture;
+        private $career;
 
         public function getId(){
             return $this->id;
@@ -34,6 +39,25 @@
         public function getFirstDetailedPicture(){
             return $this->firstDetailedPicture;
         }
+        public function getSecondDetailedPicture(){
+            return $this->secondDetailedPicture;
+        }
+        public function getFirstSongSource(){
+            return $this->firstSongSourceCode;
+        }
+        public function getSecondSongSource(){
+            return $this->secondSongSourceCode;
+        }
+        public function getThirdSongSource(){
+            return $this->thirdSongSourceCode;  
+        }
+        public function getDetailedPicture(){
+            return $this->detailedPicture;
+        }
+        public function getCareer(){
+            return $this->career;
+        }
+
 
     }
 ?>

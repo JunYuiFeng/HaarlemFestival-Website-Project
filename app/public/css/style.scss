@@ -8,12 +8,10 @@ body {
 }
 
 nav {
-  background: linear-gradient(
-    90.05deg,
-    #321325 0.73%,
-    #7f4066 99.97%,
-    #7f4066 99.97%
-  );
+  background: linear-gradient(90.05deg,
+      #321325 0.73%,
+      #7f4066 99.97%,
+      #7f4066 99.97%);
 
   .logo {
     width: 75%;
@@ -22,6 +20,7 @@ nav {
   .nav-item {
     font-family: "Inter";
     cursor: pointer;
+
     .nav-link {
       font-size: 22px;
       margin-left: 20px;
@@ -29,19 +28,23 @@ nav {
     }
   }
 }
-.cart-opened {
-  display: none;
-  position: absolute;
-  top: 80%;
-  right: 6%;
-  height: 400px;
-  z-index: 10;
-  background: linear-gradient(180deg, #9a031e 0%, #330009 100%);
-  border-radius: 20px;
-  color: white;
-  padding: 10px 20px;
-  img {
-    width: 35px;
+
+.ff-alata {
+  font-family: 'Alata';
+}
+
+.admin-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90.05deg,
+      #321325 0.73%,
+      #7f4066 99.97%,
+      #7f4066 99.97%);
+
+  .logo {
+    width: 10%;
     cursor: pointer;
     position: absolute;
     right: 10px;
@@ -109,6 +112,7 @@ footer {
   #envelopeImg {
     size: 10px;
   }
+
   .footerImg {
     width: 30px;
   }
@@ -118,6 +122,7 @@ footer {
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
+
   &:focus {
     box-shadow: none;
   }
@@ -129,6 +134,7 @@ footer {
     font-size: 14px;
     line-height: normal;
     padding: 5px 20px;
+
     &:hover {
       opacity: 0.8;
       background: linear-gradient(92.89deg, #93051f 0%, #37020b 100%);
@@ -142,6 +148,7 @@ footer {
     font-size: 14px;
     line-height: normal;
     padding: 5px 20px;
+
     &:hover {
       opacity: 0.9;
       background: linear-gradient(92.89deg, #ffd000 0%, #ffd000 100%);
@@ -499,6 +506,7 @@ footer {
         font-size: 18pt;
         font-weight: 600;
       }
+
       .michelinLogo {
         width: 80%;
       }
@@ -594,12 +602,15 @@ footer {
 .checkoutOrderSummarySection {
   background: #fcdc4d;
   height: 100%;
+
   h1 {
     font-size: 20pt;
   }
+
   h2 {
     font-size: 14pt;
   }
+
   p {
     line-height: normal;
   }
@@ -956,6 +967,7 @@ footer {
 }
 
 #danceTableContentDay1 {
+
   table,
   th,
   td {
@@ -982,12 +994,10 @@ footer {
   //background-color: red;
   padding-bottom: 20px;
   margin-top: 80px;
-  background: conic-gradient(
-    from 75.58deg at -16.05% 100%,
-    #000000 0deg,
-    #6d0000 71.01deg,
-    #000000 360deg
-  );
+  background: conic-gradient(from 75.58deg at -16.05% 100%,
+      #000000 0deg,
+      #6d0000 71.01deg,
+      #000000 360deg);
 }
 
 .danceVanue {
@@ -1018,6 +1028,23 @@ footer {
   width: 500px;
 }
 
+.artist-name h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.detailedArtistName {
+  align-self: center;
+  position: absolute;
+  width: 420px;
+  height: 60px;
+  left: 748px;
+  top: 500px;
+
+  filter: drop-shadow(0px 8px 18px #FFB800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #FFB800);
+}
+
 #danceDetailedPageBody {
   background-color: #000000;
   color: white;
@@ -1032,6 +1059,34 @@ footer {
     padding-top: 3%;
   }
 
+
+  #detailedArtistName {
+    align-self: center;
+    position: absolute;
+    width: 420px;
+    height: 60px;
+    left: 748px;
+    top: 500px;
+    size : 100px;
+
+    filter: drop-shadow(0px 8px 18px #FFB800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #FFB800);
+  }
+  
+  .container {
+    display: flex; /* display divs side-by-side */
+    justify-content: space-between; /* evenly distribute space between divs */
+    align-items: center; /* vertically center divs */
+    background-color: #f5f5f5; /* set background color */
+    padding: 20px; /* add some padding */
+  }
+  
+  .box {
+    width: 200px; /* set width */
+    height: 200px; /* set height */
+    background-color: #fff; /* set background color */
+    border-radius: 10px; /* round corners */
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* add shadow effect */
+  }
   .col-2 {
     margin-bottom: 3%;
     margin-top: 3%;
@@ -1043,17 +1098,17 @@ footer {
     box-shadow: 6px 0px 30px -4px #ffb800;
     border-radius: 56px;
   }
+
   #careerHighlight {
     background: linear-gradient(245.73deg, #9a031e 17.74%, #000000 101.89%);
+    margin-bottom: 20%;
   }
 
   .dancePageTitle {
     color: white;
     margin-top: 50px;
     margin-bottom: 40px;
-    filter: drop-shadow(0px 8px 18px #ffb800)
-      drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-      drop-shadow(-2px 12px 34px #ffb800);
+    filter: drop-shadow(0px 8px 18px #ffb800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #ffb800);
 
     h1 {
       font-weight: 800;
@@ -1496,6 +1551,7 @@ footer {
     font-weight: 700;
   }
 }
+
 .user-box {
   position: relative;
 
@@ -1510,8 +1566,8 @@ footer {
     outline: none;
     background: transparent;
 
-    &:focus ~ label,
-    &:valid ~ label {
+    &:focus~label,
+    &:valid~label {
       top: -20px;
       left: 0;
       color: #9a031e;

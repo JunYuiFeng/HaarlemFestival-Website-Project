@@ -22,29 +22,28 @@ nav .nav-item .nav-link {
   color: white !important;
 }
 
-.cart-opened {
-  display: none;
-  position: absolute;
-  top: 80%;
-  right: 6%;
-  height: 400px;
-  z-index: 10;
-  background: linear-gradient(180deg, #9a031e 0%, #330009 100%);
-  border-radius: 20px;
-  color: white;
-  padding: 10px 20px;
+.ff-alata {
+  font-family: "Alata";
 }
-.cart-opened img {
-  width: 35px;
+
+.admin-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90.05deg, #321325 0.73%, #7f4066 99.97%, #7f4066 99.97%);
+}
+.admin-header .logo {
+  width: 10%;
   cursor: pointer;
   position: absolute;
   right: 10px;
 }
-.cart-opened .items-scroll {
+.admin-header .items-scroll {
   overflow-y: scroll;
   height: 215px;
 }
-.cart-opened .item {
+.admin-header .item {
   background: #e3e3e3;
   -webkit-backdrop-filter: blur(26px);
           backdrop-filter: blur(26px);
@@ -56,26 +55,26 @@ nav .nav-item .nav-link {
   font-family: "Inter";
   color: black;
 }
-.cart-opened .item h1 {
+.admin-header .item h1 {
   font-size: 15px;
   font-weight: 700;
   margin-bottom: 0;
 }
-.cart-opened .item p {
+.admin-header .item p {
   font-size: 12px;
   margin-bottom: 0;
 }
-.cart-opened .divider-gradient {
+.admin-header .divider-gradient {
   height: 1px;
   width: 100%;
   margin: 10px 0;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 46.88%, rgba(255, 255, 255, 0) 100%);
 }
-.cart-opened p {
+.admin-header p {
   font-size: 10px;
   margin-bottom: 0;
 }
-.cart-opened h2 {
+.admin-header h2 {
   font-size: 16px;
 }
 
@@ -915,6 +914,22 @@ footer .footerImg {
   width: 500px;
 }
 
+.artist-name h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.detailedArtistName {
+  align-self: center;
+  position: absolute;
+  width: 420px;
+  height: 60px;
+  left: 748px;
+  top: 500px;
+  filter: drop-shadow(0px 8px 18px #FFB800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #FFB800);
+}
+
 #danceDetailedPageBody {
   background-color: #000000;
   color: white;
@@ -928,6 +943,30 @@ footer .footerImg {
   margin-bottom: 3%;
   padding-top: 3%;
 }
+#danceDetailedPageBody #detailedArtistName {
+  align-self: center;
+  position: absolute;
+  width: 420px;
+  height: 60px;
+  left: 748px;
+  top: 500px;
+  size: 100px;
+  filter: drop-shadow(0px 8px 18px #FFB800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #FFB800);
+}
+#danceDetailedPageBody .container {
+  display: flex; /* display divs side-by-side */
+  justify-content: space-between; /* evenly distribute space between divs */
+  align-items: center; /* vertically center divs */
+  background-color: #f5f5f5; /* set background color */
+  padding: 20px; /* add some padding */
+}
+#danceDetailedPageBody .box {
+  width: 200px; /* set width */
+  height: 200px; /* set height */
+  background-color: #fff; /* set background color */
+  border-radius: 10px; /* round corners */
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* add shadow effect */
+}
 #danceDetailedPageBody .col-2 {
   margin-bottom: 3%;
   margin-top: 3%;
@@ -940,6 +979,7 @@ footer .footerImg {
 }
 #danceDetailedPageBody #careerHighlight {
   background: linear-gradient(245.73deg, #9a031e 17.74%, #000000 101.89%);
+  margin-bottom: 20%;
 }
 #danceDetailedPageBody .dancePageTitle {
   color: white;

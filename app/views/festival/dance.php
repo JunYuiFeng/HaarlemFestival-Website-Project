@@ -86,7 +86,7 @@
                                     0
                                 </p>
                             </div>
-                            <input type="button" onclick="location.href='dancedetailedpage1'" class="danceViewMore"
+                            <input type="button" onclick="location.href='dancedetailedpage?id=<?=$artist->getId() ?>'" class="danceViewMore"
                                 value=" view more">
                         </div>
                     </div>

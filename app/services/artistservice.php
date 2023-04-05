@@ -13,6 +13,10 @@ class ArtistService
     {
         return $this->repository->getAll();
     }
+    public function getArtistById($id)
+    {
+        return $this->repository->getArtistById($id);
+    }
 }
 
 ?>
