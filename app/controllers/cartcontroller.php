@@ -73,7 +73,8 @@ class CartController extends Controller
                     'price' => number_format($ticket->getPrice() * $ticket->getQuantity(), 2),
                     'artist' => $ticket->getArtist(),
                     'venue' => $ticket->getVenue(),
-                    'date' => $ticket->getDate()
+                    'date' => $ticket->getDate(),
+                    'session' => $ticket->getSession()
                 );
                 $subTotal += ($ticket->getPrice() * $ticket->getQuantity());
 

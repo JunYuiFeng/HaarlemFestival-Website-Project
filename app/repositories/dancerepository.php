@@ -29,17 +29,17 @@ class DanceRepository extends Repository
     {
         try {
             $stmt = $this->connection->prepare("SELECT t.id, ci.quantity, t.price, 
-            GROUP_CONCAT(a.name SEPARATOR ', ') AS artist,
-            GROUP_CONCAT(v.name SEPARATOR ', ') AS venue,
+            COALESCE(GROUP_CONCAT(DISTINCT a.name SEPARATOR ', '), '') AS artist, 
+            COALESCE(GROUP_CONCAT(DISTINCT v.name SEPARATOR ', '), '') AS venue, 
             t.date, t.session 
-            FROM Carts c 
-            JOIN CartItems ci ON c.Id = ci.cartId 
-            JOIN Tickets t ON ci.itemId = t.id 
-            JOIN DanceArtists da ON t.id = da.danceId 
-            JOIN Artists a ON da.artistId = a.id 
-            JOIN Venues v ON t.venueId = v.id 
-            WHERE c.userId = :userId
-            GROUP BY t.id, t.session;");
+     FROM Carts c 
+     JOIN CartItems ci ON c.Id = ci.cartId 
+     JOIN Tickets t ON ci.itemId = t.id 
+     LEFT JOIN DanceArtists da ON t.id = da.danceId 
+     LEFT JOIN Artists a ON da.artistId = a.id 
+     LEFT JOIN Venues v ON t.venueId = v.id 
+     WHERE c.userId = :userId 
+     GROUP BY t.id, t.session;");
             $stmt->bindParam(':userId', $userId);
             $stmt->execute();
 
@@ -56,15 +56,15 @@ class DanceRepository extends Repository
     {
         try {
             $stmt = $this->connection->prepare("SELECT t.id as id, ci.quantity, t.price, t.session,
-            GROUP_CONCAT(DISTINCT a.name SEPARATOR ', ') as artist,
-            GROUP_CONCAT(DISTINCT v.name SEPARATOR ', ') as venue,
+            COALESCE(GROUP_CONCAT(DISTINCT a.name SEPARATOR ', '), '') as artist,
+            COALESCE(GROUP_CONCAT(DISTINCT v.name SEPARATOR ', '), '') as venue,
             t.date 
           FROM Carts c 
           JOIN CartItems ci ON c.Id = ci.cartId 
           JOIN Tickets t ON ci.itemId = t.id 
-          JOIN DanceArtists da ON t.id = da.danceId 
-          JOIN Artists a ON da.artistId = a.id 
-          JOIN Venues v ON t.venueId = v.id 
+          LEFT JOIN DanceArtists da ON t.id = da.danceId 
+          LEFT JOIN Artists a ON da.artistId = a.id 
+          LEFT JOIN Venues v ON t.venueId = v.id 
           WHERE c.Id = :cartId
           GROUP BY t.id, t.session;");
             $stmt->bindParam(':cartId', $cartId);

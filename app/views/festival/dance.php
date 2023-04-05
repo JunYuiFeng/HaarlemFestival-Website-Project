@@ -127,19 +127,19 @@
         <div class="row justify-content-center">
 
             <div class="d-flex justify-content-around">
-                <button type="button" id="danceAllAccessPass"> Buy ticket for all-access pass for entire festival:
+                <button type="button" id="danceAllAccessPass" onclick="addAllAccessTicketToCart(65)"> Buy ticket for all-access pass for entire festival:
                     €250,00</button>
             </div>
             <div class="col-4 d-flex justify-content-around">
-                <button type="button" class="danceDailyAccessPass"> Buy all-access pass only for 1st day
+                <button type="button" class="danceDailyAccessPass" onclick="addAllAccessTicketToCart(66)"> Buy all-access pass only for 1st day
                     €125,00</button>
             </div>
             <div class="col-4 d-flex justify-content-around">
-                <button type="button" class="danceDailyAccessPass"> Buy all-access pass only for 2nd day
+                <button type="button" class="danceDailyAccessPass" onclick="addAllAccessTicketToCart(67)"> Buy all-access pass only for 2nd day
                     €150,00</button>
             </div>
             <div class="col-4 d-flex justify-content-around">
-                <button type="button" class="danceDailyAccessPass"> Buy all-access pass only for 3rd day
+                <button type="button" class="danceDailyAccessPass" onclick="addAllAccessTicketToCart(68)"> Buy all-access pass only for 3rd day
                     €150,00</button>
             </div>
         </div>
@@ -288,6 +288,20 @@
                     body: JSON.stringify({
                         ticketId: ticketId,
                         quantity: quantity
+                    })
+                })
+                .then(() => <?php echo (isset($_SESSION['logedin'])) ? 'getCartAmount()' : 'getCartAmountAsVisitor()' ?>)
+        }
+
+        function addAllAccessTicketToCart(ticketId) {
+            fetch('/api/cart/addTicketToCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ticketId: ticketId,
+                        quantity: 1
                     })
                 })
                 .then(() => <?php echo (isset($_SESSION['logedin'])) ? 'getCartAmount()' : 'getCartAmountAsVisitor()' ?>)

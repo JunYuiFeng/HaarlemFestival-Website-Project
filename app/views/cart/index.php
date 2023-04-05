@@ -60,11 +60,23 @@
                             <div class="card-body">
                                 <div class="row d-flex align-items-center">
                                     <div class="col-1">
-                                        <img src="/img/TicketIcon.png" alt="">
+                                    <?php if (!empty($ticket['artist']) && !empty($ticket['venue'])) { ?>
+                                        <img src="/img/TicketIcon.png" alt="TicketIcon">
+                                    <?php } else { ?>
+                                        <?php if ($ticket['session'] == 'All Access Pass') {?>
+                                            <img src="/img/AllAccessPassIcon.png" alt="AllAccessPassIcon">
+                                        <?php } else { ?>
+                                            <img src="/img/DayPassIcon.png" alt="">
+                                        <?php } ?>
+                                    <?php } ?>
                                     </div>
                                     <div class="col-3">
+                                    <?php if (!empty($ticket['artist']) && !empty($ticket['venue'])) { ?>
                                         <h2><b><?= $ticket['artist'] ?></b></h2>
                                         <p><b>Venue:</b> <?= $ticket['venue'] ?></p>
+                                    <?php } else { ?>
+                                        <h2><b><?= $ticket['session'] ?></b></h2>
+                                    <?php } ?>
                                     </div>
                                     <div class="col-2" style="width: 12%;">
                                         <p>
