@@ -43,4 +43,9 @@ class OrderService
     {
         $this->repository->insertIntoOrderItems($orderId, $itemId, $type, $quantity);
     }
+
+    function transferCartItemsToOrderItemsById($orderId, $userId)
+    {
+        $this->repository->transferCartItemsToOrderItemsById($orderId, $userId);
+    }
 }

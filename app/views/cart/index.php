@@ -60,31 +60,33 @@
                             <div class="card-body">
                                 <div class="row d-flex align-items-center">
                                     <div class="col-1">
-                                    <?php if (!empty($ticket['artist']) && !empty($ticket['venue'])) { ?>
-                                        <img src="/img/TicketIcon.png" alt="TicketIcon">
-                                    <?php } else { ?>
-                                        <?php if ($ticket['session'] == 'All Access Pass') {?>
-                                            <img src="/img/AllAccessPassIcon.png" alt="AllAccessPassIcon">
+                                        <?php if (!empty($ticket['artist']) && !empty($ticket['venue'])) { ?>
+                                            <img src="/img/TicketIcon.png" alt="TicketIcon">
                                         <?php } else { ?>
-                                            <img src="/img/DayPassIcon.png" alt="">
+                                            <?php if ($ticket['session'] == 'All Access Pass') { ?>
+                                                <img src="/img/AllAccessPassIcon.png" alt="AllAccessPassIcon">
+                                            <?php } else { ?>
+                                                <img src="/img/DayPassIcon.png" alt="">
+                                            <?php } ?>
                                         <?php } ?>
-                                    <?php } ?>
                                     </div>
                                     <div class="col-3">
-                                    <?php if (!empty($ticket['artist']) && !empty($ticket['venue'])) { ?>
-                                        <h2><b><?= $ticket['artist'] ?></b></h2>
-                                        <p><b>Venue:</b> <?= $ticket['venue'] ?></p>
-                                    <?php } else { ?>
-                                        <h2><b><?= $ticket['session'] ?></b></h2>
-                                    <?php } ?>
+                                        <?php if (!empty($ticket['artist']) && !empty($ticket['venue'])) { ?>
+                                            <h2><b><?= $ticket['artist'] ?></b></h2>
+                                            <p><b>Venue:</b> <?= $ticket['venue'] ?></p>
+                                        <?php } else { ?>
+                                            <h2><b><?= $ticket['session'] ?></b></h2>
+                                        <?php } ?>
                                     </div>
                                     <div class="col-2" style="width: 12%;">
+                                    <?php if ($ticket['session'] != 'All Access Pass') {?>
                                         <p>
                                             <?php
                                             $date = new DateTime($ticket['date']);
                                             echo $date->format('F jS');
                                             ?>
                                         </p>
+                                        <?php } ?>
                                     </div>
                                     <div class="col-2 d-flex me-4">
                                         <a class="btn btn-dark w-30" href="decreaseTicketQuantity?ticketId=<?= $ticket['id']; ?>">-</a>
@@ -128,15 +130,18 @@
                 <h2>€<?= number_format($totalAmount, 2) ?></h2>
             </div>
 
-            <div class="d-flex justify-content-end mt-4">
-                <a class="btn btn-primary btn-lg" href="<?php
-                                                        if (!isset($_SESSION["logedin"])) {
-                                                            echo 'javascript:void(0);" onclick="if (confirm(\'You need to create an account first to pay\')) {location.href=\'payment\';}"';
-                                                        } else {
-                                                            echo '/cart/payment';
-                                                        }
-                                                        ?>">Pay €<?= number_format($totalAmount, 2) ?></a>
-            </div>
+            <?php if (!empty($ticketData) || !empty($reservationData)) { ?>
+                <div class="d-flex justify-content-end mt-4">
+                    <a class="btn btn-primary btn-lg" href="<?php
+                                                            if (!isset($_SESSION["logedin"])) {
+                                                                echo 'javascript:void(0);" onclick="if (confirm(\'You need to create an account first to pay\')) {location.href=\'payment\';}"';
+                                                            } else {
+                                                                echo '/cart/payment';
+                                                            }
+                                                            ?>">Pay €<?= number_format($totalAmount, 2) ?></a>
+                </div>
+            <?php } ?>
+
         </div>
     </div>
     <?php

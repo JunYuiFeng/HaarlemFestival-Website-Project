@@ -150,9 +150,10 @@ class CartController extends Controller
         if (isset($_SESSION["logedin"])) {
             try {
                 $mollie = new \Mollie\Api\MollieApiClient();
-                $mollie->setApiKey('test_Ds3fz4U9vNKxzCfVvVHJT2sgW5ECD8');
+                $mollie->setApiKey('test_vWU6vr3ypCg9NFQeuE5TbUBjMyv4FP');
 
                 $order = $this->orderService->insertIntoOrder($this->loggedInUser->getId(), date("Y-m-d"), "pending");
+                $this->orderService->transferCartItemsToOrderItemsById($order->getId(), $this->loggedInUser->getId());
 
                 $payment = $mollie->payments->create([
                     "amount" => [
@@ -160,8 +161,8 @@ class CartController extends Controller
                         "value" => number_format($_SESSION['totalAmount'], 2, '.', '')
                     ],
                     "description" => "Test payment",
-                    "redirectUrl" => "https://4474-217-105-28-29.eu.ngrok.io/cart",
-                    "webhookUrl" => "https://4474-217-105-28-29.eu.ngrok.io/api/webhook", //webhookUrl: "https://......./api/webhook"
+                    "redirectUrl" => "https://7d68-217-105-28-25.eu.ngrok.io/cart", //"https://7d68-217-105-28-25.eu.ngrok.io/cart"
+                    "webhookUrl" => "https://7d68-217-105-28-25.eu.ngrok.io/api/webhook", //"https://7d68-217-105-28-25.eu.ngrok.io/api/webhook"
                     "metadata" => [
                         "order_id" => $order->getId(),
                         "user_id" => $order->getUserId(),

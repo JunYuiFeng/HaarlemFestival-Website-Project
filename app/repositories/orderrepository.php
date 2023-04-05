@@ -72,10 +72,10 @@ class OrderRepository extends Repository
             $stmt = $this->connection->prepare("SELECT * FROM `Orders` WHERE userId = :id ORDER BY id DESC LIMIT 1");
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-    
+
             $stmt->setFetchMode(PDO::FETCH_CLASS, "Order");
             $order = $stmt->fetch();
-    
+
             return $order;
         } catch (PDOException $e) {
             echo $e;
@@ -93,7 +93,7 @@ class OrderRepository extends Repository
             echo $e;
         }
     }
-    
+
 
     function insertIntoOrder($userId, $date, $status)
     {
@@ -104,7 +104,7 @@ class OrderRepository extends Repository
             $stmt->bindParam(':date', $date);
             $stmt->bindParam(':status', $status);
             $stmt->execute();
-    
+
             // Retrieve the newly inserted order and return it
             $orderId = $this->connection->lastInsertId();
             $stmt = $this->connection->prepare("SELECT * FROM `Orders` WHERE `id` = :id");
@@ -117,7 +117,7 @@ class OrderRepository extends Repository
             echo $e;
         }
     }
-    
+
 
     function insertIntoOrderItems($orderId, $itemId, $type, $quantity)
     {
@@ -134,4 +134,21 @@ class OrderRepository extends Repository
         }
     }
 
+    function transferCartItemsToOrderItemsById($orderId, $userId)
+    {
+        try {
+            $stmt = $this->connection->prepare("INSERT INTO `OrderItems` (`orderId`, `itemId`, `type`, `quantity`)
+            SELECT :orderId, `itemId`, `type`, `quantity`
+            FROM `CartItems`
+            WHERE `cartId` = (
+                SELECT `id`
+                FROM `Carts`
+                WHERE `userId` = :userId)");
+            $stmt->bindParam(':orderId', $orderId);
+            $stmt->bindParam(':userId', $userId);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
 }

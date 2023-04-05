@@ -22,7 +22,7 @@ class WebHookController extends Controller
 
         try {
             $mollie = new \Mollie\Api\MollieApiClient();
-            $mollie->setApiKey('test_Ds3fz4U9vNKxzCfVvVHJT2sgW5ECD8');
+            $mollie->setApiKey('test_vWU6vr3ypCg9NFQeuE5TbUBjMyv4FP');
             /*
              * Retrieve the payment's current state.
              */
