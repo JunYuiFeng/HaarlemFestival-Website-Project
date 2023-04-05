@@ -6,8 +6,12 @@ require_once __DIR__ . '/../services/danceservice.php';
 require_once __DIR__ . '/../services/sessionservice.php';
 require_once __DIR__ . '/../services/paymentservice.php';
 require_once __DIR__ . '/../services/orderservice.php';
+
 require_once __DIR__ . '/controller.php';
+
 require_once '../vendor/autoload.php';
+
+
 
 
 
@@ -21,6 +25,8 @@ class CartController extends Controller
     private $paymentService;
     private $orderService;
     protected $loggedInUser;
+
+
 
 
     public function __construct()
@@ -118,6 +124,7 @@ class CartController extends Controller
         $VATAmount = $totalAmount * $VAT;
         $totalAmount += $VATAmount;
         $_SESSION['totalAmount'] = $totalAmount;
+        $_SESSION['cartItems'] = array("reservations" => $reservationData, "tickets" => $ticketData);
 
         require __DIR__ . '/../views/cart/index.php';
     }
