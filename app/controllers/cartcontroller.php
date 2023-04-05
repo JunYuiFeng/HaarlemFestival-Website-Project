@@ -37,6 +37,7 @@ class CartController extends Controller
 
     public function index()
     {
+
         // $mollie = new \Mollie\Api\MollieApiClient();
         // $mollie->setApiKey('test_Ds3fz4U9vNKxzCfVvVHJT2sgW5ECD8');
 
@@ -54,17 +55,29 @@ class CartController extends Controller
         $reservationData = array();
         $ticketData = array();
 
-        if (isset($_SESSION["logedin"])) {
-            $loggedInUser = $this->loggedInUser;
-            $reservations = $this->reservationService->getFromCartByUserId($loggedInUser->getId());
-            $tickets = $this->danceService->getTicketsFromCartByUserId($loggedInUser->getId());
+        if (isset($_GET['share'])) {
+            $sharedCartId = $_GET['share'];
+            $reservations = $this->reservationService->getFromCartByCartId($sharedCartId);
+            $tickets = $this->danceService->getTicketFromCartByCartId($sharedCartId);
         } else {
-            if (isset($_SESSION['cart'])) {
-                $reservations = $this->reservationService->getFromCartByCartId($_SESSION['cart']);
-                $tickets = $this->danceService->getTicketFromCartByCartId($_SESSION['cart']);
+            if (isset($_SESSION["logedin"])) {
+                $loggedInUser = $this->loggedInUser;
+                $reservations = $this->reservationService->getFromCartByUserId($loggedInUser->getId());
+                $tickets = $this->danceService->getTicketsFromCartByUserId($loggedInUser->getId());
+                $cartId = $this->cartService->getCartIdByUserId($loggedInUser->getId())['id'];
+            } else {
+                if (isset($_SESSION['cart'])) {
+                    $reservations = $this->reservationService->getFromCartByCartId($_SESSION['cart']);
+                    $tickets = $this->danceService->getTicketFromCartByCartId($_SESSION['cart']);
+                    $cartId = $_SESSION['cart'];
+                }
             }
         }
 
+        if (isset($_GET['saveCart'])) {
+            $this->cartService->duplicateCartItemsByCartId($_GET['saveCart'], $cartId);
+            header("Location: /cart/index");
+        }
         if (!empty($tickets)) {
             foreach ($tickets as $ticket) {
                 $item = array(
@@ -81,7 +94,7 @@ class CartController extends Controller
                 $ticketData[] = $item;
             }
         }
-        
+
         if (!empty($reservations)) {
             foreach ($reservations as $reservation) {
                 $item = array(
@@ -172,7 +185,6 @@ class CartController extends Controller
                 $this->paymentService->insert($payment->id, $order->getId(), $payment->amount->value);
 
                 header("Location: " . $payment->getCheckoutUrl(), true, 303);
-
             } catch (\Mollie\Api\Exceptions\ApiException $e) {
                 echo "API call failed: " . htmlspecialchars($e->getMessage());
             }

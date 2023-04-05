@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/repository.php';
 require_once '../vendor/autoload.php';
+
 use Ramsey\Uuid\Uuid;
 
 
@@ -16,7 +17,7 @@ class CartRepository extends Repository
             $stmt->bindParam(':type', $type);
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            
+
             if ($result) {
                 // Update quantity of existing row
                 $stmt = $this->connection->prepare("UPDATE `CartItems` SET `quantity` = `quantity` + :quantity WHERE `cartId` = :cartId AND `itemId` = :itemId AND `type` = :type");
@@ -24,7 +25,7 @@ class CartRepository extends Repository
                 // Insert new row
                 $stmt = $this->connection->prepare("INSERT INTO `CartItems`(`cartId`, `itemId`, `type`, `quantity`) VALUES (:cartId, :itemId, :type, :quantity)");
             }
-    
+
             $stmt->bindParam(':cartId', $cartId);
             $stmt->bindParam(':itemId', $itemId);
             $stmt->bindParam(':type', $type);
@@ -34,7 +35,7 @@ class CartRepository extends Repository
             echo $e;
         }
     }
-    
+
 
     function insertToCartItemsAsVisitor($id, $cartId, $itemId, $type, $quantity)
     {
@@ -84,6 +85,8 @@ class CartRepository extends Repository
         }
     }
 
+
+
     function getQuantityByCartId($id)
     {
         try {
@@ -119,6 +122,21 @@ class CartRepository extends Repository
             $stmt->bindParam(':id', $uuid);
             $stmt->bindParam(':userId', $userId);
             $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function duplicateCartItemsByCartId($cartIdFrom, $cartIdTo)
+    {
+        try {
+            $stmt = $this->connection->prepare("INSERT INTO CartItems (cartId, itemId, type, quantity)
+            SELECT :cartIdTo, ItemId, type,quantity
+            FROM CartItems
+            WHERE cartId = :cartIdFrom");
+            $stmt->bindParam(':cartIdTo', $cartIdTo);
+            $stmt->bindParam(':cartIdFrom', $cartIdFrom);
+            return $stmt->execute();
         } catch (PDOException $e) {
             echo $e;
         }
@@ -168,22 +186,22 @@ class CartRepository extends Repository
     {
         try {
             $this->connection->beginTransaction();
-    
+
             $stmt = $this->connection->prepare("UPDATE CartItems 
                 SET quantity = quantity - 1 
                 WHERE itemId = :ticketId AND type = 'ticket'");
-    
+
             $stmt->bindParam(':ticketId', $ticketId);
             $stmt->execute();
-    
+
             $stmt = $this->connection->prepare("DELETE FROM CartItems 
                 WHERE itemId = :ticketId AND type = 'ticket' AND quantity <= 0");
-    
+
             $stmt->bindParam(':ticketId', $ticketId);
             $stmt->execute();
-    
+
             $this->connection->commit();
-    
+
             return true;
         } catch (PDOException $e) {
             $this->connection->rollBack(); //If any of the two SQL statements fails, this method will undo any changes made in the transaction, and the function returns false.
@@ -192,12 +210,13 @@ class CartRepository extends Repository
         }
     }
 
-    function increaseTicketQuantity($ticketId) {
+    function increaseTicketQuantity($ticketId)
+    {
         try {
             $stmt = $this->connection->prepare("UPDATE CartItems SET quantity = quantity + 1 WHERE itemId = :ticketId");
             $stmt->bindParam(':ticketId', $ticketId);
             $stmt->execute();
-            
+
             return true;
         } catch (PDOException $e) {
             echo $e;
@@ -215,5 +234,4 @@ class CartRepository extends Repository
             echo $e;
         }
     }
-    
 }

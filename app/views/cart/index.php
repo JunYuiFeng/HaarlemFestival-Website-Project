@@ -16,7 +16,20 @@
     ?>
     <div class="checkoutOrderSummarySection p-5">
         <div class="container" style="width: 80%">
-            <h1 class="mb-4">Order Summary</h1>
+            <div class="d-flex align-items-center gap-4 mb-4">
+                <h1>Order Summary</h1>
+                <?php if (isset($cartId)) { ?>
+                    <button class="btn btn-success" onclick="copyCartLink()">Share your cart <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-link" viewBox="0 0 16 16">
+                            <path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z" />
+                            <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6H9z" />
+                        </svg></button>
+                    <input type="text" hidden id="cartLink" value="http://127.0.0.1/cart/index?share=<?= $cartId ?>">
+                <?php } ?>
+                <?php if (isset($_GET['share'])) { ?>
+                    <button onclick="document.location.href='?saveCart=<?= $_GET['share'] ?>'" class="btn btn-danger">Save shared items to my cart</button>
+                <?php } ?>
+
+            </div>
             <hr>
 
             <div style="height: 400px; overflow: auto;">
@@ -79,13 +92,13 @@
                                         <?php } ?>
                                     </div>
                                     <div class="col-2" style="width: 12%;">
-                                    <?php if ($ticket['session'] != 'All Access Pass') {?>
-                                        <p>
-                                            <?php
-                                            $date = new DateTime($ticket['date']);
-                                            echo $date->format('F jS');
-                                            ?>
-                                        </p>
+                                        <?php if ($ticket['session'] != 'All Access Pass') { ?>
+                                            <p>
+                                                <?php
+                                                $date = new DateTime($ticket['date']);
+                                                echo $date->format('F jS');
+                                                ?>
+                                            </p>
                                         <?php } ?>
                                     </div>
                                     <div class="col-2 d-flex me-4">
@@ -158,6 +171,19 @@
                 event.target.value = newValue;
             });
         });
+
+        function copyCartLink() {
+            const link = document.getElementById("cartLink");
+            const textToCopy = link.value;
+
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    alert("Cart link was copied: " + textToCopy);
+                })
+                .catch((err) => {
+                    console.error("Failed to copy text: ", err);
+                });
+        }
     </script>
 </body>
 
