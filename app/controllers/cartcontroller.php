@@ -11,10 +11,6 @@ require_once __DIR__ . '/controller.php';
 
 require_once '../vendor/autoload.php';
 
-
-
-
-
 class CartController extends Controller
 {
     private $cartService;
@@ -163,6 +159,10 @@ class CartController extends Controller
             $this->cartService->increaseTicketQuantity($ticketId);
         }
         header("Location: /cart/index");
+    }
+
+    function createInvoice()
+    {
     }
 
     function payment()

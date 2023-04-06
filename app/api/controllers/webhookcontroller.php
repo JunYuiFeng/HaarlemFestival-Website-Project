@@ -45,7 +45,7 @@ class WebHookController extends Controller
             /*
              * Retrieve the payment's current state.
              */
-            $payment = $mollie->payments->get($_POST["id"]);
+            $payment = $mollie->payments->get(htmlspecialchars($_POST["id"]));
             $orderId = $payment->metadata->order_id;
 
             /*
