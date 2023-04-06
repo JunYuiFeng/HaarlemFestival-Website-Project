@@ -24,6 +24,7 @@ class WebHookController extends Controller
     private $cartService;
     private $ticketService;
     private $userService;
+    private $items;
 
 
 
@@ -47,6 +48,7 @@ class WebHookController extends Controller
              */
             $payment = $mollie->payments->get(htmlspecialchars($_POST["id"]));
             $orderId = $payment->metadata->order_id;
+            $this->items = $payment->metadata->items;
 
             /*
              * Update the order in the database.
@@ -56,7 +58,7 @@ class WebHookController extends Controller
             if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {
                 $this->cartService->deleteCartItemsByUserId($payment->metadata->user_id);
                 $customerEmail = $this->userService->getById($payment->metadata->user_id)->getEmail();
-                $this->sendTickets($customerEmail, $orderId);
+                $this->sendTickets($orderId, $customerEmail);
 
                 /*
                  * The payment is paid and isn't refunded or charged back.
@@ -99,17 +101,17 @@ class WebHookController extends Controller
     }
     private function sendTickets($orderId, $customerEmail)
     {
-        $danceTickets = $_SESSION['cartItems']['tickets'];
-        $reservartions = $_SESSION['cartItems']['reservations'];
+        $danceTickets = $this->items->tickets;
+        $reservartions = $this->items->reservations;
 
         $tickets = array(); // Initialize an empty array to store the tickets
 
 
         foreach ($danceTickets as $danceTicket) {
             $ticket = array(
-                "event" => $danceTicket['artist'] != '' ? $danceTicket['artist'] . ' | ' . $danceTicket['session'] : $danceTicket['session'],
-                "location" => $danceTicket['venue'] == '' ? 'Dance Festival' : $danceTicket['venue'],
-                "date" => $danceTicket['date'],
+                "event" => $danceTicket->artist != '' ? $danceTicket->artist . ' | ' . $danceTicket->session : $danceTicket->session ,
+                "location" => $danceTicket->venue == '' ? 'Dance Festival' : $danceTicket->venue ,
+                "date" => $danceTicket->date,
                 "orderId" => $orderId
             );
             $tickets[] = $ticket;
@@ -117,13 +119,13 @@ class WebHookController extends Controller
         foreach ($reservartions as $reservartion) {
             $ticket = array(
                 "event" => "Yummy Festival",
-                "location" => $reservartion['restaurant'],
-                "date" => $reservartion['date'] . ' | ' . $reservartion['session'],
+                "location" => $reservartion->restaurant,
+                "date" => $reservartion->date . ' | ' . $reservartion->session,
                 "orderId" => $orderId
             );
             $tickets[] = $ticket;
         }
-        var_dump($tickets);
+
         $attachments = array();
         foreach ($tickets as $ticket) {
             $pdfTicket = $this->generateTicket($ticket['event'], $ticket['location'], $ticket['date'], $ticket['orderId']);
@@ -154,7 +156,7 @@ class WebHookController extends Controller
         $dataUri = $result->getDataUri();
 
         ob_start();
-        require __DIR__ . '/../../views/ticket.php';
+        require_once __DIR__ . '/../../views/ticket.php';
         $html = ob_get_clean();
         $mpdf = new Mpdf();
 

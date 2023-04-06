@@ -186,6 +186,7 @@ class CartController extends Controller
                     "metadata" => [
                         "order_id" => $order->getId(),
                         "user_id" => $order->getUserId(),
+                        "items" => $_SESSION['cartItems'],
                     ],
                 ]);
 
