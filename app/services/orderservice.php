@@ -39,6 +39,11 @@ class OrderService
         return $this->repository->insertIntoOrder($userId, $date, $status);
     }
 
+    function getOrderItemByOrderIdAndItemId($orderId, $itemId)
+    {
+        return $this->repository->getOrderItemByOrderIdAndItemId($orderId, $itemId);
+    }
+
     function insertIntoOrderItems($orderId, $itemId, $type, $quantity)
     {
         $this->repository->insertIntoOrderItems($orderId, $itemId, $type, $quantity);

@@ -59,13 +59,13 @@ class TicketTokenRepository extends Repository
     function create(TicketToken $ticketToken): bool
     {
         try {
-            $sql = 'INSERT INTO `TicketTokens`(`token`, `orderId`) VALUES (:token, :orderId)';
+            $sql = 'INSERT INTO `TicketTokens`(`token`, `orderItemId`) VALUES (:token, :orderItemId)';
 
             $statement = $this->connection->prepare($sql);
 
             return $statement->execute([
                 ':token' => $ticketToken->getToken(),
-                ':orderId' => $ticketToken->getOrderId(),
+                ':orderItemId' => $ticketToken->getOrderItemId(),
             ]);
         } catch (PDOException $e) {
             echo $e;

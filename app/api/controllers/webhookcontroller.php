@@ -4,6 +4,8 @@ require_once __DIR__ . '/../../services/cartservice.php';
 require_once __DIR__ . '/../../vendor/autoload.php';
 include_once("../services/ticketservice.php");
 include_once("../services/userservice.php");
+require_once __DIR__ . '/../../services/sessionservice.php';
+
 
 
 require_once __DIR__ . '/controller.php';
@@ -25,6 +27,7 @@ class WebHookController extends Controller
     private $cartService;
     private $ticketService;
     private $userService;
+    private $sessionService;
     private $items;
 
 
@@ -36,12 +39,15 @@ class WebHookController extends Controller
         $this->cartService = new CartService();
         $this->ticketService = new TicketService();
         $this->userService = new UserService();
+        $this->sessionService = new SessionService();
     }
 
     function index()
     {
-        require_once __DIR__ . '/../../config/mollieApi.php';
+
         try {
+            $mollie = new \Mollie\Api\MollieApiClient();
+            $mollie->setApiKey('test_vWU6vr3ypCg9NFQeuE5TbUBjMyv4FP');
             /*
              * Retrieve the payment's current state.
              */
@@ -137,36 +143,41 @@ class WebHookController extends Controller
 
 
         foreach ($danceTickets as $danceTicket) {
+            $orderItemsItemId = $this->orderService->getOrderItemByOrderIdAndItemId($orderId, $danceTicket->id); // get orderitem id
+            $this->ticketService->deductAvailableTickets($danceTicket->quantity, $danceTicket->id);
             for ($i = 0; $i < $danceTicket->quantity; $i++) {
                 $ticket = array(
                     "event" => $danceTicket->artist != '' ? $danceTicket->artist . ' | ' . $danceTicket->session : $danceTicket->session,
                     "location" => $danceTicket->venue == '' ? 'Dance Festival' : $danceTicket->venue,
                     "date" => $danceTicket->date,
-                    "orderId" => $orderId
+                    "orderItemId" => $orderItemsItemId['id']
                 );
                 $tickets[] = $ticket;
             }
         }
         foreach ($reservations as $reservation) {
+            $orderItemsItemId = $this->orderService->getOrderItemByOrderIdAndItemId($orderId, $reservation->id);
+            $this->sessionService->decreaseSeats($reservation->sessionId, $reservation->amountAbove12 + $reservation->amountUnderOr12);
             $ticket = array(
                 "event" => "Yummy Festival",
                 "location" => $reservation->restaurant,
                 "date" => $reservation->date . ' | ' . $reservation->session,
-                "orderId" => $orderId
+                "orderItemId" => $orderItemsItemId['id'],
             );
             $tickets[] = $ticket;
         }
         $attachments = array();
         foreach ($tickets as $ticket) {
-            $pdfTicket = $this->generateTicket($ticket['event'], $ticket['location'], $ticket['date'], $ticket['orderId']);
+            $pdfTicket = $this->generateTicket($ticket['event'], $ticket['location'], $ticket['date'], $ticket['orderItemId']);
             array_push($attachments, $pdfTicket);
         }
+
         $this->ticketService->sendTickets($customerEmail, $attachments);
     }
 
-    private function generateTicket($event, $location, $date, $orderId)
+    private function generateTicket($event, $location, $date, $orderItemId)
     {
-        $token = $this->ticketService->generateToken($orderId);
+        $token = $this->ticketService->generateToken($orderItemId);
 
         $result = Builder::create()
             ->writer(new PngWriter())

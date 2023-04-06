@@ -206,4 +206,19 @@ class DanceRepository extends Repository
             echo $e;
         }
     }
+
+    function deductAvailableTickets($amountToDeduct, $ticketId)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE Tickets
+            SET ticketAvailable = ticketAvailable - :amount
+            WHERE id = :id;");
+            $stmt->bindParam(':amount', $amountToDeduct);
+            $stmt->bindParam(':id', $ticketId);
+
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
 }

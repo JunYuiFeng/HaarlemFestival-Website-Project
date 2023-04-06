@@ -1,6 +1,8 @@
 <?php
 require '../vendor/autoload.php';
 require_once __DIR__ . "/../repositories/tickettokenrepository.php";
+require_once __DIR__ . '/../repositories/dancerepository.php';
+
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -12,10 +14,13 @@ use PHPMailer\PHPMailer\Exception;
 class TicketService
 {
     private $repository;
+    private $danceRepository;
+
 
     function __construct()
     {
         $this->repository = new TicketTokenRepository();
+        $this->danceRepository = new DanceRepository();
     }
 
 
@@ -74,15 +79,20 @@ class TicketService
         return $this->repository->setUsed($token);
     }
 
-    public function generateToken($orderId)
+    public function generateToken($orderItemId)
     {
         $ticketToken = new TicketToken();
         $ticketToken->setToken(bin2hex(random_bytes(32))); // Generating 64 characters long string for token
-        $ticketToken->setOrderId($orderId);
+        $ticketToken->setOrderItemId($orderItemId);
         while (!$this->repository->create($ticketToken)) {
             // If it returns false, wait for a short time before trying again
             usleep(100000); // Wait for 0.1 seconds
         }
         return $ticketToken->getToken();
+    }
+
+    public function deductAvailableTickets($amountToDeduct, $ticketId)
+    {
+        $this->danceRepository->deductAvailableTickets($amountToDeduct, $ticketId);
     }
 }
