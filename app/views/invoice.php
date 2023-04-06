@@ -14,8 +14,25 @@
     <hr>
 
     <div class="d-flex justify-content-between mb-5">
-        <p><b>client name:</b> Jun Yui Feng</p>
-        <p><b>Invoice date:</b> 6 April 2023</p>
+        <div>
+            <p><b>Billed to:</b><br>
+                Haarlem Festival<br>
+                haarlemfestival@sahibthecreator.com<br>
+                Bijdorplaan 15, 2015 CE Haarlem<br>
+                +31 6 12345678<br>
+            </p>
+        </div>
+        <div>
+            <p><b>Client:</b><br>
+                <?= $clientName ?><br>
+                <?= $clientEmail ?><br>
+            </p>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between mb-5">
+        <p><b>Invoice date:</b>&nbsp;<?= date("Y-m-d") ?></p>
+        <p><b>Payment date:</b></p>
     </div>
 
     <h1 class="mb-3">Order Summary</h1>
@@ -26,11 +43,20 @@
             <th scope="col">#</th>
             <th scope="col">Item</th>
             <th scope="col">Date</th>
-            <th scope="col">Quantity</th>
+            <th scope="col">Qnty</th>
             <th scope="col">Price</th>
           </tr>
         </thead>
         <tbody>
+        <?php foreach ($reservationData as $reservation) { ?>
+          <tr>
+            <th scope="row">1</th>
+            <td><h4><?= $reservation['name'] ?></h4></td>
+            <td><?= $reservation['date'] ?></td>
+            <td><?= $reservation['quantity'] ?></td>
+            <td>€<?= $reservation['price'] ?></td>
+          </tr>
+        <?php } ?>
           <tr>
             <th scope="row">1</th>
             <td><h4> Day Pass Thursday</h4></td>
@@ -49,10 +75,10 @@
         </tbody>
       </table>
 
-      <p class="d-flex justify-content-end"><b>Subtotal</b>200</p>
-      <p class="d-flex justify-content-end"><b>Reservation fee</b>200</p>
-      <p class="d-flex justify-content-end">9% VAT</p>
+      <p class="d-flex justify-content-end"><b>Subtotal</b>&nbsp;€200</p>
+      <p class="d-flex justify-content-end"><b>Reservation fee</b>&nbsp;€200</p>
+      <p class="d-flex justify-content-end"><b>9% VAT</b>&nbsp;€19</p>
       <hr>
-      <h4 class="d-flex justify-content-end"><b>Total</b>200</h4>
+      <h4 class="d-flex justify-content-end"><b>Total</b>&nbsp;€200</h4>
 </body>
 </html>

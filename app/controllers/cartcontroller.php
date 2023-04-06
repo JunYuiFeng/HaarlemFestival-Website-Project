@@ -167,11 +167,9 @@ class CartController extends Controller
 
     function payment()
     {
+        require_once __DIR__ . '/../config/mollieApi.php';
         if (isset($_SESSION["logedin"])) {
             try {
-                $mollie = new \Mollie\Api\MollieApiClient();
-                $mollie->setApiKey('test_vWU6vr3ypCg9NFQeuE5TbUBjMyv4FP');
-
                 $order = $this->orderService->insertIntoOrder($this->loggedInUser->getId(), date("Y-m-d"), "pending");
                 $this->orderService->transferCartItemsToOrderItemsById($order->getId(), $this->loggedInUser->getId());
 
@@ -186,6 +184,8 @@ class CartController extends Controller
                     "metadata" => [
                         "order_id" => $order->getId(),
                         "user_id" => $order->getUserId(),
+                        "user_email" => $this->loggedInUser->getEmail(),
+                        "user_name" => $this->loggedInUser->getUsername(),
                         "items" => $_SESSION['cartItems'],
                     ],
                 ]);

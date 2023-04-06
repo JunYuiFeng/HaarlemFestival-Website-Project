@@ -39,15 +39,15 @@ class WebHookController extends Controller
 
     function index()
     {
-
+        require_once __DIR__ . '/../../config/mollieApi.php';
         try {
-            $mollie = new \Mollie\Api\MollieApiClient();
-            $mollie->setApiKey('test_vWU6vr3ypCg9NFQeuE5TbUBjMyv4FP');
             /*
              * Retrieve the payment's current state.
              */
             $payment = $mollie->payments->get(htmlspecialchars($_POST["id"]));
             $orderId = $payment->metadata->order_id;
+            $clientName = $payment->metadata->user_name;
+            $clientEmail = $payment->metadata->user_email;
             $this->items = $payment->metadata->items;
 
             /*
@@ -58,6 +58,7 @@ class WebHookController extends Controller
             if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {
 
                 $this->cartService->deleteCartItemsByUserId($payment->metadata->user_id);
+                $this->generateInvoice($clientName, $clientEmail);
                 $customerEmail = $this->userService->getById($payment->metadata->user_id)->getEmail();
                 $this->sendTickets($orderId, $customerEmail);
 
@@ -100,6 +101,27 @@ class WebHookController extends Controller
             echo "API call failed: " . htmlspecialchars($e->getMessage());
         }
     }
+
+    private function generateInvoice($clientName, $clientEmail)
+    {
+        ob_start();
+        require_once __DIR__ . '/../../views/invoice.php';
+        $html = ob_get_clean();
+        $mpdf = new Mpdf();
+    
+        $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
+        $pdfData = $mpdf->Output('invoice.pdf', 'S');
+        
+        // Save the PDF file to the invoices directory
+        file_put_contents(__DIR__ . '/../../invoices/invoice.pdf', $pdfData);
+        
+        // Download the PDF file
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="invoice.pdf"');
+        echo $pdfData;
+    }
+    
+    
     private function sendTickets($orderId, $customerEmail)
     {
         $danceTickets = $this->items->tickets;
