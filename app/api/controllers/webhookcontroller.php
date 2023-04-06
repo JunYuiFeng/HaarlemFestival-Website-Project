@@ -16,6 +16,7 @@ use Endroid\QrCode\Label\Font\NotoSans;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
 use Mpdf\Mpdf;
+use Ramsey\Uuid\Uuid;
 
 
 class WebHookController extends Controller
@@ -46,8 +47,8 @@ class WebHookController extends Controller
              */
             $payment = $mollie->payments->get(htmlspecialchars($_POST["id"]));
             $orderId = $payment->metadata->order_id;
-            $clientName = $payment->metadata->user_name;
-            $clientEmail = $payment->metadata->user_email;
+            $customerName = $this->userService->getById($payment->metadata->user_id)->getUsername();
+            $customerEmail = $this->userService->getById($payment->metadata->user_id)->getEmail();
             $this->items = $payment->metadata->items;
 
             /*
@@ -58,8 +59,8 @@ class WebHookController extends Controller
             if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {
 
                 $this->cartService->deleteCartItemsByUserId($payment->metadata->user_id);
-                $this->generateInvoice($clientName, $clientEmail);
-                $customerEmail = $this->userService->getById($payment->metadata->user_id)->getEmail();
+                $this->generateInvoice($customerName, $customerEmail);
+                //$customerEmail = $this->userService->getById($payment->metadata->user_id)->getEmail();
                 $this->sendTickets($orderId, $customerEmail);
 
                 /*
@@ -104,6 +105,11 @@ class WebHookController extends Controller
 
     private function generateInvoice($clientName, $clientEmail)
     {
+        $tickets = $this->items->tickets;
+        $reservations = $this->items->reservations;
+
+        $invoiceNr = Uuid::uuid4()->toString();
+
         ob_start();
         require_once __DIR__ . '/../../views/invoice.php';
         $html = ob_get_clean();
