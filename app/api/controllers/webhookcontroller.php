@@ -56,6 +56,7 @@ class WebHookController extends Controller
             $this->orderService->updateOrderStatus($orderId, $payment->status);
 
             if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {
+
                 $this->cartService->deleteCartItemsByUserId($payment->metadata->user_id);
                 $customerEmail = $this->userService->getById($payment->metadata->user_id)->getEmail();
                 $this->sendTickets($orderId, $customerEmail);
@@ -102,30 +103,31 @@ class WebHookController extends Controller
     private function sendTickets($orderId, $customerEmail)
     {
         $danceTickets = $this->items->tickets;
-        $reservartions = $this->items->reservations;
+        $reservations = $this->items->reservations;
 
         $tickets = array(); // Initialize an empty array to store the tickets
 
 
         foreach ($danceTickets as $danceTicket) {
-            $ticket = array(
-                "event" => $danceTicket->artist != '' ? $danceTicket->artist . ' | ' . $danceTicket->session : $danceTicket->session ,
-                "location" => $danceTicket->venue == '' ? 'Dance Festival' : $danceTicket->venue ,
-                "date" => $danceTicket->date,
-                "orderId" => $orderId
-            );
-            $tickets[] = $ticket;
+            for ($i = 0; $i < $danceTicket->quantity; $i++) {
+                $ticket = array(
+                    "event" => $danceTicket->artist != '' ? $danceTicket->artist . ' | ' . $danceTicket->session : $danceTicket->session,
+                    "location" => $danceTicket->venue == '' ? 'Dance Festival' : $danceTicket->venue,
+                    "date" => $danceTicket->date,
+                    "orderId" => $orderId
+                );
+                $tickets[] = $ticket;
+            }
         }
-        foreach ($reservartions as $reservartion) {
+        foreach ($reservations as $reservation) {
             $ticket = array(
                 "event" => "Yummy Festival",
-                "location" => $reservartion->restaurant,
-                "date" => $reservartion->date . ' | ' . $reservartion->session,
+                "location" => $reservation->restaurant,
+                "date" => $reservation->date . ' | ' . $reservation->session,
                 "orderId" => $orderId
             );
             $tickets[] = $ticket;
         }
-
         $attachments = array();
         foreach ($tickets as $ticket) {
             $pdfTicket = $this->generateTicket($ticket['event'], $ticket['location'], $ticket['date'], $ticket['orderId']);
@@ -141,7 +143,7 @@ class WebHookController extends Controller
         $result = Builder::create()
             ->writer(new PngWriter())
             ->writerOptions([])
-            ->data($token) //"http://127.0.0.1/festival/validateticket?token=" .
+            ->data($token)
             ->encoding(new Encoding('UTF-8'))
             ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
             ->size(300)
@@ -156,8 +158,10 @@ class WebHookController extends Controller
         $dataUri = $result->getDataUri();
 
         ob_start();
-        require_once __DIR__ . '/../../views/ticket.php';
+
+        require __DIR__ . '/../../views/ticket.php';
         $html = ob_get_clean();
+
         $mpdf = new Mpdf();
 
         $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
