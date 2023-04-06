@@ -4,6 +4,8 @@ require_once __DIR__ . '/../../services/cartservice.php';
 require_once __DIR__ . '/../../vendor/autoload.php';
 include_once("../services/ticketservice.php");
 include_once("../services/userservice.php");
+require_once __DIR__ . '/../../services/sessionservice.php';
+
 
 
 require_once __DIR__ . '/controller.php';
@@ -24,6 +26,7 @@ class WebHookController extends Controller
     private $cartService;
     private $ticketService;
     private $userService;
+    private $sessionService;
     private $items;
 
 
@@ -35,6 +38,7 @@ class WebHookController extends Controller
         $this->cartService = new CartService();
         $this->ticketService = new TicketService();
         $this->userService = new UserService();
+        $this->sessionService = new SessionService();
     }
 
     function index()
@@ -109,7 +113,8 @@ class WebHookController extends Controller
 
 
         foreach ($danceTickets as $danceTicket) {
-            $orderItemsItemId = $this->orderService->getOrderItemByOrderIdAndItemId($orderId, $danceTicket->id);
+            $orderItemsItemId = $this->orderService->getOrderItemByOrderIdAndItemId($orderId, $danceTicket->id); // get orderitem id
+            $this->ticketService->deductAvailableTickets($danceTicket->quantity, $danceTicket->id);
             for ($i = 0; $i < $danceTicket->quantity; $i++) {
                 $ticket = array(
                     "event" => $danceTicket->artist != '' ? $danceTicket->artist . ' | ' . $danceTicket->session : $danceTicket->session,
@@ -122,6 +127,7 @@ class WebHookController extends Controller
         }
         foreach ($reservations as $reservation) {
             $orderItemsItemId = $this->orderService->getOrderItemByOrderIdAndItemId($orderId, $reservation->id);
+            $this->sessionService->decreaseSeats($reservation->sessionId, $reservation->amountAbove12 + $reservation->amountUnderOr12);
             $ticket = array(
                 "event" => "Yummy Festival",
                 "location" => $reservation->restaurant,

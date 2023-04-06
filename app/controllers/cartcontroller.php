@@ -107,6 +107,7 @@ class CartController extends Controller
                     'price' => number_format($this->reservationService->getPrice($reservation->getId()), 2),
                     'restaurant' => $this->restaurantService->getById($reservation->getRestaurantId())->getName(),
                     'session' => $this->sessionService->getById($reservation->getSessionId())->getName(),
+                    'sessionId' => $reservation->getSessionId(),
                     'date' => $reservation->getDate()
                 );
                 $reservationFee += ($reservation->getAmountAbove12() + $reservation->getAmountUnderOr12()) * $reservationFeePerPerson;
