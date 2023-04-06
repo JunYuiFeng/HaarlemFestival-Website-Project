@@ -17,7 +17,7 @@ class TicketToken
      * OrderId Foreign key
      * @var int $orderId 
      */
-    private $orderId;
+    private $orderItemId;
 
     /**  
      * IsUsed Boolean
@@ -67,9 +67,9 @@ class TicketToken
     /**
      * Get the value of orderId
      */
-    public function getOrderId()
+    public function getOrderItemId()
     {
-        return $this->orderId;
+        return $this->orderItemId;
     }
 
     /**
@@ -77,9 +77,9 @@ class TicketToken
      *
      * @return  self
      */
-    public function setOrderId($orderId)
+    public function setOrderItemId($orderItemId)
     {
-        $this->orderId = $orderId;
+        $this->orderItemId = $orderItemId;
         return $this;
     }
 

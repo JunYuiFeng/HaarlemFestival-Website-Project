@@ -66,6 +66,23 @@ class OrderRepository extends Repository
         }
     }
 
+    function getOrderItemByOrderIdAndItemId($orderId, $itemId)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM `OrderItems` WHERE orderId = :id AND itemId = :itemId");
+            $stmt->bindParam(':id', $orderId);
+            $stmt->bindParam(':itemId', $itemId);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $orderItem = $stmt->fetch();
+
+            return $orderItem;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
     function getLastOrderByUserId($id)
     {
         try {

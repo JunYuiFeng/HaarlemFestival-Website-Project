@@ -74,11 +74,11 @@ class TicketService
         return $this->repository->setUsed($token);
     }
 
-    public function generateToken($orderId)
+    public function generateToken($orderItemId)
     {
         $ticketToken = new TicketToken();
         $ticketToken->setToken(bin2hex(random_bytes(32))); // Generating 64 characters long string for token
-        $ticketToken->setOrderId($orderId);
+        $ticketToken->setOrderItemId($orderItemId);
         while (!$this->repository->create($ticketToken)) {
             // If it returns false, wait for a short time before trying again
             usleep(100000); // Wait for 0.1 seconds
