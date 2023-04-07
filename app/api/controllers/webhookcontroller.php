@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 include_once("../services/ticketservice.php");
 include_once("../services/userservice.php");
 require_once __DIR__ . '/../../services/sessionservice.php';
-
+require_once __DIR__ . '/../../services/invoiceservice.php';
 
 
 require_once __DIR__ . '/controller.php';
@@ -29,6 +29,11 @@ class WebHookController extends Controller
     private $userService;
     private $sessionService;
     private $items;
+    private $totalAmount;
+    private $VATAmount;
+    private $reservationFee;
+    private $subTotal;
+    private $invoiceService;
 
 
 
@@ -40,6 +45,7 @@ class WebHookController extends Controller
         $this->ticketService = new TicketService();
         $this->userService = new UserService();
         $this->sessionService = new SessionService();
+        $this->invoiceService = new InvoiceService();
     }
 
     function index()
@@ -52,20 +58,23 @@ class WebHookController extends Controller
              * Retrieve the payment's current state.
              */
             $payment = $mollie->payments->get(htmlspecialchars($_POST["id"]));
+
             $orderId = $payment->metadata->order_id;
             $customerName = $this->userService->getById($payment->metadata->user_id)->getUsername();
             $customerEmail = $this->userService->getById($payment->metadata->user_id)->getEmail();
             $this->items = $payment->metadata->items;
+            $this->totalAmount = $payment->metadata->totalAmount;
+            $this->VATAmount = $payment->metadata->VATAmount;
+            $this->reservationFee = $payment->metadata->reservationFee;
+            $this->subTotal = $payment->metadata->subTotal;
 
-            /*
-             * Update the order in the database.
-             */
+            // Update order in the database.
             $this->orderService->updateOrderStatus($orderId, $payment->status);
 
             if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {
 
                 $this->cartService->deleteCartItemsByUserId($payment->metadata->user_id);
-                $this->generateInvoice($customerName, $customerEmail);
+                $this->sendInvoice($customerName, $customerEmail);
                 //$customerEmail = $this->userService->getById($payment->metadata->user_id)->getEmail();
                 $this->sendTickets($orderId, $customerEmail);
 
@@ -93,26 +102,20 @@ class WebHookController extends Controller
                 /*
                  * The payment has been canceled.
                  */
-            } elseif ($payment->hasRefunds()) {
-                /*
-                 * The payment has been (partially) refunded.
-                 * The status of the payment is still "paid"
-                 */
-            } elseif ($payment->hasChargebacks()) {
-                /*
-                 * The payment has been (partially) charged back.
-                 * The status of the payment is still "paid"
-                 */
             }
         } catch (\Mollie\Api\Exceptions\ApiException $e) {
             echo "API call failed: " . htmlspecialchars($e->getMessage());
         }
     }
 
-    private function generateInvoice($clientName, $clientEmail)
+    private function generateInvoice($customerName, $customerEmail)
     {
         $tickets = $this->items->tickets;
         $reservations = $this->items->reservations;
+        $totalAmount = $this->totalAmount;
+        $VATAmount = $this->VATAmount;
+        $reservationFee = $this->reservationFee;
+        $subTotal = $this->subTotal;
 
         $invoiceNr = Uuid::uuid4()->toString();
 
@@ -120,20 +123,32 @@ class WebHookController extends Controller
         require_once __DIR__ . '/../../views/invoice.php';
         $html = ob_get_clean();
         $mpdf = new Mpdf();
-    
+
         $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
-        $pdfData = $mpdf->Output('invoice.pdf', 'S');
-        
+        $filename = 'invoice-' . $invoiceNr . '.pdf';
+        $pdfData = $mpdf->Output($filename, 'S');
+
         // Save the PDF file to the invoices directory
-        file_put_contents(__DIR__ . '/../../invoices/invoice.pdf', $pdfData);
-        
-        // Download the PDF file
-        header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename="invoice.pdf"');
-        echo $pdfData;
+        $filePath = __DIR__ . '/../../public/invoices/' . $filename;
+        file_put_contents($filePath, $pdfData);
+
+        // Return the path to the saved PDF file
+        return [
+            'filename' => $filename,
+            'filePath' => $filePath,
+            'pdfData' => $pdfData
+        ];
     }
-    
-    
+
+    private function sendInvoice($customerName, $customerEmail)
+    {
+        $invoice = $this->generateInvoice($customerName, $customerEmail);
+        $pdfData = $invoice['pdfData'];
+        $filename = $invoice['filename'];
+
+        $this->invoiceService->sendInvoice($customerEmail, $pdfData, $filename);
+    }
+
     private function sendTickets($orderId, $customerEmail)
     {
         $danceTickets = $this->items->tickets;

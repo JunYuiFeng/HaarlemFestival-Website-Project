@@ -23,8 +23,6 @@ class CartController extends Controller
     protected $loggedInUser;
 
 
-
-
     public function __construct()
     {
         parent::__construct();
@@ -121,6 +119,9 @@ class CartController extends Controller
         $VATAmount = $totalAmount * $VAT;
         $totalAmount += $VATAmount;
         $_SESSION['totalAmount'] = $totalAmount;
+        $_SESSION['VATAmount'] = $VATAmount;
+        $_SESSION['reservationFee'] = $reservationFee;
+        $_SESSION['subTotal'] = $subTotal;
         $_SESSION['cartItems'] = array("reservations" => $reservationData, "tickets" => $ticketData);
 
         require __DIR__ . '/../views/cart/index.php';
@@ -185,8 +186,10 @@ class CartController extends Controller
                     "metadata" => [
                         "order_id" => $order->getId(),
                         "user_id" => $order->getUserId(),
-                        "user_email" => $this->loggedInUser->getEmail(),
-                        "user_name" => $this->loggedInUser->getUsername(),
+                        "totalAmount" => $_SESSION['totalAmount'],
+                        "VATAmount" => $_SESSION['VATAmount'],
+                        "reservationFee" => $_SESSION['reservationFee'],
+                        "subTotal" => $_SESSION['subTotal'],
                         "items" => $_SESSION['cartItems'],
                     ],
                 ]);
