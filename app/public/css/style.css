@@ -867,6 +867,22 @@ footer .footerImg {
   width: 500px;
 }
 
+.artist-name h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.detailedArtistName {
+  align-self: center;
+  position: absolute;
+  width: 420px;
+  height: 60px;
+  left: 748px;
+  top: 500px;
+  filter: drop-shadow(0px 8px 18px #FFB800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #FFB800);
+}
+
 #danceDetailedPageBody {
   background-color: #000000;
   color: white;
@@ -880,6 +896,30 @@ footer .footerImg {
   margin-bottom: 3%;
   padding-top: 3%;
 }
+#danceDetailedPageBody #detailedArtistName {
+  align-self: center;
+  position: absolute;
+  width: 420px;
+  height: 60px;
+  left: 748px;
+  top: 500px;
+  size: 100px;
+  filter: drop-shadow(0px 8px 18px #FFB800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #FFB800);
+}
+#danceDetailedPageBody .container {
+  display: flex; /* display divs side-by-side */
+  justify-content: space-between; /* evenly distribute space between divs */
+  align-items: center; /* vertically center divs */
+  background-color: #f5f5f5; /* set background color */
+  padding: 20px; /* add some padding */
+}
+#danceDetailedPageBody .box {
+  width: 200px; /* set width */
+  height: 200px; /* set height */
+  background-color: #fff; /* set background color */
+  border-radius: 10px; /* round corners */
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* add shadow effect */
+}
 #danceDetailedPageBody .col-2 {
   margin-bottom: 3%;
   margin-top: 3%;
@@ -892,6 +932,7 @@ footer .footerImg {
 }
 #danceDetailedPageBody #careerHighlight {
   background: linear-gradient(245.73deg, #9a031e 17.74%, #000000 101.89%);
+  margin-bottom: 20%;
 }
 #danceDetailedPageBody .dancePageTitle {
   color: white;

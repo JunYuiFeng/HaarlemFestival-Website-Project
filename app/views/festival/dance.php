@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dance</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Dance!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
 
@@ -85,15 +86,14 @@
                                     0
                                 </p>
                             </div>
-                            <input type="button" onclick="location.href='dancedetailedpage1'" class="danceViewMore" value=" view more">
+                            <input type="button" onclick="location.href='dancedetailedpage?id=<?=$artist->getId() ?>'" class="danceViewMore"
+                                value=" view more">
                         </div>
                     </div>
                 </div>
             </div>
-        <?php
-            $count++;
+            <?php
         }
-        $count = 3;
         foreach ($artists as $artist) {
             if ($artist->getName() == "Martin Garrix" || $artist->getName() == "Afrojack") {
                 continue;
@@ -117,8 +117,10 @@
                     <p>
                         <?= $artist->getThirdSong() ?>
                     </p>
-
-                    <input type="button" onclick="location.href='dancedetailedpage1'" value=" view more">
+                    
+                    <button onclick="location.href='dancedetailedpage?id=<?=$artist->getId() ?>'" class="danceViewMore">
+                        view more
+                    </button>
                 </div>
 
             </div>
@@ -250,14 +252,14 @@
                         <div class="<?= $danceVanueType ?>">
                             <div class="danceVanue">
                                 <h4>
-                                    <?= $venue->getName(); ?>
+                                    <?= $venue->getVenueName(); ?>
                                 </h4>
                                 <label>
                                     <?= $venue->getAddress(); ?>
                                 </label>
                             </div>
                             <div>
-                                <img src="/img/DanceVanueImg<?= $count ?>.png" class="danceVanueImg">
+                                <img src="/img/<?= $venue->getImage()?>" class="danceVanueImg">
                             </div>
                         </div>
                     </div>

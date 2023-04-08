@@ -5,6 +5,9 @@ require_once __DIR__ . '/../services/reservationservice.php';
 require_once __DIR__ . '/../services/restaurantservice.php';
 require_once __DIR__ . '/../services/orderservice.php';
 require_once __DIR__ . '/../services/apikeyservice.php';
+require_once __DIR__ . '/../services/danceservice.php';
+require_once __DIR__ . '/../services/venueservice.php';
+require_once __DIR__ . '/../services/artistservice.php';
 require_once __DIR__ . '/controller.php';
 
 
@@ -19,6 +22,9 @@ class CmsController extends Controller
     private $orderService;
     private $apiKeyService;
     private $msg;
+    private $danceService;
+    private $venueService;
+    private $artistService;
 
 
     function __construct()
@@ -30,6 +36,9 @@ class CmsController extends Controller
         $this->reservationService = new ReservationService();
         $this->orderService = new OrderService();
         $this->apiKeyService = new APIKeyService();
+        $this->danceService = new DanceService();
+        $this->venueService = new VenueService();
+        $this->artistService = new ArtistService();
         $this->msg = "";
     }
 
@@ -41,82 +50,88 @@ class CmsController extends Controller
     public function manageusers()
     {
         $users = $this->userService->getAll();
+        require __DIR__ . '/../views/cms/usermanagement.php';
+    }
+    public function manageDance()
+    {
+        $venues = $this->venueService->getAll();
+        $tickets = $this->danceService->getAll();
+        $artists = $this->artistService->getAll();
+        $days = $this->danceService->getAllDate();
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             switch ($_POST['action']) {
-                case 'create':
-                    $this->createUser();
-                    $users = $this->userService->getAll();
+                case 'deleteVenue':
+                    $this->venueService->removeVenue($_POST['venueId']);
+                    $venues = $this->venueService->getAll();
                     break;
-                case 'sortIdAsc':
-                    sort($users);
+                case 'updateVenue':
+                    if ((empty($_POST['venueId']) || empty($_POST['venueName']) || empty($_POST['venueAddress']) || empty($_POST['venueImage'])))
+                        return;
+                    $this->venueService->editVenue($_POST['venueId'], $_POST['venueName'], $_POST['venueAddress'], $_POST['venueImage']);
+                    $venues = $this->venueService->getAll();
                     break;
-                case 'sortIdDESC':
-                    rsort($users);
+                case 'addVenue':
+                    if ((empty($_POST['venueName']) || empty($_POST['venueAddress']) || empty($_POST['venueImage'])))
+                        return;
+                    $this->venueService->addVenue($_POST['venueName'], $_POST['venueAddress'], $_POST['venueImage']);
+                    $venues = $this->venueService->getAll();
                     break;
-                case 'sortUsernameASC':
-                    $this->sortItem($users, "username", "ASC");
+                case 'deleteArtist':
+                    $this->artistService->removeArtist($_POST['artistId']);
+                    $artists = $this->artistService->getAll();
                     break;
-                case 'sortUsernameDESC':
-                    $users = $this->sortItem($users, "username", "DESC");
+                case 'updateArtist':
+                    if ((empty($_POST['artistId']) || empty($_POST['artistName']) || empty($_POST['artistStyle']) || empty($_POST['artistFirstSong']) || empty($_POST['artistSecondSong']) || empty($_POST['artistThirdSong']) || empty($_POST['artistIndexPicture']) || empty($_POST['artistFirstSourceSong']) || empty($_POST['artistSecondSourceSong']) || empty($_POST['artistThirdSourceSong']) || empty($_POST['artistDetailedPicture']) || empty($_POST['artistCareer']))) {
+                        break;
+                    }
+                    $this->artistService->updateArtist($_POST['artistId'], $_POST['artistName'], $_POST['artistStyle'], $_POST['artistFirstSong'], $_POST['artistSecondSong'], $_POST['artistThirdSong'], $_POST['artistIndexPicture'], $_POST['artistFirstSourceSong'], $_POST['artistSecondSourceSong'], $_POST['artistThirdSourceSong'], $_POST['artistDetailedPicture'], $_POST['artistCareer']);
+
+                    $artists = $this->artistService->getAll();
                     break;
-                case 'sortEmailASC':
-                    $this->sortItem($users, "email", "ASC");
+                case 'addArtist':
+                    if ((empty($_POST['artistName']) || empty($_POST['artistStyle']) || empty($_POST['artistFirstSong']) || empty($_POST['artistSecondSong']) || empty($_POST['artistThirdSong']) || empty($_POST['artistIndexPicture']) || empty($_POST['artistFirstSourceSong']) || empty($_POST['artistSecondSourceSong']) || empty($_POST['artistThirdSourceSong']) || empty($_POST['artistDetailedPicture']) || empty($_POST['artistCareer']))) {
+                        break;
+                    }
+                    $this->artistService->addArtist($_POST['artistName'], $_POST['artistStyle'], $_POST['artistFirstSong'], $_POST['artistSecondSong'], $_POST['artistThirdSong'], $_POST['artistIndexPicture'], $_POST['artistFirstSourceSong'], $_POST['artistSecondSourceSong'], $_POST['artistThirdSourceSong'], $_POST['artistDetailedPicture'], $_POST['artistCareer']);
+                    $artists = $this->artistService->getAll();
                     break;
-                case 'sortEmailDESC':
-                    $users = $this->sortItem($users, "email", "DESC");
+                case 'deleteTicket':
+                    $this->danceService->removeTicket($_POST['ticketId']);
+                    $tickets = $this->danceService->getAll();
+                    break;
+                case 'updateTicket':
+                    if ((empty($_POST['ticketTime']) || empty($_POST['ticketVenue']) || empty($_POST['ticketArtist1']) || empty($_POST['ticketAvaliable']) || empty($_POST['ticketPrice']))) {
+                        break;
+                    }
+                    $date = date('Y-m-d', strtotime($_POST['ticketDate']));
+                    $time = date('H:i:s', strtotime($_POST['ticketTime']));
+                    $artistId = $this->artistService->getArtistIdByName($_POST['ticketArtist1']);
+                    $venueId = $this->venueService->getVenueIdByName($_POST['ticketVenue']);
+
+                    $this->danceService->updateDance($_POST['ticketId'],$date, $time, $venueId, $artistId, $_POST['ticketAvaliable'], $_POST['ticketPrice']);
+                    $tickets = $this->danceService->getAll();
+                    break;
+                case 'addTicket':
+                    if ((empty($_POST['ticketDate']) || empty($_POST['ticketTime']) || empty($_POST['ticketVenue']) || empty($_POST['ticketArtist1']) || empty($_POST['ticketAvaliable']) || empty($_POST['ticketPrice']))) {
+                        break;
+                    }
+                    $date = date('Y-m-d', strtotime($_POST['ticketDate']));
+                    $time = date('H:i:s', strtotime($_POST['ticketTime']));
+                    $artistId = $this->artistService->getArtistIdByName($_POST['ticketArtist1']);
+                    $venueId = $this->venueService->getVenueIdByName($_POST['ticketVenue']);
+
+                    $this->danceService->addDance($date, $time, $venueId, $artistId, $_POST['ticketAvaliable'], $_POST['ticketPrice']);
+                    $tickets = $this->danceService->getAll();
                     break;
                 default:
                     break;
             }
         }
 
-        require __DIR__ . '/../views/cms/manageusers.php';
-    }
-    public function sortItem($users, $item, $sortType)
-    {
-        $items = array();
-        foreach ($users as $user) {
-            $method = 'get' . ucfirst($item); // Get the name of the getter method for the property being sorted
-            array_push($items, $user->$method()); // Call the getter method on the user object to get the value of the property, and add it to the $items array
-        }
-
-        if ($sortType == "DESC") {
-            array_multisort($items, SORT_DESC, $users); // Sort both the $items and $users arrays in descending order based on the values in the $items array
-        } else { // Otherwise, sort in ascending order
-            array_multisort($items, SORT_ASC, $users);
-        }
-        foreach ($users as $user) {
-            echo $user->getEmail();
-        }
-        return $users;
+        require __DIR__ . '/../views/cms/manageDance.php';
     }
 
-    public function createUser()
-    {
-        try {
-            if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']) || empty($_POST['userType'])) {
-                $msg = "field empty, please fill in";
-                echo $_POST['username'];
-                echo $_POST['password'];
-                echo $_POST['email'];
-                echo $_POST['userType'];
-                return;
-            }
-            $username = htmlspecialchars($_POST['username']);
-            $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
-
-            $email = htmlspecialchars($_POST['email']);
-            $userType = htmlspecialchars($_POST['userType']);
-            if ($userType == "admin") {
-                $userType = 0;
-            } else {
-                $userType = 1;
-            }
-            $this->userService->createUser($username, $email, $password, $userType);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-    }
 
     public function editpagecontent()
     {

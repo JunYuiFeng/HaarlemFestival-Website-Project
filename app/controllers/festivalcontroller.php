@@ -48,14 +48,16 @@ class FestivalController extends Controller
         require __DIR__ . '/../views/festival/dance.php';
     }
 
-    public function dancedetailedpage1()
+    public function dancedetailedpage()
     {
-        require __DIR__ . '/../views/festival/dancedetailedpage1.php';
-    }
-
-    public function dancedetailed2()
-    {
-        require __DIR__ . '/../views/festival/dancedetailedpage2.php';
+        $loggedInUser = $this->loggedInUser;
+        $dance = null;        
+        if(isset($_GET['id'])){
+            
+            $id = htmlspecialchars($_GET['id']);
+            $artist = $this->artistService->getArtistById($id);
+        }
+        require __DIR__ . '/../views/festival/dancedetailedpage.php';
     }
 
     public function yummie()

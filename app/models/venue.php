@@ -3,11 +3,11 @@
         private $id;
         private $name;
         private $address;
+        private $image;
 
         public function getId(){
             return $this->id;
         }
-        
         public function setId($id){
             $this->id = $id;
         }
@@ -24,7 +24,10 @@
             return $this->address;
         }
 
-        public function setAddress($address){
-            $this->address = $address;
+        public function getVenueName(){
+            return $this->name;
+        }
+        public function getImage(){
+            return $this->image;
         }
     }
