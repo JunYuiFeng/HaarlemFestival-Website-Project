@@ -118,7 +118,6 @@ class CmsController extends Controller
                     $time = date('H:i:s', strtotime($_POST['ticketTime']));
                     $artistId = $this->artistService->getArtistIdByName($_POST['ticketArtist1']);
                     $venueId = $this->venueService->getVenueIdByName($_POST['ticketVenue']);
-
                     $this->danceService->addDance($date, $time, $venueId, $artistId, $_POST['ticketAvaliable'], $_POST['ticketPrice']);
                     $tickets = $this->danceService->getAll();
                     break;
