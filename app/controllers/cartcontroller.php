@@ -38,16 +38,50 @@ class CartController extends Controller
     public function index()
     {
         $VAT = 0.09; //VAT is 9%
-        $reservationFeePerPerson = 10;
-        $VATAmount = 0;
-        $reservationFee = 0;
-        $subTotal = 0;
-        $totalAmount = 0;
+        $VATAmount = $subTotal = $totalAmount = $reservationFee = 0;
+        $reservations = $tickets = $reservationData = $ticketData = array();
+
+        $reservations = ($this->getReservationsAndTickets())['reservations'];
+        $tickets = ($this->getReservationsAndTickets())['tickets'];
+        $cartId = ($this->getReservationsAndTickets())['cartId'];
+
+        if (isset($_GET['saveCart'])) {
+            $this->cartService->duplicateCartItemsByCartId(htmlspecialchars($_GET['saveCart']), $cartId);
+            header("Location: /cart/index");
+        }
+
+        if (!empty($tickets)) {
+            $ticketInfo = $this->getTicketData($tickets);
+            $ticketData = $ticketInfo['ticketData'];
+            $subTotal += $ticketInfo['subTotal'];
+        }
+
+        if (!empty($reservations)) {
+            $reservationInfo = $this->getReservationData($reservations);
+            $reservationData = $reservationInfo['reservationData'];
+            $reservationFee = $reservationInfo['reservationFee'];
+            $subTotal += $reservationInfo['subTotal'];
+        }
+
+        $totalAmount = $subTotal + $reservationFee;
+        $VATAmount = $totalAmount * $VAT;
+        $totalAmount += $VATAmount;
+
+        $_SESSION['totalAmount'] = $totalAmount;
+        $_SESSION['VATAmount'] = $VATAmount;
+        $_SESSION['reservationFee'] = $reservationFee;
+        $_SESSION['subTotal'] = $subTotal;
+        
+        $_SESSION['cartItems'] = array("reservations" => $reservationData, "tickets" => $ticketData);
+
+        require __DIR__ . '/../views/cart/index.php';
+    }
+
+    function getReservationsAndTickets() {
         $reservations = array();
         $tickets = array();
-        $reservationData = array();
-        $ticketData = array();
-
+        $cartId = null;
+    
         if (isset($_GET['share'])) {
             $sharedCartId = $_GET['share'];
             $reservations = $this->reservationService->getFromCartByCartId($sharedCartId);
@@ -67,63 +101,70 @@ class CartController extends Controller
             }
         }
 
-        if (isset($_GET['saveCart'])) {
-            $this->cartService->duplicateCartItemsByCartId(htmlspecialchars($_GET['saveCart']), $cartId);
-            header("Location: /cart/index");
-        }
-
-        if (!empty($tickets)) {
-            foreach ($tickets as $ticket) {
-                $item = array(
-                    'id' => $ticket->getId(),
-                    'quantity' => $ticket->getQuantity(),
-                    'price' => number_format($ticket->getPrice() * $ticket->getQuantity(), 2),
-                    'artist' => $ticket->getArtist(),
-                    'venue' => $ticket->getVenue(),
-                    'date' => $ticket->getDate(),
-                    'session' => $ticket->getSession()
-                );
-                $subTotal += ($ticket->getPrice() * $ticket->getQuantity());
-
-                $ticketData[] = $item;
-            }
-        }
-
-        if (!empty($reservations)) {
-            foreach ($reservations as $reservation) {
-                $item = array(
-                    'id' => $reservation->getId(),
-                    'comment' => $reservation->getComments(),
-                    'amountAbove12' => $reservation->getAmountAbove12(),
-                    'amountUnderOr12' => $reservation->getAmountUnderOr12(),
-                    'price' => number_format($this->reservationService->getPrice($reservation->getId()), 2),
-                    'restaurant' => $this->restaurantService->getById($reservation->getRestaurantId())->getName(),
-                    'session' => $this->sessionService->getById($reservation->getSessionId())->getName(),
-                    'sessionId' => $reservation->getSessionId(),
-                    'date' => $reservation->getDate()
-                );
-                $reservationFee += ($reservation->getAmountAbove12() + $reservation->getAmountUnderOr12()) * $reservationFeePerPerson;
-                $subTotal += $this->reservationService->getPrice($reservation->getId());
-
-                $reservationData[] = $item;
-            }
-        }
-
-        $totalAmount = $subTotal + $reservationFee;
-        $VATAmount = $totalAmount * $VAT;
-        $totalAmount += $VATAmount;
-        $_SESSION['totalAmount'] = $totalAmount;
-        $_SESSION['VATAmount'] = $VATAmount;
-        $_SESSION['reservationFee'] = $reservationFee;
-        $_SESSION['subTotal'] = $subTotal;
-        
-        $_SESSION['cartItems'] = array("reservations" => $reservationData, "tickets" => $ticketData);
-
-        require __DIR__ . '/../views/cart/index.php';
+        return [
+            'reservations' => $reservations,
+            'tickets' => $tickets,
+            'cartId' => $cartId
+        ];
     }
 
-    function removeReservation()
-    {
+    function getReservationData($reservations) {
+        $reservationData = array();
+        $reservationFeePerPerson = 10;
+        $reservationFee = 0;
+        $subTotal = 0;
+    
+        foreach ($reservations as $reservation) {
+            $item = array(
+                'id' => $reservation->getId(),
+                'comment' => $reservation->getComments(),
+                'amountAbove12' => $reservation->getAmountAbove12(),
+                'amountUnderOr12' => $reservation->getAmountUnderOr12(),
+                'price' => number_format($this->reservationService->getPrice($reservation->getId()), 2),
+                'restaurant' => $this->restaurantService->getById($reservation->getRestaurantId())->getName(),
+                'session' => $this->sessionService->getById($reservation->getSessionId())->getName(),
+                'sessionId' => $reservation->getSessionId(),
+                'date' => $reservation->getDate()
+            );
+            $reservationFee += ($reservation->getAmountAbove12() + $reservation->getAmountUnderOr12()) * $reservationFeePerPerson;
+            $subTotal += $this->reservationService->getPrice($reservation->getId());
+    
+            $reservationData[] = $item;
+        }
+    
+        return [
+            'reservationData' => $reservationData,
+            'reservationFee' => $reservationFee,
+            'subTotal' => $subTotal
+        ];
+    }
+
+    private function getTicketData($tickets) {
+        $ticketData = array();
+        $subTotal = 0;
+    
+        foreach ($tickets as $ticket) {
+            $item = array(
+                'id' => $ticket->getId(),
+                'quantity' => $ticket->getQuantity(),
+                'price' => number_format($ticket->getPrice() * $ticket->getQuantity(), 2),
+                'artist' => $ticket->getArtist(),
+                'venue' => $ticket->getVenue(),
+                'date' => $ticket->getDate(),
+                'session' => $ticket->getSession()
+            );
+            $subTotal += ($ticket->getPrice() * $ticket->getQuantity());
+    
+            $ticketData[] = $item;
+        }
+    
+        return [
+            'ticketData' => $ticketData,
+            'subTotal' => $subTotal
+        ];
+    }
+
+    function removeReservation() {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $id = htmlspecialchars($_GET['id']);
             $this->reservationService->deleteReservation($id);
@@ -131,8 +172,7 @@ class CartController extends Controller
         header("Location: /cart/index");
     }
 
-    function removeTicket()
-    {
+    function removeTicket() {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $id = htmlspecialchars($_GET['id']);
             $this->danceService->removeTicketFromCart($id);
@@ -140,8 +180,7 @@ class CartController extends Controller
         header("Location: /cart/index");
     }
 
-    function decreaseTicketQuantity()
-    {
+    function decreaseTicketQuantity() {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $ticketId = htmlspecialchars($_GET['ticketId']);
             $this->cartService->decreaseTicketQuantity($ticketId);
@@ -149,8 +188,7 @@ class CartController extends Controller
         header("Location: /cart/index");
     }
 
-    function increaseTicketQuantity()
-    {
+    function increaseTicketQuantity() {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $ticketId = htmlspecialchars($_GET['ticketId']);
             $this->cartService->increaseTicketQuantity($ticketId);
@@ -158,8 +196,7 @@ class CartController extends Controller
         header("Location: /cart/index");
     }
 
-    function payment()
-    {
+    function payment() {
         require_once __DIR__ . '/../config/mollieApi.php';
         if (isset($_SESSION["logedin"])) {
             try {
