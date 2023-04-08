@@ -50,19 +50,26 @@
 
         <div class="row restaurantEventSection">
             <?php
+            $cardClass = "restaurantRight";
             foreach ($restaurants as $index => $restaurant) {
-                if ($index % 2 == 0) {
+                if ($restaurant->getIsFestival() == false) {
+                    continue;
+                }
+                if ($cardClass == "card restaurantLeft") {
                     // Give the first restaurant the "restaurantLeft" class
-                    $cardClass = "card restaurantLeft";
+                    $cardClass = "card restaurantRight";
                 } else {
                     // Give the second restaurant the "restaurantRight" class
-                    $cardClass = "card restaurantRight";
+                    $cardClass = "card restaurantLeft";
                 }
+                // if ($index % 2 == 0) {
+                //     // Give the first restaurant the "restaurantLeft" class
+                //     $cardClass = "card restaurantLeft";
+                // } else {
+                //     // Give the second restaurant the "restaurantRight" class
+                //     $cardClass = "card restaurantRight";
+                // }
 
-                if ($restaurant->getIsFestival() == false)
-                {
-                    return false;
-                }
             ?>
                 <div class="col-6">
                     <div class="<?= $cardClass ?>">
@@ -76,12 +83,12 @@
                                         <b>Session duration</b>: <?= $restaurant->getSessionDuration() ?> <br>
                                         <b>Price</b>: <?= '€' . $restaurant->getPriceAge12AndUnder() . ' - ' . '€' . $restaurant->getPriceAboveAge12() ?><br>
                                         <b>Rating</b>: <?php for ($i = 0; $i < $restaurant->getRating(); $i++) {
-                                            echo '<span class="star">&#9733;</span>';
-                                        }?>
+                                                            echo '<span class="star">&#9733;</span>';
+                                                        } ?>
                                     </p>
                                 </div>
                                 <div class="col align-self-end">
-                                    <button class="seeMoreBtn" onclick="location.href='restaurantdetail?id=<?=$restaurant->getId()?>'"><b>See more info and reserve</b></button>
+                                    <button class="seeMoreBtn" onclick="location.href='restaurantdetail?id=<?= $restaurant->getId() ?>'"><b>See more info and reserve</b></button>
                                 </div>
                             </div>
                         </div>

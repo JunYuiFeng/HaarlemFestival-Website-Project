@@ -19,9 +19,9 @@ class OrderService
         return $this->repository->getAll();
     }
 
-    public function getAllAsJSON()
+    public function getAllInUserFriendlyFormat()
     {
-        return $this->repository->getAllAsJSON();
+        return $this->repository->getAllInUserFriendlyFormat();
     }
 
     function getLastOrderByUserId($id)
@@ -39,8 +39,23 @@ class OrderService
         return $this->repository->insertIntoOrder($userId, $date, $status);
     }
 
+    function getOrderItemByOrderIdAndItemId($orderId, $itemId)
+    {
+        return $this->repository->getOrderItemByOrderIdAndItemId($orderId, $itemId);
+    }
+
     function insertIntoOrderItems($orderId, $itemId, $type, $quantity)
     {
         $this->repository->insertIntoOrderItems($orderId, $itemId, $type, $quantity);
+    }
+
+    function transferCartItemsToOrderItemsById($orderId, $userId)
+    {
+        $this->repository->transferCartItemsToOrderItemsById($orderId, $userId);
+    }
+
+    function changeOrderStatus($id, $status)
+    {
+        return $this->repository->changeOrderStatus($id, $status);
     }
 }

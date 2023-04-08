@@ -2,19 +2,21 @@
 require_once __DIR__ . '/../services/cartservice.php';
 require_once __DIR__ . '/../services/restaurantservice.php';
 require_once __DIR__ . '/../services/reservationservice.php';
+require_once __DIR__ . '/../services/danceservice.php';
 require_once __DIR__ . '/../services/sessionservice.php';
 require_once __DIR__ . '/../services/paymentservice.php';
 require_once __DIR__ . '/../services/orderservice.php';
+
 require_once __DIR__ . '/controller.php';
+
 require_once '../vendor/autoload.php';
-
-
 
 class CartController extends Controller
 {
     private $cartService;
     private $restaurantService;
     private $reservationService;
+    private $danceService;
     private $sessionService;
     private $paymentService;
     private $orderService;
@@ -26,6 +28,7 @@ class CartController extends Controller
         parent::__construct();
         $this->cartService = new CartService();
         $this->restaurantService = new RestaurantService();
+        $this->danceService = new DanceService();
         $this->reservationService = new ReservationService();
         $this->sessionService = new SessionService();
         $this->orderService = new OrderService();
@@ -34,48 +37,134 @@ class CartController extends Controller
 
     public function index()
     {
-        $VAT = 1.09; //VAT is 9%
-        $totalAmount = 0;
-        $items = array();
-        $data = array();
+        $VAT = 0.09; //VAT is 9%
+        $VATAmount = $subTotal = $totalAmount = $reservationFee = 0;
+        $reservations = $tickets = $reservationData = $ticketData = array();
 
-        if (isset($_SESSION["logedin"])) {
-            $loggedInUser = $this->loggedInUser;
-            $items = $this->reservationService->getFromCartByUserId($loggedInUser->getId());
-        } else {
-            if (isset($_SESSION['cart'])) {
-                $items = $this->reservationService->getFromCartByCartId($_SESSION['cart']);
-            }
+        $reservations = ($this->getReservationsAndTickets())['reservations'];
+        $tickets = ($this->getReservationsAndTickets())['tickets'];
+        $cartId = ($this->getReservationsAndTickets())['cartId'];
+
+        if (isset($_GET['saveCart'])) {
+            $this->cartService->duplicateCartItemsByCartId(htmlspecialchars($_GET['saveCart']), $cartId);
+            header("Location: /cart/index");
         }
 
-        if (!empty($items)) {
-            foreach ($items as $item) {
-                $itemData = array(
-                    'id' => $item->getId(),
-                    'comment' => $item->getComments(),
-                    'amountAbove12' => $item->getAmountAbove12(),
-                    'amountUnderOr12' => $item->getAmountUnderOr12(),
-                    'price' => number_format($this->reservationService->getPrice($item->getId()), 2),
-                    'restaurant' => $this->restaurantService->getById($item->getRestaurantId())->getName(),
-                    'session' => $this->sessionService->getById($item->getSessionId())->getName(),
-                    'date' => $item->getDate()
-                );
-                $totalAmount += $item->getAmountAbove12() * 10;
-                $totalAmount += $item->getAmountUnderOr12() * 10;
-                $totalAmount += $this->reservationService->getPrice($item->getId());
-
-                $data[] = $itemData;
-            }
+        if (!empty($tickets)) {
+            $ticketInfo = $this->getTicketData($tickets);
+            $ticketData = $ticketInfo['ticketData'];
+            $subTotal += $ticketInfo['subTotal'];
         }
-        //var_dump($items);
-        $totalAmount = $totalAmount * $VAT;
+
+        if (!empty($reservations)) {
+            $reservationInfo = $this->getReservationData($reservations);
+            $reservationData = $reservationInfo['reservationData'];
+            $reservationFee = $reservationInfo['reservationFee'];
+            $subTotal += $reservationInfo['subTotal'];
+        }
+
+        $totalAmount = $subTotal + $reservationFee;
+        $VATAmount = $totalAmount * $VAT;
+        $totalAmount += $VATAmount;
+
         $_SESSION['totalAmount'] = $totalAmount;
-        //var_dump($totalAmount);
+        $_SESSION['VATAmount'] = $VATAmount;
+        $_SESSION['reservationFee'] = $reservationFee;
+        $_SESSION['subTotal'] = $subTotal;
+        
+        $_SESSION['cartItems'] = array("reservations" => $reservationData, "tickets" => $ticketData);
+
         require __DIR__ . '/../views/cart/index.php';
     }
 
-    function removeItem()
-    {
+    function getReservationsAndTickets() {
+        $reservations = array();
+        $tickets = array();
+        $cartId = null;
+    
+        if (isset($_GET['share'])) {
+            $sharedCartId = $_GET['share'];
+            $reservations = $this->reservationService->getFromCartByCartId($sharedCartId);
+            $tickets = $this->danceService->getTicketFromCartByCartId($sharedCartId);
+        } else {
+            if (isset($_SESSION["logedin"])) {
+                $loggedInUser = $this->loggedInUser;
+                $reservations = $this->reservationService->getFromCartByUserId($loggedInUser->getId());
+                $tickets = $this->danceService->getTicketsFromCartByUserId($loggedInUser->getId());
+                $cartId = $this->cartService->getCartIdByUserId($loggedInUser->getId())['id'];
+            } else {
+                if (isset($_SESSION['cart'])) {
+                    $reservations = $this->reservationService->getFromCartByCartId($_SESSION['cart']);
+                    $tickets = $this->danceService->getTicketFromCartByCartId($_SESSION['cart']);
+                    $cartId = $_SESSION['cart'];
+                }
+            }
+        }
+
+        return [
+            'reservations' => $reservations,
+            'tickets' => $tickets,
+            'cartId' => $cartId
+        ];
+    }
+
+    function getReservationData($reservations) {
+        $reservationData = array();
+        $reservationFeePerPerson = 10;
+        $reservationFee = 0;
+        $subTotal = 0;
+    
+        foreach ($reservations as $reservation) {
+            $item = array(
+                'id' => $reservation->getId(),
+                'comment' => $reservation->getComments(),
+                'amountAbove12' => $reservation->getAmountAbove12(),
+                'amountUnderOr12' => $reservation->getAmountUnderOr12(),
+                'price' => number_format($this->reservationService->getPrice($reservation->getId()), 2),
+                'restaurant' => $this->restaurantService->getById($reservation->getRestaurantId())->getName(),
+                'session' => $this->sessionService->getById($reservation->getSessionId())->getName(),
+                'sessionId' => $reservation->getSessionId(),
+                'date' => $reservation->getDate()
+            );
+            $reservationFee += ($reservation->getAmountAbove12() + $reservation->getAmountUnderOr12()) * $reservationFeePerPerson;
+            $subTotal += $this->reservationService->getPrice($reservation->getId());
+    
+            $reservationData[] = $item;
+        }
+    
+        return [
+            'reservationData' => $reservationData,
+            'reservationFee' => $reservationFee,
+            'subTotal' => $subTotal
+        ];
+    }
+
+    private function getTicketData($tickets) {
+        $ticketData = array();
+        $subTotal = 0;
+    
+        foreach ($tickets as $ticket) {
+            $item = array(
+                'id' => $ticket->getId(),
+                'quantity' => $ticket->getQuantity(),
+                'price' => number_format($ticket->getPrice() * $ticket->getQuantity(), 2),
+                'artist' => $ticket->getArtist(),
+                'venue' => $ticket->getVenue(),
+                'date' => $ticket->getDate(),
+                'session' => $ticket->getSession()
+            );
+            $subTotal += ($ticket->getPrice() * $ticket->getQuantity());
+    
+            $ticketData[] = $item;
+        }
+    
+        return [
+            'ticketData' => $ticketData,
+            'subTotal' => $subTotal
+        ];
+    }
+
+    function removeReservation() {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $id = htmlspecialchars($_GET['id']);
             $this->reservationService->deleteReservation($id);
@@ -83,14 +172,36 @@ class CartController extends Controller
         header("Location: /cart/index");
     }
 
-    function payment()
-    {
+    function removeTicket() {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $id = htmlspecialchars($_GET['id']);
+            $this->danceService->removeTicketFromCart($id);
+        }
+        header("Location: /cart/index");
+    }
+
+    function decreaseTicketQuantity() {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $ticketId = htmlspecialchars($_GET['ticketId']);
+            $this->cartService->decreaseTicketQuantity($ticketId);
+        }
+        header("Location: /cart/index");
+    }
+
+    function increaseTicketQuantity() {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $ticketId = htmlspecialchars($_GET['ticketId']);
+            $this->cartService->increaseTicketQuantity($ticketId);
+        }
+        header("Location: /cart/index");
+    }
+
+    function payment() {
+        require_once __DIR__ . '/../config/mollieApi.php';
         if (isset($_SESSION["logedin"])) {
             try {
-                $mollie = new \Mollie\Api\MollieApiClient();
-                $mollie->setApiKey('test_Ds3fz4U9vNKxzCfVvVHJT2sgW5ECD8');
-
                 $order = $this->orderService->insertIntoOrder($this->loggedInUser->getId(), date("Y-m-d"), "pending");
+                $this->orderService->transferCartItemsToOrderItemsById($order->getId(), $this->loggedInUser->getId());
 
                 $payment = $mollie->payments->create([
                     "amount" => [
@@ -98,24 +209,27 @@ class CartController extends Controller
                         "value" => number_format($_SESSION['totalAmount'], 2, '.', '')
                     ],
                     "description" => "Test payment",
-                    "redirectUrl" => "https://example.com/return",
-                    "webhookUrl" => "https://example.com/webhook", //webhookUrl: "https://......./api/webhook"
+                    "redirectUrl" => "https://09be-217-105-28-34.ngrok-free.app//redirecturl?orderId={$order->getId()}", //https://7d68-217-105-28-25.eu.ngrok.io/redirecturl?orderId={$order->getId()}
+                    "webhookUrl" => "https://09be-217-105-28-34.ngrok-free.app//api/webhook", 
                     "metadata" => [
                         "order_id" => $order->getId(),
+                        "user_id" => $order->getUserId(),
+                        "totalAmount" => $_SESSION['totalAmount'],
+                        "VATAmount" => $_SESSION['VATAmount'],
+                        "reservationFee" => $_SESSION['reservationFee'],
+                        "subTotal" => $_SESSION['subTotal'],
+                        "items" => $_SESSION['cartItems'],
                     ],
                 ]);
 
                 $this->paymentService->insert($payment->id, $order->getId(), $payment->amount->value);
 
                 header("Location: " . $payment->getCheckoutUrl(), true, 303);
-
             } catch (\Mollie\Api\Exceptions\ApiException $e) {
                 echo "API call failed: " . htmlspecialchars($e->getMessage());
             }
         } else {
             header("Location: /myaccount/register");
         }
-
-        //echo "Payment created: " . $payment->id;
     }
 }

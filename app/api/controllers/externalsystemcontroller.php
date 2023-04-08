@@ -31,10 +31,20 @@ class ExternalSystemController extends Controller
     function orders()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data = $this->apiService->getAllOrdersWithUsers();
+            $data = $this->apiService->getAllPaymentsWithOrders();
             if ($data == false) {
                 $this->respondWithCode(204);
                 exit;
+            }
+            foreach ($data as &$row) {
+                $row['order'] = json_decode($row['order']);
+                //$row['order']->items = json_decode($row['order']->items);
+                foreach ($row['order']->items as &$item) {
+                    if ($item->itemData != null)
+                        $item->itemData = json_decode($item->itemData);
+                }
+
+                $row['customer'] = json_decode($row['customer']);
             }
             $this->respond($data);
         } else {

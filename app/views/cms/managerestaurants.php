@@ -14,8 +14,10 @@
 </head>
 
 <body>
+    <?php include_once("header.php"); ?>
+
     <div class="px-5">
-        <h1>Restaurants Overview</h1>
+        <h1 class="text-center">Restaurants Overview</h1>
 
         <button class="btn btn-yellow-gradient my-4 py-3" onclick="location.href = 'addrestaurant'">Add new restaurant</button>
 
@@ -35,11 +37,11 @@
                 $props = $reflect->getProperties();
                 foreach ($this->restaurants as $restaurant) {
                     echo '<tr>';
-                    echo '<td class="d-flex flex-column"><a href="addrestaurant?edit='.$restaurant->getId().'">Edit</a><a href="?delete='.$restaurant->getId().'">Delete</a></td>';
+                    echo '<td class="d-flex flex-column"><a href="addrestaurant?edit=' . $restaurant->getId() . '">Edit</a><a href="?delete=' . $restaurant->getId() . '">Delete</a></td>';
                     foreach ($props as $propName) {
                         $property = $propName->getName();
                         $methodName = "get" . $property;
-                        echo '<td style="white-space: nowrap;">' . $restaurant->$methodName() . '</td>';
+                        echo '<td class="text-truncate" style="max-width: 300px">' . $restaurant->$methodName() . '</td>';
                     }
                     echo '</tr>';
                 }

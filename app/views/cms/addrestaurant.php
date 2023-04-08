@@ -14,8 +14,10 @@
 </head>
 
 <body>
+    <?php include_once("header.php"); ?>
+
     <div class="container d-flex flex-column justify-content-center align-items-center" id="addRestaurantPage">
-        <h1 class="my-4"><?php echo (isset($_GET['edit'])) ? "Edit Restaurant" : "Add New Restaurant"; ?></h1>
+        <h1 class="text-center my-4"><?php echo (isset($_GET['edit'])) ? "Edit Restaurant" : "Add New Restaurant"; ?></h1>
         <form action="" method="post" class="col-12 px-0 d-flex flex-column align-items-center" enctype="multipart/form-data">
             <div class="d-flex justify-content-center">
                 <div class="col-6">
@@ -36,7 +38,7 @@
                         <label>Session Duration</label>
                     </div>
                     <div class="user-box">
-                        <input type="number" step="0.5" name="priceIndicator" required value="<?php echo (isset($restaurant)) ? $restaurant->getPriceIndicator() : ''; ?>">
+                        <input type="number" step="1" name="priceIndicator" required value="<?php echo (isset($restaurant)) ? $restaurant->getPriceIndicator() : ''; ?>">
                         <label>Price Indicator</label>
                     </div>
                     <div class="user-box">
@@ -60,10 +62,6 @@
                     <div class="user-box">
                         <input type="text" name="address" required value="<?php echo (isset($restaurant)) ? $restaurant->getAddress() : ''; ?>">
                         <label>Address</label>
-                    </div>
-                    <div class="user-box">
-                        <input type="number" name="seats" required value="<?php echo (isset($restaurant)) ? $restaurant->getSeats() : ''; ?>">
-                        <label>Seats</label>
                     </div>
                     <div class="user-box">
                         <input type="text" name="website" required value="<?php echo (isset($restaurant)) ? $restaurant->getWebsite() : ''; ?>">

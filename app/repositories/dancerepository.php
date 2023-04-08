@@ -15,11 +15,65 @@ class DanceRepository extends Repository
             $dances = $stmt->fetchAll();
 
             return $dances;
-
         } catch (PDOException $e) {
             echo $e;
         }
     }
+
+    function getTicketsFromCartByUserId($userId)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT t.id, ci.quantity, t.price, 
+            COALESCE(GROUP_CONCAT(DISTINCT a.name SEPARATOR ', '), '') AS artist, 
+            COALESCE(GROUP_CONCAT(DISTINCT v.name SEPARATOR ', '), '') AS venue, 
+            t.date, t.session 
+     FROM Carts c 
+     JOIN CartItems ci ON c.Id = ci.cartId 
+     JOIN Tickets t ON ci.itemId = t.id 
+     LEFT JOIN DanceArtists da ON t.id = da.danceId 
+     LEFT JOIN Artists a ON da.artistId = a.id 
+     LEFT JOIN Venues v ON t.venueId = v.id 
+     WHERE c.userId = :userId 
+     GROUP BY t.id, t.session;");
+            $stmt->bindParam(':userId', $userId);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, "Ticket");
+            $tickets = $stmt->fetchAll();
+
+            return $tickets;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function getTicketFromCartByCartId($cartId)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT t.id as id, ci.quantity, t.price, t.session,
+            COALESCE(GROUP_CONCAT(DISTINCT a.name SEPARATOR ', '), '') as artist,
+            COALESCE(GROUP_CONCAT(DISTINCT v.name SEPARATOR ', '), '') as venue,
+            t.date 
+          FROM Carts c 
+          JOIN CartItems ci ON c.Id = ci.cartId 
+          JOIN Tickets t ON ci.itemId = t.id 
+          LEFT JOIN DanceArtists da ON t.id = da.danceId 
+          LEFT JOIN Artists a ON da.artistId = a.id 
+          LEFT JOIN Venues v ON t.venueId = v.id 
+          WHERE c.Id = :cartId
+          GROUP BY t.id, t.session;");
+            $stmt->bindParam(':cartId', $cartId);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, "Ticket");
+            $tickets = $stmt->fetchAll();
+
+            return $tickets;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
     function getAllDate()
     {
         try {
@@ -30,11 +84,9 @@ class DanceRepository extends Repository
             $dances = $stmt->fetchAll();
 
             return $dances;
-
         } catch (PDOException $e) {
             echo $e;
         }
-
     }
 
     function getAllArtist()
@@ -47,11 +99,11 @@ class DanceRepository extends Repository
             $artists = $stmt->fetchAll();
 
             return $artists;
-
         } catch (PDOException $e) {
             echo $e;
         }
     }
+
     function addDanceTocard($danceId, $userId, $ticketAmount)
     {
         try {
@@ -82,11 +134,11 @@ class DanceRepository extends Repository
             $dances = $stmt->fetchAll();
 
             return $dances;
-
         } catch (PDOException $e) {
             echo $e;
         }
     }
+
     function getArtistById()
     {
         try {
@@ -135,6 +187,57 @@ class DanceRepository extends Repository
             echo $e;
         }
     }
+
+    function getFromCartByUserId($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT *
+            FROM Tickets
+            WHERE id IN (
+                SELECT itemId
+                FROM CartItems
+                WHERE cartId = (
+                    SELECT id
+                    FROM Carts
+                    WHERE userId = :id))");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, "Ticket");
+            $tickets = $stmt->fetchAll();
+
+            return $tickets;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function removeTicketFromCart($ticketId)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM `CartItems` WHERE `itemId` = :itemId AND `type` = 'ticket'");
+            $stmt->bindParam(':itemId', $ticketId);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function deductAvailableTickets($amountToDeduct, $ticketId)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE Tickets
+            SET ticketAvailable = ticketAvailable - :amount
+            WHERE id = :id;");
+            $stmt->bindParam(':amount', $amountToDeduct);
+            $stmt->bindParam(':id', $ticketId);
+
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
 
     public function removeTicket($id)
     {

@@ -30,9 +30,25 @@ class DanceService
     {
         return $this->repository->getById($id);
     }
-    public function addDanceTocard($danceId,$userId,$ticketAmount)
+
+    function getFromCartByUserId($id)
     {
-        return $this->repository->addDanceTocard($danceId,$userId,$ticketAmount);
+        return $this->repository->getFromCartByUserId($id);
+    }
+
+    function getTicketsFromCartByUserId($userId)
+    {
+        return $this->repository->getTicketsFromCartByUserId($userId);
+    }
+
+    function getTicketFromCartByCartId($cartId)
+    {
+        return $this->repository->getTicketFromCartByCartId($cartId);
+    }
+
+    function removeTicketFromCart($ticketId)
+    {
+        $this->repository->removeTicketFromCart($ticketId);
     }
     public function updateDance($id,$date,$time,$venueId,$ticketAmount,$price)
     {

@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../repositories/cartrepository.php';
 
-class CartService 
+class CartService
 {
     private $repository;
 
@@ -13,6 +13,11 @@ class CartService
     function insertToCartItems($cartId, $itemId, $type, $quantity)
     {
         $this->repository->insertToCartItems($cartId, $itemId, $type, $quantity);
+    }
+
+    function duplicateCartItemsByCartId($cartIdFrom, $cartIdTo)
+    {
+        return $this->repository->duplicateCartItemsByCartId($cartIdFrom, $cartIdTo);
     }
 
     function getCartIdByUserId($id)
@@ -53,5 +58,25 @@ class CartService
     function changeVisitorCartToRegisterUserCart($visitorCartId, $userId)
     {
         $this->repository->changeVisitorCartToRegisterUserCart($visitorCartId, $userId);
+    }
+
+    function getTicketQuantity($cartId, $ticketId, $type)
+    {
+        return $this->repository->getTicketQuantity($cartId, $ticketId, $type);
+    }
+
+    function decreaseTicketQuantity($ticketId)
+    {
+        $this->repository->decreaseTicketQuantity($ticketId);
+    }
+
+    function increaseTicketQuantity($ticketId)
+    {
+        $this->repository->increaseTicketQuantity($ticketId);
+    }
+
+    function deleteCartItemsByUserId($userId)
+    {
+        $this->repository->deleteCartItemsByUserId($userId);
     }
 }

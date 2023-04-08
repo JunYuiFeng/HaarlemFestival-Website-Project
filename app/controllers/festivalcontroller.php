@@ -45,18 +45,6 @@ class FestivalController extends Controller
         $artists = $this->artistService->getAll();
         $venues = $this->venueService->getAll();
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            switch ($_POST['action']) {
-                case 'add':
-                    $danceId = htmlspecialchars($_POST['danceId']);
-                    $userId = htmlspecialchars($_SESSION["logedin"]);
-                    $ticketAmount = htmlspecialchars($_POST['ticketAmount']);
-                    $this->danceService->addDanceTocard($danceId, $userId, $ticketAmount);
-                    break;
-                default:
-                    break;
-            }
-        }
         require __DIR__ . '/../views/festival/dance.php';
     }
 

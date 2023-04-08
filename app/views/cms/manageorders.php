@@ -11,10 +11,12 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="../../js/manageorders.js"></script>
+    <script src="../../js/manageorders.js?s" defer></script>
 </head>
 
 <body>
+    <?php include_once("header.php"); ?>
+
     <div class="px-5">
         <h1 class="text-center">Orders Overview</h1>
 
@@ -23,37 +25,61 @@
         </button>
         <p id="statusMessage" class="text-danger mt-1"></p>
         <table class="table table-bordered table-striped table-hover mt-5">
-            <?php if (sizeof($orders) != 0) {
-                $reflect = new ReflectionClass('Order');
-                $props = $reflect->getProperties();
-                echo '<thead>';
-                echo '<th>Edit</th>';
-                foreach ($props as $property) {
-                    echo '<th><input type="checkbox" checked=true"><a>' . $property->getName() . '</a></th>';
-                }
-                echo '</thead>';
-            ?>
+            <thead>
+                <th><input type="checkbox" checked=true>Order Id</th>
+                <th><input type="checkbox" checked=true>Customer Username</th>
+                <th><input type="checkbox" checked=true>Customer Email</th>
+                <th><input type="checkbox" checked=true>Order Items</th>
+                <th><input type="checkbox" checked=true>Order Date</th>
+                <th><input type="checkbox" checked=true>Invoice Number</th>
+                <th><input type="checkbox" checked=true>Order Status</th>
+                <th><input type="checkbox" checked=true>Total Amount</th>
+            </thead>
             <?php
-                $reflect = new ReflectionClass('Order');
-                $props = $reflect->getProperties();
-                foreach ($orders as $order) {
-                    echo '<tr>';
-                    echo '<td class="d-flex flex-column"><a id="' . $order->getId() . '">Change status</a></td>';
-                    foreach ($props as $propName) {
-                        $property = $propName->getName();
-                        $methodName = "get" . $property;
-                        if (gettype($order->$methodName()) == "object") {
-                            $time = $order->$methodName()->format('H:i');
-                            echo '<td class="' . $property . '" style="white-space: nowrap;">' .  $time . '</td>';
-                        } else
-                            echo '<td class="' . $property . '" style="white-space: nowrap;">' . $order->$methodName() . '</td>';
-                    }
-                    echo '</tr>';
-                }
-            } else {
-                echo "<h3>There is no any orders</h3>";
-            }
+            foreach ($orders as $order) {
             ?>
+                <tr>
+                    <td>
+                        <p><?= $order['orderId'] ?></p>
+                    </td>
+                    <td>
+                        <p><?= $order['customerUsername'] ?></p>
+                    </td>
+                    <td>
+                        <p><?= $order['customerEmail'] ?></p>
+                    </td>
+                    <td>
+                        <p><?= $order['orderItems'] ?></p>
+                    </td>
+                    <td>
+                        <p><?= $order['orderDate'] ?></p>
+                    </td>
+                    <td>
+                        <p><?= $order['invoiceNumber'] ?></p>
+                        <button class="btn btn-success" onclick="downloadInvoice('<?= $order['invoiceNumber'] ?>')">Download Invoice</button>
+
+                    </td>
+                    <td>
+                        <p><?= $order['orderStatus'] ?></p>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Change
+                            </button>
+                            <div class="dropdown-menu" id="<?= $order['orderId'] ?>">
+                                <a class="dropdown-item" type="button">Open</a>
+                                <a class="dropdown-item" type="button">Pending</a>
+                                <a class="dropdown-item" type="button">Failed</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" type="button">Paid</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p><?= $order['totalAmount'] ?></p>
+                    </td>
+                </tr>
+
+            <?php } ?>
         </table>
     </div>
 </body>

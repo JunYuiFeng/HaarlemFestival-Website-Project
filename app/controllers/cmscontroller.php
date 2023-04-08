@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../services/editPageService.php';
-require_once __DIR__ . '/../services/restaurantsmanagementservice.php';
 require_once __DIR__ . '/../services/sessionservice.php';
 require_once __DIR__ . '/../services/reservationservice.php';
 require_once __DIR__ . '/../services/restaurantservice.php';
@@ -18,7 +17,6 @@ class CmsController extends Controller
     private $restaurants;
     private $restaurantService;
     private $contentEditorService;
-    private $restaurantManagementService;
     private $sessionService;
     private $reservationService;
     private $orderService;
@@ -33,7 +31,6 @@ class CmsController extends Controller
     {
         parent::__construct();
         $this->contentEditorService = new EditPageService();
-        $this->restaurantManagementService = new RestaurantsManagementService();
         $this->restaurantService = new RestaurantService();
         $this->sessionService = new SessionService();
         $this->reservationService = new ReservationService();
@@ -45,10 +42,15 @@ class CmsController extends Controller
         $this->msg = "";
     }
 
-    public function usermanagement()
+    public function index()
+    {
+        require __DIR__ . '/../views/cms/index.php';
+    }
+
+    public function manageusers()
     {
         $users = $this->userService->getAll();
-        require __DIR__ . '/../views/cms/usermanagement.php';
+        require __DIR__ . '/../views/cms/manageusers.php';
     }
     public function manageDance()
     {
@@ -147,9 +149,9 @@ class CmsController extends Controller
     public function editpagecontent()
     {
         if (isset($_GET["webPage"])) {
-            $webPage = $_GET["webPage"];
+            $webPage = htmlspecialchars($_GET["webPage"]);
             if (isset($_POST['editor'])) {
-                $editor_data = $_POST['editor'];
+                $editor_data = htmlspecialchars($_POST['editor']);
                 $this->contentEditorService->setNewPageContent($webPage, $editor_data);
             }
             $this->content = $this->contentEditorService->getPageContent($webPage);
@@ -160,21 +162,21 @@ class CmsController extends Controller
         }
     }
 
-    public function restaurants()
+    public function managerestaurants()
     {
-        $this->restaurants = $this->restaurantManagementService->getAll();
+        $this->restaurants = $this->restaurantService->getAll();
         if (isset($_GET["delete"])) {
-            $id = $_GET['delete'];
-            $this->restaurantManagementService->deleteRestaurant($id);
-            header("location: restaurants");
+            $id = htmlspecialchars($_GET['delete']);
+            $this->restaurantService->deleteRestaurant($id);
+            header("location: managerestaurants");
         }
-        require __DIR__ . '/../views/cms/restaurants.php';
+        require __DIR__ . '/../views/cms/managerestaurants.php';
     }
 
     public function addrestaurant()
     {
         if (isset($_GET["edit"])) {
-            $restaurant = $this->restaurantManagementService->getById($_GET["edit"]);
+            $restaurant = $this->restaurantService->getById(htmlspecialchars($_GET["edit"]));
         }
         if (isset($_POST["addrestaurant"])) {
             foreach ($_POST as $field) {
@@ -182,7 +184,7 @@ class CmsController extends Controller
                     $this->msg = "Please fill all the fields";
             }
             if ($this->msg == "") {
-                $restaurant = (!isset($_GET["edit"])) ? new Restaurant() : $restaurant;
+                $restaurant = (!isset(($_GET["edit"]))) ? new Restaurant() : $restaurant;
                 if (isset($_FILES['coverImg']) && $_FILES['coverImg']['name'] != "") {
                     $coverImg = $_FILES['coverImg'];
                     if ($coverImg && $coverImg['error'] == 0) {
@@ -199,36 +201,35 @@ class CmsController extends Controller
                 } else {
                     if (isset($_GET["edit"])) {
                         $this->msg = "";
-                        $restaurant->setCoverImg($this->restaurantManagementService->getById($_GET["edit"])->getCoverImg());
+                        $restaurant->setCoverImg($this->restaurantService->getById(htmlspecialchars($_GET["edit"]))->getCoverImg());
                     } else
                         $this->msg = "Please upload a cover image";
                 }
             }
             if ($this->msg == "") {
-                $restaurant->setName($_POST['name']);
-                $restaurant->setCuisine($_POST['cuisine']);
-                $restaurant->setFoodType($_POST['foodType']);
-                $restaurant->setSessionDuration($_POST['sessionDuration']);
-                $restaurant->setPriceIndicator($_POST['priceIndicator']);
-                $restaurant->setPriceAge12AndUnder($_POST['priceAge12AndUnder']);
-                $restaurant->setRating($_POST['rating']);
+                $restaurant->setName(htmlspecialchars($_POST['name']));
+                $restaurant->setCuisine(htmlspecialchars($_POST['cuisine']));
+                $restaurant->setFoodType(htmlspecialchars($_POST['foodType']));
+                $restaurant->setSessionDuration(htmlspecialchars($_POST['sessionDuration']));
+                $restaurant->setPriceIndicator(htmlspecialchars($_POST['priceIndicator']));
+                $restaurant->setPriceAge12AndUnder(htmlspecialchars($_POST['priceAge12AndUnder']));
+                $restaurant->setRating(htmlspecialchars($_POST['rating']));
                 $restaurant->setHasMichelin(isset($_POST['hasMichelin']));
                 $restaurant->setIsFestival(isset($_POST['isFestival']));
-                $restaurant->setPriceAboveAge12($_POST['priceAboveAge12']);
-                $restaurant->setPhoneNumber($_POST['phoneNumber']);
-                $restaurant->setAddress($_POST['address']);
-                $restaurant->setSeats($_POST['seats']);
-                $restaurant->setWebsite($_POST['website']);
-                $restaurant->setDescription($_POST['description']);
+                $restaurant->setPriceAboveAge12(htmlspecialchars($_POST['priceAboveAge12']));
+                $restaurant->setPhoneNumber(htmlspecialchars($_POST['phoneNumber']));
+                $restaurant->setAddress(htmlspecialchars($_POST['address']));
+                $restaurant->setWebsite(htmlspecialchars($_POST['website']));
+                $restaurant->setDescription(htmlspecialchars($_POST['description']));
 
                 if (isset($_GET["edit"])) {
-                    if ($this->restaurantManagementService->updateRestaurant($restaurant, $_GET["edit"])) {
-                        header("location: restaurants");
+                    if ($this->restaurantService->updateRestaurant($restaurant, htmlspecialchars($_GET["edit"]))) {
+                        header("location: managerestaurants");
                     } else
                         $this->msg = "Something went wrong. Please try again";
                 } else {
-                    if ($this->restaurantManagementService->insertRestaurant($restaurant)) {
-                        header("location: restaurants");
+                    if ($this->restaurantService->insertRestaurant($restaurant)) {
+                        header("location: managerestaurants");
                     } else
                         $this->msg = "Something went wrong. Please try again";
                 }
@@ -241,7 +242,7 @@ class CmsController extends Controller
     public function managesessions()
     {
         if (isset($_GET["edit"])) {
-            $editSession = $this->sessionService->getById($_GET["edit"]);
+            $editSession = $this->sessionService->getById(htmlspecialchars($_GET["edit"]));
         }
 
         if (isset($_POST["addSession"])) {
@@ -253,6 +254,7 @@ class CmsController extends Controller
                 $session = (isset($_GET["edit"])) ? $editSession : new Session(); // checking if user edits session or creates new one
                 $session->setName($_POST["name"]);
                 $session->setStartTime($_POST["startTime"]);
+                $session->setSeats($_POST["seats"]);
                 $session->setEndTime($_POST["endTime"]);
                 $session->setRestaurantId($_POST["restaurantId"]);
                 if (isset($_GET["edit"])) {
@@ -270,16 +272,62 @@ class CmsController extends Controller
         }
 
         if (isset($_GET["delete"])) {
-            $id = $_GET['delete'];
+            $id = htmlspecialchars($_GET['delete']);
             $this->sessionService->delete($id);
             header("location: managesessions");
         }
+
         $sessions = $this->sessionService->getAll();
+        $sessionsData = array();
+        foreach ($sessions as $session) {
+            $restaurant = $this->restaurantService->getById($session->getRestaurantId());
+            $data = array(
+                "id" => $session->getId(),
+                "name" => $session->getName(),
+                "startTime" => $session->getStartTime()->format('H:i'),
+                "endTime" => $session->getEndTime()->format('H:i'),
+                "restaurantId" => $session->getRestaurantId(),
+                "restaurantName" => $restaurant->getName(),
+                "seats" => $session->getSeats()
+            );
+            array_push($sessionsData, $data);
+        }
         require __DIR__ . '/../views/cms/managesessions.php';
     }
 
     public function managereservations()
     {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $reservation = new Reservation();
+            $reservation->setRestaurantId(htmlspecialchars($_POST['restaurant']));
+            $reservation->setDate(htmlspecialchars($_POST['date']));
+            $reservation->setAmountAbove12(htmlspecialchars($_POST['amountAbove12']));
+            $reservation->setAmountUnderOr12(htmlspecialchars($_POST['amountUnderOr12']));
+            $reservation->setSessionId(htmlspecialchars($_POST['session']));
+            $reservation->setStatus(htmlspecialchars($_POST['status']));
+            $reservation->setComments(htmlspecialchars($_POST['comment']));
+
+            $this->reservationService->insertReservation($reservation);
+        }
+
+        if (isset($_GET["deactivateid"])) {
+            $id = htmlspecialchars($_GET['deactivateid']);
+            $this->reservationService->updateStatus($id, 'unactive');
+
+            header("location: managereservations");
+        }
+
+        if (isset($_GET["activateid"])) {
+            $id = htmlspecialchars($_GET['activateid']);
+            $this->reservationService->updateStatus($id, 'active');
+
+            header("location: managereservations");
+        }
+
+        $restaurants = $this->restaurantService->getAll();
+
         $reservationData = array();
 
         foreach ($this->reservationService->getAll() as $reservation) {
@@ -299,7 +347,7 @@ class CmsController extends Controller
 
     public function manageorders()
     {
-        $orders = $this->orderService->getAll();
+        $orders = $this->orderService->getAllInUserFriendlyFormat();
         require __DIR__ . '/../views/cms/manageorders.php';
     }
 
@@ -307,6 +355,13 @@ class CmsController extends Controller
     {
         if (isset($_POST['createKey'])) {
             $this->apiKeyService->create();
+        }
+        if (isset($_GET["delete"])) {
+            $token = htmlspecialchars($_GET['delete']);
+            $apiKey = new ApiKey();
+            $apiKey->setToken($token);
+            $this->apiKeyService->delete($apiKey);
+            header("location: manageapikeys");
         }
         $apiKeys = $this->apiKeyService->getAll();
         require __DIR__ . '/../views/cms/manageapikeys.php';

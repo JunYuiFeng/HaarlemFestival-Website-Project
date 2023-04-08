@@ -14,39 +14,38 @@
 </head>
 
 <body>
+    <?php include_once("header.php"); ?>
+
     <div class="px-5">
-        <h1>Restaurant Sessions Overview</h1>
+        <h1 class="text-center">Restaurant Sessions Overview</h1>
 
         <button class="btn btn-yellow-gradient my-4 py-3" onclick="location.href='manageSessions#addSession'">Add new session</button>
 
         <table class="table table-bordered table-striped table-hover">
-            <?php if (sizeof($sessions) != 0) {
-                $reflect = new ReflectionClass('Session');
-                $props = $reflect->getProperties();
-                echo '<thead>';
-                echo '<th>Edit</th>';
-                foreach ($props as $property) {
-                    echo '<th>' . $property->getName() . '</th>';
-                }
-                echo '</thead>';
-            ?>
+            <thead>
+                <th>Action</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Restaurant Id</th>
+                <th>Restaurant Name</th>
+                <th>Seats</th>
+            </thead>
             <?php
-                $reflect = new ReflectionClass('Session');
-                $props = $reflect->getProperties();
-                foreach ($sessions as $session) {
-                    echo '<tr>';
-                    echo '<td class="d-flex flex-column"><a href="?edit=' . $session->getId() . '">Edit</a><a href="?delete=' . $session->getId() . '">Delete</a></td>';
-                    foreach ($props as $propName) {
-                        $property = $propName->getName();
-                        $methodName = "get" . $property;
-                        if (gettype($session->$methodName()) == "object") {
-                            $time = $session->$methodName()->format('H:i');
-                            echo '<td style="white-space: nowrap;">' .  $time . '</td>';
-                        } else
-                            echo '<td style="white-space: nowrap;">' . $session->$methodName() . '</td>';
-                    }
-                    echo '</tr>';
-                }
+            if (sizeof($sessionsData) != 0) {
+                foreach ($sessionsData as $session) { ?>
+                    <tr>
+                        <td class="d-flex flex-column"><a href="?edit=<?= $session['id'] ?>#addSession">Edit</a><a href="?delete=<?= $session['id'] ?>">Delete</a></td>
+                        <td style="white-space: nowrap;"><?= $session['id'] ?></td>
+                        <td style="white-space: nowrap;"><?= $session['name'] ?></td>
+                        <td style="white-space: nowrap;"><?= $session['startTime'] ?></td>
+                        <td style="white-space: nowrap;"><?= $session['endTime'] ?></td>
+                        <td style="white-space: nowrap;"><?= $session['restaurantId'] ?></td>
+                        <td style="white-space: nowrap;"><?= $session['restaurantName'] ?></td>
+                        <td style="white-space: nowrap;"><?= $session['seats'] ?></td>
+                    </tr>
+            <? }
             } else {
                 echo "<h2>There are no any sessions</h2>";
             }
@@ -71,15 +70,19 @@
                     <input type="text" name="restaurantId" required value="<?php echo (isset($editSession)) ? $editSession->getRestaurantId() : ''; ?>">
                     <label>Restaurant Id</label>
                 </div>
+                <div class="user-box">
+                    <input type="text" name="seats" required value="<?php echo (isset($editSession)) ? $editSession->getSeats() : ''; ?>">
+                    <label>Amount of Seats</label>
+                </div>
             </div>
             <button class="btn btn-red-gradient my-2 py-3 col-6" name="addSession" value="yes" type="submit"><?php echo (isset($_GET['edit'])) ? "Save Session" : "Add Session"; ?></button>
             <p class="error-message"><?php echo isset($this->msg) ? $this->msg : '' ?></p>
 
         </form>
     </div>
-            
+
     <script>
-        function ScrollToAddSession(){
+        function ScrollToAddSession() {
             console.log(document.querySelector("form"));
             window.scrollTo(0, document.body.scrollHeight);
         }

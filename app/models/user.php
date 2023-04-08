@@ -37,10 +37,12 @@ class User implements \JsonSerializable
     {
         return $this->id;
     }
+    
     public function getUsername()
     {
         return $this->username;
     }
+
     public function getEmail()
     {
         return $this->email;

@@ -39,11 +39,6 @@
             <b>Festival</b>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/visithaarlem/personalprogram">
-            <b>Personal Program</b>
-          </a>
-        </li>
         <li class="nav-item" id="cartIcon" onclick="document.location.href='/cart/index'">
           <a class="nav-link">
             <svg class="d-inline" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" viewBox="0 0 576 512">

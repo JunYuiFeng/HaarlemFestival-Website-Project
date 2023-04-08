@@ -34,9 +34,12 @@ class MyAccountController extends Controller
         $user = $this->userService->getById($_SESSION["logedin"]);
 
         if (isset($_POST['updateUsername'])) {
-            $validation = $this->userService->validateUsernameAndEmail($_POST['username'], $_POST['email'], $_SESSION["logedin"]);
+            $email = filter_var($_POST["email"], FILTER_SANITIZE_SPECIAL_CHARS);
+            $username = filter_var($_POST["username"], FILTER_SANITIZE_SPECIAL_CHARS);
+            $validation = $this->userService->validateUsernameAndEmail($username, $email, $_SESSION["logedin"]);
             if (is_bool($validation)) {
-                if ($this->userService->updateUsernameAndEmail($_POST['username'], $_POST['email'], $_SESSION["logedin"])) {
+
+                if ($this->userService->updateUsernameAndEmail($username, $email, $_SESSION["logedin"])) {
                     $this->userService->sendConfirmationEmail($user->getEmail(), $user->getUsername());
                     $msg = "Profile information was successfully updated";
                     $user = $this->userService->getById($_SESSION["logedin"]);
@@ -51,8 +54,8 @@ class MyAccountController extends Controller
             if ($_POST['newPassword'] == $_POST['confirmNewPassword']) {
                 $validation = $this->userService->validatePassword($_POST['newPassword']);
                 if (is_bool($validation)) {
-                    $oldPass = $_POST['oldPassword'];
-                    $newPass = $_POST['newPassword'];
+                    $oldPass = filter_var($_POST['oldPassword'], FILTER_SANITIZE_SPECIAL_CHARS);;
+                    $newPass = filter_var($_POST['newPassword'], FILTER_SANITIZE_SPECIAL_CHARS);;
                     if (password_verify($oldPass, $user->getPassword())) {
                         $hasshedPassword = password_hash($newPass, PASSWORD_DEFAULT);
                         $this->userService->updatePassword($hasshedPassword, $user->getId());
@@ -90,67 +93,38 @@ class MyAccountController extends Controller
         require __DIR__ . '/../views/myaccount/index.php';
     }
 
-
-    public function updateItem($user)
-    {
-        try {
-            if (empty($_POST['username']) || empty($_POST['oldPassword']) || empty($_POST['email']) || empty($_POST['newPassword']) || empty($_POST['confirmationNewPassword'])) {
-                $msg = "field empty, please fill in";
-                return;
-            }
-            if ($_POST['newPassword'] == $_POST['confirmationNewPassword']) {
-                $password = password_hash(htmlspecialchars($_POST['newPassword']), PASSWORD_DEFAULT);
-                if ($user->getPassword() == $_POST['oldPassword']) {
-
-                    $username = htmlspecialchars($_POST['username']);
-
-                    $email = htmlspecialchars($_POST['email']);
-                    $id = htmlspecialchars($_POST['id']);
-
-                    $this->userService->editUser($username, $email, $password, $id);
-                    //$this->userService->sendLink($email);
-                } else {
-                    $msg = "old password is incorrect";
-                }
-            } else {
-                $msg = "new password and confirmation new password are not the same";
-            }
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
     public function login()
     {
         if (isset($_SESSION["logedin"])) {
             header("location: index");
-        } else {
-            if (isset($_POST["login"])) {
-                if (empty($_POST["username"]) || empty($_POST["password"])) {
-                    $this->msg = "field empty, please fill in";
-                } else {
-                    $username = filter_var($_POST["username"], FILTER_SANITIZE_SPECIAL_CHARS);
-                    $password = filter_var($_POST["password"], FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+        if (isset($_POST["login"])) {
+            if (empty($_POST["username"]) || empty($_POST["password"])) {
+                $this->msg = "field empty, please fill in";
+            } else {
+                $username = filter_var($_POST["username"], FILTER_SANITIZE_SPECIAL_CHARS);
+                $password = filter_var($_POST["password"], FILTER_SANITIZE_SPECIAL_CHARS);
 
-                    $res = $this->loginService->login($username, $password);
-                    if (ctype_digit($res)) {
-                        if (strstr($username, "@")) {
-                            $user = $this->userService->getByEmail($username);
-                        } else {
-                            $user = $this->userService->getByUsername($username);
-                        }
-                        $_SESSION["logedin"] = $user->getId();
-                        if ($user->getUserType() == "employee") {
-                            $_SESSION["employee"] = $user->getId();
-                        }
-                        unset($_SESSION['cart']);
-                        header("location: index");
+                $res = $this->loginService->login($username, $password);
+                if (ctype_digit($res)) {
+                    if (strstr($username, "@")) {
+                        $user = $this->userService->getByEmail($username);
                     } else {
-                        $this->msg = "incorrect username or password";
+                        $user = $this->userService->getByUsername($username);
                     }
+                    $_SESSION["logedin"] = $user->getId();
+                    if ($user->getUserType() == "employee") {
+                        $_SESSION["employee"] = $user->getId();
+                    }
+                    unset($_SESSION['cart']);
+
+                    header("location: index");
+                } else {
+                    $this->msg = "incorrect username or password";
                 }
             }
         }
+
 
         $msg = $this->msg;
         require __DIR__ . '/../views/myaccount/login.php';
@@ -169,21 +143,23 @@ class MyAccountController extends Controller
                         if (empty($_POST["email"]) || empty($_POST["username"]) || empty($_POST["password"])) {
                             $this->msg = "Please fill all the fields";
                         } else {
-                            $email = $_POST["email"];
-                            $username = $_POST["username"];
-                            $password = $_POST["password"];
+
+                            $email = filter_var($_POST["email"], FILTER_SANITIZE_SPECIAL_CHARS);
+                            $username = filter_var($_POST["username"], FILTER_SANITIZE_SPECIAL_CHARS);
+                            $password = filter_var($_POST["password"], FILTER_SANITIZE_SPECIAL_CHARS);
 
                             $res = $this->registerService->register($email, $username, $password);
 
-                            if (isset($_SESSION['cart'])) {
-                                $this->cartService->changeVisitorCartToRegisterUserCart($_SESSION['cart'], $res);
-                                unset($_SESSION['cart']);
-                            } else {
-                                $this->cartService->createRegisterUserCart($res);
-                            }
+
 
                             if (ctype_digit($res)) {
                                 $_SESSION["logedin"] = $res;
+                                if (isset($_SESSION['cart'])) {
+                                    $this->cartService->changeVisitorCartToRegisterUserCart($_SESSION['cart'], $res);
+                                    unset($_SESSION['cart']);
+                                } else {
+                                    $this->cartService->createRegisterUserCart($res);
+                                }
                                 header("location: index");
                             } else {
                                 $this->msg = $res;
@@ -204,7 +180,7 @@ class MyAccountController extends Controller
                 $this->msg = "Please fill all the fields";
             } else {
                 $resetPasswordService = new ResetPasswordService();
-                $email = $_POST["email"];
+                $email = filter_var($_POST["email"], FILTER_SANITIZE_SPECIAL_CHARS);
                 if ($resetPasswordService->validateEmail($email)) {
                     if ($resetPasswordService->sendLink($email)) {
                         $this->msg = "Email sent successfully";
@@ -221,7 +197,7 @@ class MyAccountController extends Controller
     {
         if (isset($_GET["token"])) {
             $resetPasswordService = new ResetPasswordService();
-            $token = $_GET["token"];
+            $token = filter_var($_GET["token"], FILTER_SANITIZE_SPECIAL_CHARS);
             $user = $resetPasswordService->checkToken($token);
 
             if ($user == NULL) {
@@ -229,7 +205,7 @@ class MyAccountController extends Controller
             }
             if (isset($_POST["changePass"])) {
                 if ($_POST["newPassword"] == $_POST["newPasswordRepeat"]) {
-                    $password = $_POST["newPassword"];
+                    $password = filter_var($_POST["newPassword"], FILTER_SANITIZE_SPECIAL_CHARS);
                     $hasshedPassword = password_hash($password, PASSWORD_DEFAULT);
                     if ($resetPasswordService->setNewPassword($hasshedPassword, $user->getId())) {
                         $_SESSION["logedin"] = $user->getId();
@@ -251,4 +227,5 @@ class MyAccountController extends Controller
         $this->loginService->logout();
         header("location: login");
     }
+    
 }
