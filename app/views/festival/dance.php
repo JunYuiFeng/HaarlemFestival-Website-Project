@@ -115,7 +115,7 @@
             </div>
         <?
         } ?>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id="tickets">
 
             <div class="d-flex justify-content-around">
                 <button type="button" id="danceAllAccessPass" onclick="addAllAccessTicketToCart(65)"> Buy ticket for all-access pass for entire festival:

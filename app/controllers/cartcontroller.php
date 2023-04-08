@@ -122,6 +122,7 @@ class CartController extends Controller
                 'amountUnderOr12' => $reservation->getAmountUnderOr12(),
                 'price' => number_format($this->reservationService->getPrice($reservation->getId()), 2),
                 'restaurant' => $this->restaurantService->getById($reservation->getRestaurantId())->getName(),
+                'restaurantId' => $reservation->getRestaurantId(),
                 'session' => $this->sessionService->getById($reservation->getSessionId())->getName(),
                 'sessionId' => $reservation->getSessionId(),
                 'date' => $reservation->getDate()
