@@ -234,4 +234,17 @@ class CartRepository extends Repository
             echo $e;
         }
     }
+
+    function checkAvailability()
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM `CartItems` WHERE cartId = (SELECT id FROM `Carts` WHERE userId = :userId)");
+            $stmt->bindParam(':userId', $_SESSION['userId']);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
 }

@@ -61,4 +61,9 @@ class DanceService
     public function removeTicket($id){
         return $this->repository->removeTicket($id);
     }
+
+    function getTicketById($id)
+    {
+        return $this->repository->getTicketById($id);
+    }
 }

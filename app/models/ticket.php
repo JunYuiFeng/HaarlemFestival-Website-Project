@@ -33,10 +33,7 @@ class Ticket
         $this->time = date("h:i A", strtotime($this->time));
         return $this->time;
     }
-    public function getVenueId()
-    {
-        return $this->venueId;
-    }
+
     public function getVenue()
     {
         return $this->venue;
