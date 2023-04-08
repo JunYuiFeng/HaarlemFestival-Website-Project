@@ -14,5 +14,20 @@ class VenueService
     {
         return $this->repository->getAll();
     }
+    public function editVenue($id,$name,$address,$image)
+    {
+        return $this->repository->editVenue($id,$name,$address,$image);
+    }
+    public function addVenue($name,$address,$image)
+    {
+        return $this->repository->addVenue($name,$address,$image);
+    }
+    public function removeVenue($id)
+    {
+        return $this->repository->removeVenue($id);
+    }
+    public function getVenueIdByName($name){
+        return $this->repository->getVenueIdByName($name);
+    }
 }
 ?>

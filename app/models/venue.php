@@ -1,13 +1,23 @@
 <?php 
     class Venue{
-        private $vanueName;
+        private $id;
+        private $name;
         private $address;
+        private $image;
 
-        public function getVanueName(){
-            return $this->vanueName;
+        public function getId(){
+            return $this->id;
         }
+
+        public function getVenueName(){
+            return $this->name;
+        }
+
         public function getAddress(){
             return $this->address;
+        }
+        public function getImage(){
+            return $this->image;
         }
     }
 

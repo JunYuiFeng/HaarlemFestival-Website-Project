@@ -26,9 +26,17 @@ class Ticket
         $this->date = date("d-m-Y", strtotime($this->date));
         return $this->date;
     }
+    public function getDateForDB()
+    {
+        return $this->date;
+    }
     public function getTime()
     {
         $this->time = date("h:i A", strtotime($this->time));
+        return $this->time;
+    }
+    public function getTimeForDB()
+    {
         return $this->time;
     }
     public function getVenueId()

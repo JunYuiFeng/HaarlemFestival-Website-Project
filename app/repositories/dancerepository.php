@@ -7,7 +7,7 @@ class DanceRepository extends Repository
     function getAll()
     {
         try {
-            $stmt = $this->connection->prepare("SELECT t.id, t.date, t.time, t.session, t.duration, v.vanuesName AS venue, GROUP_CONCAT(a.name) AS artist,t.ticketAvailable ,t.price FROM Tickets t JOIN Venues v ON t.venueId = v.id JOIN DanceArtists da ON da.danceId = t.id JOIN Artists a ON da.artistId = a.id GROUP BY t.id;
+            $stmt = $this->connection->prepare("SELECT t.id, t.date, t.time, t.session, t.duration, v.name AS venue, GROUP_CONCAT(a.name) AS artist,t.ticketAvailable ,t.price FROM Tickets t JOIN Venues v ON t.venueId = v.id JOIN DanceArtists da ON da.danceId = t.id JOIN Artists a ON da.artistId = a.id GROUP BY t.id;
             ");
             $stmt->execute();
 
@@ -16,12 +16,12 @@ class DanceRepository extends Repository
 
             return $dances;
 
-        } catch (PDOException $e)
-        {
+        } catch (PDOException $e) {
             echo $e;
         }
     }
-    function getAllDate(){
+    function getAllDate()
+    {
         try {
             $stmt = $this->connection->prepare("SELECT DISTINCT date FROM Tickets");
             $stmt->execute();
@@ -31,13 +31,14 @@ class DanceRepository extends Repository
 
             return $dances;
 
-        } catch (PDOException $e)
-        {
+        } catch (PDOException $e) {
             echo $e;
         }
 
     }
-    function getAllArtist(){
+
+    function getAllArtist()
+    {
         try {
             $stmt = $this->connection->prepare("SELECT * FROM Artists");
             $stmt->execute();
@@ -47,12 +48,12 @@ class DanceRepository extends Repository
 
             return $artists;
 
-        } catch (PDOException $e)
-        {
+        } catch (PDOException $e) {
             echo $e;
         }
     }
-    function addDanceTocard($danceId,$userId,$ticketAmount){
+    function addDanceTocard($danceId, $userId, $ticketAmount)
+    {
         try {
             $stmt = $this->connection->prepare("INSERT INTO CartItems (cartId, itemId, type, quantity) 
             VALUES ('7149e134-9835-4f40-a4a8-194db4ab0982', :danceId, 'ticket', :ticketAmount);");
@@ -66,14 +67,14 @@ class DanceRepository extends Repository
 
             return $dances;
 
-        } catch (PDOException $e)
-        {
+        } catch (PDOException $e) {
         }
     }
-    function getAllByDate($date){
+    function getAllByDate($date)
+    {
         try {
             $stmt = $this->connection->prepare("SELECT * FROM `Tickets` WHERE date = :date ORDER BY `Dance`.`id` ASC");
-            
+
             $stmt->bindParam(':date', $date);
             $stmt->execute();
 
@@ -82,12 +83,12 @@ class DanceRepository extends Repository
 
             return $dances;
 
-        } catch (PDOException $e)
-        {
+        } catch (PDOException $e) {
             echo $e;
         }
     }
-    function getArtistById(){
+    function getArtistById()
+    {
         try {
             $stmt = $this->connection->prepare("SELECT DISTINCT artist FROM Dance");
             $stmt->execute();
@@ -97,8 +98,7 @@ class DanceRepository extends Repository
 
             return $dances;
 
-        } catch (PDOException $e)
-        {
+        } catch (PDOException $e) {
             echo $e;
         }
     }
@@ -114,11 +114,10 @@ class DanceRepository extends Repository
 
             return $dances;
 
-        } catch (PDOException $e)
-        {
+        } catch (PDOException $e) {
             echo $e;
         }
-    }  
+    }
 
     function getById($id)
     {
@@ -132,9 +131,74 @@ class DanceRepository extends Repository
 
             return $restaurant;
 
-        } catch (PDOException $e) 
-        {
+        } catch (PDOException $e) {
             echo $e;
+        }
+    }
+
+    public function removeTicket($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM Tickets WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function addDance($date,$time,$venueId,$artistId,$ticketAmount,$price)
+    {
+        try {
+            $stmt = $this->connection->prepare("INSERT INTO Tickets (date, time, venueId, ticketAvailable, price, session, duration) VALUES (:date , :time, :venueId, :ticketAmount , :price, 'club', '09:00:00');
+            SET @last_id_in_tickets = LAST_INSERT_ID();
+            INSERT INTO DanceArtists (danceId, artistId) VALUES (@last_id_in_tickets, :artistId);
+            ");
+            $stmt->bindParam(':date', $date);
+            $stmt->bindParam(':time', $time);
+            $stmt->bindParam(':venueId', $venueId);
+            $stmt->bindParam(':artistId', $artistId);
+            $stmt->bindParam(':ticketAmount', $ticketAmount);
+            $stmt->bindParam(':price', $price);
+            $stmt->execute();
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }        
+    
+    public function updateDance($id, $date, $time, $venueId, $artistId, $ticketAmount, $price)
+    {
+        try {
+            $stmt = $this->connection->prepare("ALTER TABLE DanceArtists DROP FOREIGN KEY DanceArtists_ibfk_2;
+            UPDATE Tickets t
+                JOIN Venues v ON v.id = t.venueId
+                JOIN DanceArtists da ON da.danceId = t.id
+                JOIN Artists a ON a.id = da.artistId
+                SET t.date = :date,
+                    t.time = :time,
+                    t.venueId = :venueId,
+                    da.artistId = :artistId,
+                    t.ticketAvailable = :ticketAmount,
+                    t.price = :price
+                WHERE t.id = :id;
+
+                
+            
+            ALTER TABLE DanceArtists ADD CONSTRAINT DanceArtists_ibfk_2 FOREIGN KEY (artistId) REFERENCES Artists (id) ON DELETE CASCADE ON UPDATE CASCADE;
+            ");
+
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':date', $date);
+            $stmt->bindParam(':time', $time);
+            $stmt->bindParam(':venueId', $venueId);
+            $stmt->bindParam(':artistId', $artistId);
+            $stmt->bindParam(':ticketAmount', $ticketAmount);
+            $stmt->bindParam(':price', $price);
+            $stmt->execute();
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
     }
 }

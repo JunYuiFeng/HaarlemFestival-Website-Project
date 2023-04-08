@@ -34,4 +34,15 @@ class DanceService
     {
         return $this->repository->addDanceTocard($danceId,$userId,$ticketAmount);
     }
+    public function updateDance($id,$date,$time,$venueId,$artistId,$ticketAmount,$price)
+    {
+        return $this->repository->updateDance($id,$date,$time,$artistId,$venueId,$ticketAmount,$price);
+    }
+    public function addDance($date,$time,$venueId,$artistId,$ticketAmount,$price)
+    {
+        return $this->repository->addDance($date,$time,$venueId,$artistId,$ticketAmount,$price);
+    }
+    public function removeTicket($id){
+        return $this->repository->removeTicket($id);
+    }
 }
