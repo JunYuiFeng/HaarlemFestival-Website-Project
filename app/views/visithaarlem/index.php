@@ -18,6 +18,7 @@
     <video autoplay muted loop class="videoBackground">
         <source src="/img/VisitHaarlemVideo.mp4" type="video/mp4">
     </video>
+
     <?= $this->content ?>
     <?php
     include __DIR__ . '/../footer.php';

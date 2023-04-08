@@ -18,8 +18,8 @@ class ContentEditorRepository extends Repository
 
             $statement->setFetchMode(PDO::FETCH_CLASS, "ContentEditor");
             $pageContent = $statement->fetch();
-
-            return $pageContent->getContent();
+            
+            return htmlspecialchars_decode($pageContent->getContent());
         } catch (PDOException $e) {
             echo $e;
         }

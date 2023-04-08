@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dance!</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
 
@@ -32,25 +31,16 @@
         <img src="/img/DanceHomeimg1.png" alt="DanceHomeimg1" id="danceHomeimg1">
     </div>
 
-    <div class="row" id="dancePersonalProrgam">
-        <div class="col-6">
-            Do you want to build your own personal program?
-        </div>
-        <div class="col-3">
-            <span class="personalProgramArrow">
-                <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-long-right.css' rel='stylesheet'>
-            </span>
-        </div>
-        <div class="col-3">
-            <button type="button" id="dancePersonalProgramButton">Build own personal prorgam</button>
-        </div>
-    </div>
+    <a class="arrow-down" href="#danceCard1"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+        </svg>
+    </a>
     <div class="row justify-content-center">
 
         <?php
         $count = 1;
         foreach ($artists as $artist) {
-            if ($artist->getName() != "Martin Garrix" && $artist->getName() != "Afrojack") {
+            if ($artist->getId() != 1 && $artist->getId() != 2) {
                 continue;
             }
         ?>
@@ -86,16 +76,15 @@
                                     0
                                 </p>
                             </div>
-                            <input type="button" onclick="location.href='dancedetailedpage?id=<?=$artist->getId() ?>'" class="danceViewMore"
-                                value=" view more">
+                            <input type="button" onclick="location.href='dancedetailedpage?id=<?= $artist->getId() ?>'" class="danceViewMore" value=" view more">
                         </div>
                     </div>
                 </div>
             </div>
-            <?php
+        <?php
         }
         foreach ($artists as $artist) {
-            if ($artist->getName() == "Martin Garrix" || $artist->getName() == "Afrojack") {
+            if ($artist->getId() == 1 || $artist->getId() == 2) {
                 continue;
             } ?>
             <div class="col-3">
@@ -117,8 +106,8 @@
                     <p>
                         <?= $artist->getThirdSong() ?>
                     </p>
-                    
-                    <button onclick="location.href='dancedetailedpage?id=<?=$artist->getId() ?>'" class="danceViewMore">
+
+                    <button onclick="location.href='dancedetailedpage?id=<?= $artist->getId() ?>'" class="danceViewMore">
                         view more
                     </button>
                 </div>
@@ -126,7 +115,7 @@
             </div>
         <?
         } ?>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id="tickets">
 
             <div class="d-flex justify-content-around">
                 <button type="button" id="danceAllAccessPass" onclick="addAllAccessTicketToCart(65)"> Buy ticket for all-access pass for entire festival:
@@ -259,7 +248,7 @@
                                 </label>
                             </div>
                             <div>
-                                <img src="/img/<?= $venue->getImage()?>" class="danceVanueImg">
+                                <img src="/img/<?= $venue->getImage() ?>" class="danceVanueImg">
                             </div>
                         </div>
                     </div>
