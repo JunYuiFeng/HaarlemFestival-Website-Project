@@ -294,7 +294,7 @@
                                 </select>
                             </td>
                             <td>              
-                                <select>     
+                                <select name="ticketArtist1">
                                 <?php 
                                     foreach ($artists as $artist): ?>
                                     <option value="<?= $artist->getName() ?>" >
