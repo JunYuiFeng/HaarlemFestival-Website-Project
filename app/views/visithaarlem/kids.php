@@ -14,6 +14,8 @@
     <?php
     include __DIR__ . '/../header.php';
     ?>
+
+
     <?= $this->content ?>
 
     <?php

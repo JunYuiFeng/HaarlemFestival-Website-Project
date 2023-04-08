@@ -781,44 +781,50 @@ footer {
 }
 
 #danceHomeNameArtist1 {
-  left: 1002px;
-  top: 170px;
+  left: 75%;
+  top: 25%;
 }
 
 #danceHomeNameArtist2 {
-  left: 1544px;
-  top: 250px;
+  left: 75%;
+  top: 45%;
 }
 
 #danceHomeNameArtist3 {
-  left: 1037px;
-  top: 500px;
+  left: 70%;
+  top: 65%;
 }
 
 #danceHomeNameArtist4 {
-  left: 416px;
-  top: 401px;
+  left: 43%;
+  top: 35%;
 }
 
 #danceHomeNameArtist5 {
-  left: 47px;
-  top: 508px;
+  left: 10%;
+  top: 55%;
 }
 
 #danceHomeNameArtist6 {
-  left: 272px;
-  top: 681px;
+  left: 30%;
+  top: 80%;
 }
 
-#dancePersonalProrgam {
-  background: linear-gradient(180deg, #9a031e 0%, #35020b 100%);
+.arrow-down {
   position: absolute;
-  top: 792px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 83%;
   left: 120px;
   padding: 45px;
   width: 80%;
   color: white;
   align-content: center;
+  text-decoration: none;
+}
+.arrow-down:hover{
+  color: #a1a1a1;
 }
 
 #dancePersonalProgramButton {
