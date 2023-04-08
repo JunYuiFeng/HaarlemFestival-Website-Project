@@ -35,8 +35,6 @@ class WebHookController extends Controller
     private $subTotal;
     private $invoiceService;
 
-
-
     function __construct()
     {
         parent::__construct();
@@ -74,14 +72,9 @@ class WebHookController extends Controller
             if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {
 
                 $this->cartService->deleteCartItemsByUserId($payment->metadata->user_id);
-                $this->sendInvoice($customerName, $customerEmail);
-                //$customerEmail = $this->userService->getById($payment->metadata->user_id)->getEmail();
+                $this->sendInvoice($customerName, $customerEmail, $orderId);
                 $this->sendTickets($orderId, $customerEmail);
 
-                /*
-                 * The payment is paid and isn't refunded or charged back.
-                 * At this point you'd probably want to start the process of delivering the product to the customer.
-                 */
             } elseif ($payment->isOpen()) {
                 /*
                  * The payment is open.
@@ -108,7 +101,7 @@ class WebHookController extends Controller
         }
     }
 
-    private function generateInvoice($customerName, $customerEmail)
+    private function generateInvoice($customerName, $customerEmail, $orderId)
     {
         $tickets = $this->items->tickets;
         $reservations = $this->items->reservations;
@@ -128,6 +121,8 @@ class WebHookController extends Controller
         $filename = 'invoice-' . $invoiceNr . '.pdf';
         $pdfData = $mpdf->Output($filename, 'S');
 
+        $this->invoiceService->updateInvoiceNr($orderId, $invoiceNr);
+
         // Save the PDF file to the invoices directory
         $filePath = __DIR__ . '/../../public/invoices/' . $filename;
         file_put_contents($filePath, $pdfData);
@@ -140,9 +135,9 @@ class WebHookController extends Controller
         ];
     }
 
-    private function sendInvoice($customerName, $customerEmail)
+    private function sendInvoice($customerName, $customerEmail, $orderId)
     {
-        $invoice = $this->generateInvoice($customerName, $customerEmail);
+        $invoice = $this->generateInvoice($customerName, $customerEmail, $orderId);
         $pdfData = $invoice['pdfData'];
         $filename = $invoice['filename'];
 

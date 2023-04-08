@@ -37,13 +37,6 @@ class CartController extends Controller
 
     public function index()
     {
-
-        // $mollie = new \Mollie\Api\MollieApiClient();
-        // $mollie->setApiKey('test_Ds3fz4U9vNKxzCfVvVHJT2sgW5ECD8');
-
-        // $invoice = $mollie->invoices->get("tr_F7puMvpQEz");
-        // var_dump($invoice);
-
         $VAT = 0.09; //VAT is 9%
         $reservationFeePerPerson = 10;
         $VATAmount = 0;
@@ -75,9 +68,10 @@ class CartController extends Controller
         }
 
         if (isset($_GET['saveCart'])) {
-            $this->cartService->duplicateCartItemsByCartId($_GET['saveCart'], $cartId);
+            $this->cartService->duplicateCartItemsByCartId(htmlspecialchars($_GET['saveCart']), $cartId);
             header("Location: /cart/index");
         }
+
         if (!empty($tickets)) {
             foreach ($tickets as $ticket) {
                 $item = array(
@@ -122,6 +116,7 @@ class CartController extends Controller
         $_SESSION['VATAmount'] = $VATAmount;
         $_SESSION['reservationFee'] = $reservationFee;
         $_SESSION['subTotal'] = $subTotal;
+        
         $_SESSION['cartItems'] = array("reservations" => $reservationData, "tickets" => $ticketData);
 
         require __DIR__ . '/../views/cart/index.php';
@@ -163,10 +158,6 @@ class CartController extends Controller
         header("Location: /cart/index");
     }
 
-    function createInvoice()
-    {
-    }
-
     function payment()
     {
         require_once __DIR__ . '/../config/mollieApi.php';
@@ -181,8 +172,8 @@ class CartController extends Controller
                         "value" => number_format($_SESSION['totalAmount'], 2, '.', '')
                     ],
                     "description" => "Test payment",
-                    "redirectUrl" => "https://7d68-217-105-28-25.eu.ngrok.io/cart", //"https://7d68-217-105-28-25.eu.ngrok.io/cart"
-                    "webhookUrl" => "https://7d68-217-105-28-25.eu.ngrok.io/api/webhook", //"https://7d68-217-105-28-25.eu.ngrok.io/api/webhook"
+                    "redirectUrl" => "https://09be-217-105-28-34.ngrok-free.app//redirecturl?orderId={$order->getId()}", //https://7d68-217-105-28-25.eu.ngrok.io/redirecturl?orderId={$order->getId()}
+                    "webhookUrl" => "https://09be-217-105-28-34.ngrok-free.app//api/webhook", 
                     "metadata" => [
                         "order_id" => $order->getId(),
                         "user_id" => $order->getUserId(),

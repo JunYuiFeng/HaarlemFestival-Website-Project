@@ -1,5 +1,6 @@
 <?php
 require '../vendor/autoload.php';
+require_once __DIR__ . '/../repositories/orderrepository.php';
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -7,9 +8,15 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 
-
 class InvoiceService
 {
+    private $orderRepository;
+
+    function __construct()
+    {
+        $this->orderRepository = new OrderRepository();
+    }
+
     public function sendInvoice($email, $attachment, $filename): bool
     {
         $mail = new PHPMailer(false); //Create an instance; passing `true` enables exceptions
@@ -42,5 +49,10 @@ class InvoiceService
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             return FALSE;
         }
+    }
+
+    function updateInvoiceNr($orderId, $invoiceNr)
+    {
+        $this->orderRepository->updateInvoiceNr($orderId, $invoiceNr);
     }
 }

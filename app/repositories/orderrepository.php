@@ -84,7 +84,7 @@ class OrderRepository extends Repository
         }
     }
 
-    function getOrderItemsByOrderId($id) // do i need a model class for orderitems? and seperate repo file for it?
+    function getOrderItemsByOrderId($id)
     {
         try {
             $stmt = $this->connection->prepare("SELECT * FROM `OrderItems` WHERE orderId = :id");
@@ -210,6 +210,18 @@ class OrderRepository extends Repository
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':status', $status);
             return $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function updateInvoiceNr($orderId, $invoiceNr)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE `Orders` SET `invoiceNr` = :invoiceNr WHERE id = :id");
+            $stmt->bindParam(':id', $orderId);
+            $stmt->bindParam(':invoiceNr', $invoiceNr);
+            $stmt->execute();
         } catch (PDOException $e) {
             echo $e;
         }
