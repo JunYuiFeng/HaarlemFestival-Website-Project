@@ -2,10 +2,11 @@
 
 class Order 
 {
-    private  $id;
-    private  $userId;
-    private  $date;
-    private  $status;
+    private $id;
+    private $userId;
+    private $date;
+    private $status;
+    private $invoiceNr;
 
     /**
      * @return int
@@ -81,6 +82,26 @@ class Order
     public function setStatus($status)
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of invoiceNr
+     */ 
+    public function getInvoiceNr()
+    {
+        return $this->invoiceNr;
+    }
+
+    /**
+     * Set the value of invoiceNr
+     *
+     * @return  self
+     */ 
+    public function setInvoiceNr($invoiceNr)
+    {
+        $this->invoiceNr = $invoiceNr;
 
         return $this;
     }
