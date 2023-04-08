@@ -110,7 +110,7 @@
                                         <p><b>€<?= $ticket['price'] ?></b></p>
                                     </div>
                                     <div class="col-1">
-                                        <a class="btn btn-danger" href="cart/removeTicket?id=<?= $ticket['id']; ?>">Remove</a>
+                                        <a class="btn btn-danger" href="removeTicket?id=<?= $ticket['id']; ?>">Remove</a>
                                     </div>
                                 </div>
                             </div>
