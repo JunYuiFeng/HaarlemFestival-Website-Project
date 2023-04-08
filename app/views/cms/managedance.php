@@ -222,7 +222,7 @@
                                         <?php 
                                             $checkedArtistName = explode(',', $ticket->getArtist());                                             
                                             for ($i = 0; $i < count($checkedArtistName); $i++): ?>
-                                                <select name="ticketArtist<?=$i?>">                      
+                                                <select name="ticketArtist<?=$i+1?>">                      
                                                     <?php 
                                                     foreach ($artists as $artist): ?>
                                                         <option value="<?= $artist->getName() ?>" <?= $artist->getName() === $checkedArtistName[$i] ? 'selected' : '' ?>>
@@ -232,7 +232,7 @@
                                                 </select>
                                             <?php endfor; ?>
 
-                                        <select name="ticketArtist1<?= count($checkedArtistName)+1?>">
+                                        <select name="ticketArtist<?= count($checkedArtistName)+1?>">
                                             <option value="">Select an artist</option>
                                             <?php foreach ($artists as $artist): ?>
                                                 <option value="<?= $artist->getName() ?>">

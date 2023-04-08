@@ -21,7 +21,6 @@
             <h1>Haarlem</h1><br>
             <h2>for dance<br>
                 festival</h2>
-
         </div>
     </div>
     <div>

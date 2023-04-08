@@ -50,7 +50,7 @@
         <?php
         $count = 1;
         foreach ($artists as $artist) {
-            if ($artist->getName() != "Martin Garrix" && $artist->getName() != "Afrojack") {
+            if ($artist->getId() != 1 && $artist->getId() != 2) {
                 continue;
             }
             ?>
@@ -95,7 +95,7 @@
             <?php
         }
         foreach ($artists as $artist) {
-            if ($artist->getName() == "Martin Garrix" || $artist->getName() == "Afrojack") {
+            if ($artist->getId() == 1 || $artist->getId() == 2) {
                 continue;
             } ?>
             <div class="col-3">

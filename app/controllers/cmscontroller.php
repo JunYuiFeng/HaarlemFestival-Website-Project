@@ -104,11 +104,24 @@ class CmsController extends Controller
                     }
                     $date = date('Y-m-d', strtotime($_POST['ticketDate']));
                     $time = date('H:i:s', strtotime($_POST['ticketTime']));
-                    $artistId = $this->artistService->getArtistIdByName($_POST['ticketArtist1']);
                     $venueId = $this->venueService->getVenueIdByName($_POST['ticketVenue']);
 
-                    $this->danceService->updateDance($_POST['ticketId'],$date, $time, $venueId, $artistId, $_POST['ticketAvaliable'], $_POST['ticketPrice']);
-                    $tickets = $this->danceService->getAll();
+                    
+                    $this->danceService->deleteDanceArtistsByDanceId($_POST['ticketId']);// delete all the artists for the dance so can edit later
+                    $artists = array();
+                    for ($i = 1; $i <= 5; $i++) {
+                        if (!empty($_POST['ticketArtist' . $i])) {
+                            $artists[] = $_POST['ticketArtist' . $i];
+                        }
+                    }      
+                    foreach ($artists as $artist) {
+                        $artistId = $this->artistService->getArtistIdByName($artist);
+                        echo $artistId;
+                        $this->danceService->addDanceArtist($_POST['ticketId'], $artistId);
+                    }                
+
+                    $this->danceService->updateDance($_POST['ticketId'], $date, $time, $venueId, $_POST['ticketAvaliable'], $_POST['ticketPrice']);
+
                     break;
                 case 'addTicket':
                     if ((empty($_POST['ticketDate']) || empty($_POST['ticketTime']) || empty($_POST['ticketVenue']) || empty($_POST['ticketArtist1']) || empty($_POST['ticketAvaliable']) || empty($_POST['ticketPrice']))) {
@@ -119,6 +132,7 @@ class CmsController extends Controller
                     $artistId = $this->artistService->getArtistIdByName($_POST['ticketArtist1']);
                     $venueId = $this->venueService->getVenueIdByName($_POST['ticketVenue']);
                     $this->danceService->addDance($date, $time, $venueId, $artistId, $_POST['ticketAvaliable'], $_POST['ticketPrice']);
+
                     $tickets = $this->danceService->getAll();
                     break;
                 default:

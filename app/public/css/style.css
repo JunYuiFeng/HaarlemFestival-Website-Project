@@ -953,13 +953,6 @@ footer .footerImg {
   size: 100px;
   filter: drop-shadow(0px 8px 18px #FFB800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #FFB800);
 }
-#danceDetailedPageBody .container {
-  display: flex; /* display divs side-by-side */
-  justify-content: space-between; /* evenly distribute space between divs */
-  align-items: center; /* vertically center divs */
-  background-color: #f5f5f5; /* set background color */
-  padding: 20px; /* add some padding */
-}
 #danceDetailedPageBody .box {
   width: 200px; /* set width */
   height: 200px; /* set height */
@@ -982,7 +975,6 @@ footer .footerImg {
   margin-bottom: 20%;
 }
 #danceDetailedPageBody .dancePageTitle {
-  color: white;
   margin-top: 50px;
   margin-bottom: 40px;
   filter: drop-shadow(0px 8px 18px #ffb800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #ffb800);
