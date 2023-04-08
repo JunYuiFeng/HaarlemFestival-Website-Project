@@ -1,20 +1,23 @@
 <?php
 require_once __DIR__ . '/../../services/userservice.php';
 require_once __DIR__ . '/../../services/sessionservice.php';
+require_once __DIR__ . '/../../services/orderservice.php';
 require_once __DIR__ . '/controller.php';
 
 class CmsController extends Controller
 {
     private $userService;
     private $sessionsService;
+    private $orderService;
 
     public function __construct()
     {
         parent::__construct();
         $this->userService = new UserService();
         $this->sessionsService = new SessionService();
+        $this->orderService = new OrderService();
     }
-    
+
     function index()
     {
 
@@ -30,7 +33,7 @@ class CmsController extends Controller
             $user = json_decode($body);
 
             if (empty($user->id) || empty($user->username) || empty($user->email) || empty($user->type)) {
-                
+
                 $this->respondWithError(400, "Not all data was provided");
                 return;
             }
@@ -83,11 +86,22 @@ class CmsController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $body = file_get_contents("php://input");
             $object = json_decode($body);
-    
+
             $sessions = $this->sessionsService->getSessionsArrayByRestaurantId($object->restaurantId);
         }
-    
+
         header("Content-Type: application/json");
         echo json_encode($sessions);
-    }    
+    }
+
+    function changeOrderStatus()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $body = file_get_contents("php://input");
+            $object = json_decode($body);
+
+            $res = $this->orderService->changeOrderStatus($object->id, $object->status);
+            echo json_encode($res);
+        }
+    }
 }

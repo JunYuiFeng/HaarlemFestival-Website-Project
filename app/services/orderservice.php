@@ -19,9 +19,9 @@ class OrderService
         return $this->repository->getAll();
     }
 
-    public function getAllAsJSON()
+    public function getAllInUserFriendlyFormat()
     {
-        return $this->repository->getAllAsJSON();
+        return $this->repository->getAllInUserFriendlyFormat();
     }
 
     function getLastOrderByUserId($id)
@@ -52,5 +52,10 @@ class OrderService
     function transferCartItemsToOrderItemsById($orderId, $userId)
     {
         $this->repository->transferCartItemsToOrderItemsById($orderId, $userId);
+    }
+
+    function changeOrderStatus($id, $status)
+    {
+        return $this->repository->changeOrderStatus($id, $status);
     }
 }

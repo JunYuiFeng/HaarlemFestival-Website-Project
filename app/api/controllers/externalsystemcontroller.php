@@ -40,7 +40,8 @@ class ExternalSystemController extends Controller
                 $row['order'] = json_decode($row['order']);
                 //$row['order']->items = json_decode($row['order']->items);
                 foreach ($row['order']->items as &$item) {
-                    $item->itemData = json_decode($item->itemData);
+                    if ($item->itemData != null)
+                        $item->itemData = json_decode($item->itemData);
                 }
 
                 $row['customer'] = json_decode($row['customer']);

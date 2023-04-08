@@ -50,7 +50,7 @@ class CmsController extends Controller
     public function manageusers()
     {
         $users = $this->userService->getAll();
-        require __DIR__ . '/../views/cms/usermanagement.php';
+        require __DIR__ . '/../views/cms/manageusers.php';
     }
     public function manageDance()
     {
@@ -333,7 +333,7 @@ class CmsController extends Controller
 
     public function manageorders()
     {
-        $orders = $this->orderService->getAll();
+        $orders = $this->orderService->getAllInUserFriendlyFormat();
         require __DIR__ . '/../views/cms/manageorders.php';
     }
 
