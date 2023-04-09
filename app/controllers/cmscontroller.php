@@ -40,6 +40,10 @@ class CmsController extends Controller
         $this->venueService = new VenueService();
         $this->artistService = new ArtistService();
         $this->msg = "";
+        if ($this->loggedInUser == null)
+            header("location: ../");
+        else if ($this->loggedInUser->getUserType() != "admin")
+            header("location: ../");
     }
 
     public function index()
@@ -117,7 +121,7 @@ class CmsController extends Controller
                         if (!empty($_POST['ticketArtist' . $i])) {
                             $artists[] = $_POST['ticketArtist' . $i];
                         }
-                    }      
+                    }
                     foreach ($artists as $artist) {
                         $artistId = $this->artistService->getArtistIdByName($artist);
                         $this->danceService->addDanceArtist(htmlspecialchars($_POST['ticketId']), $artistId);
@@ -184,7 +188,7 @@ class CmsController extends Controller
                 if (empty($field))
                     $this->msg = "Please fill all the fields";
             }
-            if ($this->msg == "") {                
+            if ($this->msg == "") {
                 $restaurant = (!isset(($_GET["edit"]))) ? new Restaurant() : $restaurant;
                 if (isset($_FILES['coverImg']) && $_FILES['coverImg']['name'] != "") {
                     $coverImg = $_FILES['coverImg'];
