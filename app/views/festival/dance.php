@@ -68,7 +68,7 @@
                             <img src="/img/DanceDemoMartin1.png" class="danceDemoMartin1">
                         </div>
                         <div class="col-6 justify-content-center">
-                            <img src="/img/<?= $artist->getIndexPicture() ?>">
+                            <img src="/img/<?= $artist->getIndexPicture() ?>" class="danceArtistImage">
                             <div class="col-12">
                                 <br></br>
                                 <p class="danceCardLine">
@@ -91,7 +91,7 @@
                     <h4>
                         <?= $artist->getName() ?>
                     </h4>
-                    <img src="/img/<?= $artist->getIndexPicture() ?>">
+                    <img src="/img/<?= $artist->getIndexPicture() ?>" class="DanceArtistImage">
                     <p>
                         <?= $artist->getStyle() ?>
                     </p>
