@@ -84,7 +84,7 @@ class FestivalController extends Controller
     public function validateTicket()
     {
         if (isset($_GET['token'])) {
-            $token = $_GET['token'];
+            $token = htmlspecialchars($_GET['token']);
             $this->ticketService = new TicketService();
             $ticketStatus = $this->ticketService->validateToken($token);
 

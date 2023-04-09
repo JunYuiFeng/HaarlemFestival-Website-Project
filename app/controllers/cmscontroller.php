@@ -40,6 +40,10 @@ class CmsController extends Controller
         $this->venueService = new VenueService();
         $this->artistService = new ArtistService();
         $this->msg = "";
+        if ($this->loggedInUser == null)
+            header("location: ../");
+        else if ($this->loggedInUser->getUserType() != "admin")
+            header("location: ../");
     }
 
     public function index()
@@ -108,18 +112,18 @@ class CmsController extends Controller
                     $time = date('H:i:s', strtotime($_POST['ticketTime']));
                     $venueId = $this->venueService->getVenueIdByName($_POST['ticketVenue']);
 
-                    
-                    $this->danceService->deleteDanceArtistsByDanceId($_POST['ticketId']);// delete all the artists for the dance so can edit later
+
+                    $this->danceService->deleteDanceArtistsByDanceId($_POST['ticketId']); // delete all the artists for the dance so can edit later
                     $artists = array();
                     for ($i = 1; $i <= 5; $i++) {
                         if (!empty($_POST['ticketArtist' . $i])) {
                             $artists[] = $_POST['ticketArtist' . $i];
                         }
-                    }      
+                    }
                     foreach ($artists as $artist) {
                         $artistId = $this->artistService->getArtistIdByName($artist);
                         $this->danceService->addDanceArtist($_POST['ticketId'], $artistId);
-                    }                
+                    }
 
                     $this->danceService->updateDance($_POST['ticketId'], $date, $time, $venueId, $_POST['ticketAvaliable'], $_POST['ticketPrice']);
 
@@ -182,7 +186,7 @@ class CmsController extends Controller
                 if (empty($field))
                     $this->msg = "Please fill all the fields";
             }
-            if ($this->msg == "") {                
+            if ($this->msg == "") {
                 $restaurant = (!isset(($_GET["edit"]))) ? new Restaurant() : $restaurant;
                 if (isset($_FILES['coverImg']) && $_FILES['coverImg']['name'] != "") {
                     $coverImg = $_FILES['coverImg'];
