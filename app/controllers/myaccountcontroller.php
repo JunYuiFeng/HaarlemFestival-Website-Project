@@ -3,7 +3,6 @@ include_once("../services/loginservice.php");
 include_once("../services/registerservice.php");
 require_once __DIR__ . '/../services/cartservice.php';
 
-require_once __DIR__ . "/../models/user.php";
 include_once("../services/resetpasswordservice.php");
 require_once __DIR__ . '/controller.php';
 

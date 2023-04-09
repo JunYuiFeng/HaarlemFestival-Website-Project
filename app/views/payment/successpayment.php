@@ -10,9 +10,9 @@
 </head>
 
 <body class="pt-5">
-    <p class="d-flex justify-content-center">Your payment has been successfully processed.</p>
+    <p class="d-flex justify-content-center">Your payment has been successfully processed.<br>Your tickets and invoice were sent on your email</p>
     <div class="d-flex justify-content-center">
-        <a href="/visithaarlem/index" class="btn btn-primary btn-sm">go back home</a>
+        <a href="/" class="btn btn-primary btn-sm">go back home</a>
     </div>
 </body>
 

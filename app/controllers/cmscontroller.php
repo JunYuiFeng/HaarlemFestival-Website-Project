@@ -40,6 +40,10 @@ class CmsController extends Controller
         $this->venueService = new VenueService();
         $this->artistService = new ArtistService();
         $this->msg = "";
+        if ($this->loggedInUser == null)
+            header("location: ../");
+        else if ($this->loggedInUser->getUserType() != "admin")
+            header("location: ../");
     }
 
     public function index()
@@ -52,6 +56,8 @@ class CmsController extends Controller
         $users = $this->userService->getAll();
         require __DIR__ . '/../views/cms/manageusers.php';
     }
+
+    
     public function manageDance()
     {
         $venues = $this->venueService->getAll();
@@ -62,30 +68,30 @@ class CmsController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             switch ($_POST['action']) {
                 case 'deleteVenue':
-                    $this->venueService->removeVenue($_POST['venueId']);
+                    $this->venueService->removeVenue(htmlspecialchars($_POST['venueId']));
                     $venues = $this->venueService->getAll();
                     break;
                 case 'updateVenue':
                     if ((empty($_POST['venueId']) || empty($_POST['venueName']) || empty($_POST['venueAddress']) || empty($_POST['venueImage'])))
                         return;
-                    $this->venueService->editVenue($_POST['venueId'], $_POST['venueName'], $_POST['venueAddress'], $_POST['venueImage']);
+                    $this->venueService->editVenue(htmlspecialchars($_POST['venueId']), htmlspecialchars($_POST['venueName']), htmlspecialchars($_POST['venueAddress']), htmlspecialchars($_POST['venueImage']));
                     $venues = $this->venueService->getAll();
                     break;
                 case 'addVenue':
                     if ((empty($_POST['venueName']) || empty($_POST['venueAddress']) || empty($_POST['venueImage'])))
                         return;
-                    $this->venueService->addVenue($_POST['venueName'], $_POST['venueAddress'], $_POST['venueImage']);
+                    $this->venueService->addVenue(htmlspecialchars($_POST['venueName']), htmlspecialchars($_POST['venueAddress']), htmlspecialchars($_POST['venueImage']));
                     $venues = $this->venueService->getAll();
                     break;
                 case 'deleteArtist':
-                    $this->artistService->removeArtist($_POST['artistId']);
+                    $this->artistService->removeArtist(htmlspecialchars($_POST['artistId']));
                     $artists = $this->artistService->getAll();
                     break;
                 case 'updateArtist':
                     if ((empty($_POST['artistId']) || empty($_POST['artistName']) || empty($_POST['artistStyle']) || empty($_POST['artistFirstSong']) || empty($_POST['artistSecondSong']) || empty($_POST['artistThirdSong']) || empty($_POST['artistIndexPicture']) || empty($_POST['artistFirstSourceSong']) || empty($_POST['artistSecondSourceSong']) || empty($_POST['artistThirdSourceSong']) || empty($_POST['artistDetailedPicture']) || empty($_POST['artistCareer']))) {
                         break;
                     }
-                    $this->artistService->updateArtist($_POST['artistId'], $_POST['artistName'], $_POST['artistStyle'], $_POST['artistFirstSong'], $_POST['artistSecondSong'], $_POST['artistThirdSong'], $_POST['artistIndexPicture'], $_POST['artistFirstSourceSong'], $_POST['artistSecondSourceSong'], $_POST['artistThirdSourceSong'], $_POST['artistDetailedPicture'], $_POST['artistCareer']);
+                    $this->artistService->updateArtist(htmlspecialchars($_POST['artistId']), htmlspecialchars($_POST['artistName']), htmlspecialchars($_POST['artistStyle']), htmlspecialchars($_POST['artistFirstSong']), htmlspecialchars($_POST['artistSecondSong']), htmlspecialchars($_POST['artistThirdSong']), htmlspecialchars($_POST['artistIndexPicture']), htmlspecialchars($_POST['artistFirstSourceSong']), htmlspecialchars($_POST['artistSecondSourceSong']), htmlspecialchars($_POST['artistThirdSourceSong']), htmlspecialchars($_POST['artistDetailedPicture']), htmlspecialchars($_POST['artistCareer']));
 
                     $artists = $this->artistService->getAll();
                     break;
@@ -93,11 +99,11 @@ class CmsController extends Controller
                     if ((empty($_POST['artistName']) || empty($_POST['artistStyle']) || empty($_POST['artistFirstSong']) || empty($_POST['artistSecondSong']) || empty($_POST['artistThirdSong']) || empty($_POST['artistIndexPicture']) || empty($_POST['artistFirstSourceSong']) || empty($_POST['artistSecondSourceSong']) || empty($_POST['artistThirdSourceSong']) || empty($_POST['artistDetailedPicture']) || empty($_POST['artistCareer']))) {
                         break;
                     }
-                    $this->artistService->addArtist($_POST['artistName'], $_POST['artistStyle'], $_POST['artistFirstSong'], $_POST['artistSecondSong'], $_POST['artistThirdSong'], $_POST['artistIndexPicture'], $_POST['artistFirstSourceSong'], $_POST['artistSecondSourceSong'], $_POST['artistThirdSourceSong'], $_POST['artistDetailedPicture'], $_POST['artistCareer']);
+                    $this->artistService->addArtist(htmlspecialchars($_POST['artistName']), htmlspecialchars($_POST['artistStyle']), htmlspecialchars($_POST['artistFirstSong']), htmlspecialchars($_POST['artistSecondSong']), htmlspecialchars($_POST['artistThirdSong']), htmlspecialchars($_POST['artistIndexPicture']), htmlspecialchars($_POST['artistFirstSourceSong']), htmlspecialchars($_POST['artistSecondSourceSong']), htmlspecialchars($_POST['artistThirdSourceSong']),htmlspecialchars($_POST['artistDetailedPicture']), htmlspecialchars($_POST['artistCareer']));
                     $artists = $this->artistService->getAll();
                     break;
                 case 'deleteTicket':
-                    $this->danceService->removeTicket($_POST['ticketId']);
+                    $this->danceService->removeTicket(htmlspecialchars($_POST['ticketId']));
                     $tickets = $this->danceService->getAll();
                     break;
                 case 'updateTicket':
@@ -106,20 +112,19 @@ class CmsController extends Controller
                     }
                     $date = date('Y-m-d', strtotime($_POST['ticketDate']));
                     $time = date('H:i:s', strtotime($_POST['ticketTime']));
-                    $venueId = $this->venueService->getVenueIdByName($_POST['ticketVenue']);
+                    $venueId = $this->venueService->getVenueIdByName(htmlspecialchars($_POST['ticketVenue']));
 
                     
-                    $this->danceService->deleteDanceArtistsByDanceId($_POST['ticketId']);// delete all the artists for the dance so can edit later
+                    $this->danceService->deleteDanceArtistsByDanceId(htmlspecialchars($_POST['ticketId']));// delete all the artists for the dance so can edit later
                     $artists = array();
                     for ($i = 1; $i <= 5; $i++) {
                         if (!empty($_POST['ticketArtist' . $i])) {
                             $artists[] = $_POST['ticketArtist' . $i];
                         }
-                    }      
+                    }
                     foreach ($artists as $artist) {
                         $artistId = $this->artistService->getArtistIdByName($artist);
-                        echo $artistId;
-                        $this->danceService->addDanceArtist($_POST['ticketId'], $artistId);
+                        $this->danceService->addDanceArtist(htmlspecialchars($_POST['ticketId']), $artistId);
                     }                
 
                     $this->danceService->updateDance($_POST['ticketId'], $date, $time, $venueId, $_POST['ticketAvaliable'], $_POST['ticketPrice']);
@@ -129,11 +134,11 @@ class CmsController extends Controller
                     if ((empty($_POST['ticketDate']) || empty($_POST['ticketTime']) || empty($_POST['ticketVenue']) || empty($_POST['ticketArtist1']) || empty($_POST['ticketAvaliable']) || empty($_POST['ticketPrice']))) {
                         break;
                     }
-                    $date = date('Y-m-d', strtotime($_POST['ticketDate']));
-                    $time = date('H:i:s', strtotime($_POST['ticketTime']));
+                    $date = date('Y-m-d', strtotime(htmlspecialchars($_POST['ticketDate'])));
+                    $time = date('H:i:s', strtotime(htmlspecialchars($_POST['ticketTime'])));
                     $artistId = $this->artistService->getArtistIdByName($_POST['ticketArtist1']);
                     $venueId = $this->venueService->getVenueIdByName($_POST['ticketVenue']);
-                    $this->danceService->addDance($date, $time, $venueId, $artistId, $_POST['ticketAvaliable'], $_POST['ticketPrice']);
+                    $this->danceService->addDance($date, $time, $venueId, $artistId, htmlspecialchars($_POST['ticketAvaliable']), htmlspecialchars($_POST['ticketPrice']));
 
                     $tickets = $this->danceService->getAll();
                     break;
@@ -183,7 +188,7 @@ class CmsController extends Controller
                 if (empty($field))
                     $this->msg = "Please fill all the fields";
             }
-            if ($this->msg == "") {                
+            if ($this->msg == "") {
                 $restaurant = (!isset(($_GET["edit"]))) ? new Restaurant() : $restaurant;
                 if (isset($_FILES['coverImg']) && $_FILES['coverImg']['name'] != "") {
                     $coverImg = $_FILES['coverImg'];

@@ -83,8 +83,6 @@ class ArtistRepositories extends Repository
             $stmt->bindParam(':second_song_source_code', $secondSongSourceCode);
             $stmt->bindParam(':third_song_source_code', $thirdSongSourceCode);
             $stmt->execute();
-            echo $id;
-            echo "success";
 
         } catch (PDOException $e) {
             echo $e;
@@ -108,7 +106,6 @@ class ArtistRepositories extends Repository
             $stmt->bindParam(':second_song_source_code', $secondSongSourceCode);
             $stmt->bindParam(':third_song_source_code', $thirdSongSourceCode);
             $stmt->execute();
-            echo "success";
 
         } catch (PDOException $e) {
             echo $e;
