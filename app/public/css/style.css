@@ -769,7 +769,7 @@ footer .footerImg {
   text-align: center;
   padding: 15px;
   margin-top: 20px;
-  height: 580px;
+  height: auto;
 }
 
 .danceCardLine {
@@ -783,12 +783,16 @@ footer .footerImg {
 
 .danceViewMore {
   background: #6a0013;
+  border: 0;
   color: white;
-  width: 350px;
+  width: 100%;
   height: 40px;
-  float: right;
-  margin-right: -32px;
-  text-align: left;
+  text-align: center;
+  color: #d3d3d3;
+}
+
+.danceViewMore:hover {
+  opacity: 0.7;
 }
 
 #danceAllAccessPass {
@@ -1484,7 +1488,7 @@ button.red-outline-animated span:nth-child(4) {
   position: fixed;
   align-items: center;
   justify-content: space-between;
-  top: 20px;
+  top: 80px;
   right: 0px;
   width: 15%;
   height: 7%;
