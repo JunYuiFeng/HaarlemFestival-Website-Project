@@ -26,7 +26,8 @@ class CartController extends Controller
     protected $loggedInUser;
 
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->cartService = new CartService();
         $this->restaurantService = new RestaurantService();
@@ -37,13 +38,14 @@ class CartController extends Controller
         $this->paymentService = new PaymentService();
     }
 
-    public function index() {
+    public function index()
+    {
         if (isset($_SESSION['alert'])) {
             echo '<script>alert("' . $_SESSION['alert'] . '");</script>';
-            
+
             unset($_SESSION['alert']);
         }
-                
+
         $VAT = 0.09; //VAT is 9%
         $VATAmount = $subTotal = $totalAmount = $reservationFee = 0;
         $reservations = $tickets = $reservationData = $ticketData = array();
@@ -84,7 +86,8 @@ class CartController extends Controller
         require __DIR__ . '/../views/cart/index.php';
     }
 
-    function getReservationsAndTickets() {
+    function getReservationsAndTickets()
+    {
         $reservations = array();
         $tickets = array();
         $cartId = null;
@@ -115,7 +118,8 @@ class CartController extends Controller
         ];
     }
 
-    function getReservationData($reservations) {
+    function getReservationData($reservations)
+    {
         $reservationData = array();
         $reservationFeePerPerson = 10;
         $reservationFee = 0;
@@ -147,7 +151,8 @@ class CartController extends Controller
         ];
     }
 
-    private function getTicketData($tickets) {
+    private function getTicketData($tickets)
+    {
         $ticketData = array();
         $subTotal = 0;
 
@@ -185,7 +190,12 @@ class CartController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $id = htmlspecialchars($_GET['id']);
-            $this->danceService->removeTicketFromCart($id);
+
+            if (isset($_SESSION["logedin"])) {
+                $this->danceService->removeTicketFromCart($id, $this->cartService->getCartIdByUserId($this->loggedInUser->getId()));
+            } else {
+                $this->danceService->removeTicketFromCart($id, $_SESSION['cart']);
+            }
         }
         header("Location: /cart/index");
     }
@@ -194,7 +204,12 @@ class CartController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $ticketId = htmlspecialchars($_GET['ticketId']);
-            $this->cartService->decreaseTicketQuantity($ticketId);
+
+            if (isset($_SESSION["logedin"])) {
+                $this->cartService->decreaseTicketQuantity($ticketId, $this->cartService->getCartIdByUserId($this->loggedInUser->getId()));
+            } else {
+                $this->cartService->decreaseTicketQuantity($ticketId, $_SESSION['cart']);
+            }
         }
         header("Location: /cart/index");
     }
@@ -204,16 +219,27 @@ class CartController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $ticketId = htmlspecialchars($_GET['ticketId']);
 
-            if (($this->danceService->getTicketById($ticketId))->getAvaliableTickets() == 0) {
+            if ($ticketId == 65 || $ticketId == 66 || $ticketId == 67 || $ticketId == 68) {
+                if (isset($_SESSION["logedin"])) {
+                    $this->cartService->increaseTicketQuantity($ticketId, $this->loggedInUser->getId());
+                } else {
+                    $this->cartService->increaseTicketQuantity($ticketId, $_SESSION['cart']);
+                }
+            } else if (($this->danceService->getTicketById($ticketId))->getAvaliableTickets() == 0) {
                 $_SESSION['alert'] = "ticket unavailable";
             } else {
-                $this->cartService->increaseTicketQuantity($ticketId);
+                if (isset($_SESSION["logedin"])) {
+                    $this->cartService->increaseTicketQuantity($ticketId, $this->loggedInUser->getId());
+                } else {
+                    $this->cartService->increaseTicketQuantity($ticketId, $_SESSION['cart']);
+                }
             }
             header("Location: /cart/index");
         }
     }
 
-    function reservationAvailabilityCheck() {
+    function reservationAvailabilityCheck()
+    {
         $reservations = $this->reservationService->getFromCartByUserId($this->loggedInUser->getId());
 
         foreach ($reservations as $reservation) {
@@ -221,8 +247,7 @@ class CartController extends Controller
 
             if ($session->getSeats() == 0) {
                 $_SESSION['alert'] = "reservation with RESTAURANT: {$this->restaurantService->getById($reservation->getRestaurantId())->getName()} and SESSION: {$session->getName()} on {$reservation->getDate()} is soldout";
-            }
-            else if ($reservation->getAmountAbove12() + $reservation->getAmountUnderOr12() > $session->getSeats() ) {
+            } else if ($reservation->getAmountAbove12() + $reservation->getAmountUnderOr12() > $session->getSeats()) {
                 $_SESSION['alert'] = "reservation with RESTAURANT: {$this->restaurantService->getById($reservation->getRestaurantId())->getName()} and SESSION: {$session->getName()} on {$reservation->getDate()} has only {$session->getSeats()} available";
             }
             header("Location: /cart/index");
@@ -230,21 +255,23 @@ class CartController extends Controller
         }
     }
 
-    function ticketAvailabilityCheck() {
+    function ticketAvailabilityCheck()
+    {
         $tickets = $this->danceService->getTicketsFromCartByUserId($this->loggedInUser->getId());
-    
+
         foreach ($tickets as $ticket) {
-            if ($ticket->getAvaliableTickets() == 0) {
-                $_SESSION['alert'] = "ticket with ARTIST(S): {$ticket->getArtist()} and VENUE: {$ticket->getVenue()} on {$ticket->getDate()} is soldout";
+            if ($ticket->getId() != 65 && $ticket->getId() != 66 && $ticket->getId() != 67 && $ticket->getId() != 68) {
+                if ($ticket->getAvaliableTickets() == 0) {
+                    $_SESSION['alert'] = "ticket with ARTIST(S): {$ticket->getArtist()} and VENUE: {$ticket->getVenue()} on {$ticket->getDate()} is soldout";
+                } else if ($ticket->getQuantity() > $ticket->getAvaliableTickets()) {
+                    $_SESSION['alert'] = "ticket with ARTIST(S): {$ticket->getArtist()} and VENUE: {$ticket->getVenue()} on {$ticket->getDate()} has only {$ticket->getAvaliableTickets()} available";
+                }
+                header("Location: /cart/index");
+                exit();
             }
-            else if ($ticket->getQuantity() > $ticket->getAvaliableTickets()) {
-                $_SESSION['alert'] = "ticket with ARTIST(S): {$ticket->getArtist()} and VENUE: {$ticket->getVenue()} on {$ticket->getDate()} has only {$ticket->getAvaliableTickets()} available";
-            }
-            header("Location: /cart/index");
-            exit();
         }
     }
-    
+
 
     function payment()
     {

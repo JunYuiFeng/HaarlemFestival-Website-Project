@@ -46,9 +46,9 @@ class DanceService
         return $this->repository->getTicketFromCartByCartId($cartId);
     }
 
-    function removeTicketFromCart($ticketId)
+    function removeTicketFromCart($ticketId, $cartId)
     {
-        $this->repository->removeTicketFromCart($ticketId);
+        $this->repository->removeTicketFromCart($ticketId, $cartId);
     }
     public function updateDance($id,$date,$time,$venueId,$ticketAmount,$price)
     {

@@ -85,8 +85,6 @@ class CartRepository extends Repository
         }
     }
 
-
-
     function getQuantityByCartId($id)
     {
         try {
@@ -182,26 +180,28 @@ class CartRepository extends Repository
         }
     }
 
-    function decreaseTicketQuantity($ticketId)
+    function decreaseTicketQuantity($ticketId, $cartId)
     {
         try {
             $this->connection->beginTransaction();
-
+    
             $stmt = $this->connection->prepare("UPDATE CartItems 
                 SET quantity = quantity - 1 
-                WHERE itemId = :ticketId AND type = 'ticket'");
-
+                WHERE itemId = :ticketId AND type = 'ticket' AND cartId = :cartId");
+    
             $stmt->bindParam(':ticketId', $ticketId);
+            $stmt->bindParam(':cartId', $cartId);
             $stmt->execute();
-
+    
             $stmt = $this->connection->prepare("DELETE FROM CartItems 
-                WHERE itemId = :ticketId AND type = 'ticket' AND quantity <= 0");
-
+                WHERE itemId = :ticketId AND type = 'ticket' AND quantity <= 0 AND cartId = :cartId");
+    
             $stmt->bindParam(':ticketId', $ticketId);
+            $stmt->bindParam(':cartId', $cartId);
             $stmt->execute();
-
+    
             $this->connection->commit();
-
+    
             return true;
         } catch (PDOException $e) {
             $this->connection->rollBack(); //If any of the two SQL statements fails, this method will undo any changes made in the transaction, and the function returns false.
@@ -209,11 +209,13 @@ class CartRepository extends Repository
             return false;
         }
     }
+    
 
-    function increaseTicketQuantity($ticketId)
+    function increaseTicketQuantity($ticketId, $cartId)
     {
         try {
-            $stmt = $this->connection->prepare("UPDATE CartItems SET quantity = quantity + 1 WHERE itemId = :ticketId");
+            $stmt = $this->connection->prepare("UPDATE CartItems SET quantity = quantity + 1 WHERE itemId = :ticketId AND type = 'ticket' AND cartId = :cartId");
+            $stmt->bindParam(':cartId', $cartId);
             $stmt->bindParam(':ticketId', $ticketId);
             $stmt->execute();
 

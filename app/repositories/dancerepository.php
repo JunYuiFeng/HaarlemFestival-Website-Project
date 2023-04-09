@@ -228,10 +228,11 @@ class DanceRepository extends Repository
         }
     }
 
-    function removeTicketFromCart($ticketId)
+    function removeTicketFromCart($ticketId, $cartId)
     {
         try {
-            $stmt = $this->connection->prepare("DELETE FROM `CartItems` WHERE `itemId` = :itemId AND `type` = 'ticket'");
+            $stmt = $this->connection->prepare("DELETE FROM `CartItems` WHERE `itemId` = :itemId AND `type` = 'ticket' AND cartId = :cartId");
+            $stmt->bindParam(':cartId', $cartId);
             $stmt->bindParam(':itemId', $ticketId);
             $stmt->execute();
         } catch (PDOException $e) {
@@ -254,7 +255,6 @@ class DanceRepository extends Repository
         }
     }
 
-
     public function removeTicket($id)
     {
         try {
@@ -266,6 +266,7 @@ class DanceRepository extends Repository
             echo $e->getMessage();
         }
     }
+
     public function addDanceArtist($danceId, $artistId)
     {
         try {
