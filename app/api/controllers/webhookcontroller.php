@@ -151,7 +151,6 @@ class WebHookController extends Controller
 
         $tickets = array(); // Initialize an empty array to store the tickets
 
-
         foreach ($danceTickets as $danceTicket) {
             $orderItemsItemId = $this->orderService->getOrderItemByOrderIdAndItemId($orderId, $danceTicket->id); // get orderitem id
             $this->ticketService->deductAvailableTickets($danceTicket->quantity, $danceTicket->id);

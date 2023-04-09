@@ -146,10 +146,12 @@
                                 </div>
 
                                 <h3 class="mt-4"><b>Available time:</b></h3>
-                                <?php foreach ($sessions as $session) { ?>
+                                <?php foreach ($sessions as $session) { 
+                                    if ($session->getSeats() != 0) {?>
                                     <input type="radio" id="session_<?= $session->getId() ?>" name="sessionId" value="<?= $session->getId() ?>">
                                     <label for="session_<?= $session->getId() ?>"><?= $session->getName() . ' at ' . $session->getStartTime()->format('H:i') . ' - ' . $session->getEndTime()->format('H:i') ?></label><br>
-                                <?php } ?>
+                                <?php } 
+                                }?>
                             </div>
 
                             <div class="col ms-3">
@@ -203,13 +205,13 @@
 
                 reservationData.restaurantId = restaurantId;
 
-                addToCart(reservationData);
+                addReservationToCart(reservationData);
             }
         });
 
 
-        async function addToCart(reservationData) {
-            await fetch('/api/cart/addToCart', {
+        async function addReservationToCart(reservationData) {
+            await fetch('/api/cart/addReservationToCart', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
