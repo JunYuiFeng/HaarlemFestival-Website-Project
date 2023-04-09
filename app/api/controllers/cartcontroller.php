@@ -20,7 +20,7 @@ class CartController extends Controller
         $this->userService = new UserService();
     }
 
-    function addToCart()
+    function addReservationToCart()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $body = file_get_contents("php://input");

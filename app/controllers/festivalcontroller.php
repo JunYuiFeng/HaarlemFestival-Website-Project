@@ -78,9 +78,6 @@ class FestivalController extends Controller
             $sessions = $this->sessionService->getSessionsByRestaurantId($id);
         }
 
-        // $loggedInUser = $this->userService->getById($_SESSION["logedin"]);
-        //var_dump($loggedInUser);
-
         require __DIR__ . '/../views/festival/restaurantdetail.php';
     }   
 
