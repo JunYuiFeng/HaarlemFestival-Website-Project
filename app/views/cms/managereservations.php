@@ -8,16 +8,13 @@
     <title>Manage Reservations</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <?php include_once("header.php"); ?>
 
     <div class="container">
-        <h1 class="mb-5">Reservation Overview</h1>
+        <h1 class="mb-5 d-flex justify-content-center">Reservation Overview</h1>
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
@@ -34,10 +31,10 @@
             </thead>
             <tbody>
                 <tr>
-                    <form action="" method="POST">
+                    <form action="" method="POST" onsubmit="return validateForm()">
                         <td></td>
                         <td>
-                            <select name="restaurant" id="restaurant" class="form-control">>
+                            <select name="restaurant" id="restaurant" class="form-control">
                                 <option value="0">Choose a restaurant</option>
                                 <?php foreach ($restaurants as $restaurant) { ?>
                                     <option value="<?= $restaurant->getId() ?>"><?= $restaurant->getName() ?></option>
@@ -58,8 +55,6 @@
                             </select>
                         </td>
                         <td colspan="2"> <input type="submit" class="btn btn-primary w-100" value="Add"></td>
-
-
                     </form>
                 </tr>
                 <?php foreach ($reservationData as $reservation) { ?>
@@ -77,7 +72,7 @@
                         <?php } else { ?>
                             <td><a href="managereservations?activateid= <?= $reservation['id'] ?>" class="btn btn-success btn-sm">activate</a></td>
                         <?php } ?>
-                        <td><a href="" class="btn btn-primary btn-sm">edit</a></td>
+                        <td><a href="editReservation?id=<?= $reservation['id'] ?>" class="btn btn-primary btn-sm">edit</a></td>
 
                     </tr>
                 <?php } ?>
@@ -91,7 +86,6 @@
         restaurantSelect.addEventListener('change', () => {
             const selectedRestaurantId = restaurantSelect.value;
             if (selectedRestaurantId !== '0') {
-                // Make HTTP request using the selectedRestaurantId
                 fetch(`/api/cms/getSessionsBySelectedRestaurant`, {
                         method: 'POST',
                         headers: {

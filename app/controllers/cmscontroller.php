@@ -295,16 +295,15 @@ class CmsController extends Controller
         require __DIR__ . '/../views/cms/managesessions.php';
     }
 
-    public function managereservations()
-    {
+    public function managereservations() {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $reservation = new Reservation();
             $reservation->setRestaurantId(htmlspecialchars($_POST['restaurant']));
             $reservation->setDate(htmlspecialchars($_POST['date']));
-            $reservation->setAmountAbove12(htmlspecialchars($_POST['amountAbove12']));
-            $reservation->setAmountUnderOr12(htmlspecialchars($_POST['amountUnderOr12']));
+            $reservation->setAmountUnderOr12(htmlspecialchars(!empty($_POST['amountAbove12']) ? $_POST['amountAbove12'] : 0)); 
+            $reservation->setAmountUnderOr12(htmlspecialchars(!empty($_POST['amountUnderOr12']) ? $_POST['amountUnderOr12'] : 0)); 
             $reservation->setSessionId(htmlspecialchars($_POST['session']));
             $reservation->setStatus(htmlspecialchars($_POST['status']));
             $reservation->setComments(htmlspecialchars($_POST['comment']));
@@ -343,6 +342,34 @@ class CmsController extends Controller
             );
         }
         require __DIR__ . '/../views/cms/managereservations.php';
+    }
+
+    function editReservation() {
+        $restaurants = $this->restaurantService->getAll();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $id = htmlspecialchars($_GET['id']);
+            $reservation = $this->reservationService->getById($id);
+        }
+        require_once __DIR__ . '/../views/cms/editreservation.php';
+    }
+
+    function updateReservation() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $reservation = new Reservation();
+            $reservation->setId(htmlspecialchars($_POST['id']));
+            $reservation->setRestaurantId(htmlspecialchars($_POST['restaurant']));
+            $reservation->setDate(htmlspecialchars($_POST['date']));
+            $reservation->setAmountUnderOr12(htmlspecialchars(!empty($_POST['amountAbove12']) ? $_POST['amountAbove12'] : 0)); 
+            $reservation->setAmountUnderOr12(htmlspecialchars(!empty($_POST['amountUnderOr12']) ? $_POST['amountUnderOr12'] : 0));           
+            $reservation->setSessionId(htmlspecialchars($_POST['session']));
+            $reservation->setStatus(htmlspecialchars($_POST['status']));
+            $reservation->setComments(htmlspecialchars($_POST['comment']));
+
+            $this->reservationService->updateReservation($reservation);
+        }
+        header("location: managereservations");
+
     }
 
     public function manageorders()

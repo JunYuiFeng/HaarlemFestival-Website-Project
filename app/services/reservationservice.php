@@ -15,6 +15,15 @@ class ReservationService
         return $this->repository->getAll();
     }
 
+    function getById($id)
+    {
+        return $this->repository->getById($id);
+    }
+
+    function updateReservation($reservation) {
+        $this->repository->updateReservation($reservation);
+    }
+
     function insertReservation($reservation)
     {
         $this->repository->insertReservation($reservation);

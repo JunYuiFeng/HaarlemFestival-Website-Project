@@ -19,6 +19,43 @@ class ReservationRepository extends Repository
         }
     }
 
+    function getById($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM `Reservations` WHERE `id` = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, "Reservation");
+            $reservation = $stmt->fetch();
+
+            return $reservation;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    function updateReservation($reservation) {
+        try {
+            $reservationDate = new DateTime($reservation->getDate());
+            $formattedDate = $reservationDate->format('Y-m-d H:i:s');
+
+            $stmt = $this->connection->prepare("INSERT INTO `Reservations`(`restaurantId`, `sessionId`, `amountAbove12`, `amountUnderOr12`, `date`, `comments`, `status`) 
+        VALUES (:restaurantId, :sessionId, :amountAbove12, :amountUnderOr12, :reservationDate, :comments, :status)");
+            $stmt->bindValue(':restaurantId', ($reservation->getRestaurantId()));
+            $stmt->bindValue(':sessionId', ($reservation->getSessionId()));
+            $stmt->bindValue(':amountAbove12', ($reservation->getAmountAbove12()));
+            $stmt->bindValue(':amountUnderOr12', ($reservation->getAmountUnderOr12()));
+            $stmt->bindValue(':reservationDate', $formattedDate);
+            $stmt->bindValue(':comments', ($reservation->getComments()));
+            $stmt->bindValue(':status', ($reservation->getStatus()));
+
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
     function insertReservation($reservation)
     {
         try {
