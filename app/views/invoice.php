@@ -39,7 +39,7 @@
                 <p><b>Invoice date:</b>&nbsp;<?= date("Y-m-d") ?></p>
             </td>
             <td style="width: 50%;">
-                <p><b>Payment date:</b></p>
+                <p><b>Payment date:</b>&nbsp;<?= date("Y-m-d") ?></p>
             </td>
         </tr>
     </table>
