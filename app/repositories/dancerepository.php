@@ -20,10 +20,26 @@ class DanceRepository extends Repository
         }
     }
 
+    function getTicketById($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT `ticketAvailable` FROM `Tickets` WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, "Ticket");
+            $ticket = $stmt->fetch();
+
+            return $ticket;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
     function getTicketsFromCartByUserId($userId)
     {
         try {
-            $stmt = $this->connection->prepare("SELECT t.id, ci.quantity, t.price, 
+            $stmt = $this->connection->prepare("SELECT t.id, ci.quantity, t.price, t.ticketAvailable, 
             COALESCE(GROUP_CONCAT(DISTINCT a.name SEPARATOR ', '), '') AS artist, 
             COALESCE(GROUP_CONCAT(DISTINCT v.name SEPARATOR ', '), '') AS venue, 
             t.date, t.session 
@@ -50,7 +66,7 @@ class DanceRepository extends Repository
     function getTicketFromCartByCartId($cartId)
     {
         try {
-            $stmt = $this->connection->prepare("SELECT t.id as id, ci.quantity, t.price, t.session,
+            $stmt = $this->connection->prepare("SELECT t.id as id, ci.quantity, t.price, t.session, t.ticketAvailable, 
             COALESCE(GROUP_CONCAT(DISTINCT a.name SEPARATOR ', '), '') as artist,
             COALESCE(GROUP_CONCAT(DISTINCT v.name SEPARATOR ', '), '') as venue,
             t.date 

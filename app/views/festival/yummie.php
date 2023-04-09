@@ -40,13 +40,6 @@
             <h1 class="d-flex justify-content-center"><b>Food events</b></h1>
             <h3 class="d-flex justify-content-center"><b>27 July - 31 July </b></h3>
         </div>
-        <div class="row personalProgramOffer">
-            <div class="col-6">
-                <p><b>Do you want to build your own personal program?</b></p>
-            </div>
-            <div class="col-2"></div>
-            <div class="col-4"><button><b>Build your own personal program</b></button></div>
-        </div>
 
         <div class="row restaurantEventSection">
             <?php

@@ -35,11 +35,6 @@ class CartService
         return $this->repository->getQuantityByItemId($id);
     }
 
-    // function insert($userId)
-    // {
-    //     $this->repository->insert($userId);
-    // }
-
     function createRegisterUserCart($userId)
     {
         $this->repository->createRegisterUserCart($userId);

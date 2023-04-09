@@ -42,7 +42,7 @@
                                         <img src="/img/ReservationIcon.png" alt="">
                                     </div>
                                     <div class="col-3">
-                                        <h2><b><?= $reservation['restaurant'] ?></b></h2>
+                                    <a class="text-reset text-decoration-none" href="../festival/restaurantdetail?id=<?= $reservation['restaurantId'] ?>"><h2><b><?= $reservation['restaurant'] ?></b></h2></a>
                                         <p><b>Comment:</b> <?= $reservation['comment'] ?></p>
                                         <p><b>People:</b> <?= $reservation['amountAbove12'] + $reservation['amountUnderOr12'] ?></p>
                                     </div>
@@ -85,10 +85,10 @@
                                     </div>
                                     <div class="col-3">
                                         <?php if (!empty($ticket['artist']) && !empty($ticket['venue'])) { ?>
-                                            <h2><b><?= $ticket['artist'] ?></b></h2>
+                                            <a class="text-reset text-decoration-none" href="../festival/dance#tickets"><h2><b><?= $ticket['artist'] ?></b></h2></a>
                                             <p><b>Venue:</b> <?= $ticket['venue'] ?></p>
                                         <?php } else { ?>
-                                            <h2><b><?= $ticket['session'] ?></b></h2>
+                                            <a class="text-reset text-decoration-none" href="../festival/dance#tickets"><h2><b><?= $ticket['session'] ?></b></h2></a>
                                         <?php } ?>
                                     </div>
                                     <div class="col-2" style="width: 12%;">
@@ -102,9 +102,9 @@
                                         <?php } ?>
                                     </div>
                                     <div class="col-2 d-flex me-4">
-                                        <a class="btn btn-dark w-30" href="decreaseTicketQuantity?ticketId=<?= $ticket['id']; ?>">-</a>
-                                        <input type="text" name="quantity" id="quantity-input<?= $ticket['id']; ?>" class="form-control" value="<?= $ticket['quantity'] ?>">
-                                        <a class="btn btn-dark w-30" href="increaseTicketQuantity?ticketId=<?= $ticket['id']; ?>">+</a>
+                                        <a class="btn btn-dark w-30 " href="decreaseTicketQuantity?ticketId=<?= $ticket['id']; ?>">-</a>
+                                        <input type="text" name="quantity" id="quantity-input<?= $ticket['id']; ?>" class="form-control " value="<?= $ticket['quantity'] ?>">
+                                        <a class="btn btn-dark w-30 " href="increaseTicketQuantity?ticketId=<?= $ticket['id']; ?>">+</a>
                                     </div>
                                     <div class="col-2">
                                         <p><b>€<?= $ticket['price'] ?></b></p>

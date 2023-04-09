@@ -3,8 +3,7 @@
 
     <section class="" style="margin-top: 25px;">
         <div class="container text-center text-md-start mt-5">
-            <!-- Grid row -->
-            <div class="row mt-3">
+            <div class="row mt-3 content">
                 <div class="col mb-4">
                     <!-- Section: Social media -->
                     <section class="d-flex justify-content-center justify-content-lg-between p-1">
@@ -25,7 +24,7 @@
                     </section>
                     <!-- Section: Social media -->
                 </div>
-                <div class="col mb-5">
+                <div class="col mb-5 breakpoint">
                 </div>
                 <!-- Grid column -->
                 <div class="col mb-3">

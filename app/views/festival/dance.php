@@ -115,7 +115,7 @@
             </div>
         <?
         } ?>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id="tickets">
 
             <div class="d-flex justify-content-around">
                 <button type="button" id="danceAllAccessPass" onclick="addAllAccessTicketToCart(65)"> Buy ticket for all-access pass for entire festival:
@@ -185,7 +185,7 @@
                                                         amount of ticket
                                                     </label>
                                                     <input type="number" id="ticketAmount<?= $ticket->getId() ?>">
-                                                    <button onclick="addTicketToCart(<?= $ticket->getId() ?>)">Add to cart</button>
+                                                    <button class="btn btn-light rounded-0" onclick="addTicketToCart(<?= $ticket->getId() ?>)">Add to cart</button>
                                                 <?php } else {
                                                 ?>
                                                     <p>
