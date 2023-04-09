@@ -32,12 +32,11 @@ class CmsController extends Controller
             $body = file_get_contents("php://input");
             $user = json_decode($body);
 
-            if (empty($user->id) || empty($user->username) || empty($user->email) || empty($user->type)) {
+            if (empty($user->id) || empty($user->username) || empty($user->email) || !isset($user->type)) {
 
                 $this->respondWithError(400, "Not all data was provided");
                 return;
             }
-            echo $user->type;
             if ($this->userService->editUserAsAdmin($user->id, $user->username, $user->email, $user->type))
                 $this->respond();
             else

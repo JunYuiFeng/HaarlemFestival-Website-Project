@@ -26,7 +26,7 @@
         </div>
 
 
-        <p class="text-danger text-center my-3" id="outputMessage"></p>
+        <p class="text-danger text-center my-3" id="outputMessage"><?= isset($outputMsg)? $outputMsg : "" ?></p>
         <table class="table">
             <thead>
                 <tr>
@@ -71,14 +71,11 @@
                         <input type="text" name="password" placeholder="password" class="pb-1">
                     </td>
                     <td>
-                        <input type="hidden" name="registrationDate" placeholder="registrationDate" class="pb-1">
-                    </td>
-                    <td>
                         <div>
-                            <select name=" userType" id="userType" class="px-2 py-1">
-                                <option value="admin">Admin</option>
-                                <option value="user" selected>User</option>
-                                <option value="employee">Employee</option>
+                            <select name="userType" id="userType" class="px-2 py-1">
+                                <option value="0">Admin</option>
+                                <option value="1" selected>User</option>
+                                <option value="2">Employee</option>
                             </select>
                         </div>
                     </td>
