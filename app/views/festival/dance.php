@@ -185,7 +185,7 @@
                                                         amount of ticket
                                                     </label>
                                                     <input type="number" id="ticketAmount<?= $ticket->getId() ?>">
-                                                    <button onclick="addTicketToCart(<?= $ticket->getId() ?>)">Add to cart</button>
+                                                    <button class="btn btn-light rounded-0" onclick="addTicketToCart(<?= $ticket->getId() ?>)">Add to cart</button>
                                                 <?php } else {
                                                 ?>
                                                     <p>

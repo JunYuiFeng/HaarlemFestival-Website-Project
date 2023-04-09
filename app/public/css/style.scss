@@ -8,10 +8,12 @@ body {
 }
 
 nav {
-  background: linear-gradient(90.05deg,
-      #321325 0.73%,
-      #7f4066 99.97%,
-      #7f4066 99.97%);
+  background: linear-gradient(
+    90.05deg,
+    #321325 0.73%,
+    #7f4066 99.97%,
+    #7f4066 99.97%
+  );
 
   .logo {
     width: 75%;
@@ -29,8 +31,8 @@ nav {
   }
 }
 
-.ff-alata{
-  font-family: 'Alata';
+.ff-alata {
+  font-family: "Alata";
 }
 .admin-header {
   width: 100%;
@@ -43,7 +45,7 @@ nav {
     #7f4066 99.97%,
     #7f4066 99.97%
   );
-  .logo{
+  .logo {
     width: 10%;
     cursor: pointer;
   }
@@ -171,6 +173,7 @@ footer {
 
     img {
       width: 100%;
+      filter: brightness(50%);
     }
 
     div {
@@ -823,7 +826,7 @@ footer {
   align-content: center;
   text-decoration: none;
 }
-.arrow-down:hover{
+.arrow-down:hover {
   color: #a1a1a1;
 }
 
@@ -921,7 +924,6 @@ footer {
 }
 
 #danceTableContentDay1 {
-
   table,
   th,
   td {
@@ -948,10 +950,12 @@ footer {
   //background-color: red;
   padding-bottom: 20px;
   margin-top: 80px;
-  background: conic-gradient(from 75.58deg at -16.05% 100%,
-      #000000 0deg,
-      #6d0000 71.01deg,
-      #000000 360deg);
+  background: conic-gradient(
+    from 75.58deg at -16.05% 100%,
+    #000000 0deg,
+    #6d0000 71.01deg,
+    #000000 360deg
+  );
 }
 
 .danceVanue {
@@ -996,7 +1000,9 @@ footer {
   left: 748px;
   top: 500px;
 
-  filter: drop-shadow(0px 8px 18px #FFB800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #FFB800);
+  filter: drop-shadow(0px 8px 18px #ffb800)
+    drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
+    drop-shadow(-2px 12px 34px #ffb800);
 }
 
 #danceDetailedPageBody {
@@ -1020,17 +1026,19 @@ footer {
     height: 60px;
     left: 748px;
     top: 500px;
-    size : 100px;
+    size: 100px;
 
-    filter: drop-shadow(0px 8px 18px #FFB800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #FFB800);
+    filter: drop-shadow(0px 8px 18px #ffb800)
+      drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
+      drop-shadow(-2px 12px 34px #ffb800);
   }
-    
+
   .box {
     width: 200px; /* set width */
     height: 200px; /* set height */
     background-color: #fff; /* set background color */
     border-radius: 10px; /* round corners */
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* add shadow effect */
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* add shadow effect */
   }
   .col-2 {
     margin-bottom: 3%;
@@ -1052,7 +1060,9 @@ footer {
   .dancePageTitle {
     margin-top: 50px;
     margin-bottom: 40px;
-    filter: drop-shadow(0px 8px 18px #ffb800) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-2px 12px 34px #ffb800);
+    filter: drop-shadow(0px 8px 18px #ffb800)
+      drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
+      drop-shadow(-2px 12px 34px #ffb800);
 
     h1 {
       font-weight: 800;
@@ -1510,8 +1520,8 @@ footer {
     outline: none;
     background: transparent;
 
-    &:focus~label,
-    &:valid~label {
+    &:focus ~ label,
+    &:valid ~ label {
       top: -20px;
       left: 0;
       color: #9a031e;
@@ -1658,4 +1668,138 @@ button.red-outline-animated {
 
 .hidden {
   display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  #transparent-navbar {
+    background-color: #00000095;
+  }
+  .videoBackground {
+    filter: brightness(50%);
+  }
+  .welcomeSection {
+    flex-direction: column;
+    article {
+      width: 100%;
+      h1 {
+        font-size: 36px;
+        line-height: 60px;
+      }
+    }
+    img {
+      position: absolute;
+      top: 32%;
+    }
+  }
+  .arrow-down {
+    display: none;
+  }
+  .interestingSection {
+    padding: 10px 12px;
+    .festivalPromo {
+      div {
+        h4 {
+          font-size: 30px;
+        }
+        p {
+          font-size: 24px;
+          line-height: normal;
+        }
+      }
+      .btn {
+        font-size: 8px;
+        padding: 3px 20px;
+        bottom: 5px;
+      }
+    }
+    .visitHaarlemPromo {
+      h3 {
+        font-size: 16px;
+        margin-bottom: 2px;
+      }
+      p {
+        font-size: 12px;
+      }
+      .btn-red-gradient {
+        font-size: 12px;
+        width: 100%;
+        padding: 3px 20px;
+      }
+    }
+  }
+  .mobileAppPromoSection {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 12px;
+    .informationColumn {
+      .caption {
+        display: none;
+      }
+      h1 {
+        font-size: 34px;
+        line-height: 35px;
+      }
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      .downloadBtns {
+        img {
+          height: 10vw;
+        }
+      }
+    }
+    .mockupColumn {
+      width: 60%;
+    }
+  }
+  .container-fluid.login{
+    h1{
+      margin-top: 10%;
+      font-size: 34px;
+      font-family: "Inter";
+    }
+    .d-flex{
+      padding: 0 10px !important;
+    }
+  }
+  .container-fluid.myaccount{
+    padding: 0 12px;
+    .row{
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      div{
+        width: 100%;
+      }
+      :nth-child(2){
+        div{
+          gap: 5px !important;
+        }
+      }
+      div.col-3 img.w-100.vh-100{
+        display: none;
+      }
+    }
+  }
+  footer{
+    margin-top: 5%;
+    .breakpoint{
+      display: none;
+    }
+    .content{
+      .col{
+        flex: auto;
+      }
+      p.d-flex{
+        justify-content: center;
+      }
+      div:nth-child(1){
+        width: 100%;
+      }
+    }
+  }
 }
