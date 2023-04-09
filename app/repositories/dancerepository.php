@@ -49,7 +49,7 @@ class DanceRepository extends Repository
      LEFT JOIN DanceArtists da ON t.id = da.danceId 
      LEFT JOIN Artists a ON da.artistId = a.id 
      LEFT JOIN Venues v ON t.venueId = v.id 
-     WHERE c.userId = :userId 
+     WHERE c.userId = :userId AND ci.type = 'ticket'
      GROUP BY t.id, t.session;");
             $stmt->bindParam(':userId', $userId);
             $stmt->execute();
@@ -76,7 +76,7 @@ class DanceRepository extends Repository
           LEFT JOIN DanceArtists da ON t.id = da.danceId 
           LEFT JOIN Artists a ON da.artistId = a.id 
           LEFT JOIN Venues v ON t.venueId = v.id 
-          WHERE c.Id = :cartId
+          WHERE c.Id = :cartId AND ci.type = 'ticket'
           GROUP BY t.id, t.session;");
             $stmt->bindParam(':cartId', $cartId);
             $stmt->execute();

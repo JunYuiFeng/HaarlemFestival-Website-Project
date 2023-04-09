@@ -50,11 +50,16 @@ class CartController extends Controller
         $VATAmount = $subTotal = $totalAmount = $reservationFee = 0;
         $reservations = $tickets = $reservationData = $ticketData = array();
 
-        $reservations = ($this->getReservationsAndTickets())['reservations'];
-        $tickets = ($this->getReservationsAndTickets())['tickets'];
-        $cartId = ($this->getReservationsAndTickets())['cartId'];
+        $reservationsAndTickets = $this->getReservationsAndTickets();
+        $reservations = $reservationsAndTickets['reservations'];
+        $tickets = $reservationsAndTickets['tickets'];
+        $cartId = $reservationsAndTickets['cartId'];
 
         if (isset($_GET['saveCart'])) {
+            if (!isset($_SESSION['cart']) && !isset($_SESSION["logedin"])) {
+                $_SESSION['cart'] = $this->cartService->createVisitorCart();
+                $cartId = $_SESSION['cart'];
+            }
             $this->cartService->duplicateCartItemsByCartId(htmlspecialchars($_GET['saveCart']), $cartId);
             header("Location: /cart/index");
         }
@@ -179,9 +184,14 @@ class CartController extends Controller
 
     function removeReservation()
     {
+
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $id = htmlspecialchars($_GET['id']);
-            $this->reservationService->deleteReservation($id);
+            if (isset($_SESSION["logedin"])) {
+                $this->reservationService->deleteReservation($id, $this->cartService->getCartIdByUserId($this->loggedInUser->getId())['id']);
+            } else {
+                $this->reservationService->deleteReservation($id, $_SESSION['cart']);
+            }
         }
         header("Location: /cart/index");
     }
@@ -192,7 +202,7 @@ class CartController extends Controller
             $id = htmlspecialchars($_GET['id']);
 
             if (isset($_SESSION["logedin"])) {
-                $this->danceService->removeTicketFromCart($id, $this->cartService->getCartIdByUserId($this->loggedInUser->getId()));
+                $this->danceService->removeTicketFromCart($id, $this->cartService->getCartIdByUserId($this->loggedInUser->getId())['id']);
             } else {
                 $this->danceService->removeTicketFromCart($id, $_SESSION['cart']);
             }

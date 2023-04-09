@@ -277,7 +277,6 @@
                 })
                 .then(() => <?php echo (isset($_SESSION['logedin'])) ? 'getCartAmount()' : 'getCartAmountAsVisitor()' ?>)
             displayModalPanel("TicketIcon.png", "Added to cart", true);
-
         }
 
         function addAllAccessTicketToCart(ticketId) {

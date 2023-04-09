@@ -123,7 +123,7 @@ class ReservationRepository extends Repository
             WHERE id IN (
                 SELECT itemId
                 FROM CartItems
-                WHERE cartId = :id)");
+                WHERE cartId = :id AND type = 'reservation')");
             $stmt->bindParam(':id', $id);
 
             $stmt->execute();
@@ -137,7 +137,7 @@ class ReservationRepository extends Repository
         }
     }
 
-    function deleteReservation($id)
+    function deleteReservation($id, $cartId)
     {
         try {
             $this->connection->beginTransaction();
@@ -146,8 +146,9 @@ class ReservationRepository extends Repository
             $stmt->execute();
     
             // Delete the CartItems with itemId equal to $id and type as 'reservation'
-            $stmt = $this->connection->prepare("DELETE FROM `CartItems` WHERE `itemId` = :itemId AND `type` = 'reservation'");
+            $stmt = $this->connection->prepare("DELETE FROM `CartItems` WHERE `itemId` = :itemId AND `type` = 'reservation' AND `cartId` = :cartId");
             $stmt->bindParam(':itemId', $id);
+            $stmt->bindParam(':cartId', $cartId);
             $stmt->execute();
             
             $this->connection->commit();
