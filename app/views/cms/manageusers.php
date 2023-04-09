@@ -78,6 +78,7 @@
                             <select name=" userType" id="userType" class="px-2 py-1">
                                 <option value="admin">Admin</option>
                                 <option value="user" selected>User</option>
+                                <option value="employee">Employee</option>
                             </select>
                         </div>
                     </td>
@@ -128,8 +129,10 @@
                         userResult.forEach(user => {
                             if (user.userType == 0) {
                                 user.userType = "Admin";
-                            } else {
+                            } else if(user.userType == 1){
                                 user.userType = "User";
+                            } else if(user.userType == 2){
+                                user.userType = "Employee";
                             }
                             const row = document.createElement("tr");
                             row.innerHTML = `
@@ -141,6 +144,7 @@
                             <select id="userType_${user.id}">
                                 <option value="0" ${user.userType === "Admin" ? "selected" : ""}>Admin</option>
                                 <option value="1" ${user.userType === "User" ? "selected" : ""}>User</option>
+                                <option value="2" ${user.userType === "Employee" ? "selected" : ""}>Employee</option>
                             </select>
             <td><button class="btn btn-warning" id="update${user.id}" onclick="updateUser(${user.id})">Update</button</td>
             <td><button class="btn btn-danger" id="delete${user.id}" onclick="deleteUser(${user.id})">Delete</button></td>
@@ -166,8 +170,10 @@
                         userResult.forEach(user => {
                             if (user.userType == 0) {
                                 user.userType = "Admin";
-                            } else {
+                            } else if(user.userType == 1){
                                 user.userType = "User";
+                            } else if(user.userType == 2){
+                                user.userType = "Employee";
                             }
                             const row = document.createElement("tr");
                             row.innerHTML = `
@@ -180,6 +186,7 @@
                             <select id="userType_${user.id}">
                                 <option value="0" ${user.userType === "Admin" ? "selected" : ""}>Admin</option>
                                 <option value="1" ${user.userType === "User" ? "selected" : ""}>User</option>
+                                <option value-"2" ${user.userType === "Employee" ? "selected" : ""}>Employee</option>
                             </select>
                         </td>
                         <td><button class="btn btn-warning" id="update${user.id}" onclick="updateUser(${user.id})">Update</button></td>
