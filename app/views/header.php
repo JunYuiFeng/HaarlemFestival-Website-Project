@@ -61,34 +61,7 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="/js/cartlogic.js"></script>
 <script>
-
-  var cartAmount = document.getElementById("cartAmount");
-
   <?php echo (isset($_SESSION['logedin'])) ? 'getCartAmount();' : 'getCartAmountAsVisitor();' ?>
-
-  function getCartAmount(userId) {
-    console.log("getCartAmount");
-    fetch('/api/cart/getCartAmount')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        data = data == null ? 0 : data;
-        cartAmount.innerHTML = data;
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-
-  function getCartAmountAsVisitor() {
-    fetch('/api/cart/getCartAmountAsVisitor')
-      .then(response => response.json())
-      .then(data => {
-        cartAmount.innerHTML = data;
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
 </script>

@@ -1691,6 +1691,41 @@ button.red-outline-animated {
 .hidden {
   display: none;
 }
+.modal-panel {
+  z-index: 1021;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: space-between;
+  top: 20px;
+  right: 0px;
+  width: 15%;
+  height: 7%;
+  padding: 5px 5px;
+  background: rgb(255, 255, 255);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.8px);
+  -webkit-backdrop-filter: blur(5.8px);
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(100%);
+  p {
+    margin: 0;
+    font-size: 18px;
+    font-family: "Inter";
+    font-weight: 500;
+    color: black;
+    white-space: nowrap;
+    margin-right: 15%;
+  }
+  img {
+    height: 100%;
+    width: auto;
+  }
+  &.slide {
+    transform: translateX(0px);
+  }
+}
 
 @media only screen and (max-width: 768px) {
   #transparent-navbar {

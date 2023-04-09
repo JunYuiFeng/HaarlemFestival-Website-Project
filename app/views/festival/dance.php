@@ -11,7 +11,6 @@
 </head>
 
 <body id="danceBody">
-
     <?php
     include __DIR__ . '/../header.php';
     ?>
@@ -259,58 +258,10 @@
         </div>
     </div>
 
-    <br>
-    <br>
 
     <?php
     include __DIR__ . '/../footer.php';
     ?>
-
-    <script>
-        getCartAmount()
-
-        function addTicketToCart(ticketId) {
-            var quantity = document.getElementById("ticketAmount" + ticketId).value ? document.getElementById("ticketAmount" + ticketId).value : 1;
-            fetch('/api/cart/addTicketToCart', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        ticketId: ticketId,
-                        quantity: quantity
-                    })
-                })
-                .then(() => <?php echo (isset($_SESSION['logedin'])) ? 'getCartAmount()' : 'getCartAmountAsVisitor()' ?>)
-        }
-
-        function addAllAccessTicketToCart(ticketId) {
-            fetch('/api/cart/addTicketToCart', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        ticketId: ticketId,
-                        quantity: 1
-                    })
-                })
-                .then(() => <?php echo (isset($_SESSION['logedin'])) ? 'getCartAmount()' : 'getCartAmountAsVisitor()' ?>)
-        }
-
-
-        function getCartAmount() {
-            fetch('/api/cart/getCartAmount')
-                .then(response => response.json())
-                .then(data => {
-                    cartAmount.innerHTML = data;
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        }
-    </script>
-
 </body>
 
 </html>

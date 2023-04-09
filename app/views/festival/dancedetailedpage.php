@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dance!</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
 
@@ -24,8 +23,7 @@
         </div>
     </div>
     <div>
-        <img src="/img/<?= $artist->getDetailedPicture() ?>" alt="Dance Festival Image" class="img-fluid danceDetailedPageImage"
-            style="posision: absolute; top:20px">
+        <img src="/img/<?= $artist->getDetailedPicture() ?>" alt="Dance Festival Image" class="img-fluid danceDetailedPageImage" style="posision: absolute; top:20px">
     </div>
     <div class="">
         <h1 class="detailedArtistName" style="">
@@ -88,6 +86,39 @@
     <?php
     include __DIR__ . '/../footer.php';
     ?>
+
+    <script>
+        function addTicketToCart(ticketId) {
+            var quantity = document.getElementById("ticketAmount" + ticketId).value ? document.getElementById("ticketAmount" + ticketId).value : 1;
+            fetch('/api/cart/addTicketToCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ticketId: ticketId,
+                        quantity: quantity
+                    })
+                })
+                .then(() => <?php echo (isset($_SESSION['logedin'])) ? 'getCartAmount()' : 'getCartAmountAsVisitor()' ?>)
+            displayModalPanel("TicketIcon.png", "Added to cart", true);
+        }
+
+        function addAllAccessTicketToCart(ticketId) {
+            fetch('/api/cart/addTicketToCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ticketId: ticketId,
+                        quantity: 1
+                    })
+                })
+                .then(() => <?php echo (isset($_SESSION['logedin'])) ? 'getCartAmount()' : 'getCartAmountAsVisitor()' ?>)
+            displayModalPanel("AllAccessPassIcon.png", "Added to cart", true);
+        }
+    </script>
 
 </body>
 

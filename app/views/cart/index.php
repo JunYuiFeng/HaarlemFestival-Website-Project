@@ -42,7 +42,9 @@
                                         <img src="/img/ReservationIcon.png" alt="">
                                     </div>
                                     <div class="col-3">
-                                    <a class="text-reset text-decoration-none" href="../festival/restaurantdetail?id=<?= $reservation['restaurantId'] ?>"><h2><b><?= $reservation['restaurant'] ?></b></h2></a>
+                                        <a class="text-reset text-decoration-none" href="../festival/restaurantdetail?id=<?= $reservation['restaurantId'] ?>">
+                                            <h2><b><?= $reservation['restaurant'] ?></b></h2>
+                                        </a>
                                         <p><b>Comment:</b> <?= $reservation['comment'] ?></p>
                                         <p><b>People:</b> <?= $reservation['amountAbove12'] + $reservation['amountUnderOr12'] ?></p>
                                     </div>
@@ -85,10 +87,14 @@
                                     </div>
                                     <div class="col-3">
                                         <?php if (!empty($ticket['artist']) && !empty($ticket['venue'])) { ?>
-                                            <a class="text-reset text-decoration-none" href="../festival/dance#tickets"><h2><b><?= $ticket['artist'] ?></b></h2></a>
+                                            <a class="text-reset text-decoration-none" href="../festival/dance#tickets">
+                                                <h2><b><?= $ticket['artist'] ?></b></h2>
+                                            </a>
                                             <p><b>Venue:</b> <?= $ticket['venue'] ?></p>
                                         <?php } else { ?>
-                                            <a class="text-reset text-decoration-none" href="../festival/dance#tickets"><h2><b><?= $ticket['session'] ?></b></h2></a>
+                                            <a class="text-reset text-decoration-none" href="../festival/dance#tickets">
+                                                <h2><b><?= $ticket['session'] ?></b></h2>
+                                            </a>
                                         <?php } ?>
                                     </div>
                                     <div class="col-2" style="width: 12%;">
@@ -162,8 +168,6 @@
     ?>
 
     <script>
-        getCartAmount();
-
         const quantityInputs = document.querySelectorAll('input[name="quantity"]');
         quantityInputs.forEach(input => {
             input.addEventListener('input', (event) => {

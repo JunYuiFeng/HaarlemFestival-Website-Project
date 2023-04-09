@@ -189,11 +189,7 @@
     ?>
 
     <script>
-        var cartAmount = document.getElementById("cartAmount");
-
         const restaurantId = <?= $restaurant->getId() ?>;
-
-        <?php echo (isset($_SESSION['logedin'])) ? 'getCartAmount();' : 'getCartAmountAsVisitor();' ?>
 
         document.getElementById("addToCart").addEventListener("click", function(event) {
 
@@ -220,29 +216,9 @@
                 .catch(error => {
                     console.error(error);
                 });
+            displayModalPanel("ReservationIcon.png", "Added to cart", true);
         }
 
-        function getCartAmount() {
-            fetch('/api/cart/getCartAmount')
-                .then(response => response.json())
-                .then(data => {
-                    cartAmount.innerHTML = data;
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        }
-
-        function getCartAmountAsVisitor() {
-            fetch('/api/cart/getCartAmountAsVisitor')
-                .then(response => response.json())
-                .then(data => {
-                    cartAmount.innerHTML = data;
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        }
 
         function validateForm() {
             const amountAbove12 = document.getElementsByName('amountAbove12')[0].value;
