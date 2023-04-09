@@ -26,8 +26,7 @@ class CartController extends Controller
     protected $loggedInUser;
 
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->cartService = new CartService();
         $this->restaurantService = new RestaurantService();
@@ -38,8 +37,7 @@ class CartController extends Controller
         $this->paymentService = new PaymentService();
     }
 
-    public function index()
-    {
+    public function index() {
         if (isset($_SESSION['alert'])) {
             echo '<script>alert("' . $_SESSION['alert'] . '");</script>';
             
@@ -86,8 +84,7 @@ class CartController extends Controller
         require __DIR__ . '/../views/cart/index.php';
     }
 
-    function getReservationsAndTickets()
-    {
+    function getReservationsAndTickets() {
         $reservations = array();
         $tickets = array();
         $cartId = null;
@@ -118,8 +115,7 @@ class CartController extends Controller
         ];
     }
 
-    function getReservationData($reservations)
-    {
+    function getReservationData($reservations) {
         $reservationData = array();
         $reservationFeePerPerson = 10;
         $reservationFee = 0;
@@ -151,8 +147,7 @@ class CartController extends Controller
         ];
     }
 
-    private function getTicketData($tickets)
-    {
+    private function getTicketData($tickets) {
         $ticketData = array();
         $subTotal = 0;
 
@@ -209,33 +204,47 @@ class CartController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $ticketId = htmlspecialchars($_GET['ticketId']);
 
-
             if (($this->danceService->getTicketById($ticketId))->getAvaliableTickets() == 0) {
                 $_SESSION['alert'] = "ticket unavailable";
             } else {
                 $this->cartService->increaseTicketQuantity($ticketId);
             }
             header("Location: /cart/index");
-            
+        }
+    }
+
+    function reservationAvailabilityCheck() {
+        $reservations = $this->reservationService->getFromCartByUserId($this->loggedInUser->getId());
+
+        foreach ($reservations as $reservation) {
+            $session = $this->sessionService->getById($reservation->getSessionId());
+
+            if ($session->getSeats() == 0) {
+                $_SESSION['alert'] = "reservation with RESTAURANT: {$this->restaurantService->getById($reservation->getRestaurantId())->getName()} and SESSION: {$session->getName()} on {$reservation->getDate()} is soldout";
+            }
+            else if ($reservation->getAmountAbove12() + $reservation->getAmountUnderOr12() > $session->getSeats() ) {
+                $_SESSION['alert'] = "reservation with RESTAURANT: {$this->restaurantService->getById($reservation->getRestaurantId())->getName()} and SESSION: {$session->getName()} on {$reservation->getDate()} has only {$session->getSeats()} available";
+            }
+            header("Location: /cart/index");
+            exit();
         }
     }
 
     function ticketAvailabilityCheck() {
         $tickets = $this->danceService->getTicketsFromCartByUserId($this->loggedInUser->getId());
-
+    
         foreach ($tickets as $ticket) {
             if ($ticket->getAvaliableTickets() == 0) {
                 $_SESSION['alert'] = "ticket with ARTIST(S): {$ticket->getArtist()} and VENUE: {$ticket->getVenue()} on {$ticket->getDate()} is soldout";
-                header("Location: /cart/index");
-                exit();
             }
             else if ($ticket->getQuantity() > $ticket->getAvaliableTickets()) {
                 $_SESSION['alert'] = "ticket with ARTIST(S): {$ticket->getArtist()} and VENUE: {$ticket->getVenue()} on {$ticket->getDate()} has only {$ticket->getAvaliableTickets()} available";
-                header("Location: /cart/index");
-                exit();
             }
+            header("Location: /cart/index");
+            exit();
         }
     }
+    
 
     function payment()
     {
@@ -244,6 +253,7 @@ class CartController extends Controller
             try {
 
                 $this->ticketAvailabilityCheck();
+                $this->reservationAvailabilityCheck();
 
                 $order = $this->orderService->insertIntoOrder($this->loggedInUser->getId(), date("Y-m-d"), "pending");
                 $this->orderService->transferCartItemsToOrderItemsById($order->getId(), $this->loggedInUser->getId());

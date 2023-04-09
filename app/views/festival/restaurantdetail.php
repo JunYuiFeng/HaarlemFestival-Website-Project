@@ -188,21 +188,23 @@
     include __DIR__ . '/../footer.php';
     ?>
 
-<script>
+    <script>
         var cartAmount = document.getElementById("cartAmount");
 
         const restaurantId = <?= $restaurant->getId() ?>;
 
         <?php echo (isset($_SESSION['logedin'])) ? 'getCartAmount();' : 'getCartAmountAsVisitor();' ?>
 
-        document.querySelector("#addToCart").addEventListener("click", function(event) {
+        document.getElementById("addToCart").addEventListener("click", function(event) {
 
-            const formData = new FormData(document.getElementById("reservationForm")); // get form data
-            const reservationData = Object.fromEntries(formData.entries()); // convert form data to object
+            if (validateForm()) {
+                const formData = new FormData(document.getElementById("reservationForm")); // get form data
+                const reservationData = Object.fromEntries(formData.entries()); // convert form data to object
 
-            reservationData.restaurantId = restaurantId;
+                reservationData.restaurantId = restaurantId;
 
-            addToCart(reservationData); 
+                addToCart(reservationData);
+            }
         });
 
 
@@ -241,8 +243,22 @@
                     console.error(error);
                 });
         }
+
+        function validateForm() {
+            const amountAbove12 = document.getElementsByName('amountAbove12')[0].value;
+            const amountUnderOr12 = document.getElementsByName('amountUnderOr12')[0].value;
+            const sessionId = document.querySelector('input[name="sessionId"]:checked');
+            const date = document.querySelector('input[name="date"]:checked');
+
+            if (amountAbove12 === '' && amountUnderOr12 === '' || !sessionId || !date) {
+                alert('Please fill all required fields!');
+                return false;
+            }
+
+            return true;
+        }
     </script>
-    
+
 </body>
 
 </html>
