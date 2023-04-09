@@ -24,7 +24,7 @@
         </div>
     </div>
     <div>
-        <img src="/img/<?= $artist->getDetailedPicture() ?>" alt="Dance Festival Image" class="img-fluid"
+        <img src="/img/<?= $artist->getDetailedPicture() ?>" alt="Dance Festival Image" class="img-fluid danceDetailedPageImage"
             style="posision: absolute; top:20px">
     </div>
     <div class="">

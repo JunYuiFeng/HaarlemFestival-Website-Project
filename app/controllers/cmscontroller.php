@@ -183,7 +183,7 @@ class CmsController extends Controller
                 if (empty($field))
                     $this->msg = "Please fill all the fields";
             }
-            if ($this->msg == "") {
+            if ($this->msg == "") {                
                 $restaurant = (!isset(($_GET["edit"]))) ? new Restaurant() : $restaurant;
                 if (isset($_FILES['coverImg']) && $_FILES['coverImg']['name'] != "") {
                     $coverImg = $_FILES['coverImg'];
