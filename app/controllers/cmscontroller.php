@@ -53,11 +53,27 @@ class CmsController extends Controller
 
     public function manageusers()
     {
+        if (isset($_POST['action'])) {
+            if (!empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password']) && isset($_POST['userType'])) {
+                $username = filter_var($_POST["username"], FILTER_SANITIZE_SPECIAL_CHARS);
+                $email = filter_var($_POST["email"], FILTER_SANITIZE_SPECIAL_CHARS);
+                $password = filter_var($_POST["password"], FILTER_SANITIZE_SPECIAL_CHARS);
+                $userType = filter_var($_POST["userType"], FILTER_SANITIZE_SPECIAL_CHARS);
+                if ($this->userService->CreateUser($username, $email, $password, $userType)) {
+                    $outputMsg = "User created successfully";
+                } else {
+                    $outputMsg = "Something went wrong";
+                }
+            } else {
+                var_dump($_POST);
+                $outputMsg = "Please fill all fields";
+            }
+        }
         $users = $this->userService->getAll();
         require __DIR__ . '/../views/cms/manageusers.php';
     }
 
-    
+
     public function manageDance()
     {
         $venues = $this->venueService->getAll();
@@ -99,7 +115,7 @@ class CmsController extends Controller
                     if ((empty($_POST['artistName']) || empty($_POST['artistStyle']) || empty($_POST['artistFirstSong']) || empty($_POST['artistSecondSong']) || empty($_POST['artistThirdSong']) || empty($_POST['artistIndexPicture']) || empty($_POST['artistFirstSourceSong']) || empty($_POST['artistSecondSourceSong']) || empty($_POST['artistThirdSourceSong']) || empty($_POST['artistDetailedPicture']) || empty($_POST['artistCareer']))) {
                         break;
                     }
-                    $this->artistService->addArtist(htmlspecialchars($_POST['artistName']), htmlspecialchars($_POST['artistStyle']), htmlspecialchars($_POST['artistFirstSong']), htmlspecialchars($_POST['artistSecondSong']), htmlspecialchars($_POST['artistThirdSong']), htmlspecialchars($_POST['artistIndexPicture']), htmlspecialchars($_POST['artistFirstSourceSong']), htmlspecialchars($_POST['artistSecondSourceSong']), htmlspecialchars($_POST['artistThirdSourceSong']),htmlspecialchars($_POST['artistDetailedPicture']), htmlspecialchars($_POST['artistCareer']));
+                    $this->artistService->addArtist(htmlspecialchars($_POST['artistName']), htmlspecialchars($_POST['artistStyle']), htmlspecialchars($_POST['artistFirstSong']), htmlspecialchars($_POST['artistSecondSong']), htmlspecialchars($_POST['artistThirdSong']), htmlspecialchars($_POST['artistIndexPicture']), htmlspecialchars($_POST['artistFirstSourceSong']), htmlspecialchars($_POST['artistSecondSourceSong']), htmlspecialchars($_POST['artistThirdSourceSong']), htmlspecialchars($_POST['artistDetailedPicture']), htmlspecialchars($_POST['artistCareer']));
                     $artists = $this->artistService->getAll();
                     break;
                 case 'deleteTicket':
@@ -114,8 +130,8 @@ class CmsController extends Controller
                     $time = date('H:i:s', strtotime($_POST['ticketTime']));
                     $venueId = $this->venueService->getVenueIdByName(htmlspecialchars($_POST['ticketVenue']));
 
-                    
-                    $this->danceService->deleteDanceArtistsByDanceId(htmlspecialchars($_POST['ticketId']));// delete all the artists for the dance so can edit later
+
+                    $this->danceService->deleteDanceArtistsByDanceId(htmlspecialchars($_POST['ticketId'])); // delete all the artists for the dance so can edit later
                     $artists = array();
                     for ($i = 1; $i <= 5; $i++) {
                         if (!empty($_POST['ticketArtist' . $i])) {
@@ -125,7 +141,7 @@ class CmsController extends Controller
                     foreach ($artists as $artist) {
                         $artistId = $this->artistService->getArtistIdByName($artist);
                         $this->danceService->addDanceArtist(htmlspecialchars($_POST['ticketId']), $artistId);
-                    }                
+                    }
 
                     $this->danceService->updateDance($_POST['ticketId'], $date, $time, $venueId, $_POST['ticketAvaliable'], $_POST['ticketPrice']);
 
