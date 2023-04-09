@@ -52,10 +52,8 @@ class WebHookController extends Controller
         try {
             $mollie = new \Mollie\Api\MollieApiClient();
             $mollie->setApiKey('test_vWU6vr3ypCg9NFQeuE5TbUBjMyv4FP');
-            /*
-             * Retrieve the payment's current state.
-             */
-            $payment = $mollie->payments->get(htmlspecialchars($_POST["id"]));
+
+            $payment = $mollie->payments->get(htmlspecialchars($_POST["id"])); // Get payment by id
 
             $orderId = $payment->metadata->order_id;
             $customerName = $this->userService->getById($payment->metadata->user_id)->getUsername();
@@ -66,8 +64,7 @@ class WebHookController extends Controller
             $this->reservationFee = $payment->metadata->reservationFee;
             $this->subTotal = $payment->metadata->subTotal;
 
-            // Update order in the database.
-            $this->orderService->updateOrderStatus($orderId, $payment->status);
+            $this->orderService->updateOrderStatus($orderId, $payment->status); // Update order in the database.
 
             if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {
 

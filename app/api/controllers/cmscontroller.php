@@ -65,7 +65,7 @@ class CmsController extends Controller
         $userResult = null;
 
         if (!empty($_GET['query'])) {
-            $query = $_GET['query'];
+            $query = htmlspecialchars($_GET['query']);
             $userResult = array();
             foreach ($users as $user) {
                 if (stristr($user->getId(), $query) || stristr($user->getUsername(), $query) || stristr($user->getEmail(), $query)) {

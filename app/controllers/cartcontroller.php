@@ -38,8 +38,7 @@ class CartController extends Controller
         $this->paymentService = new PaymentService();
     }
 
-    public function index()
-    {
+    public function index() {
         if (isset($_SESSION['alert'])) {
             echo '<script>alert("' . $_SESSION['alert'] . '");</script>';
 
@@ -91,8 +90,7 @@ class CartController extends Controller
         require __DIR__ . '/../views/cart/index.php';
     }
 
-    function getReservationsAndTickets()
-    {
+    function getReservationsAndTickets() {
         $reservations = array();
         $tickets = array();
         $cartId = null;
@@ -123,8 +121,7 @@ class CartController extends Controller
         ];
     }
 
-    function getReservationData($reservations)
-    {
+    function getReservationData($reservations) {
         $reservationData = array();
         $reservationFeePerPerson = 10;
         $reservationFee = 0;
@@ -156,8 +153,7 @@ class CartController extends Controller
         ];
     }
 
-    private function getTicketData($tickets)
-    {
+    function getTicketData($tickets) {
         $ticketData = array();
         $subTotal = 0;
 
@@ -182,9 +178,7 @@ class CartController extends Controller
         ];
     }
 
-    function removeReservation()
-    {
-
+    function removeReservation() {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $id = htmlspecialchars($_GET['id']);
             if (isset($_SESSION["logedin"])) {
@@ -196,8 +190,7 @@ class CartController extends Controller
         header("Location: /cart/index");
     }
 
-    function removeTicket()
-    {
+    function removeTicket() {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $id = htmlspecialchars($_GET['id']);
 
@@ -210,13 +203,12 @@ class CartController extends Controller
         header("Location: /cart/index");
     }
 
-    function decreaseTicketQuantity()
-    {
+    function decreaseTicketQuantity() {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $ticketId = htmlspecialchars($_GET['ticketId']);
 
             if (isset($_SESSION["logedin"])) {
-                $this->cartService->decreaseTicketQuantity($ticketId, $this->cartService->getCartIdByUserId($this->loggedInUser->getId()));
+                $this->cartService->decreaseTicketQuantity($ticketId, $this->cartService->getCartIdByUserId($this->loggedInUser->getId())['id']);
             } else {
                 $this->cartService->decreaseTicketQuantity($ticketId, $_SESSION['cart']);
             }
@@ -224,22 +216,15 @@ class CartController extends Controller
         header("Location: /cart/index");
     }
 
-    function increaseTicketQuantity()
-    {
+    function increaseTicketQuantity() {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $ticketId = htmlspecialchars($_GET['ticketId']);
 
-            if ($ticketId == 65 || $ticketId == 66 || $ticketId == 67 || $ticketId == 68) {
-                if (isset($_SESSION["logedin"])) {
-                    $this->cartService->increaseTicketQuantity($ticketId, $this->loggedInUser->getId());
-                } else {
-                    $this->cartService->increaseTicketQuantity($ticketId, $_SESSION['cart']);
-                }
-            } else if (($this->danceService->getTicketById($ticketId))->getAvaliableTickets() == 0) {
+            if (($this->danceService->getTicketById($ticketId))->getAvaliableTickets() == 0 && $ticketId != 65 && $ticketId != 66 && $ticketId != 67 && $ticketId != 68) {
                 $_SESSION['alert'] = "ticket unavailable";
             } else {
                 if (isset($_SESSION["logedin"])) {
-                    $this->cartService->increaseTicketQuantity($ticketId, $this->loggedInUser->getId());
+                    $this->cartService->increaseTicketQuantity($ticketId, $this->cartService->getCartIdByUserId($this->loggedInUser->getId())['id']);
                 } else {
                     $this->cartService->increaseTicketQuantity($ticketId, $_SESSION['cart']);
                 }
@@ -248,8 +233,7 @@ class CartController extends Controller
         }
     }
 
-    function reservationAvailabilityCheck()
-    {
+    function reservationAvailabilityCheck() {
         $reservations = $this->reservationService->getFromCartByUserId($this->loggedInUser->getId());
 
         foreach ($reservations as $reservation) {
@@ -257,34 +241,35 @@ class CartController extends Controller
 
             if ($session->getSeats() == 0) {
                 $_SESSION['alert'] = "reservation with RESTAURANT: {$this->restaurantService->getById($reservation->getRestaurantId())->getName()} and SESSION: {$session->getName()} on {$reservation->getDate()} is soldout";
+                header("Location: /cart/index");
+                exit();
             } else if ($reservation->getAmountAbove12() + $reservation->getAmountUnderOr12() > $session->getSeats()) {
                 $_SESSION['alert'] = "reservation with RESTAURANT: {$this->restaurantService->getById($reservation->getRestaurantId())->getName()} and SESSION: {$session->getName()} on {$reservation->getDate()} has only {$session->getSeats()} available";
-            }
-            header("Location: /cart/index");
-            exit();
-        }
-    }
-
-    function ticketAvailabilityCheck()
-    {
-        $tickets = $this->danceService->getTicketsFromCartByUserId($this->loggedInUser->getId());
-
-        foreach ($tickets as $ticket) {
-            if ($ticket->getId() != 65 && $ticket->getId() != 66 && $ticket->getId() != 67 && $ticket->getId() != 68) {
-                if ($ticket->getAvaliableTickets() == 0) {
-                    $_SESSION['alert'] = "ticket with ARTIST(S): {$ticket->getArtist()} and VENUE: {$ticket->getVenue()} on {$ticket->getDate()} is soldout";
-                } else if ($ticket->getQuantity() > $ticket->getAvaliableTickets()) {
-                    $_SESSION['alert'] = "ticket with ARTIST(S): {$ticket->getArtist()} and VENUE: {$ticket->getVenue()} on {$ticket->getDate()} has only {$ticket->getAvaliableTickets()} available";
-                }
                 header("Location: /cart/index");
                 exit();
             }
         }
     }
 
+    function ticketAvailabilityCheck() {
+        $tickets = $this->danceService->getTicketsFromCartByUserId($this->loggedInUser->getId());
 
-    function payment()
-    {
+        foreach ($tickets as $ticket) {
+            if ($ticket->getId() != 65 && $ticket->getId() != 66 && $ticket->getId() != 67 && $ticket->getId() != 68) {
+                if ($ticket->getAvaliableTickets() == 0) {
+                    $_SESSION['alert'] = "ticket with ARTIST(S): {$ticket->getArtist()} and VENUE: {$ticket->getVenue()} on {$ticket->getDate()} is soldout";
+                    header("Location: /cart/index");
+                    exit();
+                } else if ($ticket->getQuantity() > $ticket->getAvaliableTickets()) {
+                    $_SESSION['alert'] = "ticket with ARTIST(S): {$ticket->getArtist()} and VENUE: {$ticket->getVenue()} on {$ticket->getDate()} has only {$ticket->getAvaliableTickets()} available";
+                    header("Location: /cart/index");
+                    exit();
+                }
+            }
+        }
+    }
+
+    function payment() {
         require_once __DIR__ . '/../config/mollieApi.php';
         if (isset($_SESSION["logedin"])) {
             try {
@@ -300,9 +285,9 @@ class CartController extends Controller
                         "currency" => "EUR",
                         "value" => number_format($_SESSION['totalAmount'], 2, '.', '')
                     ],
-                    "description" => "Test payment",
-                    "redirectUrl" => "https://09be-217-105-28-34.ngrok-free.app//redirecturl?orderId={$order->getId()}", //https://7d68-217-105-28-25.eu.ngrok.io/redirecturl?orderId={$order->getId()}
-                    "webhookUrl" => "https://09be-217-105-28-34.ngrok-free.app//api/webhook",
+                    "description" => "payment for order {$order->getId()}",
+                    "redirectUrl" => "https://09be-217-105-28-34.ngrok-free.app/redirecturl?orderId={$order->getId()}", //https://7d68-217-105-28-25.eu.ngrok.io/redirecturl?orderId={$order->getId()}
+                    "webhookUrl" => "https://09be-217-105-28-34.ngrok-free.app/api/webhook",
                     "metadata" => [
                         "order_id" => $order->getId(),
                         "user_id" => $order->getUserId(),

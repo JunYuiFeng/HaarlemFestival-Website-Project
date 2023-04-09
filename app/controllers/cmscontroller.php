@@ -317,7 +317,6 @@ class CmsController extends Controller
     }
 
     public function managereservations() {
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $reservation = new Reservation();
