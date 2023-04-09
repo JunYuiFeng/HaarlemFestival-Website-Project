@@ -118,7 +118,6 @@ class CmsController extends Controller
                     }      
                     foreach ($artists as $artist) {
                         $artistId = $this->artistService->getArtistIdByName($artist);
-                        echo $artistId;
                         $this->danceService->addDanceArtist($_POST['ticketId'], $artistId);
                     }                
 
