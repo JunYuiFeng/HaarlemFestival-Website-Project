@@ -29,6 +29,7 @@
                     <th>date</th>
                     <th>comments</th>
                     <th>status</th>
+                    <th colspan="2">manage</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,7 +57,8 @@
                                 <option value="unactive">unactive</option>
                             </select>
                         </td>
-                        <td> <input type="submit" class="btn btn-primary" value="Add"></td>
+                        <td colspan="2"> <input type="submit" class="btn btn-primary w-100" value="Add"></td>
+
 
                     </form>
                 </tr>

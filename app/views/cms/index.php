@@ -39,6 +39,7 @@
                 <button class="btn btn-danger mb-2" onclick="document.location.href='managerestaurants'">Restaurants</button>
                 <button class="btn btn-danger mb-2" onclick="document.location.href='managesessions'">Sessions</button>
                 <button class="btn btn-danger mb-2" onclick="document.location.href='managereservations'">Reservations</button>
+                <button class="btn btn-danger mb-2" onclick="document.location.href='managedance'">Dance Event</button>
                 <button class="btn btn-danger mb-2" onclick="document.location.href='manageorders'">Orders</button>
                 <button class="btn btn-danger mb-2" onclick="document.location.href='manageapikeys'">API Keys</button>
             </div>
