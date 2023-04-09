@@ -126,9 +126,10 @@
                             <td>
                                 <input type="text" name="artistDetailedPicture"
                                     value="<?= $artist->getDetailedPicture() ?>">
+                                <input type="file" name="artistDetailedPicture" value="<?= $artist->getDetailedPicture() ?>">
                             </td>
                             <td>
-                                <input type="text" name="artistCareer" value="<?= $artist->getCareer() ?>">
+                                <input type="text" name="artistCareer" value="<?= $artist->getCareer() ?>"maxlength="4500">
                             </td>
                             <td>
                                 <button type="submit" class="btn btn-primary edit-btn" name="action" action="update"

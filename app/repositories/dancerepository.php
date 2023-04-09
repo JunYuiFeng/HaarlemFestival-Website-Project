@@ -273,7 +273,6 @@ class DanceRepository extends Repository
             $stmt->bindParam(':danceId', $danceId);
             $stmt->bindParam(':artistId', $artistId);
             $stmt->execute();
-            echo "New DanceArtist created successfully";
 
         } catch (PDOException $e) {
             echo $e->getMessage();
