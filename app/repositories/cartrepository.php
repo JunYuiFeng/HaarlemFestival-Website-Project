@@ -128,10 +128,31 @@ class CartRepository extends Repository
     function duplicateCartItemsByCartId($cartIdFrom, $cartIdTo)
     {
         try {
-            $stmt = $this->connection->prepare("INSERT INTO CartItems (cartId, itemId, type, quantity)
-            SELECT :cartIdTo, ItemId, type,quantity
-            FROM CartItems
-            WHERE cartId = :cartIdFrom");
+            $stmt = $this->connection->prepare("IF EXISTS (
+                SELECT *
+                FROM CartItems
+                WHERE cartId = :cartIdFrom AND type = 'reservation'
+              ) THEN
+                INSERT INTO Reservations (restaurantId, sessionId, amountAbove12, amountUnderOr12, date, comments, status)
+                SELECT restaurantId, sessionId, amountAbove12, amountUnderOr12, date, comments, status
+                FROM Reservations
+                WHERE id IN (
+                  SELECT itemId
+                  FROM CartItems
+                  WHERE cartId = :cartIdFrom AND type = 'reservation'
+                );
+                
+                SET @newReservationId := LAST_INSERT_ID();
+                
+                INSERT INTO CartItems (cartId, itemId, type, quantity) 
+                VALUES (:cartIdTo, @newReservationId, 'reservation', 1);
+              END IF;
+              
+              INSERT INTO CartItems (cartId, itemId, type, quantity)
+              SELECT :cartIdTo, itemId, type, quantity
+              FROM CartItems
+              WHERE cartId = :cartIdFrom AND type != 'reservation' ");
+              
             $stmt->bindParam(':cartIdTo', $cartIdTo);
             $stmt->bindParam(':cartIdFrom', $cartIdFrom);
             return $stmt->execute();
@@ -184,24 +205,24 @@ class CartRepository extends Repository
     {
         try {
             $this->connection->beginTransaction();
-    
+
             $stmt = $this->connection->prepare("UPDATE CartItems 
                 SET quantity = quantity - 1 
                 WHERE itemId = :ticketId AND type = 'ticket' AND cartId = :cartId");
-    
+
             $stmt->bindParam(':ticketId', $ticketId);
             $stmt->bindParam(':cartId', $cartId);
             $stmt->execute();
-    
+
             $stmt = $this->connection->prepare("DELETE FROM CartItems 
                 WHERE itemId = :ticketId AND type = 'ticket' AND quantity <= 0 AND cartId = :cartId");
-    
+
             $stmt->bindParam(':ticketId', $ticketId);
             $stmt->bindParam(':cartId', $cartId);
             $stmt->execute();
-    
+
             $this->connection->commit();
-    
+
             return true;
         } catch (PDOException $e) {
             $this->connection->rollBack(); //If any of the two SQL statements fails, this method will undo any changes made in the transaction, and the function returns false.
@@ -209,7 +230,7 @@ class CartRepository extends Repository
             return false;
         }
     }
-    
+
 
     function increaseTicketQuantity($ticketId, $cartId)
     {
