@@ -50,6 +50,18 @@ class CmsController extends Controller
     public function manageusers()
     {
         $users = $this->userService->getAll();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            echo "POST";
+            switch ($_POST['action']) {
+                case 'create':
+                    $this->createUser();
+                    $users = $this->userService->getAll();
+                    break;
+                default:
+                    break;
+            }
+        }
         require __DIR__ . '/../views/cms/manageusers.php';
     }
     public function manageDance()
