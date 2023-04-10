@@ -26,7 +26,7 @@
         <img src="/img/<?= $artist->getDetailedPicture() ?>" alt="Dance Festival Image" class="img-fluid danceDetailedPageImage" style="posision: absolute; top:20px">
     </div>
     <div class="">
-        <h1 class="detailedArtistName" style="">
+        <h1 class="detailedArtistName">
             <?= $artist->getName() ?>
         </h1>
     </div>
@@ -78,9 +78,6 @@
         </div>
         <div class="col-3 ">
             <img src="/img/<?= $artist->getIndexPicture() ?>">
-            <label>
-                <?= $artist->getIndexPicture() ?>
-            </label>
         </div>
     </div>
     <?php

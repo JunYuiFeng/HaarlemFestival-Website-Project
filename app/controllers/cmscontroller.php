@@ -58,8 +58,9 @@ class CmsController extends Controller
                 $username = filter_var($_POST["username"], FILTER_SANITIZE_SPECIAL_CHARS);
                 $email = filter_var($_POST["email"], FILTER_SANITIZE_SPECIAL_CHARS);
                 $password = filter_var($_POST["password"], FILTER_SANITIZE_SPECIAL_CHARS);
+                $hasshedPassword = password_hash($password, PASSWORD_DEFAULT);
                 $userType = filter_var($_POST["userType"], FILTER_SANITIZE_SPECIAL_CHARS);
-                if ($this->userService->CreateUser($username, $email, $password, $userType)) {
+                if ($this->userService->CreateUser($username, $email, $hasshedPassword, $userType)) {
                     $outputMsg = "User created successfully";
                 } else {
                     $outputMsg = "Something went wrong";
@@ -88,9 +89,9 @@ class CmsController extends Controller
                     $venues = $this->venueService->getAll();
                     break;
                 case 'updateVenue':
-                    if ((empty($_POST['venueId']) || empty($_POST['venueName']) || empty($_POST['venueAddress']) || empty($_POST['venueImage']))){
+                    if ((empty($_POST['venueId']) || empty($_POST['venueName']) || empty($_POST['venueAddress']) || empty($_POST['venueImage']))) {
                         break;
-                    }          
+                    }
                     $this->venueService->editVenue(($_POST['venueId']), htmlspecialchars($_POST['venueName']), htmlspecialchars($_POST['venueAddress']), htmlspecialchars($_POST['venueImage']));
                     $venues = $this->venueService->getAll();
                     break;
@@ -164,7 +165,7 @@ class CmsController extends Controller
             }
         }
 
-        require __DIR__ . '/../views/cms/manageDance.php';
+        require __DIR__ . '/../views/cms/managedance.php';
     }
 
 
@@ -177,6 +178,10 @@ class CmsController extends Controller
                 $this->contentEditorService->setNewPageContent($webPage, $editor_data);
             }
             $this->content = $this->contentEditorService->getPageContent($webPage);
+            if ($this->content == false) {
+                require __DIR__ . '/../views/notfound.php';
+                die();
+            }
 
             require __DIR__ . '/../views/cms/editpagecontent.php';
         } else {
@@ -211,7 +216,7 @@ class CmsController extends Controller
                     $coverImg = $_FILES['coverImg'];
                     if ($coverImg && $coverImg['error'] == 0) {
                         $filename = $coverImg['name'];
-                        $destination = __DIR__ . '/../public/img/' . $filename;
+                        $destination = __DIR__ . '/../public_html/img/' . $filename;
                         if (move_uploaded_file($coverImg['tmp_name'], $destination)) {
                             $restaurant->setCoverImg($filename);
                         } else {
@@ -269,7 +274,7 @@ class CmsController extends Controller
 
         if (isset($_POST["addSession"])) {
             foreach ($_POST as $field) {
-                if (empty($field))
+                if ($field == "")
                     $this->msg = "Please fill all the fields";
             }
             if ($this->msg == "") {
@@ -317,14 +322,15 @@ class CmsController extends Controller
         require __DIR__ . '/../views/cms/managesessions.php';
     }
 
-    public function managereservations() {
+    public function managereservations()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $reservation = new Reservation();
             $reservation->setRestaurantId(htmlspecialchars($_POST['restaurant']));
             $reservation->setDate(htmlspecialchars($_POST['date']));
-            $reservation->setAmountAbove12(htmlspecialchars(!empty($_POST['amountAbove12']) ? $_POST['amountAbove12'] : 0)); 
-            $reservation->setAmountUnderOr12(htmlspecialchars(!empty($_POST['amountUnderOr12']) ? $_POST['amountUnderOr12'] : 0)); 
+            $reservation->setAmountAbove12(htmlspecialchars(!empty($_POST['amountAbove12']) ? $_POST['amountAbove12'] : 0));
+            $reservation->setAmountUnderOr12(htmlspecialchars(!empty($_POST['amountUnderOr12']) ? $_POST['amountUnderOr12'] : 0));
             $reservation->setSessionId(htmlspecialchars($_POST['session']));
             $reservation->setStatus(htmlspecialchars($_POST['status']));
             $reservation->setComments(htmlspecialchars($_POST['comment']));
@@ -365,7 +371,8 @@ class CmsController extends Controller
         require __DIR__ . '/../views/cms/managereservations.php';
     }
 
-    function editReservation() {
+    function editReservation()
+    {
         $restaurants = $this->restaurantService->getAll();
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -375,14 +382,15 @@ class CmsController extends Controller
         require_once __DIR__ . '/../views/cms/editreservation.php';
     }
 
-    function updateReservation() {
+    function updateReservation()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $reservation = new Reservation();
             $reservation->setId(htmlspecialchars($_POST['id']));
             $reservation->setRestaurantId(htmlspecialchars($_POST['restaurant']));
             $reservation->setDate(htmlspecialchars($_POST['date']));
-            $reservation->setAmountAbove12(htmlspecialchars(!empty($_POST['amountAbove12']) ? $_POST['amountAbove12'] : 0)); 
-            $reservation->setAmountUnderOr12(htmlspecialchars(!empty($_POST['amountUnderOr12']) ? $_POST['amountUnderOr12'] : 0));           
+            $reservation->setAmountAbove12(htmlspecialchars(!empty($_POST['amountAbove12']) ? $_POST['amountAbove12'] : 0));
+            $reservation->setAmountUnderOr12(htmlspecialchars(!empty($_POST['amountUnderOr12']) ? $_POST['amountUnderOr12'] : 0));
             $reservation->setSessionId(htmlspecialchars($_POST['session']));
             $reservation->setStatus(htmlspecialchars($_POST['status']));
             $reservation->setComments(htmlspecialchars($_POST['comment']));
@@ -390,7 +398,6 @@ class CmsController extends Controller
             $this->reservationService->updateReservation($reservation);
         }
         header("location: managereservations");
-
     }
 
     public function manageorders()

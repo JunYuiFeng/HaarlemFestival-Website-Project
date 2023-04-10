@@ -96,7 +96,7 @@ class CartController extends Controller
         $cartId = null;
 
         if (isset($_GET['share'])) {
-            $sharedCartId = $_GET['share'];
+            $sharedCartId = htmlspecialchars($_GET['share']);
             $reservations = $this->reservationService->getFromCartByCartId($sharedCartId);
             $tickets = $this->danceService->getTicketFromCartByCartId($sharedCartId);
         } else {
@@ -286,8 +286,8 @@ class CartController extends Controller
                         "value" => number_format($_SESSION['totalAmount'], 2, '.', '')
                     ],
                     "description" => "payment for order {$order->getId()}",
-                    "redirectUrl" => "https://09be-217-105-28-34.ngrok-free.app/redirecturl?orderId={$order->getId()}", //https://7d68-217-105-28-25.eu.ngrok.io/redirecturl?orderId={$order->getId()}
-                    "webhookUrl" => "https://09be-217-105-28-34.ngrok-free.app/api/webhook",
+                    "redirectUrl" => "https://haarlemfestival.sahibthecreator.com/redirecturl?orderId={$order->getId()}",
+                    "webhookUrl" => "https://haarlemfestival.sahibthecreator.com/api/webhook",
                     "metadata" => [
                         "order_id" => $order->getId(),
                         "user_id" => $order->getUserId(),

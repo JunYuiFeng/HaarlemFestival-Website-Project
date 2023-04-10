@@ -121,7 +121,7 @@ class WebHookController extends Controller
         $this->invoiceService->updateInvoiceNr($orderId, $invoiceNr);
 
         // Save the PDF file to the invoices directory
-        $filePath = __DIR__ . '/../../public/invoices/' . $filename;
+        $filePath = __DIR__ . '/../../public_html/invoices/' . $filename;
         file_put_contents($filePath, $pdfData);
 
         // Return the path to the saved PDF file

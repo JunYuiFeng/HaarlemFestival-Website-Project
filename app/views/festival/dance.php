@@ -15,7 +15,6 @@
     include __DIR__ . '/../header.php';
     ?>
 
-    <img src="/img/DanceHomeLine.png" id="danceHomeLine">
     <div>
         <?php $count = 1;
         foreach ($artists as $artist) {
@@ -27,7 +26,7 @@
             $count++;
         } ?>
 
-        <img src="/img/DanceHomeimg1.png" alt="DanceHomeimg1" id="danceHomeimg1">
+        <img src="/img/DanceHomeImg1.png" alt="DanceHomeimg1" id="danceHomeimg1">
     </div>
 
     <a class="arrow-down" href="#danceCard1"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
@@ -112,7 +111,7 @@
                 </div>
 
             </div>
-        <?
+        <?php
         } ?>
         <div class="row justify-content-center" id="tickets">
 
@@ -190,7 +189,7 @@
                                                     <p>
                                                         Sold out
                                                     </p>
-                                                <? } ?>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                     <?php } ?>

@@ -45,7 +45,7 @@
                         <td style="white-space: nowrap;"><?= $session['restaurantName'] ?></td>
                         <td style="white-space: nowrap;"><?= $session['seats'] ?></td>
                     </tr>
-            <? }
+            <?php }
             } else {
                 echo "<h2>There are no any sessions</h2>";
             }

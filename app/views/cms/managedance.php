@@ -125,7 +125,7 @@
                         </td>
                     </tr>
                 </form>
-            <? } ?>
+            <?php } ?>
             <form method="POST">
                 <tr>
                     <td>
@@ -161,7 +161,9 @@
 
             </form>
         </table>
-
+        <h3>
+            Tickets
+        </h3>
         <?php foreach ($days as $day) { ?>
             <h5>
                 <?= $day->getDate() ?>

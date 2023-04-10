@@ -57,13 +57,13 @@
             return $this->secondDetailedPicture;
         }
         public function getFirstSongSource(){
-            return $this->firstSongSourceCode;
+            return htmlspecialchars_decode($this->firstSongSourceCode);
         }
         public function getSecondSongSource(){
-            return $this->secondSongSourceCode;
+            return htmlspecialchars_decode($this->secondSongSourceCode);
         }
         public function getThirdSongSource(){
-            return $this->thirdSongSourceCode;  
+            return htmlspecialchars_decode($this->thirdSongSourceCode);
         }
         public function getDetailedPicture(){
             return $this->detailedPicture;

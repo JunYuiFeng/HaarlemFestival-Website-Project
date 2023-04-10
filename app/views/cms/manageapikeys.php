@@ -22,7 +22,7 @@
             <form action="" method="post" class="col-3">
                 <button type="submit" name="createKey" class="btn btn-yellow-gradient my-4 py-3" onclick="location.href='manageSessions#addSession'">Create new API Key</button>
             </form>
-            <p class="col-9 text-muted"><b>API endpoint: </b>http://127.0.0.1/api/externalsystem/orders?API_KEY=YOUR_API_KEY</p>
+            <p class="col-9 text-muted"><b>API endpoint: </b>http://haarlemfestival.sahibthecreator.com/api/externalsystem/orders?API_KEY=YOUR_API_KEY</p>
         </div>
         <table class="table table-bordered table-striped table-hover">
             <?php

@@ -50,7 +50,7 @@ class PatternRouter
         if (file_exists($filename)) {
             require $filename;
         } else {
-            http_response_code(404);
+            require __DIR__ . '/../views/notfound.php';
             die();
         }
         // dynamically call relevant controller method
@@ -58,7 +58,7 @@ class PatternRouter
             $controllerObj = new $controllerName;
             $controllerObj->{$methodName}();
         } catch (Exception $e) {
-            http_response_code(404);
+            require __DIR__ . '/../views/notfound.php';
             die();
         }
     }
