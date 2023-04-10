@@ -8,8 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
     </head>
 </head>
@@ -26,7 +25,7 @@
         </div>
 
 
-        <p class="text-danger text-center my-3" id="outputMessage"><?= isset($outputMsg)? $outputMsg : "" ?></p>
+        <p class="text-danger text-center my-3" id="outputMessage"><?= isset($outputMsg) ? $outputMsg : "" ?></p>
         <table class="table">
             <thead>
                 <tr>
@@ -36,14 +35,11 @@
                     </th>
 
                     <th scope="col">Username
-                        <button name="action" onclick="sort('usernameASC')" type="submit"
-                            value="sortUsernameASC">&#x25b4;</button>
-                        <button name="action" type="submit" onclick="sort('usernameDESC')"
-                            value="sortUsernameDESC">&#x25be;</button>
+                        <button name="action" onclick="sort('usernameASC')" type="submit" value="sortUsernameASC">&#x25b4;</button>
+                        <button name="action" type="submit" onclick="sort('usernameDESC')" value="sortUsernameDESC">&#x25be;</button>
                     </th>
                     <th scope="col">Email
-                        <button name="action" type="submit" onclick="sort('emailASC')"
-                            value="sortEmailASC">&#x25b4;</button>
+                        <button name="action" type="submit" onclick="sort('emailASC')" value="sortEmailASC">&#x25b4;</button>
                         <button name="action" type="submit" onclick="sort('emailDESC')" value="sortEmailDESC">&#x25be;
                         </button>
                     </th>
@@ -126,9 +122,9 @@
                         userResult.forEach(user => {
                             if (user.userType == 0) {
                                 user.userType = "Admin";
-                            } else if(user.userType == 1){
+                            } else if (user.userType == 1) {
                                 user.userType = "User";
-                            } else if(user.userType == 2){
+                            } else if (user.userType == 2) {
                                 user.userType = "Employee";
                             }
                             const row = document.createElement("tr");
@@ -167,9 +163,9 @@
                         userResult.forEach(user => {
                             if (user.userType == 0) {
                                 user.userType = "Admin";
-                            } else if(user.userType == 1){
+                            } else if (user.userType == 1) {
                                 user.userType = "User";
-                            } else if(user.userType == 2){
+                            } else if (user.userType == 2) {
                                 user.userType = "Employee";
                             }
                             const row = document.createElement("tr");
@@ -209,14 +205,14 @@
                 return;
             }
             fetch(`http://localhost/api/cms`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    id: id,
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: id,
+                    })
                 })
-            })
                 .then(response => {
                     if (response.ok) {
                         document.getElementById("outputMessage").innerText = "User id: " + id + " has been deleted.";

@@ -1,6 +1,5 @@
 <?php
 include_once("../services/loginservice.php");
-include_once("../services/registerservice.php");
 require_once __DIR__ . '/../services/cartservice.php';
 
 include_once("../services/resetpasswordservice.php");
@@ -12,7 +11,6 @@ class MyAccountController extends Controller
 {
     private $cartService;
     private $loginService;
-    private $registerService;
     private $msg;
 
     function __construct()
@@ -20,7 +18,6 @@ class MyAccountController extends Controller
         parent::__construct();
         $this->cartService = new CartService();
         $this->loginService = new LoginService();
-        $this->registerService = new RegisterService();
         $this->msg = "";
     }
 
@@ -147,7 +144,7 @@ class MyAccountController extends Controller
                             $username = filter_var($_POST["username"], FILTER_SANITIZE_SPECIAL_CHARS);
                             $password = filter_var($_POST["password"], FILTER_SANITIZE_SPECIAL_CHARS);
 
-                            $res = $this->registerService->register($email, $username, $password);
+                            $res = $this->userService->register($email, $username, $password);
 
 
 
@@ -201,6 +198,7 @@ class MyAccountController extends Controller
 
             if ($user == NULL) {
                 require __DIR__ . '/../views/notfound.php';
+                exit;
             }
             if (isset($_POST["changePass"])) {
                 if ($_POST["newPassword"] == $_POST["newPasswordRepeat"]) {

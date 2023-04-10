@@ -36,14 +36,13 @@
                             </div>
                             <p class="error-message"><?php echo isset($this->msg) ? $this->msg : '' ?></p>
 
-                            <button type="submit" name="changePass">
+                            <button type="submit" name="changePass" class="red-outline-animated">
                                 <span></span>
                                 <span></span>
                                 <span></span>
                                 <span></span>
                                 Change
                             </button>
-
                         </form>
 
                     </div>

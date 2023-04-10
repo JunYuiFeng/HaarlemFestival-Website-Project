@@ -29,6 +29,9 @@
                 <button class="btn btn-primary mb-2" onclick="document.location.href='editpagecontent?webPage=Home'">Home page</button>
                 <button class="btn btn-primary mb-2" onclick="document.location.href='editpagecontent?webPage=History'">History page</button>
                 <button class="btn btn-primary mb-2" onclick="document.location.href='editpagecontent?webPage=Culture'">Culture page</button>
+                <button class="btn btn-primary mb-2" onclick="document.location.href='editpagecontent?webPage=Museum'">Museum page</button>
+                <button class="btn btn-primary mb-2" onclick="document.location.href='editpagecontent?webPage=Theatre'">Theatre page</button>
+                <button class="btn btn-primary mb-2" onclick="document.location.href='editpagecontent?webPage=CultureFestival'">Culture Festival page</button>
                 <button class="btn btn-primary mb-2" onclick="document.location.href='editpagecontent?webPage=Food'">Food page</button>
                 <button class="btn btn-primary mb-2" onclick="document.location.href='editpagecontent?webPage=Kids'">Kids page</button>
             </div>

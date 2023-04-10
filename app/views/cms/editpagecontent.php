@@ -15,7 +15,7 @@
     <div class="container">
         <h1 class="text-center">Content Managing System</h1>
 
-
+        <button class="btn btn-outline-success px-3 my-4 py-3"  onclick="document.location.href='index'">Back</button>
         <button class="btn btn-warning px-5 my-4 py-3" id="previewBtn" onclick="previewContent(this)">Preview</button>
         <button class="btn btn-danger px-5 my-4 py-3" onclick="saveContent()">Save</button>
 

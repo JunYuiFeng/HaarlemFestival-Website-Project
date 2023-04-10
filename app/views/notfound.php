@@ -15,7 +15,7 @@
     include __DIR__ . '/header.php';
     ?>
     <div class="container vh-100 d-flex justify-content-center mt-5">
-        <h1>Error 404 - Page not found</h1>
+        <h1 class="text-muted">Error 404 - Page not found</h1>
     </div>
 
 

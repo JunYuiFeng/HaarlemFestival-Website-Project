@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../services/restaurantservice.php';
-require_once __DIR__ . '/../services/editPageService.php';
+require_once __DIR__ . '/../services/editpageservice.php';
 
 
 class VisitHaarlemController
@@ -38,15 +38,22 @@ class VisitHaarlemController
         $this->content = $this->contentEditorService->getPageContent("Culture");
         require __DIR__ . '/../views/visithaarlem/culture.php';
     }
+
     public function theatre(){
+        $this->content = $this->contentEditorService->getPageContent("Theatre");
         require __DIR__ . '/../views/visithaarlem/theatre.php';
     }
-    public function festivalCulture(){
-        require __DIR__ . '/../views/visithaarlem/cultureFestival.php';
+
+    public function festivalculture(){
+        $this->content = $this->contentEditorService->getPageContent("CultureFestival");
+        require __DIR__ . '/../views/visithaarlem/culturefestival.php';
     }
+
     public function museum(){
+        $this->content = $this->contentEditorService->getPageContent("Museum");
         require __DIR__ . '/../views/visithaarlem/museum.php';
     }
+
     public function kids()
     {
         $this->content = $this->contentEditorService->getPageContent("Kids");
