@@ -46,7 +46,7 @@
                                 <input type="text" value="<?= $venue->getImage() ?>" name="venueImage">
                                 <img src="/img/<?= $venue->getImage() ?>" alt="Venue Image" class="img-fluid" style="height: 100px">
                             <td>
-                                <button type="submit" class="btn btn-primary edit-btn" name="action" action="updateVenue" value="update">Update</button>
+                                <button type="submit" class="btn btn-primary edit-btn" name="action" action="updateVenue" value="updateVenue">Update</button>
                                 <button type="submit" class="btn btn-danger delete-btn" name="action" value="deleteVenue" action="delete">Delete</button>
                             </td>
                         </tr>
