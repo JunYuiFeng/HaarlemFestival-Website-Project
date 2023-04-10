@@ -323,7 +323,7 @@ class CmsController extends Controller
             $reservation = new Reservation();
             $reservation->setRestaurantId(htmlspecialchars($_POST['restaurant']));
             $reservation->setDate(htmlspecialchars($_POST['date']));
-            $reservation->setAmountUnderOr12(htmlspecialchars(!empty($_POST['amountAbove12']) ? $_POST['amountAbove12'] : 0)); 
+            $reservation->setAmountAbove12(htmlspecialchars(!empty($_POST['amountAbove12']) ? $_POST['amountAbove12'] : 0)); 
             $reservation->setAmountUnderOr12(htmlspecialchars(!empty($_POST['amountUnderOr12']) ? $_POST['amountUnderOr12'] : 0)); 
             $reservation->setSessionId(htmlspecialchars($_POST['session']));
             $reservation->setStatus(htmlspecialchars($_POST['status']));
@@ -381,7 +381,7 @@ class CmsController extends Controller
             $reservation->setId(htmlspecialchars($_POST['id']));
             $reservation->setRestaurantId(htmlspecialchars($_POST['restaurant']));
             $reservation->setDate(htmlspecialchars($_POST['date']));
-            $reservation->setAmountUnderOr12(htmlspecialchars(!empty($_POST['amountAbove12']) ? $_POST['amountAbove12'] : 0)); 
+            $reservation->setAmountAbove12(htmlspecialchars(!empty($_POST['amountAbove12']) ? $_POST['amountAbove12'] : 0)); 
             $reservation->setAmountUnderOr12(htmlspecialchars(!empty($_POST['amountUnderOr12']) ? $_POST['amountUnderOr12'] : 0));           
             $reservation->setSessionId(htmlspecialchars($_POST['session']));
             $reservation->setStatus(htmlspecialchars($_POST['status']));

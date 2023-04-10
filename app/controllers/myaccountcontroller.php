@@ -1,8 +1,6 @@
 <?php
-include_once("../services/loginservice.php");
 require_once __DIR__ . '/../services/cartservice.php';
-
-include_once("../services/resetpasswordservice.php");
+require_once __DIR__ . '/../services/resetpasswordservice.php';
 require_once __DIR__ . '/controller.php';
 
 
@@ -10,14 +8,12 @@ require_once __DIR__ . '/controller.php';
 class MyAccountController extends Controller
 {
     private $cartService;
-    private $loginService;
     private $msg;
 
     function __construct()
     {
         parent::__construct();
         $this->cartService = new CartService();
-        $this->loginService = new LoginService();
         $this->msg = "";
     }
 
@@ -101,7 +97,7 @@ class MyAccountController extends Controller
                 $username = filter_var($_POST["username"], FILTER_SANITIZE_SPECIAL_CHARS);
                 $password = filter_var($_POST["password"], FILTER_SANITIZE_SPECIAL_CHARS);
 
-                $res = $this->loginService->login($username, $password);
+                $res = $this->userService->login($username, $password);
                 if (ctype_digit($res)) {
                     if (strstr($username, "@")) {
                         $user = $this->userService->getByEmail($username);
@@ -221,7 +217,7 @@ class MyAccountController extends Controller
 
     public function logout()
     {
-        $this->loginService->logout();
+        $this->userService->logout();
         header("location: login");
     }
     
