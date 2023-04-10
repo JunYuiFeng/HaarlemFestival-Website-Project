@@ -88,14 +88,15 @@ class CmsController extends Controller
                     $venues = $this->venueService->getAll();
                     break;
                 case 'updateVenue':
-                    if ((empty($_POST['venueId']) || empty($_POST['venueName']) || empty($_POST['venueAddress']) || empty($_POST['venueImage'])))
-                        return;
-                    $this->venueService->editVenue(htmlspecialchars($_POST['venueId']), htmlspecialchars($_POST['venueName']), htmlspecialchars($_POST['venueAddress']), htmlspecialchars($_POST['venueImage']));
+                    if ((empty($_POST['venueId']) || empty($_POST['venueName']) || empty($_POST['venueAddress']) || empty($_POST['venueImage']))){
+                        break;
+                    }          
+                    $this->venueService->editVenue(($_POST['venueId']), htmlspecialchars($_POST['venueName']), htmlspecialchars($_POST['venueAddress']), htmlspecialchars($_POST['venueImage']));
                     $venues = $this->venueService->getAll();
                     break;
                 case 'addVenue':
                     if ((empty($_POST['venueName']) || empty($_POST['venueAddress']) || empty($_POST['venueImage'])))
-                        return;
+                        break;
                     $this->venueService->addVenue(htmlspecialchars($_POST['venueName']), htmlspecialchars($_POST['venueAddress']), htmlspecialchars($_POST['venueImage']));
                     $venues = $this->venueService->getAll();
                     break;
