@@ -18,7 +18,7 @@
     <?php include_once("header.php"); ?>
 
     <div class="px-5">
-        <h1 class="text-center">Orders Overview</h1>
+        <h1 class="text-center fw-bolder text-dark ff-alata display-5">Orders Overview</h1>
 
         <button class="btn btn-primary" onclick="convertTableToCSV()">
             download CSV

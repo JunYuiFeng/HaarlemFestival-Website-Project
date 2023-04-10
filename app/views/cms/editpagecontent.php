@@ -13,7 +13,7 @@
     <?php include_once("header.php"); ?>
 
     <div class="container">
-        <h1 class="text-center">Content Managing System</h1>
+        <h1 class="text-center fw-bolder text-dark ff-alata display-5">Content Managing System</h1>
 
         <button class="btn btn-outline-success px-3 my-4 py-3"  onclick="document.location.href='index'">Back</button>
         <button class="btn btn-warning px-5 my-4 py-3" id="previewBtn" onclick="previewContent(this)">Preview</button>

@@ -17,7 +17,7 @@
     <?php include_once("header.php"); ?>
 
     <div class="container">
-        <h1 class="text-center my-4">Manage Users</h1>
+        <h1 class="text-center my-4 fw-bolder text-dark ff-alata display-5">Manage Users</h1>
         <div class="row">
             <input class="p-1 col-3" type="text" id="searchInput" placeholder="Search username...">
             <div class="col-7"></div>

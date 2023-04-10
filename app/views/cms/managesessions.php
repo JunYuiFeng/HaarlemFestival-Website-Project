@@ -17,7 +17,7 @@
     <?php include_once("header.php"); ?>
 
     <div class="px-5">
-        <h1 class="text-center">Restaurant Sessions Overview</h1>
+        <h1 class="text-center fw-bolder text-dark ff-alata display-5">Restaurant Sessions Overview</h1>
 
         <button class="btn btn-yellow-gradient my-4 py-3" onclick="location.href='manageSessions#addSession'">Add new session</button>
 

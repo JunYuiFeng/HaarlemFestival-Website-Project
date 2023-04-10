@@ -14,7 +14,7 @@
     <?php include_once("header.php"); ?>
 
     <div class="container">
-        <h1 class="mb-5 d-flex justify-content-center">Reservation Overview</h1>
+        <h1 class="mb-5 d-flex justify-content-center fw-bolder text-dark ff-alata display-5">Reservation Overview</h1>
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>

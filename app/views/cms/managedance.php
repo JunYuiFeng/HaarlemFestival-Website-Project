@@ -15,7 +15,7 @@
 
 <body>
     <div class="px-6">
-        <h1 class="text-center py-2">Dance Overview</h1>
+        <h1 class="text-center py-2 fw-bolder text-dark ff-alata display-5">Dance Overview</h1>
         <table class="table table-bordered table-striped table-hover">
             <h3>Venue</h3>
             <thead>

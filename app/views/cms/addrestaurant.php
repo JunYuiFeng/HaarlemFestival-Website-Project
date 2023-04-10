@@ -17,7 +17,7 @@
     <?php include_once("header.php"); ?>
 
     <div class="container d-flex flex-column justify-content-center align-items-center" id="addRestaurantPage">
-        <h1 class="text-center my-4"><?php echo (isset($_GET['edit'])) ? "Edit Restaurant" : "Add New Restaurant"; ?></h1>
+        <h1 class="text-center my-4 fw-bolder text-dark ff-alata display-5"><?php echo (isset($_GET['edit'])) ? "Edit Restaurant" : "Add New Restaurant"; ?></h1>
         <button class="btn btn-outline-success px-3 py-2 align-self-start" onclick="document.location.href='managerestaurants'">Back</button>
 
         <form action="" method="post" class="col-12 px-0 d-flex flex-column align-items-center" enctype="multipart/form-data">
