@@ -42,8 +42,8 @@
                             </select>
                         </td>
                         <td><select name="session" id="session" class="form-control"></select></td>
-                        <td><input type="number" name="amountAbove12" class="form-control"></td>
-                        <td><input type="number" name="amountUnderOr12" class="form-control"></td>
+                        <td><input type="number" name="amountAbove12" class="form-control" min="0" oninput="validity.valid||(value='');"></td>
+                        <td><input type="number" name="amountUnderOr12" class="form-control" min="0" oninput="validity.valid||(value='');"></td>
                         <td><input type="date" name="date" class="form-control"></td>
                         </td>
                         <td> <input type="text" name="comment" class="form-control"></td>
@@ -114,6 +114,25 @@
 
             }
         });
+
+        function validateForm() {
+            const restaurantSelect = document.getElementById("restaurant");
+            const sessionSelect = document.getElementById("session");
+            const amountAbove12Input = document.getElementsByName("amountAbove12")[0];
+            const amountUnderOr12Input = document.getElementsByName("amountUnderOr12")[0];
+            const dateInput = document.getElementsByName("date")[0];
+            const commentInput = document.getElementsByName("comment")[0];
+            const statusSelect = document.getElementById("status");
+
+            if (restaurantSelect.value == "0" || sessionSelect.value == "" || (amountAbove12Input.value == "" && amountUnderOr12Input.value == "") || dateInput.value == "" || statusSelect.value == "0") {
+                alert("Please fill in all required fields.");
+                return false;
+            }
+
+            return true; // Form is valid
+        }
+    </script>
+
     </script>
 
 </body>

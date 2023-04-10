@@ -134,14 +134,14 @@
                                 <div class="form-group row reservationQuantityOfPoeple">
                                     <label for="amountAbove12" class="col-8 col-form-label">Above 12 years:</label>
                                     <div class="col-4">
-                                        <input type="number" class="form-control" name="amountAbove12" min="0">
+                                        <input type="number" class="form-control" name="amountAbove12" min="0" oninput="validity.valid||(value='');">
                                     </div>
                                 </div>
 
                                 <div class="form-group row reservationQuantityOfPoeple">
                                     <label for="amountUnderOr12" class="col-8 col-form-label">12 years or under:</label>
                                     <div class="col-4">
-                                        <input type="number" class="form-control" name="amountUnderOr12" min="0">
+                                        <input type="number" class="form-control" name="amountUnderOr12" min="0" oninput="validity.valid||(value='');">
                                     </div>
                                 </div>
 

@@ -27,10 +27,10 @@
                     <select name="session" id="session" class="form-control"></select><br>
 
                     <label for="">People above 12 years old</label>
-                    <input type="number" name="amountAbove12" class="form-control" value="<?= $reservation->getAmountAbove12() ?>"><br>
+                    <input type="number" name="amountAbove12" class="form-control" value="<?= $reservation->getAmountAbove12() ?>" min="0" oninput="validity.valid||(value='');"><br>
 
                     <label for="">People under or 12 years old</label>
-                    <input type="number" name="amountUnderOr12" class="form-control" value="<?= $reservation->getAmountUnderOr12() ?>"><br>
+                    <input type="number" name="amountUnderOr12" class="form-control" value="<?= $reservation->getAmountUnderOr12() ?>" min="0" oninput="validity.valid||(value='');"><br>
 
                 </div>
                 <div class="col-6">
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center ">
-                <input type="submit" class="btn btn-primary mr-4" value="Update">
+                <input type="submit" class="btn btn-primary mr-4" value="Update" onclick="return validateReservationForm();">
 
                 <a href="managereservations" class="btn btn-secondary">Cancel</a>
             </div>
@@ -90,6 +90,22 @@
         // Trigger change event on page load
         const changeEvent = new Event('change');
         restaurantSelect.dispatchEvent(changeEvent);
+
+        function validateReservationForm() {
+        var restaurantSelect = document.getElementById("restaurant");
+        var sessionSelect = document.getElementById("session");
+        var amountAbove12Input = document.getElementsByName("amountAbove12")[0];
+        var amountUnderOr12Input = document.getElementsByName("amountUnderOr12")[0];
+        var dateInput = document.getElementsByName("date")[0];
+        var statusSelect = document.getElementById("status");
+
+        if (restaurantSelect.value == "0" || sessionSelect.value == "" || (amountAbove12Input.value == "" && amountUnderOr12Input.value == "") || dateInput.value == "" || statusSelect.value == "0") {
+            alert("Please fill in all required fields.");
+            return false;
+        }
+
+        return true;
+    }
     </script>
 </body>
 
