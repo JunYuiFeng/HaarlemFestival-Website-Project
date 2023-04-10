@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../services/editPageService.php';
+require_once __DIR__ . '/../services/editpageservice.php';
 require_once __DIR__ . '/../services/sessionservice.php';
 require_once __DIR__ . '/../services/reservationservice.php';
 require_once __DIR__ . '/../services/restaurantservice.php';

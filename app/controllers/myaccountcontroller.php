@@ -1,9 +1,6 @@
 <?php
-include_once("../services/loginservice.php");
-include_once("../services/registerservice.php");
 require_once __DIR__ . '/../services/cartservice.php';
-
-include_once("../services/resetpasswordservice.php");
+require_once __DIR__ . '/../services/resetpasswordservice.php';
 require_once __DIR__ . '/controller.php';
 
 
@@ -11,16 +8,12 @@ require_once __DIR__ . '/controller.php';
 class MyAccountController extends Controller
 {
     private $cartService;
-    private $loginService;
-    private $registerService;
     private $msg;
 
     function __construct()
     {
         parent::__construct();
         $this->cartService = new CartService();
-        $this->loginService = new LoginService();
-        $this->registerService = new RegisterService();
         $this->msg = "";
     }
 
@@ -104,7 +97,7 @@ class MyAccountController extends Controller
                 $username = filter_var($_POST["username"], FILTER_SANITIZE_SPECIAL_CHARS);
                 $password = filter_var($_POST["password"], FILTER_SANITIZE_SPECIAL_CHARS);
 
-                $res = $this->loginService->login($username, $password);
+                $res = $this->userService->login($username, $password);
                 if (ctype_digit($res)) {
                     if (strstr($username, "@")) {
                         $user = $this->userService->getByEmail($username);
@@ -147,7 +140,7 @@ class MyAccountController extends Controller
                             $username = filter_var($_POST["username"], FILTER_SANITIZE_SPECIAL_CHARS);
                             $password = filter_var($_POST["password"], FILTER_SANITIZE_SPECIAL_CHARS);
 
-                            $res = $this->registerService->register($email, $username, $password);
+                            $res = $this->userService->register($email, $username, $password);
 
 
 
@@ -201,6 +194,7 @@ class MyAccountController extends Controller
 
             if ($user == NULL) {
                 require __DIR__ . '/../views/notfound.php';
+                exit;
             }
             if (isset($_POST["changePass"])) {
                 if ($_POST["newPassword"] == $_POST["newPasswordRepeat"]) {
@@ -223,7 +217,7 @@ class MyAccountController extends Controller
 
     public function logout()
     {
-        $this->loginService->logout();
+        $this->userService->logout();
         header("location: login");
     }
     

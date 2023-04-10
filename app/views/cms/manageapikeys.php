@@ -17,7 +17,7 @@
     <?php include_once("header.php"); ?>
 
     <div class="px-5">
-        <h1 class="text-center py-2">API Keys Overview</h1>
+        <h1 class="text-center py-2 fw-bolder text-dark ff-alata display-5">API Keys Overview</h1>
         <div class="d-flex align-items-center">
             <form action="" method="post" class="col-3">
                 <button type="submit" name="createKey" class="btn btn-yellow-gradient my-4 py-3" onclick="location.href='manageSessions#addSession'">Create new API Key</button>

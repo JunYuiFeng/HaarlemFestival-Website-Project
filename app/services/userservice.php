@@ -136,7 +136,67 @@ class UserService
         }
     }
 
-    
+    public function register(string $email, string $username, string $password): string
+    {
+        $users = $this->repository->getAll();
+        $loginUser = NULL;
+
+        foreach ($users as $user) {
+            if ($email == $user->getEmail()) {
+                return "Email already registered";
+            }
+            if ($username == $user->getUsername()) {
+                return "Username already registered";
+            }
+        }
+        if (strlen($username) > 1 && strlen($username) < 30  && ctype_alnum($username)) {
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                if (strlen($password) >= 6 && strlen($password) < 50) {
+                    $hasshedPassword = password_hash($password, PASSWORD_DEFAULT);
+                    $id = $this->repository->createUser($username, $email, $hasshedPassword, 1);
+                    return $id;
+                } else {
+                    return "Password should be at least 6 characters and maximum 50";
+                }
+            } else {
+                return "Email is invalid";
+            }
+        } else {
+            return "Username can contain only letters and numbers";
+        }
+
+        return FALSE;
+    }
+
+    public function login(string $username, string $password): string
+    {
+        $users = $this->repository->getAll();
+        $loginUser = NULL;
+
+        foreach ($users as $user) {
+            if ($username == $user->getUsername()) {
+                $loginUser = $user;
+                break;
+            } else if ($username == $user->getEmail()) {
+                $loginUser = $user;
+                break;
+            }
+        }
+
+        if ($loginUser && password_verify($password, $loginUser->getPassword())) {
+            return true;
+        }
+        return false;
+    }
+
+    public function logout()
+    {
+        unset($_SESSION["logedin"]);
+        if (isset($_SESSION["employee"]))
+            unset($_SESSION["employee"]);
+    }
+
+
 
     public function checkUsernameAvailability($username, $id = NULL): bool
     {
@@ -165,9 +225,4 @@ class UserService
         }
         return TRUE;
     }
-
-    // public function editUserTest($username,$email,$id)
-    // {
-    //     return $this->repository->editUserTest($username,$email,$id);
-    // }
 }
