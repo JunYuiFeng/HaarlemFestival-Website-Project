@@ -52,7 +52,7 @@
                     if (isset($_SESSION['employee'])) {?>
                         <button class="btn btn-primary w-100" onclick="toggleScanning()">Scan Tickets</button>
                         <div class="hidden mt-3 w-100" id="reader"></div>
-                        <p id="ticketStatus" class="text-success fw-bolder fs-1"></p>
+                        <p id="ticketStatus" class="text-success fw-bolder fs-4 text-center"></p>
                         <button class="btn btn-danger hidden" id="ticketStatusUpdateBtn" onclick="markTicketAsScanned()">Mark Ticket as Scanned</button>
                     <?php } ?>
 
