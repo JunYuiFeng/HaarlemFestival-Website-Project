@@ -1543,8 +1543,7 @@ button.red-outline-animated span:nth-child(4) {
     line-height: 60px;
   }
   .welcomeSection img {
-    position: absolute;
-    top: 32%;
+    display: none;
   }
   .arrow-down {
     display: none;
