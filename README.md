@@ -1,4 +1,6 @@
 # Haarlem Festival Project Group 1 IT2B
+This website is currently not optimized for different screen sizes, so it is only designed to display properly on a laptop.
+
 ## Live Website URL
 https://haarlemfestival.sahibthecreator.com/
 
